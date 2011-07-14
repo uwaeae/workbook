@@ -1,0 +1,45 @@
+Calendar:
+  actAs:
+    Timestampable: ~
+  tableName: Calendar
+  columns:
+    id:
+      type: integer
+      autoincrement: true
+      primary: true
+    beginn:
+      type: timestamp
+      notnull: true
+    duration:
+      type: integer
+      notnull: true
+    job_id:
+      type: integer
+    type_id:
+      type: integer
+  relations:
+    Users:
+      foreignAlias: Calendars
+      class: User
+      refClass: CalendarUser
+      cascade: [delete]
+    Job:
+      class: Job
+      foreignAlias: Calendar
+      local: job_id
+      cascade: [delete]  
+    CalendarType:
+      class: CalendarType
+      local: type_id
+      
+
+CalendarType:
+  tableName: CalendarType
+  columns:
+    id:
+      type: integer
+      autoincrement: true
+      primary: true
+    name:
+      type: string
+      notnull: true

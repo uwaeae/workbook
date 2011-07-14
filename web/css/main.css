@@ -1,0 +1,539 @@
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+h1 {
+	font-size: 18pt;
+	xtext-transform:uppercase;
+	letter-spacing:2px
+}
+h3 {
+	background-color: #E7EEF6;
+    padding: 2px;
+    color: steelblue;
+}
+
+input,
+select {
+	
+	background: none repeat scroll 0 0 #F8F8F8;
+	border: 1px solid #AAAACC;
+	color: #000000;
+	font-size: 13px;
+	margin-left: 2px;
+	padding-left: 2px;
+}
+
+
+
+
+.header {
+	padding: 10px;
+	font-family:Sans-serif;
+	font-weight: bold;
+	font-size: 12pt;
+	color: white;
+	border-radius: 5px;
+	padding: 1em;
+	margin:2em;
+	text-shadow: 2px 2px 2px #000;
+	background-color: steelblue;
+
+	
+}
+.content {
+	display: inline-block;
+	padding: 10px;
+}
+
+.smallicon {
+	height: 20px;
+	width: 20px;
+	border: 0px;
+}
+.fault{
+	color: black;
+	background: none repeat scroll 0 0 #ff9999;
+	
+}
+.list_button {
+	background-color: white;
+	color: black;
+}
+.list_button:hover {
+	background-color: #9999ff;
+	color: black;
+}
+
+#open_job{
+	float:right;
+	 padding-left: 20px;
+}
+/*
+
+
+
+
+#calendar{
+	min-width: 500px;
+	font-family: verdana,arial,sans-serif;
+	font-size:7pt;
+	color:#333333;
+	float:left;
+	padding-left: 20px;
+	
+}
+
+.cal_day_col{
+	border-right: 2px inset blue;
+	padding: 0;
+	margin: 0;
+}
+
+.calendar_button{
+	cursor: pointer;
+	
+	
+}
+.calendar_button:hover {
+		
+		
+		color:steelblue;
+}
+
+.calendar_type_button{
+	display: inline-block; 
+		margin: 0px;
+		text-align:center;
+		color: white; 
+		border-style:none; 
+		border-width:3px; 
+		border-radius:2em;
+		padding:5px;
+		font-size:10px;
+		text-decoration:none;
+		cursor: pointer;
+		line-height: 15px;
+		font-family: verdana,arial,sans-serif;
+} */
+#calendar{
+	
+	font-family: verdana,arial,sans-serif;
+	font-size:7pt;
+	color:#333333;
+	float:left;
+	padding-left: 20px;
+	
+}
+
+.cal_type_1  {
+
+	background-color: #5882FA;
+}
+
+.cal_type_1_finshed {
+	
+	background-color: #9AFE2E;
+}
+
+.cal_type_2 {
+	
+	background-color: #FA8258;
+}
+
+.cal_type_3
+  {
+
+	background-color: #F3F781;
+}
+
+.cal_user{
+	
+	background-color: lightblue;
+}
+
+.cal_timerow_unused{
+	opacity: .5;
+	
+}
+
+.cal_timerow_odd {
+	background-color: #CED8F6;
+}
+
+.cal_timerow_even {
+	background-color: #CEF6CE;
+}
+
+.calender_today{
+	background-color: #ff7777;
+}
+.checkbox_list li{
+	list-style: none;
+	display: inline;
+}
+
+table.cal_table{
+  	width: 100%;
+
+	font-family: verdana,arial,sans-serif;
+	font-size:7pt;
+	color:#333333;
+	border-width: 1px;
+	border-color: #ccccff;
+	border-collapse: collapse;
+	
+}
+.cal_timeline{
+	width: 40px;
+}
+table.cal_table td,
+table.cal_table tr{
+
+	height: 15px;
+	border-bottom: 1px solid #81BEF7;
+}
+	
+.cal_table tbody{
+	height: 300px;
+}
+div #open_job{
+	float:left;
+	font-size: 8pt;
+	font-family: verdana,arial,sans-serif;
+	width: 150px;
+}
+div #cal_filter{
+	float:left;
+	font-size: 8pt;
+	font-family: verdana,arial,sans-serif;
+}
+
+.cal_filter_head{
+	text-align:center;
+    background-color: #E7EEF6;
+	list-style: none outside none;
+	margin: 0 0.2em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	font-size: 9pt;
+	font-weight: bold;
+}
+.cal_filter_item{
+	list-style: none outside none;
+	margin: 0 0.2em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+}
+
+.cal_filter_item  a{
+	text-decoration: none;
+	color: black;
+
+}
+
+
+
+.cal_open_jobs_head{
+	text-align:center;
+    background-color: #E7EEF6;
+	list-style: none outside none;
+	margin: 0 0.2em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	font-size: 9pt;
+	font-weight: bold;
+}
+.cal_oen_jobs_item{
+	 background-color: #CEECF5;
+}
+.cal_oen_jobs_item:hover{
+	 background-color: #81DAF5;
+}
+
+
+
+
+.header h1 {
+	padding: 0;
+	margin: 0;
+	display: inline;
+	
+}
+
+.button_selected,
+.button_selected:visited,
+.button_selected:active { 
+			background-color: #0101DF;
+			color: white;
+			}
+
+.button:hover { 
+			background-color: steelblue; }
+
+.button,
+.button:visited
+.button:active
+ 		{ 	display: inline-block; 
+			margin: 0px;
+			text-align:center;
+			color: white;
+			border-radius:2px;
+			border-style:none; 
+			border-width:3px; 
+			padding:5px;
+			font-size:10px;
+			text-decoration:none;
+			background-color: lightblue;
+			cursor: pointer;
+			line-height: 15px;
+			font-family: verdana,arial,sans-serif;
+		
+			
+			 }
+
+
+.menu {
+	
+	padding-top: 4px;
+	xbackground-color: #CCCCCC;
+	xheight: 24px;
+	display: block;
+	color: white; 
+	float:left;
+}
+.menu a {
+	text-decoration: none;
+	color: white; 
+	font-family:Sans-serif;
+	width: 60px;
+	display: block;
+	xpadding: 0.2em;
+}
+
+
+.menu ul {
+	
+	padding: 0;
+	margin: 0;
+}
+
+.menu li {
+	list-style: none;
+	
+	margin: 10px;
+	padding: 0.5em;
+	background-color: steelblue;
+}
+.menu li:hover {
+	background-color: blue;
+	color: lightblue;
+}
+
+.menu li ul{
+	xposition: absolute;
+	margin: 0;
+		display: block;
+}
+
+.menu ul li:hover ul {
+	color: black;
+
+	
+}
+
+.menu ul li ul li {
+	float: none;
+	display: block;
+	color: white; 
+	xmargin: 0.5em;
+	background-color: steelblue;
+	
+}
+
+.usermenu {
+	
+	padding-top: 4px;
+	xbackground-color: #CCCCCC;
+	height: 24px;
+	color: white; 
+	float: right;
+}
+.usermenu a {
+	text-decoration: none;
+	color: white; 
+}
+.usermenu a:hover {
+
+	xcolor: lightblue;
+	text-shadow: 3px 3px 3px blue;
+}
+
+.usermenu ul {
+	
+	padding: 0;
+	margin: 0;
+}
+
+.usermenu li {
+	float: left;
+	list-style: none;
+	margin: 0 0.2em 0 0.2em  ;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	background-color: steelblue;
+}
+.usermenu li ul{
+	position: absolute;
+	display: none;
+	
+	margin: 0;
+}
+
+.usermenu ul li:hover ul {
+	
+	display: block;
+	
+}
+
+.usermenu ul li ul li {
+	float: none;
+	display: block;
+	color: white; 
+	margin: 0.5em;
+	background-color: steelblue;
+	
+}
+.table_menu_left{
+	
+	float: left;
+	list-style: none outside none;
+	margin: 0 0.2em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+}
+.table_item {
+	border-bottom: 1px solid #ccccff ;
+}
+.table_item:hover {
+	background-color: lightblue;
+	border-bottom: 1px solid #ccccff ;
+	cursor:pointer; 
+}
+
+.table_list{
+	display: inline-table;
+	margin: 0;
+	padding: 0;
+}
+.table_border_left{
+	border-left: 2px solid #FFFFFF;
+}
+.table_border_right{
+	xborder-right: 1px solid #ccccff;
+}
+.table_list li{
+	list-style: none;
+}
+.table_workday{
+	background-color: #ffffff;
+}
+.table_weekend{
+	background-color: #ffdddd;
+}
+
+
+table .list ul {
+	
+	padding: 0;
+	margin: 0;
+}
+
+table .list li {
+	list-style: none;
+	margin: 0 0.2em 0 0.2em  ;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	display: none;
+	position: relative;
+	background-color: #E7EEF6;
+}
+table .list:hover ul li {
+	
+	display: block;
+	
+}
+
+.list ul li ul li {
+	float: none;
+	display: block;
+	color: white; 
+	margin: 0.5em;
+	background-color: steelblue;
+	
+}
+
+
+
+
+
+table.job{
+	display: block;	
+
+} 
+.job_type_head {
+	min-width:800px;
+	background-color: #CED8F6;
+	border-radius: 1em 1em 1em 1em;
+}
+.job_type_head:hover {
+	background-color: #E0E6F8;
+}
+/*
+table {
+	font-family: verdana,arial,sans-serif;
+	font-size:7pt;
+	color:#333333;
+	border-width: 1px;
+	border-color: #ccccff;
+	border-collapse: collapse;
+	display: inline;
+	
+}
+table tr {
+	xheight: 30px;
+}
+
+
+table th {
+	background-color: #E7EEF6;
+    white-space: nowrap;
+	xborder-bottom: 1px solid #ccccff; 
+   	xborder-top: 1px solid #ccccff; 
+
+}
+table thead tr th,
+table tbody tr td {
+	padding-left: 8px;
+	padding-right: 8px;
+	
+	
+}
+
+table tbody tr td {
+	-moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+
+   
+    text-align: left;
+    xvertical-align: top;
+	max-width: 700px;
+}
+
+*/
+

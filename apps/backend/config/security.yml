@@ -1,0 +1,9 @@
+# You can find more information about this file on the symfony website:
+# 
+
+default:
+  is_secure: true
+
+all:
+  is_secure: true
+  credentials: admin  

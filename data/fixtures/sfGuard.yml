@@ -1,0 +1,68 @@
+sfGuardUser:
+  User_admin:
+    first_name:     Joachim   
+    last_name:      Maier
+    email_address:  jo.meier@workbook.com
+    username:       admin
+    password:       admin
+    is_super_admin: true
+    Groups:         [Group_admin]
+  User_office:
+    first_name:     Gretchen   
+    last_name:      Müller
+    email_address:  gm@workbook.com
+    username:       test1
+    password:       test1
+    is_super_admin: false
+    Groups:         [Group_office]
+  User_worker:
+    first_name:     Hans   
+    last_name:      Wurst
+    email_address:  hw@workbook.com
+    username:       test2
+    password:       test2
+    is_super_admin: false
+    Groups:         [Group_workers]
+
+sfGuardGroup:
+  Group_admin:
+    name:           admin
+    description:    Administrator group
+    Permissions:    [Permission_admin,Job_Neu, Job_Edit,Job_assign,Job_Invoice, Customer]
+  Group_office:
+    name:           supervisor
+    description:    Buero Gruppe
+    Permissions:    [Job_Neu, Job_Edit,Job_assign, Customer]
+  Group_workers:
+    name:           user
+    description:    Mitarbeiter
+    Permissions:    [Job_Edit]
+
+sfGuardPermission:
+  Permission_admin:
+    name:           admin
+    description:    Administrator permission
+  Job_Neu:
+    name:           Neu
+    description:    Neuen Auftrag erstellen
+  Job_assign:
+    name:           Zuweisen
+    description:    Einen Auftrag zuweisen
+  Job_admin:
+    name:           Verwalten
+    description:    Aufträge Verwalten
+  Job_Edit:
+    name:           Bearbeiten
+    description:    Einen Auftrag Bearbeiten
+  Job_Invoice:
+    name:           Rechung
+    description:    Rechungsnummer Erstellen    
+  Item:
+    name:           Material
+    description:    Material verwalten
+  User:
+    name:           Mitarbeiter
+    description:    Mitarbeiter verwalten
+  Customer:
+    name:           Kunden
+    description:    Kunden Erstellen und Bearbeiten

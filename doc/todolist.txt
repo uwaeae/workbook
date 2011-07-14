@@ -1,0 +1,37 @@
+-tabellen Struktur, Store zu Adresse
+
+- anzeige in bei der Bearbeitung eines Jobs welche Jobs sich in der nähe befinden
+- anzeige welche Jobs schon in dieser Adresse/Filiale bearbeitet worden sind.
+- Backend Einstellungen
+- Konfiguration Tabelle erstellen layout einfallen lassen
+
+
+-Back buttons konzept erarbeiten.
+
+- Task Thermin ändern einbauen bzw user zuweisen
+
+
+- Carlendar View doppelschleife in den Controller bringen. 
+
+- Calendar alles User anzeigen übersichtlicheremachen 
+	vieleicht durch weitere Überschriftsspalte und Timeline?
+
+Auftrag
+	Dateihochladen und anzeigen
+	
+Stundenzettel
+	Monatssyitsch
+	Admin Switsch
+
+Konfigurations Datenbank
+
+FEATURES
+
+	ICAL
+	Mobile Version (CSS angepasst)
+	
+	
+
+ERLEDIGT
+
+- Calendar User Filter funktoniert irgenwie nicht?!

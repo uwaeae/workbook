@@ -1,0 +1,38 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           Customer
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          customer
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        company: { label: Firmenname }  
+        logo: { label: Firmenlogo, help: Hier kannst du ein Firmenlogo angeben }
+        url: { label: Homepage, help: Hier kann die Firmenwebseite angegeben werden}
+        number: { label: Kundennummer, help: Hier wird die Interne Kundennummer angegeben}
+      list:    
+        title: Kundenverwaltung
+        display: [ =number, =company, _stores]
+        object_actions:
+          _edit: ~
+          _delete: ~
+          addStore: { label: Filiale Hinzufügen, action: addStore }
+      filter:  
+        display: [company, number]
+      form:    ~
+      edit:
+        title: Bearbeiten von %%company%%  
+        display:
+          Kunde: [ company, logo, url, number]
+          
+              
+      new:
+        title: Neuer Kunde

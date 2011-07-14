@@ -1,0 +1,334 @@
+Customer:
+  tableName: customer
+  columns:
+    id:
+      type: integer
+      autoincrement: true
+      primary: true
+    company:
+      notnull: true
+      type: string(255)
+    logo:
+      type: string(255)
+    url:
+      notnull: false
+      type: string(255)
+    number:
+      notnull: true
+      autoincrement: false
+      unique: true
+      type: integer(5)
+    headoffice:
+      notnull: true
+      type: integer(5)
+  relations:
+    Store:
+      local: headoffice
+      foreign: id
+      type: one
+      foreignType: one        
+Store:
+  actAs: [Timestampable]
+  tableName: store
+  columns:
+    id:
+      type: integer
+      autoincrement: true
+      primary: true
+    number:
+      type: string(8)
+      notnull: true
+    contact:
+      notnull: true    
+      type: string(255)
+    info:
+      notnull: false
+      type: clob  
+    street:
+      notnull: true
+      type: string(255)
+    city:
+      notnull: true
+      type: string(255)
+    country:
+      notnull: false
+      type: string(255)  
+    destrict:
+      type: string(255)
+    fon:
+      notnull: true
+      type: string
+    fax:
+      type: string  
+    postcode:
+      notnull: true
+      type: integer(5)
+    customer_id:
+      type: integer
+  relations:
+    Customer:
+      foreignAlias: Stores
+
+Job:
+  tableName: job
+  columns:
+    id:
+      type: integer
+      autoincrement: true
+      primary: true
+    contact_person:
+      type: string(255)  
+    contact_info:
+      type: string(255)
+    job_type_id:
+      type: integer
+      notnull: true
+    end:
+      type: timestamp
+      notnull: true
+    start:
+      type: timestamp
+    timeed:
+      type: timestamp
+    description:
+      type: clob
+    timeinterval:
+      type: integer(1)
+      notnull: false
+    job_state_id:
+      type: integer
+      notnull: true
+    store_id:
+      type: integer
+    created_at:
+      type: timestamp
+    updated_at:
+      type: timestamp 
+  relations:
+    Store:
+      foreignType: one 
+    JobState:
+      foreignAlias: Jobs
+    JobType:
+      foreignAlias: Jobs
+    Invoices:
+      foreignAlias: Jobs
+      class: Invoice
+      refClass: JobInvoice
+  actAs:
+    Timestampable: ~
+
+
+Task:
+  tableName: task 
+  columns:
+    id:
+      type: integer
+      autoincrement: true
+      primary: true
+    start:
+      type: timestamp
+    end:
+      type: timestamp
+    scheduled:
+      type: boolean
+    break:
+      type: integer
+    overtime:
+      type: integer
+    info:
+      type: clob      
+    approach:
+      type: integer
+    job_id:
+      type: integer
+    task_type_id:
+      type: integer
+      default: 1
+    created_at:
+      type: timestamp
+    updated_at:
+      type: timestamp
+  actAs:
+    Timestampable: ~
+  relations:
+    Job:
+      foreignAlias: Tasks
+      cascade: [delete]
+    Users:
+      foreignAlias: Tasks
+      class: User
+      refClass: TaskUser
+      cascade: [delete]
+    TaskType:
+      foreignAlias: Tasks
+      
+      
+Entry:
+  tableName: Entry
+  columns:
+    id:
+      type: integer
+      autoincrement: true
+      primary: true
+    description:
+      type: string(255)
+    amount:
+      type: integer
+      notnull: true
+    item_id:
+      type: integer
+    job_id:
+      type: integer
+  relations:
+    Job:
+      foreignAlias: Entry
+    Item:
+      foreignAlias: Entry
+            
+Item:
+  tableName: item
+  columns:
+    id:
+      type: integer
+      autoincrement: true
+      primary: true
+    code:
+      type: string(10)
+      notnull: true
+    name:
+      type: string(64)
+      notnull: true
+    unit:
+      type: string(32)
+      notnull: true
+    description:
+      type: string(255)
+
+
+Message:
+  actAs: [Timestampable]
+  tableName: message
+  columns:
+    id:
+      type: integer
+      autoincrement: true
+      primary: true
+    parent:
+      type: integer
+    sender:
+      type: integer
+      notnull: true
+    reciver:
+      type: integer
+    job_id:
+      type: integer
+    body:
+      type: clob
+  relations:
+    User:
+      class: sfGuardUser
+      local: sender
+    Job:
+      class: Job
+
+
+TaskUser:
+  tableName: task_user
+  columns:
+    task_id:
+      type: integer
+      primary: true
+    user_id:
+      type: integer
+      primary: true
+  relations:
+    User:
+      class: sfGuardUser
+      local: user_id
+
+
+File:
+  tableName: file
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: ture
+      primary: true
+    name:
+      type: string(64)
+      notnull: true  
+    file:
+      type: string(255)      
+  relations:
+    Jobs:
+      foreignAlias: Files
+      class: Job
+      refClass: FileJob
+
+FileJob:
+  tableName: file_job
+  columns:
+    file_id:
+      type: integer(8)
+      primary: true
+    job_id: 
+      type: integer(8)
+      primary: true
+JobState:
+  tableName: job_state
+  columns:
+      id:
+        type: integer
+        primary: true
+        autoincrement: true
+      name:
+        type: string(64)
+JobType:
+  tableName: job_type
+  columns:
+      id:
+        type: integer
+        primary: true
+        autoincrement: true
+      name:
+        type: string(64)
+
+TaskType:
+  tableName: task_type
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    name:
+      type: string(64)
+
+JobInvoice:
+  tableName: job_invoice
+  columns:
+    job_id:
+      type: integer(8)
+      primary: true
+    invoice_id:
+      type: integer(8)
+      primary: true
+Invoice:
+  actAs: [Timestampable]
+  tableName: invoice
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    number:
+      type: integer
+      notnull: true
+  relations:
+    Jobs:
+      foreignAlias: Invoices
+      class: Job
+      refClass: JobInvoice
+      cascade: [delete]
+    
+        

@@ -1,0 +1,145 @@
+invoice:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Invoice
+    module:               invoice
+    prefix_path:          /invoice
+    column:               id
+    with_wildcard_routes: true
+
+item_typ:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                ItemTyp
+    module:               itemtyp
+    prefix_path:          /itemtyp
+    column:               id
+    with_wildcard_routes: true
+
+task_type:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                TaskType
+    module:               tasktype
+    prefix_path:          /tasktype
+    column:               id
+    with_wildcard_routes: true
+
+item:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Item
+    module:               item
+    prefix_path:          /item
+    column:               id
+    with_wildcard_routes: true
+
+job_user:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                JobUser
+    module:               JobUser
+    prefix_path:          /JobUser
+    column:               Array
+    with_wildcard_routes: true
+
+file:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                File
+    module:               file
+    prefix_path:          /file
+    column:               id
+    with_wildcard_routes: true
+
+jobtype:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                jobtype
+    module:               jobtype
+    prefix_path:          /jobtype
+    column:               id
+    with_wildcard_routes: true
+
+job_state:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                JobState
+    module:               job_state
+    prefix_path:          /job_state
+    column:               id
+    with_wildcard_routes: true
+
+user:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                User
+    module:               user
+    prefix_path:          /user
+    column:               id
+    with_wildcard_routes: true
+
+task:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Task
+    module:               task
+    prefix_path:          /task
+    column:               id
+    with_wildcard_routes: true
+
+job:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Job
+    module:               job
+    prefix_path:          /job
+    column:               id
+    with_wildcard_routes: true
+
+store:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Store
+    module:               store
+    prefix_path:          /store
+    column:               id
+    with_wildcard_routes: true
+
+customer:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Customer
+    module:               customer
+    prefix_path:          /customer
+    column:               id
+    with_wildcard_routes: true
+
+sf_guard_signin:
+  url:   /login
+  param: { module: sfGuardAuth, action: signin }
+
+sf_guard_signout:
+  url:   /logout
+  param: { module: sfGuardAuth, action: signout }
+  
+sf_guard_password:
+  url:   /request_password
+  param: { module: sfGuardAuth, action: password }
+  
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+
+# default rules
+homepage:
+  url:   /
+  param: { module: job, action: index }
+
+# generic rules
+# please, remove them by adding more specific rules
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*
