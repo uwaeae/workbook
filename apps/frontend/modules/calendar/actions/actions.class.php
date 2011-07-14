@@ -316,34 +316,30 @@ class calendarActions extends sfActions
 			foreach ($tasks as $task) {
 				$daytime[date('G',strtotime($task->getStart()))][] = $task;
 			}
-			
-			
-			$output = '<table border="0" class="cal_table">';
-			$full = 0;
 			for ($i=0; $i < 24  ; $i++) { 
-			$output .= '<tr class="cal_timerow_'.(($i%2) == 1? 'even': 'odd').'" > ';
+			$output[$i] = array();
 			
 			if(isset($daytime[$i])) foreach ($daytime[$i] as $task) {
+				$out = array();
 				$end = date('G',strtotime($task->getEnd()));
 				$start = date('G',strtotime($task->getStart()));
-				$duration = $end - $start;
-				if($full < $duration) $full = $duration;
-				$output .= '<td rowspan="'.$duration.'" class="cal_type_1">';
-				$output .= date('H:i',strtotime($task->getStart())).' - '.date('H:i',strtotime($task->getEnd())).'<br>';
-				$output .= 'Number'.$task->getJob()->getID();
-				$output .= '</td> ';
+				$out['duration'] = $end - $start;
+				$out['task'] = $task;
 				
+				$output[$i][] = $out;
+				} 	
 			}
-			if( $full == 0) $output .= '<td colspan="3"></td> ';
-			else $full--;		
-			$output .= '</tr> ';
-			}
-						
-			$output .= 	'</table></div>';	
+			
 			return $output;
 			
 		  }
 		
+		protected function renderTask($task,$style = 9){
+			
+			
+				
+				return $output;
+		}
 
 
 		
@@ -352,7 +348,8 @@ class calendarActions extends sfActions
 		  {
 		    $this->getUser()->setAttribute('calendar',
 								array('next'=> $this->next,'user'=> $this->userid));
-			$this->getUser()->setAttribute('back','calendar');
+			$routing = $this->getContext()->getRouting();
+			$this->getUser()->setAttribute('back',$routing->getCurrentInternalUri());
 		  }
 
 }

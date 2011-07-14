@@ -9,7 +9,7 @@ $(document).ready(function()
 	});
 $('.cal_filter_opener').click(function(key)
 	{
-	$('.cal_filter_item').fadeToggle();	
+	$('.cal_filter_item').fadeToggle();
 	});
 
 

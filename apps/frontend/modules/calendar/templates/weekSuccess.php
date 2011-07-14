@@ -1,14 +1,6 @@
 <?php  use_helper('Date');?>
 <?php use_javascript('calendar.js') ?>
 
-
-
-	
-<div id="calendar">	
-	
-
-
-
 <table class="calendar">
 	
 <colgroup>
@@ -43,15 +35,15 @@
 
 <?php foreach ($calendar as $day): ?>
 	<td class="cal_day_col"	>
-
-		<?php echo htmlspecialchars_decode($day) ?>
+			<?php include_partial('task_medium', array('day' => $day)) ?>
+		<?php // echo htmlspecialchars_decode($day) ?>
 	</td>	
 <?php endforeach ?>	
 
 </tr>
 </tbody>
 </table>
-</div>
+
 
 <?php include_partial('openjob', array('jobs' => $jobs)) ?>
 <?php include_partial('filter', array('type' => 'week','users' => $users, 'userid' => $userid,'next' => $next)) ?>

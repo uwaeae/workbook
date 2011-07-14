@@ -1,13 +1,16 @@
 
 * {
+	font-family: verdana,arial,sans-serif;
 	padding: 0;
 	margin: 0;
 }
 
 h1 {
 	font-size: 18pt;
-	xtext-transform:uppercase;
-	letter-spacing:2px
+	text-transform:uppercase;
+	letter-spacing:2px;
+	background-color: #E7EEF6;
+ 	border-radius: 5px 5px 5px 5px;
 }
 h3 {
 	background-color: #E7EEF6;
@@ -43,8 +46,16 @@ select {
 
 	
 }
+.header h1 {
+	padding: 0;
+	margin: 0;
+	display: inline;
+	background-color: steelblue;
+
+}
+
 .content {
-	display: inline-block;
+	xdisplay: inline-block;
 	padding: 10px;
 }
 
@@ -71,63 +82,24 @@ select {
 	float:right;
 	 padding-left: 20px;
 }
-/*
-
-
-
-
-#calendar{
-	min-width: 500px;
-	font-family: verdana,arial,sans-serif;
-	font-size:7pt;
-	color:#333333;
-	float:left;
-	padding-left: 20px;
-	
-}
-
-.cal_day_col{
-	border-right: 2px inset blue;
-	padding: 0;
-	margin: 0;
-}
-
-.calendar_button{
-	cursor: pointer;
-	
-	
-}
-.calendar_button:hover {
-		
-		
-		color:steelblue;
-}
-
-.calendar_type_button{
-	display: inline-block; 
-		margin: 0px;
-		text-align:center;
-		color: white; 
-		border-style:none; 
-		border-width:3px; 
-		border-radius:2em;
-		padding:5px;
-		font-size:10px;
-		text-decoration:none;
-		cursor: pointer;
-		line-height: 15px;
-		font-family: verdana,arial,sans-serif;
-} */
-#calendar{
+ /* CALENDAR SECECTION   */
+.calendar{
 	
 	font-family: verdana,arial,sans-serif;
 	font-size:7pt;
 	color:#333333;
 	float:left;
 	padding-left: 20px;
+	width: 60%;
 	
 }
-
+.cal_col_even,
+.cal_col_odd{
+	width: 13%;
+}
+.cal_col_timeline{
+	width: 5%;
+}
 .cal_type_1  {
 
 	background-color: #5882FA;
@@ -256,12 +228,7 @@ div #cal_filter{
 
 
 
-.header h1 {
-	padding: 0;
-	margin: 0;
-	display: inline;
-	
-}
+/* NAVIGATIONS BUTTONS */
 
 .button_selected,
 .button_selected:visited,
@@ -271,7 +238,8 @@ div #cal_filter{
 			}
 
 .button:hover { 
-			background-color: steelblue; }
+			background-color: #A9F5F2;
+			color: blue; }
 
 .button,
 .button:visited
@@ -286,15 +254,17 @@ div #cal_filter{
 			padding:5px;
 			font-size:10px;
 			text-decoration:none;
-			background-color: lightblue;
+			background-color: steelblue;
 			cursor: pointer;
 			line-height: 15px;
 			font-family: verdana,arial,sans-serif;
-		
+			-webkit-box-shadow: 2px 2px 3px 1px #00007a;
+			-moz-box-shadow: 2px 2px 3px 1px #00007a;
+			box-shadow: 2px 2px 3px 1px #00007a;
 			
 			 }
 
-
+/* MENU */
 .menu {
 	
 	padding-top: 4px;
@@ -322,10 +292,15 @@ div #cal_filter{
 
 .menu li {
 	list-style: none;
-	
+	border-radius:3px;
 	margin: 10px;
 	padding: 0.5em;
 	background-color: steelblue;
+
+	-webkit-box-shadow: 2px 2px 3px 1px #00007a;
+	-moz-box-shadow: 2px 2px 3px 1px #00007a;
+	box-shadow: 2px 2px 3px 1px #00007a;
+
 }
 .menu li:hover {
 	background-color: blue;
@@ -367,8 +342,8 @@ div #cal_filter{
 }
 .usermenu a:hover {
 
-	xcolor: lightblue;
-	text-shadow: 3px 3px 3px blue;
+	color: lightblue;
+	xtext-shadow: 3px 3px 3px blue;
 }
 
 .usermenu ul {
@@ -406,6 +381,11 @@ div #cal_filter{
 	background-color: steelblue;
 	
 }
+
+
+/* Tabellen allgemein */
+
+
 .table_menu_left{
 	
 	float: left;
@@ -487,53 +467,27 @@ table.job{
 	min-width:800px;
 	background-color: #CED8F6;
 	border-radius: 1em 1em 1em 1em;
+	cursor: pointer;
 }
 .job_type_head:hover {
 	background-color: #E0E6F8;
 }
-/*
+
 table {
 	font-family: verdana,arial,sans-serif;
 	font-size:7pt;
 	color:#333333;
 	border-width: 1px;
 	border-color: #ccccff;
-	border-collapse: collapse;
-	display: inline;
-	
-}
-table tr {
-	xheight: 30px;
 }
 
+/* Fromulare */
 
-table th {
-	background-color: #E7EEF6;
-    white-space: nowrap;
-	xborder-bottom: 1px solid #ccccff; 
-   	xborder-top: 1px solid #ccccff; 
-
-}
-table thead tr th,
-table tbody tr td {
-	padding-left: 8px;
-	padding-right: 8px;
-	
-	
+form th{
+	background-color: #CECEF6;
+	border-radius: 2px;
+	padding: 5px;
 }
 
-table tbody tr td {
-	-moz-border-bottom-colors: none;
-    -moz-border-image: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
 
-   
-    text-align: left;
-    xvertical-align: top;
-	max-width: 700px;
-}
-
-*/
 

@@ -3,7 +3,7 @@
 
 
 
-<div id="calendar">	
+
 <table class="calendar"><colgroup>
 
 </colgroup>
@@ -28,7 +28,7 @@
 </tr>
 </tbody>
 </table>
-</div>
+
 
 <?php include_partial('openjob', array('jobs' => $jobs)) ?>
 
