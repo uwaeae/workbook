@@ -29,12 +29,12 @@
 	
 	
 </tr>
-<td class="cal_day_col cal_timeline">
-	<?php echo htmlspecialchars_decode($timeline) ?>
+<td class="cal_week_col cal_timeline">
+	<?php include_partial('timeline', array('time' => $timeline,'type' => 'medium')) ?>
 </td>
 
 <?php foreach ($calendar as $day): ?>
-	<td class="cal_day_col"	>
+	<td class="cal_week_col"	>
 			<?php include_partial('task_medium', array('day' => $day)) ?>
 		<?php // echo htmlspecialchars_decode($day) ?>
 	</td>	

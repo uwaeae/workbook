@@ -199,7 +199,7 @@ class calendarActions extends sfActions
 			else{
 					$this->type = 0;
 				}
-			$this->timeline = $this->renderTimeline();
+			$this->timeline = $this->renderTimeline(8,18);
 			$next =  $this->days * $this->next  - ( date('j') ) - ( date('w',mktime(0, 0, 0, date("m")  , date("d") - date('j') , date("Y")))) ;
 			
 			
@@ -211,7 +211,7 @@ class calendarActions extends sfActions
 					$this->calendar[$i][$j]['weekday'] = date('w');
 					$this->calendar[$i][$j]['today'] = date('z') == date('z',$date);
 					$this->calendar[$i][$j]['date'] = $this->tag[(date('w',$date))].' '.date("d.m.",$date);
-					$this->calendar[$i][$j]['task'] = $this->renderDay($this->getTaskDay(( $i * $j ) + $next,$this->type,$this->userid));
+					$this->calendar[$i][$j]['task'] = $this->renderDay($this->getTaskDay(( ($i * 7 ) + $j ) + $next,$this->type,$this->userid),8,18);
 				}
 			}
 
@@ -247,14 +247,14 @@ class calendarActions extends sfActions
 		else{
 				$this->type = 0;
 			}
-		$this->timeline = $this->renderTimeline();
+		$this->timeline = $this->renderTimeline(8,18);
 		$next =  $this->days * $this->next  - ( date('w') - 1);
 		for ($i=0; $i < $this->days ; $i++) { 
 			$date = mktime(0, 0, 0, date("m")  , date("d")+ $i + $next, date("Y"));
 			$this->weekday[$i]['weekday'] = date('w');
 			$this->weekday[$i]['today'] = date('z') == date('z',$date);
 			$this->weekday[$i]['date'] = $this->tag[(date('w',$date))].' '.date("d.m.",$date);
-			$this->calendar[$i] = $this->renderDay($this->getTaskDay($i + $next,$this->type,$this->userid));
+			$this->calendar[$i] = $this->renderDay($this->getTaskDay($i + $next,$this->type,$this->userid),8,18);
 		}
 		
 	
@@ -298,25 +298,23 @@ class calendarActions extends sfActions
 	
 	}
 	
-	protected function renderTimeline()
+	protected function renderTimeline($from = 0,$to = 24)
 	{
-			$output = '<table border="0" class="cal_table">';
-			for ($i=0; $i < 24  ; $i++) { 
-			$output .= '<tr class="cal_timerow_'.(($i%2) == 1? 'even': 'odd').'" > ';
-			$output .= '<td>'.$i.':00</td>';
-			$output .= '</tr> ';
+			$output = array();
+			for ($i=$from; $i < $to  ; $i++) { 
+			 $output[] = $i;
 			}
-			$output .= 	'</table></div>';
+			
 			return $output;
 	}
 		
-		protected function renderDay($tasks)
+		protected function renderDay($tasks,$from = 0,$to = 24)
 		  {
 			$daytime = array();	
 			foreach ($tasks as $task) {
 				$daytime[date('G',strtotime($task->getStart()))][] = $task;
 			}
-			for ($i=0; $i < 24  ; $i++) { 
+			for ($i=$from; $i < $to  ; $i++) { 
 			$output[$i] = array();
 			
 			if(isset($daytime[$i])) foreach ($daytime[$i] as $task) {

@@ -36,14 +36,14 @@
 	
 	
 </tr>
-<td class="cal_day_col cal_timeline">
-	<?php echo htmlspecialchars_decode($timeline) ?>
+<td class="cal_day_col cal_timeline_small">
+	<?php include_partial('timeline', array('time' => $timeline,'type' => 'small')) ?>
 </td>
 
 <?php foreach ($week as $day): ?>
 	<td class="cal_day_col"	>
-
-		<?php echo htmlspecialchars_decode($day['task']) ?>
+	<?php include_partial('task_small', array('day' => $day['task'])) ?>
+		<?php //echo htmlspecialchars_decode() ?>
 	</td>	
 <?php endforeach ?>	
 

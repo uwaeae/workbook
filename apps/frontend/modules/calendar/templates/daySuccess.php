@@ -20,10 +20,10 @@
 	<th colspan="2"><?php echo htmlspecialchars_decode($weekday['date']) ?></th>
 </tr>
 <td class="cal_day_col cal_timeline">
-	<?php echo htmlspecialchars_decode($timeline) ?>
+	<?php include_partial('timeline', array('time' => $timeline,'type' => 'large')) ?>
 </td>	
 <td class="cal_day_col">
-	<?php echo htmlspecialchars_decode($calendar) ?>
+		<?php include_partial('task_large', array('day' => $calendar)) ?>
 </td>	
 </tr>
 </tbody>
@@ -31,5 +31,5 @@
 
 
 <?php include_partial('openjob', array('jobs' => $jobs)) ?>
-
+<?php include_partial('filter', array('type' => 'week','users' => $users, 'userid' => $userid,'next' => $next)) ?>
 

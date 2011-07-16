@@ -5,6 +5,13 @@
 	margin: 0;
 }
 
+body{
+	margin-left: 10%;
+	margin-right: 10%;
+
+	
+}
+
 h1 {
 	font-size: 18pt;
 	text-transform:uppercase;
@@ -55,7 +62,7 @@ select {
 }
 
 .content {
-	xdisplay: inline-block;
+	margin: 0 auto;
 	padding: 10px;
 }
 
@@ -78,10 +85,7 @@ select {
 	color: black;
 }
 
-#open_job{
-	float:right;
-	 padding-left: 20px;
-}
+
  /* CALENDAR SECECTION   */
 .calendar{
 	
@@ -89,46 +93,40 @@ select {
 	font-size:7pt;
 	color:#333333;
 	float:left;
-	padding-left: 20px;
-	width: 60%;
+	width: 90%;
 	
 }
 .cal_col_even,
 .cal_col_odd{
 	width: 13%;
 }
-.cal_col_timeline{
-	width: 5%;
-}
-.cal_type_1  {
 
+table.cal_entry td {
+ 
+}
+
+.cal_type_1  {
 	background-color: #5882FA;
 }
 
 .cal_type_1_finshed {
-	
 	background-color: #9AFE2E;
 }
 
 .cal_type_2 {
-	
 	background-color: #FA8258;
 }
 
-.cal_type_3
-  {
-
+.cal_type_3  {
 	background-color: #F3F781;
 }
 
 .cal_user{
-	
 	background-color: lightblue;
 }
 
 .cal_timerow_unused{
 	opacity: .5;
-	
 }
 
 .cal_timerow_odd {
@@ -147,38 +145,116 @@ select {
 	display: inline;
 }
 
-table.cal_table{
-  	width: 100%;
 
-	font-family: verdana,arial,sans-serif;
-	font-size:7pt;
-	color:#333333;
-	border-width: 1px;
-	border-color: #ccccff;
-	border-collapse: collapse;
-	
-}
 .cal_timeline{
 	width: 40px;
+	
 }
-table.cal_table td,
-table.cal_table tr{
+table.cal_table_large {
+  	width: 100%;
+	
+	font-family: verdana,arial,sans-serif;
+	font-size:12pt;
+	color:#333333;
+	border-collapse: collapse;
+	background-color: #CED8F6;
+	
+}
+table.cal_table_large td,
+table.cal_table_large tr{
 
-	height: 15px;
-	border-bottom: 1px solid #81BEF7;
+	height: 50px;
+
 }
+table.cal_table_large  td.cal_entry{
+	vertical-align: top;
+	cursor: pointer;
+	border: 1px solid rgba(0,0,0,.5)
+}
+table.cal_table_large div.cal_entry_content{
+
+	overflow: hidden;
+}
+table.cal_table_medium {
+  	width: 100%;
+	
+	font-family: verdana,arial,sans-serif;
+	font-size:8pt;
+	color:#333333;
+	border-collapse: collapse;
+	background-color: #CED8F6;
+	
+}
+
+table.cal_table_medium td,
+table.cal_table_medium tr{
+
+	height: 30px;
+
+}
+table.cal_table_medium  td.cal_entry{
+	vertical-align: top;
+	cursor: pointer;
+	border: 1px solid rgba(0,0,0,.5)
+}
+table.cal_table_medium div.cal_entry_content{
+
+	overflow: hidden;
+}
+table.cal_table_medium div.cal_entry_content p{
+	margin-bottom: 5px;
+}
+table.cal_table_small {
+  	width: 100%;
+	
+	font-family: verdana,arial,sans-serif;
+	font-size:5pt;
+	color:#333333;
+	border-collapse: collapse;
+	background-color: #CED8F6;
+	
+}
+table.cal_table_small td,
+table.cal_table_small tr{
+
+	height: 10px;
+
+}
+table td.cal_timeline_small {
+	width: 3%;
+}
+
+table.cal_table_small  td.cal_entry{
+	vertical-align: top;
+	cursor: pointer;
+	border: 1px solid rgba(0,0,0,.5)
+}
+table.cal_table_small div.cal_entry_content{
+
+	overflow: hidden;
+}
+
+
+
+
 	
 .cal_table tbody{
 	height: 300px;
 }
+
+
 div #open_job{
-	float:left;
+	float:none;
 	font-size: 8pt;
 	font-family: verdana,arial,sans-serif;
 	width: 150px;
+	position: absolute;
+	left:65%;
 }
 div #cal_filter{
-	float:left;
+	position: absolute;
+	float:none;
+	left: 60%;
 	font-size: 8pt;
 	font-family: verdana,arial,sans-serif;
 }

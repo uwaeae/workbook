@@ -6,22 +6,26 @@
 - Konfiguration Tabelle erstellen layout einfallen lassen
 
 
--Back buttons konzept erarbeiten.
+-Back buttons konzept erarbeiten und umsetzen.
 
 - Task Thermin ändern einbauen bzw user zuweisen
 
 
-- Carlendar View doppelschleife in den Controller bringen. 
+
+- Calendar Fertig stellen
 
 - Calendar alles User anzeigen übersichtlicheremachen 
 	vieleicht durch weitere Überschriftsspalte und Timeline?
 
 Auftrag
+
+	Übersicht Filter/Suche einbauen User, Firma, usw. 
 	Dateihochladen und anzeigen
+	Eingabe die Datepicker jQuery UI verwenden?
 	
 Stundenzettel
 	Monatssyitsch
-	Admin Switsch
+	Admin Switsch zwischen unsern
 
 Konfigurations Datenbank
 
