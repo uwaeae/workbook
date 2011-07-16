@@ -8,8 +8,9 @@
   <table>
     <tfoot>	
       <tr>
+
         <td colspan="2">
-        	<a class="button" href="<?php //echo url_for('job/show/?id='.$job->getId()) ?>">zurück</a>
+        	<a class="button" href="<?php echo url_for($back)  ?>">zurück </a>
 		    <?php if (!$form->getObject()->isNew()): ?>
 		    <?php echo link_to('Löschen', 'task/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => 'Sind sie sicher?','class' => 'button')) ?>
 		    <?php endif; ?>

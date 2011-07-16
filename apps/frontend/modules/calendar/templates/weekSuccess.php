@@ -30,12 +30,12 @@
 	
 </tr>
 <td class="cal_week_col cal_timeline">
-	<?php include_partial('timeline', array('time' => $timeline,'type' => 'medium')) ?>
+	<?php include_partial('timeline', array('time' => $timeline,'type' => 'user')) ?>
 </td>
 
 <?php foreach ($calendar as $day): ?>
 	<td class="cal_week_col"	>
-			<?php include_partial('task_medium', array('day' => $day)) ?>
+			<?php include_partial('task_users', array('day' => $day,'users' => $users)) ?>
 		<?php // echo htmlspecialchars_decode($day) ?>
 	</td>	
 <?php endforeach ?>	

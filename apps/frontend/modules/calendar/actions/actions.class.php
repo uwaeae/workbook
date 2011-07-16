@@ -16,10 +16,7 @@ class calendarActions extends sfActions
 		$this->calendar = array();
 		$this->weekday = array();
 		$this->makeWeekdays();
-		$this->users = Doctrine_Query::create()
-					->select('*')
-					->from('sfGuardUser')
-					->execute();
+	
 		$this->TaskType = Doctrine_Query::create()
 					->select('*')
 					->from('TaskType')
@@ -214,10 +211,7 @@ class calendarActions extends sfActions
 					$this->calendar[$i][$j]['task'] = $this->renderDay($this->getTaskDay(( ($i * 7 ) + $j ) + $next,$this->type,$this->userid),8,18);
 				}
 			}
-
-
-	
-	
+			$this->setBack('calendar/month/?&next='.$this->next.'&user='.$this->userid);		
 	}
 	
 	public function executeWeek(sfWebRequest $request)
@@ -258,7 +252,7 @@ class calendarActions extends sfActions
 		}
 		
 	
-			
+		$this->setBack('calendar/week/?&next='.$this->next.'&user='.$this->userid);		
 			
 	}
 
@@ -295,7 +289,7 @@ class calendarActions extends sfActions
 		$this->calendar = $this->renderDay($this->getTaskDay( $this->next,$this->type,$this->userid));
 		$this->timeline = $this->renderTimeline();
 		
-	
+		$this->setBack('calendar/day/?&next='.$this->next.'&user='.$this->userid);	
 	}
 	
 	protected function renderTimeline($from = 0,$to = 24)
@@ -310,44 +304,54 @@ class calendarActions extends sfActions
 		
 		protected function renderDay($tasks,$from = 0,$to = 24)
 		  {
+			$this->users = Doctrine_Query::create()
+						->select('*')
+						->from('sfGuardUser')
+						->execute();
+			
 			$daytime = array();	
 			foreach ($tasks as $task) {
 				$daytime[date('G',strtotime($task->getStart()))][] = $task;
 			}
 			for ($i=$from; $i < $to  ; $i++) { 
-			$output[$i] = array();
 			
-			if(isset($daytime[$i])) foreach ($daytime[$i] as $task) {
-				$out = array();
-				$end = date('G',strtotime($task->getEnd()));
-				$start = date('G',strtotime($task->getStart()));
-				$out['duration'] = $end - $start;
-				$out['task'] = $task;
-				
-				$output[$i][] = $out;
-				} 	
+			foreach ($this->users as $user) {
+			
+			
+				$output[$user->getUsername()][$i] = array();
+			
+				if(isset($daytime[$i])) foreach ($daytime[$i] as $task) {
+					foreach ($task->getUsers() as $u) {
+						$out = array();
+						$end = date('G',strtotime($task->getEnd()));
+						$start = date('G',strtotime($task->getStart()));
+						$out['duration'] = $end - $start;
+						$out['task'] = $task;
+						if($u->getUsername() == $user->getUsername() )
+						$output[$u->getUsername()][$i][] = $out;
+						}
+					} 	
 			}
-			
+			}
 			return $output;
 			
 		  }
 		
-		protected function renderTask($task,$style = 9){
-			
-			
-				
-				return $output;
-		}
-
-
-		
+	
+	protected function setBack($var){
+			$routing = $this->getContext()->getRouting();
+			$this->getUser()->setFlash('back',$var);
+			$this->getUser()->setAttribute('back',$routing->getCurrentInternalUri());
+			}
+	
 		
 		public function postExecute()
 		  {
 		    $this->getUser()->setAttribute('calendar',
 								array('next'=> $this->next,'user'=> $this->userid));
-			$routing = $this->getContext()->getRouting();
-			$this->getUser()->setAttribute('back',$routing->getCurrentInternalUri());
+							$routing = $this->getContext()->getRouting();
+			
+							$this->getUser()->setAttribute('back',$routing->getCurrentInternalUri());
 		  }
 
 }

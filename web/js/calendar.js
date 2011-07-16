@@ -5,7 +5,15 @@ $(document).ready(function()
  
   $('.cal_open_jobs_head').click(function(key)
 	{
-	$('.cal_open_jobs_body').fadeToggle();
+	if ($(".cal_open_jobs_body").is(":hidden")) {
+	$('.cal_open_jobs_body').slideDown("slow");
+	} else {
+    $('.cal_open_jobs_body').slideUp("slow");
+	}
+	
+	
+	
+	
 	});
 $('.cal_filter_opener').click(function(key)
 	{

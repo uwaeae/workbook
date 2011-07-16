@@ -65,8 +65,6 @@ class jobActions extends sfActions
 			->execute();
 			}
 
-
-
   }
  
  public function executeArchiv(sfWebRequest $request)
@@ -101,8 +99,7 @@ class jobActions extends sfActions
   {
 	  
     $this->forward404Unless($this->job = Doctrine_Core::getTable('Job')->find(array($request->getParameter('id'))));
-	
-
+		$this->setBack('job/show?id='.$request->getParameter('id'));
 
   }
 
@@ -251,7 +248,11 @@ public function executeAjax($request)
 
   return parent::saveEmbeddedForms($con, $forms);
 } 
-
+protected function setBack($var){
+		$routing = $this->getContext()->getRouting();
+		$this->getUser()->setFlash('back',$var);
+		$this->getUser()->setAttribute('back',$routing->getCurrentInternalUri());
+		}
 
 
 }

@@ -7,6 +7,9 @@
 <td class="sf_admin_date sf_admin_list_td_end">
   <?php echo false !== strtotime($task->getEnd()) ? format_date($task->getEnd(), "f") : '&nbsp;' ?>
 </td>
+<td class="sf_admin_boolean sf_admin_list_td_scheduled">
+  <?php echo get_partial('task/list_field_boolean', array('value' => $task->getScheduled())) ?>
+</td>
 <td class="sf_admin_text sf_admin_list_td_break">
   <?php echo $task->getBreak() ?>
 </td>

@@ -64,6 +64,8 @@ select {
 .content {
 	margin: 0 auto;
 	padding: 10px;
+	display: inline-block;
+	width: 90%;
 }
 
 .smallicon {
@@ -234,6 +236,44 @@ table.cal_table_small div.cal_entry_content{
 	overflow: hidden;
 }
 
+table.cal_table_user {
+	font-family: verdana,arial,sans-serif;
+	font-size:5pt;
+	color:#333333;
+	border-collapse: collapse;
+	background-color: #CED8F6;
+	width: 100%;
+	
+}
+div.cal_user_day {
+	display:inline-block;
+}
+div.cal_day {
+		
+}
+
+
+table.cal_table_user td,
+table.cal_table_user tr{
+
+	height: 40px;
+
+}
+table td.cal_timeline_user {
+	width: 3%;
+}
+
+table.cal_table_user  td.cal_entry{
+	vertical-align: top;
+	cursor: pointer;
+	border: 1px solid rgba(0,0,0,.5)
+}
+table.cal_table_user div.cal_entry_content{
+
+	overflow: hidden;
+}
+
+
 
 
 
@@ -243,14 +283,7 @@ table.cal_table_small div.cal_entry_content{
 }
 
 
-div #open_job{
-	float:none;
-	font-size: 8pt;
-	font-family: verdana,arial,sans-serif;
-	width: 150px;
-	position: absolute;
-	left:65%;
-}
+
 div #cal_filter{
 	position: absolute;
 	float:none;
@@ -281,8 +314,13 @@ div #cal_filter{
 	color: black;
 
 }
-
-
+div #open_job{
+	float:none;
+	font-size: 8pt;
+	font-family: verdana,arial,sans-serif;
+	position: absolute;
+	left:65%;
+}
 
 .cal_open_jobs_head{
 	text-align:center;
@@ -293,9 +331,21 @@ div #cal_filter{
 	padding-right: 0.5em;
 	font-size: 9pt;
 	font-weight: bold;
+	width: 25em;
+	margin-bottom: 5px;
 }
+.cal_open_jobs_body{
+	height: 40em;
+	overflow: auto;
+}
+
 .cal_oen_jobs_item{
 	 background-color: #CEECF5;
+	list-style: none outside none;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	cursor: pointer;
+	margin-top:5px;
+	margin-right: 5px;
 }
 .cal_oen_jobs_item:hover{
 	 background-color: #81DAF5;
@@ -344,8 +394,7 @@ div #cal_filter{
 .menu {
 	
 	padding-top: 4px;
-	xbackground-color: #CCCCCC;
-	xheight: 24px;
+	width: 8%;
 	display: block;
 	color: white; 
 	float:left;

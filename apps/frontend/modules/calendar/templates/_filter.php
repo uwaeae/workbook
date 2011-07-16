@@ -1,8 +1,12 @@
 <div id="cal_filter">
-		<ul>
-			<li  class="cal_filter_head cal_filter_opener ">
-				Filter
-			</li>
+	<h1  class="cal_filter_head cal_filter_opener ">
+		Filter
+	</h1>		
+	<div >
+		
+
+	<ul>
+
 			<li class="cal_filter_item cal_type_1">
 				<a class="calendar_type_button" href="<?php echo url_for('calendar/'.$type.'/?next='.$next.'&user='.$userid.'&type=0') ?>">
 					Alle</a>
@@ -19,25 +23,24 @@
 				<a class="cal_type_button " href="<?php echo url_for('calendar/'.$type.'/?next='.$next.'&user='.$userid.'&type=3') ?>">
 				Urlaub</a>
 			</li>
-		
+</ul>		
 <?php if ( $sf_user->hasGroup('admin') OR $sf_user->hasGroup('supervisor')) : ?>
-				<li  class="cal_filter_head">
-					User
-				</li>	
-			<li class="cal_filter_item   cal_user <?php if($userid == 0)  echo "button_selected" ?>">
-				<a class="cal_type_button " href="<?php echo url_for('calendar/'.$type.'/?next='.$next.'&user=0') ?>">
+	<ul>
+	<form action="<?php echo url_for('calendar/'.$type.'/?next='.$next) ?>">
+		<li>
+			<input type="checkbox" <?php if($userid == 0)  echo "checked" ?> 
 				 Alle 
-				</a>
-			</li>	
+		</li>		
 		<?php foreach ($users as $user): ?>
-			<li class="cal_filter_item  cal_user<?php if($userid == $user->getId())  echo " button_selected" ?> ">
-				<a class='cal_type_button' href="<?php echo url_for('calendar/'.$type.'/?next='.$next.'&user='.$user->getId()) ?>">
+			<input type="checkbox" <?php if($userid == $user->getId())  echo "checked" ?> >
+				 
 				 <?php echo $user->getUsername() ?>	
-				</a>
+			
 			</li>
 	<?php endforeach ?>
-	
-<?php endif ?>		
-</ul>
-
+	  </select>	
+	</form>
+	<?php endif ?>		
+	</ul>
+</div>
 </div>

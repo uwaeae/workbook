@@ -19,10 +19,10 @@
 	<td rowspan="<?php echo $task['duration'] ?>"
 		class="cal_entry cal_type_<?php echo $task['task']->getTaskTypeId() ?>
 					<?php echo (!$task['task']->getScheduled()? '_finshed':' ')?>" 
-					onclick="document.location='<?php echo url_for('job/show?id='.$task['task']->getJob()->getId()) ?>'" >
+					 >
 						<a href="<?php echo url_for('task/edit?type=0&id='.$task['task']->getId()) ?>" style="float:right;">
 							<img src="/images/icons/calendar_edit.png" ></a>		
-		<div class="cal_entry_content" style="height: <?php echo $task['duration']*10 ?>px;">
+		<div class="cal_entry_content" style="height: <?php echo $task['duration']*10 ?>px;" onclick="document.location='<?php echo url_for('job/show?id='.$task['task']->getJob()->getId()) ?>'">
 	<p><strong><?php echo $task['task']->getJob()->getStore()->getCustomer()->getCompany() ?></strong></p>
 	</div>
 	

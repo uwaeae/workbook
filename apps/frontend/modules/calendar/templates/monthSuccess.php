@@ -55,5 +55,7 @@
 
 
 <?php include_partial('openjob', array('jobs' => $jobs)) ?>
+<?php include_partial('filter', array('type' => 'month','users' => $users, 'userid' => $userid,'next' => $next)) ?>
+
 
 

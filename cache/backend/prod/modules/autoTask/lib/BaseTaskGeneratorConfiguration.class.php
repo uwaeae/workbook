@@ -47,7 +47,7 @@ abstract class BaseTaskGeneratorConfiguration extends sfModelGeneratorConfigurat
 
   public function getListParams()
   {
-    return '%%id%% - %%start%% - %%end%% - %%break%% - %%overtime%% - %%info%% - %%approach%% - %%job_id%% - %%task_type_id%% - %%created_at%% - %%updated_at%%';
+    return '%%id%% - %%start%% - %%end%% - %%scheduled%% - %%break%% - %%overtime%% - %%info%% - %%approach%% - %%job_id%% - %%task_type_id%% - %%created_at%% - %%updated_at%%';
   }
 
   public function getListLayout()
@@ -92,7 +92,7 @@ abstract class BaseTaskGeneratorConfiguration extends sfModelGeneratorConfigurat
 
   public function getListDisplay()
   {
-    return array(  0 => 'id',  1 => 'start',  2 => 'end',  3 => 'break',  4 => 'overtime',  5 => 'info',  6 => 'approach',  7 => 'job_id',  8 => 'task_type_id',  9 => 'created_at',  10 => 'updated_at',);
+    return array(  0 => 'id',  1 => 'start',  2 => 'end',  3 => 'scheduled',  4 => 'break',  5 => 'overtime',  6 => 'info',  7 => 'approach',  8 => 'job_id',  9 => 'task_type_id',  10 => 'created_at',  11 => 'updated_at',);
   }
 
   public function getFieldsDefault()
@@ -101,6 +101,7 @@ abstract class BaseTaskGeneratorConfiguration extends sfModelGeneratorConfigurat
       'id' => array(  'is_link' => true,  'is_real' => true,  'is_partial' => false,  'is_component' => false,  'type' => 'Text',),
       'start' => array(  'is_link' => false,  'is_real' => true,  'is_partial' => false,  'is_component' => false,  'type' => 'Date',),
       'end' => array(  'is_link' => false,  'is_real' => true,  'is_partial' => false,  'is_component' => false,  'type' => 'Date',),
+      'scheduled' => array(  'is_link' => false,  'is_real' => true,  'is_partial' => false,  'is_component' => false,  'type' => 'Boolean',),
       'break' => array(  'is_link' => false,  'is_real' => true,  'is_partial' => false,  'is_component' => false,  'type' => 'Text',),
       'overtime' => array(  'is_link' => false,  'is_real' => true,  'is_partial' => false,  'is_component' => false,  'type' => 'Text',),
       'info' => array(  'is_link' => false,  'is_real' => true,  'is_partial' => false,  'is_component' => false,  'type' => 'Text',),
@@ -119,6 +120,7 @@ abstract class BaseTaskGeneratorConfiguration extends sfModelGeneratorConfigurat
       'id' => array(),
       'start' => array(),
       'end' => array(),
+      'scheduled' => array(),
       'break' => array(),
       'overtime' => array(),
       'info' => array(),
@@ -137,6 +139,7 @@ abstract class BaseTaskGeneratorConfiguration extends sfModelGeneratorConfigurat
       'id' => array(),
       'start' => array(),
       'end' => array(),
+      'scheduled' => array(),
       'break' => array(),
       'overtime' => array(),
       'info' => array(),
@@ -155,6 +158,7 @@ abstract class BaseTaskGeneratorConfiguration extends sfModelGeneratorConfigurat
       'id' => array(),
       'start' => array(),
       'end' => array(),
+      'scheduled' => array(),
       'break' => array(),
       'overtime' => array(),
       'info' => array(),
@@ -173,6 +177,7 @@ abstract class BaseTaskGeneratorConfiguration extends sfModelGeneratorConfigurat
       'id' => array(),
       'start' => array(),
       'end' => array(),
+      'scheduled' => array(),
       'break' => array(),
       'overtime' => array(),
       'info' => array(),
@@ -191,6 +196,7 @@ abstract class BaseTaskGeneratorConfiguration extends sfModelGeneratorConfigurat
       'id' => array(),
       'start' => array(),
       'end' => array(),
+      'scheduled' => array(),
       'break' => array(),
       'overtime' => array(),
       'info' => array(),

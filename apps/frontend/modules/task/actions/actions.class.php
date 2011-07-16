@@ -10,6 +10,8 @@
  */
 class taskActions extends sfActions
 {
+	
+
   public function executeIndex(sfWebRequest $request)
   {
 
@@ -132,9 +134,12 @@ class taskActions extends sfActions
 
   public function executeEdit(sfWebRequest $request)
   {
+	$this->back = $this->getUser()->getAttribute('back');
     $this->forward404Unless($task = Doctrine_Core::getTable('Task')->find(array($request->getParameter('id'))), sprintf('Object task does not exist (%s).', $request->getParameter('id')));
-$this->job = Doctrine_Core::getTable('Job')->find($task->getJobId());
+//	$this->back = $this->getUser()->getFlash('back');
+//$this->job = Doctrine_Core::getTable('Job')->find($task->getJobId());
 	//echo $this->getUser()->getFlash('job');
+	
     $this->form = new TaskForm($task,array(
 		'type' => ($request->hasParameter('type')? $request->getParameter('type'): $task->getTaskTypeId()),	
 		));
