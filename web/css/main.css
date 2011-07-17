@@ -236,20 +236,35 @@ table.cal_table_small div.cal_entry_content{
 	overflow: hidden;
 }
 
+
+
+
 table.cal_table_user {
 	font-family: verdana,arial,sans-serif;
 	font-size:5pt;
 	color:#333333;
-	border-collapse: collapse;
-	background-color: #CED8F6;
+	xborder-collapse: collapse;
+	
 	width: 100%;
+	border: 0;
 	
 }
 div.cal_user_day {
-	display:inline-block;
+	float:left;
 }
 div.cal_day {
-		
+	 width: 15em;	
+}
+table.cal_table_user tr:first-child{
+
+	height: 10px;
+
+}
+
+td.cal_week_col{
+
+	background-color: #E0ECF8;
+
 }
 
 
@@ -287,7 +302,7 @@ table.cal_table_user div.cal_entry_content{
 div #cal_filter{
 	position: absolute;
 	float:none;
-	left: 60%;
+	left: 50%;
 	font-size: 8pt;
 	font-family: verdana,arial,sans-serif;
 }
@@ -302,7 +317,16 @@ div #cal_filter{
 	font-size: 9pt;
 	font-weight: bold;
 }
-.cal_filter_item{
+
+div #cal_filter .checkbox_list li{
+	list-style: none outside none;
+	margin: 0 0.2em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	display: block;
+}
+
+.cal_filter_item {
 	list-style: none outside none;
 	margin: 0 0.2em;
 	padding-left: 0.5em;

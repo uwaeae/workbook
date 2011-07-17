@@ -23,7 +23,7 @@
 	<?php include_partial('timeline', array('time' => $timeline,'type' => 'large')) ?>
 </td>	
 <td class="cal_day_col">
-		<?php include_partial('task_large', array('day' => $calendar)) ?>
+	<?php include_partial('task_large', array('day' => $day,'users' => $UserArray)) ?>
 </td>	
 </tr>
 </tbody>
@@ -31,5 +31,5 @@
 
 
 <?php include_partial('openjob', array('jobs' => $jobs)) ?>
-<?php include_partial('filter', array('type' => 'week','users' => $users, 'userid' => $userid,'next' => $next)) ?>
+<?php include_partial('filterform', array('form' => $form , 'type' => 'week')) ?>
 

@@ -1,11 +1,13 @@
-<div class="cal_day" >
+
 
 <?php foreach ($users as $user): ?>
-<div class="cal_user_day" style=" width:<?php echo round(100 / count($users),-1) ?>%;" >	
+<div class="cal_user_day" style=" width:<?php echo round(100 / count($users)) ?>%;" >	
 <table border="0" class="cal_table_user  " >
 <?php $full = 0; ?>
 <?php $even = true ?>
- 
+<tr>
+	<th><?php echo $user->getUsername() ?>	</th>
+</tr>	 
 <?php foreach ($day[$user->getUsername()] as $tasks): ?>
 <tr class="cal_timerow_<?php if($even) {
 							echo 'odd';
@@ -32,7 +34,7 @@
 	</td>
 	<?php endforeach ?>
 <?php else: ?>
-<?php if ($full > 0): ?>
+<?php if ($full > 1): ?>
  <td colspan="1"></td> 	
 <?php endif ?>	
  <td colspan="3"></td> 
@@ -45,4 +47,8 @@
 </table>
 </div>
 <?php endforeach ?>
+<!--
+<div class="cal_day" style=" width:<?php echo round(30 * count($users))+ 5 ?>px;" >
 </div>
+
+-->

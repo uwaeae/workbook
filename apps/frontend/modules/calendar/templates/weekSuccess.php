@@ -1,6 +1,6 @@
 <?php  use_helper('Date');?>
 <?php use_javascript('calendar.js') ?>
-
+<div id="calendar">
 <table class="calendar">
 	
 <colgroup>
@@ -16,7 +16,7 @@
 <thead>
 	<tr>
 			<td colspan="7" style="background-color: white;">
-						<?php include_partial('calnav', array('type' => 'week','users' => $users, 'userid' => $userid,'next' => $next)) ?>
+						<?php include_partial('calnav', array('type' => 'week','next' => $next)) ?>
 		</td>
 	</tr>
 </thead>	
@@ -35,7 +35,7 @@
 
 <?php foreach ($calendar as $day): ?>
 	<td class="cal_week_col"	>
-			<?php include_partial('task_users', array('day' => $day,'users' => $users)) ?>
+			<?php include_partial('task_users', array('day' => $day,'users' => $UserArray)) ?>
 		<?php // echo htmlspecialchars_decode($day) ?>
 	</td>	
 <?php endforeach ?>	
@@ -43,9 +43,9 @@
 </tr>
 </tbody>
 </table>
-
+</div>
 
 <?php include_partial('openjob', array('jobs' => $jobs)) ?>
-<?php include_partial('filter', array('type' => 'week','users' => $users, 'userid' => $userid,'next' => $next)) ?>
+<?php include_partial('filterform', array('form' => $form , 'type' => 'week')) ?>
 
 

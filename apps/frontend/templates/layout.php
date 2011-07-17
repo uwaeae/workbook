@@ -12,7 +12,8 @@
 	<body>
 	<div class="header">
 		<h1>WORKBOOK</h1>
-		<?php if ($sf_user->isAuthenticated()) echo $sf_user ?>
+		<?php if ($sf_user->isAuthenticated()): ?>
+		<?php echo $sf_user  ?> 	
 		<div class="usermenu">
 				<ul>
 				<?php if ($sf_user->hasPermission('admin')): ?>
@@ -22,12 +23,12 @@
 					<li><?php echo link_to('Einstellungen','customer'); ?></li>
 				</ul>
 		</div>
+		<?php endif ?>
 	</div>
 	<?php if ($sf_user->isAuthenticated()): ?>
 	<div class="menu">
 		<ul>
-			<li><?php echo link_to('Kalender','calendar/day/?next='.($calendar['next'])
-			.'&user='.$calendar['user']); ?></li>
+			<li><?php echo link_to('Kalender','calendar/day/?next='.($calendar['next'])); ?></li>
 			<li><?php echo link_to('Auftäge','job'); ?></li>
 		<?php if ($sf_user->hasPermission('Neu')): ?>
 			<li><?php echo link_to('Neu','job/new'); ?></li>

@@ -17,10 +17,7 @@ class calendarActions extends sfActions
 		$this->weekday = array();
 		$this->makeWeekdays();
 	
-		$this->TaskType = Doctrine_Query::create()
-					->select('*')
-					->from('TaskType')
-					->execute();
+	
 		$this->jobs = Doctrine_Query::create()
 					->select('j.*')
 					->from('Job j')
@@ -42,8 +39,64 @@ class calendarActions extends sfActions
 		$this->tag[6] = "Sa";
 	
 	  }
+	protected function setOptions(sfWebRequest $request)
+	  {
+
+			if($request->hasParameter('next')){
+				 $this->next =  $request->getParameter('next'); 
+				}
+			else {
+					$this->next = 0;
+				}
+
+			if(	$request->hasParameter('user') 
+				AND  $this->getUser()->hasGroup('admin') 
+				OR $this->getUser()->hasGroup('supervisor') ){	
+						$this->userid =  $request->getParameter('user'); 
+					}	
+			else $this->userid = $this->getUser()->getID();
+
+			if($request->hasParameter('type')){	
+					$this->type =  $request->getParameter('type'); 
+				}
+			else{
+					$this->type = 0;
+				}
+
+	  }
 	
-	protected function getTaskDay($offset, $type = 0, $userid = 0)
+	
+	protected function makeFilterForm()
+	  {
+		
+		
+		
+		
+		
+		$form = new sfForm();
+	
+		$form->setWidget('type',new sfWidgetFormDoctrineChoice(array(
+		      	'model' => 'tasktype', 
+		      	'add_empty' => false,
+				'expanded' => true,
+		      	'multiple'	=> true
+		 		 )));
+		$form->setDefault('type', $this->TaskType);
+		
+		
+		$form->setWidget('user',new sfWidgetFormDoctrineChoice(array(
+		      	'model' => 'sfGuardUser', 
+		      	'add_empty' => false,
+				'expanded' => true,
+		      	'multiple'	=> true )));
+		$form->setDefault('user', $this->Users);
+		
+	
+		return $form;
+		
+	  }
+	
+	protected function getTaskDay($offset)
 	  {
 		$date_day = date("d")+$offset;
 		$day_beginn = "'".date('y-m-d H:i:s',mktime(0,0,0,date("m"),$date_day,date("Y")))."'";
@@ -58,13 +111,12 @@ class calendarActions extends sfActions
 					)	
 					->orderby('t.task_type_id DESC, t.start');
 					
-		if ($userid != 0) {
-							$query->innerJoin('t.TaskUser t2 on  (t2.task_id = t.id  and t2.user_id = '.$userid.') ');
-				}
-		if ($type != 0) {
-					$query->andWhere('t.task_type_id = '.$type);
-			}
+		$userJoin = 't.TaskUser t2 on  ( t2.task_id = t.id AND t2.user_id IN ('.implode(",", $this->Users).'))';
+		$query->innerJoin($userJoin);	
+		$query->andWhere( 't.task_type_id IN ('.implode(",", $this->TaskType).')');
+				
 			
+		
 		return $query->execute();
 	  }
 	
@@ -111,10 +163,7 @@ class calendarActions extends sfActions
 		}
 	$this->calendar = array();
 
-	$this->users = Doctrine_Query::create()
-				->select('*')
-				->from('sfGuardUser')
-				->execute();
+	
 				
 	$this->TaskType = Doctrine_Query::create()
 						->select('*')
@@ -176,26 +225,26 @@ class calendarActions extends sfActions
 
 
 
-			if($request->hasParameter('next')){
-				 $this->next =  $request->getParameter('next'); 
-				}
-			else {
-					$this->next = 0;
-				}
+				if($request->hasParameter('next')){
+					 $this->next =  $request->getParameter('next'); 
+					}
+				else {
+						$this->next = 0;
+					}
 
-			if(	$request->hasParameter('user') 
-				AND  $this->getUser()->hasGroup('admin') 
-				OR $this->getUser()->hasGroup('supervisor') ){	
-						$this->userid =  $request->getParameter('user'); 
-					}	
-			else $this->userid = $this->getUser()->getID();
+				if(	$request->hasParameter('user') 
+					AND  $this->getUser()->hasGroup('admin') 
+					OR $this->getUser()->hasGroup('supervisor') ){	
+							$this->userid =  $request->getParameter('user'); 
+						}	
+				else $this->userid = $this->getUser()->getID();
 
-			if($request->hasParameter('type')){	
-					$this->type =  $request->getParameter('type'); 
-				}
-			else{
-					$this->type = 0;
-				}
+				if($request->hasParameter('type')){	
+						$this->type =  $request->getParameter('type'); 
+					}
+				else{
+						$this->type = 0;
+					}
 			$this->timeline = $this->renderTimeline(8,18);
 			$next =  $this->days * $this->next  - ( date('j') ) - ( date('w',mktime(0, 0, 0, date("m")  , date("d") - date('j') , date("Y")))) ;
 			
@@ -213,9 +262,43 @@ class calendarActions extends sfActions
 			}
 			$this->setBack('calendar/month/?&next='.$this->next.'&user='.$this->userid);		
 	}
+
+
+
+
 	
-	public function executeWeek(sfWebRequest $request)
+public function executeWeek(sfWebRequest $request)
 	{
+		
+		if($request->isMethod(sfRequest::POST))  {
+			$this->TaskType = $request->getParameter('type');
+			$this->Users = $request->getParameter('user');
+			$this->UserArray = array();
+			foreach($this->Users as $userID) {
+			$this->UserArray[]  = Doctrine::getTable('sfGuardUser')->find($userID);
+			}
+		} else {
+			$TT = Doctrine_Query::create()
+							->select('t.id')
+							->from('TaskType t')
+							->execute();
+			$this->TaskType = array();
+			foreach ( $TT as $task) {
+				$this->TaskType[] = $task->getId();
+
+			}
+			$this->UserArray = Doctrine_Query::create()
+							->select('u.id')
+							->from('sfGuardUser u')
+							->execute();
+			$this->Users = array();
+			foreach ( $this->UserArray as $user) {
+				$this->Users[] = $user->getId();
+
+			}
+			
+		}
+		
 			$this->days = 7;
 		//Wochentags verschiebung auf anfang der woche also das das erste Element im Claendar der Montag ist
 	
@@ -225,22 +308,14 @@ class calendarActions extends sfActions
 			 $this->next =  $request->getParameter('next'); 
 			}
 		else {
-				$this->next = 0;
+			    if($this->getUser()->hasAttribute('calendar')){
+				$options = $this->getUser()->getAttribute('calendar');	
+				$this->next = $options['next'];}
+				else $this->next = 0;
 			}
 	
-		if(	$request->hasParameter('user') 
-			AND  $this->getUser()->hasGroup('admin') 
-			OR $this->getUser()->hasGroup('supervisor') ){	
-					$this->userid =  $request->getParameter('user'); 
-				}	
-		else $this->userid = $this->getUser()->getID();
+		
 
-		if($request->hasParameter('type')){	
-				$this->type =  $request->getParameter('type'); 
-			}
-		else{
-				$this->type = 0;
-			}
 		$this->timeline = $this->renderTimeline(8,18);
 		$next =  $this->days * $this->next  - ( date('w') - 1);
 		for ($i=0; $i < $this->days ; $i++) { 
@@ -248,10 +323,10 @@ class calendarActions extends sfActions
 			$this->weekday[$i]['weekday'] = date('w');
 			$this->weekday[$i]['today'] = date('z') == date('z',$date);
 			$this->weekday[$i]['date'] = $this->tag[(date('w',$date))].' '.date("d.m.",$date);
-			$this->calendar[$i] = $this->renderDay($this->getTaskDay($i + $next,$this->type,$this->userid),8,18);
+			$this->calendar[$i] = $this->renderDay($this->getTaskDay($i + $next),8,18);
 		}
 		
-	
+		$this->form = $this->makeFilterForm();
 		$this->setBack('calendar/week/?&next='.$this->next.'&user='.$this->userid);		
 			
 	}
@@ -261,26 +336,40 @@ class calendarActions extends sfActions
 
 		$this->days = 1;
 	
-		if($request->hasParameter('next')){
-			 $this->next =  $request->getParameter('next'); 
-			}
-		else {
-				$this->next = 0;
-			}
+			if($request->isMethod(sfRequest::POST))  {
+				$this->TaskType = $request->getParameter('type');
+				$this->Users = $request->getParameter('user');
+				$this->UserArray = array();
+				foreach($this->Users as $userID) {
+				$this->UserArray[]  = Doctrine::getTable('sfGuardUser')->find($userID);
+				}
+			} else {
+				$TT = Doctrine_Query::create()
+								->select('t.id')
+								->from('TaskType t')
+								->execute();
+				$this->TaskType = array();
+				foreach ( $TT as $task) {
+					$this->TaskType[] = $task->getId();
 
-		if(	$request->hasParameter('user') 
-			AND  $this->getUser()->hasGroup('admin') 
-			OR $this->getUser()->hasGroup('supervisor') ){	
-					$this->userid =  $request->getParameter('user'); 
-				}	
-		else $this->userid = $this->getUser()->getID();
+				}
+				$this->UserArray = Doctrine_Query::create()
+								->select('u.id')
+								->from('sfGuardUser u')
+								->execute();
+				$this->Users = array();
+				foreach ( $this->UserArray as $user) {
+					$this->Users[] = $user->getId();
 
-		if($request->hasParameter('type')){	
-				$this->type =  $request->getParameter('type'); 
+				}
+
 			}
-		else{
-				$this->type = 0;
-			}
+		   if($request->hasParameter('next')){
+					 $this->next =  $request->getParameter('next'); 
+					}
+				else {
+						$this->next = 0;
+					}	
 			
 		
 		$date = mktime(0, 0, 0, date("m")  , date("d")+ $this->next, date("Y"));
@@ -288,7 +377,7 @@ class calendarActions extends sfActions
 		$this->weekday['date'] = $this->tag[(date('w',$date))].' '.date("d.m.",$date);
 		$this->calendar = $this->renderDay($this->getTaskDay( $this->next,$this->type,$this->userid));
 		$this->timeline = $this->renderTimeline();
-		
+		$this->form = $this->makeFilterForm();
 		$this->setBack('calendar/day/?&next='.$this->next.'&user='.$this->userid);	
 	}
 	
@@ -304,10 +393,7 @@ class calendarActions extends sfActions
 		
 		protected function renderDay($tasks,$from = 0,$to = 24)
 		  {
-			$this->users = Doctrine_Query::create()
-						->select('*')
-						->from('sfGuardUser')
-						->execute();
+			
 			
 			$daytime = array();	
 			foreach ($tasks as $task) {
@@ -315,9 +401,9 @@ class calendarActions extends sfActions
 			}
 			for ($i=$from; $i < $to  ; $i++) { 
 			
-			foreach ($this->users as $user) {
+			foreach ($this->UserArray  as $user) {
 			
-			
+				
 				$output[$user->getUsername()][$i] = array();
 			
 				if(isset($daytime[$i])) foreach ($daytime[$i] as $task) {
@@ -331,7 +417,9 @@ class calendarActions extends sfActions
 						$output[$u->getUsername()][$i][] = $out;
 						}
 					} 	
-			}
+				
+				
+				}
 			}
 			return $output;
 			
@@ -348,7 +436,7 @@ class calendarActions extends sfActions
 		public function postExecute()
 		  {
 		    $this->getUser()->setAttribute('calendar',
-								array('next'=> $this->next,'user'=> $this->userid));
+								array('next'=> $this->next));
 							$routing = $this->getContext()->getRouting();
 			
 							$this->getUser()->setAttribute('back',$routing->getCurrentInternalUri());
