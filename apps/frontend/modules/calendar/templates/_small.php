@@ -1,8 +1,7 @@
 
-
 <?php foreach ($users as $user): ?>
 <div class="cal_user_day" style=" width:<?php echo round(100 / count($users)) ?>%;" >	
-<table border="0" class="cal_table_small  " >
+<table border="0" class="cal_table_micro  " >
 <?php $full = 0; ?>
 <?php $even = true ?>
 <tr>
@@ -25,10 +24,7 @@
 		class="cal_entry cal_type_<?php echo $task['task']->getTaskTypeId() ?>
 					<?php echo (!$task['task']->getScheduled()? '_finshed':' ')?>" 
 					 >
-	<a href="<?php echo url_for('task/edit?type=0&id='.$task['task']->getId()) ?>" style="float:right;" >
-			<img src="/images/icons/calendar_edit.png" ></a>				
-	<div class="cal_entry_content" style="height: <?php echo $task['duration']*10 ?>px;" onclick="document.location='<?php echo url_for('job/show?id='.$task['task']->getJob()->getId()) ?>'">
-	
+	<div class="cal_entry_content" style="height: <?php echo $task['duration']*5 ?>px;" onclick="document.location='<?php echo url_for('job/show?id='.$task['task']->getJob()->getId()) ?>'">
 			 	<?php echo $task['task']->getJob()->getId() ?>
 	</div>
 	</td>

@@ -100,7 +100,7 @@ class taskActions extends sfActions
 
   public function executeNew(sfWebRequest $request)
   {
-	
+		$this->back = $this->getUser()->getAttribute('back');
 	$task = new TaskForm(NULL,array(
 	'type' => ($request->hasParameter('type')? $request->getParameter('type'): 1),	
 		));
@@ -182,7 +182,7 @@ class taskActions extends sfActions
     if ($form->isValid())
     {
       $task = $form->save();
-	  $this->redirect('task/edit?id='.$task->getId());
+	  $this->redirect($this->getUser()->getAttribute('back'));
     // $this->redirect('job/show/?id='.$task->getJob()->getId());
     }
 	 

@@ -14,7 +14,7 @@ class Customer extends BaseCustomer
 {
 	public function __toString() 
 	{
-		return $this->getNumber().' '.$this->getCompany();
+		return  str_pad($this->getNumber(), 4, "0", STR_PAD_LEFT).' '.$this->getCompany();
 	}
 	
 	public function getNbStores() 
@@ -24,5 +24,21 @@ class Customer extends BaseCustomer
 		return link_to($this->getStores()->count(), 'store/list'); 
 		
 	}
+	static public function retrieveForSelect($q, $limit )
+	  {
+
+		$query = Doctrine_Core::getTable('Customer')->createQuery('c');
+		if(is_numeric($q)) $query->where(" c.number LIKE '$q%'");
+		else if(strlen($q) > 1) $query->where("c.company LIKE '%$q%' ");
+	
+
+	    $stores = array();
+	    foreach ($query->execute() as $store)
+	    {
+	      $stores[$store->getId()] = (string) $store;
+	    }
+
+	    return $stores;
+	  }
 	
 }

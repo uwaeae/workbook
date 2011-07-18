@@ -8,7 +8,7 @@
     <tfoot>
       <tr>
         <td colspan="2">
-          <input type="image" class="smallicon" src="/images/icons2/checkmark.png" />
+          <input type="submit" class="button" value="weiter" />
         </td>
       </tr>
     </tfoot>

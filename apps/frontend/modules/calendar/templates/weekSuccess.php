@@ -23,7 +23,7 @@
 </tbody>
 <tr>
 		<th>Zeit</th>
-	<?php foreach ($weekday as $day): ?>
+	<?php foreach ($calendar as $day): ?>
 		<th><?php echo $day['date'] ?></th>
 	<?php endforeach ?>
 	
@@ -35,7 +35,7 @@
 
 <?php foreach ($calendar as $day): ?>
 	<td class="cal_week_col"	>
-			<?php include_partial('task_users', array('day' => $day,'users' => $UserArray)) ?>
+			<?php include_partial('task_users', array('day' => $day['task'],'users' => $UserArray)) ?>
 		<?php // echo htmlspecialchars_decode($day) ?>
 	</td>	
 <?php endforeach ?>	

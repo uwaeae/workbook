@@ -11,6 +11,11 @@ class PreJobForm extends sfForm
       	'customer' => new sfWidgetFormDoctrineChoice(array('model' => 'Customer', 'multiple' => false, )),
 		'type' => new sfWidgetFormDoctrineChoice(array('model' => 'JobType', 'multiple' => false, )),
     ));
+	$this->widgetSchema['customer']->setOption('renderer_class', 'sfWidgetFormDoctrineJQueryAutocompleter');
+	$this->widgetSchema['customer']->setOption('renderer_options', array(
+		'model' => 'Customer',
+		'url'   => $this->getOption('url'),
+		'config'=>'{ width: 500,max: 100,highlight:false ,scroll: true,scrollHeight: 300}'	));
  	
     $this->setValidators(array(
     ));

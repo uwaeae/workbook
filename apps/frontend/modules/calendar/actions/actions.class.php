@@ -8,6 +8,15 @@
  * @author     Florian Engler
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
+class calendarComponents extends sfComponents
+{
+  public function executeSmall()
+  {
+    
+  }
+}
+
+
 class calendarActions extends sfActions
 {
 	
@@ -42,28 +51,42 @@ class calendarActions extends sfActions
 	protected function setOptions(sfWebRequest $request)
 	  {
 
-			if($request->hasParameter('next')){
-				 $this->next =  $request->getParameter('next'); 
-				}
-			else {
-					$this->next = 0;
-				}
+		if($request->isMethod(sfRequest::POST))  {
+			$this->TaskType = $request->getParameter('type');
+			$this->Users = $request->getParameter('user');
+			$this->UserArray = array();
+			foreach($this->Users as $userID) {
+			$this->UserArray[]  = Doctrine::getTable('sfGuardUser')->find($userID);
+			}
+		} else {
+			$TT = Doctrine_Query::create()
+							->select('t.id')
+							->from('TaskType t')
+							->execute();
+			$this->TaskType = array();
+			foreach ( $TT as $task) {
+				$this->TaskType[] = $task->getId();
 
-			if(	$request->hasParameter('user') 
-				AND  $this->getUser()->hasGroup('admin') 
-				OR $this->getUser()->hasGroup('supervisor') ){	
-						$this->userid =  $request->getParameter('user'); 
-					}	
-			else $this->userid = $this->getUser()->getID();
-
-			if($request->hasParameter('type')){	
-					$this->type =  $request->getParameter('type'); 
+			}
+			$this->UserArray = Doctrine_Query::create()
+							->select('u.id')
+							->from('sfGuardUser u')
+							->execute();
+			$this->Users = array();
+			foreach ( $this->UserArray as $user) {
+				$this->Users[] = $user->getId();
 				}
-			else{
-					$this->type = 0;
-				}
-
-	  }
+		}
+		if($request->hasParameter('next')){
+			 $this->next =  $request->getParameter('next'); 
+			}
+		else {
+			    if($this->getUser()->hasAttribute('calendar')){
+				$options = $this->getUser()->getAttribute('calendar');	
+				$this->next = $options['next'];}
+				else $this->next = 0;
+			}
+		}
 	
 	
 	protected function makeFilterForm()
@@ -223,166 +246,70 @@ class calendarActions extends sfActions
 				$this->days = 31;
 			//Wochentags verschiebung auf anfang der woche also das das erste Element im Claendar der Montag ist
 
-
-
-				if($request->hasParameter('next')){
-					 $this->next =  $request->getParameter('next'); 
-					}
-				else {
-						$this->next = 0;
-					}
-
-				if(	$request->hasParameter('user') 
-					AND  $this->getUser()->hasGroup('admin') 
-					OR $this->getUser()->hasGroup('supervisor') ){	
-							$this->userid =  $request->getParameter('user'); 
-						}	
-				else $this->userid = $this->getUser()->getID();
-
-				if($request->hasParameter('type')){	
-						$this->type =  $request->getParameter('type'); 
-					}
-				else{
-						$this->type = 0;
-					}
+			$this->setOptions( $request);
+			
 			$this->timeline = $this->renderTimeline(8,18);
 			$next =  $this->days * $this->next  - ( date('j') ) - ( date('w',mktime(0, 0, 0, date("m")  , date("d") - date('j') , date("Y")))) ;
 			
 			
 			
 			for ($i=0 ; $i < ($this->days / 7) ; $i++) { 
-				$this->calendar[$i] = array();
-				for ($j=1; $j < 8 ; $j++) { 
-					$date = mktime(0, 0, 0, date("m")  , date("d")+ ( ($i * 7 ) + $j ) + $next, date("Y"));
-					$this->calendar[$i][$j]['weekday'] = date('w');
-					$this->calendar[$i][$j]['today'] = date('z') == date('z',$date);
-					$this->calendar[$i][$j]['date'] = $this->tag[(date('w',$date))].' '.date("d.m.",$date);
-					$this->calendar[$i][$j]['task'] = $this->renderDay($this->getTaskDay(( ($i * 7 ) + $j ) + $next,$this->type,$this->userid),8,18);
-				}
+				
+				$this->calendar[$i] = $this->renderCalendar(7,($i * 7 ) + $next,8,18);
 			}
+				$this->form = $this->makeFilterForm();
 			$this->setBack('calendar/month/?&next='.$this->next.'&user='.$this->userid);		
 	}
 
-
-
-
-	
 public function executeWeek(sfWebRequest $request)
 	{
 		
-		if($request->isMethod(sfRequest::POST))  {
-			$this->TaskType = $request->getParameter('type');
-			$this->Users = $request->getParameter('user');
-			$this->UserArray = array();
-			foreach($this->Users as $userID) {
-			$this->UserArray[]  = Doctrine::getTable('sfGuardUser')->find($userID);
-			}
-		} else {
-			$TT = Doctrine_Query::create()
-							->select('t.id')
-							->from('TaskType t')
-							->execute();
-			$this->TaskType = array();
-			foreach ( $TT as $task) {
-				$this->TaskType[] = $task->getId();
-
-			}
-			$this->UserArray = Doctrine_Query::create()
-							->select('u.id')
-							->from('sfGuardUser u')
-							->execute();
-			$this->Users = array();
-			foreach ( $this->UserArray as $user) {
-				$this->Users[] = $user->getId();
-
-			}
-			
-		}
-		
-			$this->days = 7;
+		$this->days = 7;
+		$this->setOptions( $request);
 		//Wochentags verschiebung auf anfang der woche also das das erste Element im Claendar der Montag ist
-	
-	
-
-		if($request->hasParameter('next')){
-			 $this->next =  $request->getParameter('next'); 
-			}
-		else {
-			    if($this->getUser()->hasAttribute('calendar')){
-				$options = $this->getUser()->getAttribute('calendar');	
-				$this->next = $options['next'];}
-				else $this->next = 0;
-			}
-	
-		
-
-		$this->timeline = $this->renderTimeline(8,18);
 		$next =  $this->days * $this->next  - ( date('w') - 1);
-		for ($i=0; $i < $this->days ; $i++) { 
-			$date = mktime(0, 0, 0, date("m")  , date("d")+ $i + $next, date("Y"));
-			$this->weekday[$i]['weekday'] = date('w');
-			$this->weekday[$i]['today'] = date('z') == date('z',$date);
-			$this->weekday[$i]['date'] = $this->tag[(date('w',$date))].' '.date("d.m.",$date);
-			$this->calendar[$i] = $this->renderDay($this->getTaskDay($i + $next),8,18);
-		}
-		
+		$this->calendar = $this->renderCalendar($this->days,$next,8,18);
+		$this->timeline = $this->renderTimeline(8,18);
 		$this->form = $this->makeFilterForm();
-		$this->setBack('calendar/week/?&next='.$this->next.'&user='.$this->userid);		
-			
+		$this->setBack('calendar/week/?&next='.$this->next);
 	}
-
-	public function executeDay(sfWebRequest $request)
-	  {
-
-		$this->days = 1;
 	
-			if($request->isMethod(sfRequest::POST))  {
-				$this->TaskType = $request->getParameter('type');
-				$this->Users = $request->getParameter('user');
-				$this->UserArray = array();
-				foreach($this->Users as $userID) {
-				$this->UserArray[]  = Doctrine::getTable('sfGuardUser')->find($userID);
-				}
-			} else {
-				$TT = Doctrine_Query::create()
-								->select('t.id')
-								->from('TaskType t')
-								->execute();
-				$this->TaskType = array();
-				foreach ( $TT as $task) {
-					$this->TaskType[] = $task->getId();
-
-				}
-				$this->UserArray = Doctrine_Query::create()
-								->select('u.id')
-								->from('sfGuardUser u')
-								->execute();
-				$this->Users = array();
-				foreach ( $this->UserArray as $user) {
-					$this->Users[] = $user->getId();
-
-				}
-
-			}
-		   if($request->hasParameter('next')){
-					 $this->next =  $request->getParameter('next'); 
-					}
-				else {
-						$this->next = 0;
-					}	
-			
-		
-		$date = mktime(0, 0, 0, date("m")  , date("d")+ $this->next, date("Y"));
-			for ($i=0; $i < $this->days ; $i++) { 
-				$date = mktime(0, 0, 0, date("m")  , date("d")+ $i + $next, date("Y"));
-				$this->weekday[$i]['weekday'] = date('w');
-				$this->weekday[$i]['today'] = date('z') == date('z',$date);
-				$this->weekday[$i]['date'] = $this->tag[(date('w',$date))].' '.date("d.m.",$date);
-				$this->calendar[$i] = $this->renderDay($this->getTaskDay($i + $next),8,18);
-			}
+public function executeDay(sfWebRequest $request)
+	{
+		$this->days = 1;
+		$this->setOptions( $request);
+		$this->timeline = $this->renderTimeline(8,18);
+		$this->calendar = $this->renderCalendar($this->days,$this->next,8,18);
 		$this->form = $this->makeFilterForm();
-		$this->setBack('calendar/day/?&next='.$this->next.'&user='.$this->userid);	
+		$this->setBack('calendar/day/?&next='.$this->next);	
 	}
+public function executeSmall(sfWebRequest $request)
+	{
+
+		$this->days = 7;
+		$this->setOptions( $request);
+		//Wochentags verschiebung auf anfang der woche also das das erste Element im Claendar der Montag ist
+		$next =  $this->days * $this->next  - ( date('w') - 1);
+		$this->calendar = $this->renderCalendar($this->days,$next,8,18);
+		$this->timeline = $this->renderTimeline(8,18);
+		$this->form = $this->makeFilterForm();
+		$this->setBack('calendar/week/?&next='.$this->next);
+		$this->setLayout(false);
+	}
+	
+	protected function renderCalendar( $days, $next = 0,$from = 0,$to = 24){
+			$calendar = array();
+		$date = mktime(0, 0, 0, date("m")  , date("d")+ $next, date("Y"));
+			for ($i=0; $i < $days ; $i++) { 
+				$date = mktime(0, 0, 0, date("m")  , date("d")+ $i + $next, date("Y"));
+				$calendar[$i]['weekday'] = date('w');
+				$calendar[$i]['today'] = date('z') == date('z',$date);
+				$calendar[$i]['date'] = $this->tag[(date('w',$date))].' '.date("d.m.",$date);
+				$calendar[$i]['task'] = $this->renderDay($this->getTaskDay($i + $next),$from,$to);
+			}
+		return $calendar;
+	}
+	
 	
 	protected function renderTimeline($from = 0,$to = 24)
 	{

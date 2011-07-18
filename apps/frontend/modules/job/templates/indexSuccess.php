@@ -57,3 +57,7 @@
 </table>
 
 <?php endforeach ?>
+<div class="job_search">
+	<?php include_partial('search', array('form' => $formStore)) ?>
+	<?php include_partial('search', array('form' => $formCustomer)) ?>
+</div>

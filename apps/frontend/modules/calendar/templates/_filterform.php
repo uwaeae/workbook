@@ -6,13 +6,13 @@
 		<form action="<?php echo url_for('calendar/'.$type) ?>" method="post" >
 		<div class="filtertypes">
 	
-		<?php echo $form['type']->renderError()  ?>
-		<?php echo $form['type']->render()  ?>
+		
+		<?php echo $form['type']->renderRow()  ?>
 		</div>
 		<div class="filterusers">
 		
-		<?php echo $form['user']->renderError()  ?>
-		<?php echo $form['user']->render()  ?>
+		
+		<?php echo $form['user']->renderRow()  ?>
 		</div>
 
 	</form>

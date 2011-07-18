@@ -115,13 +115,16 @@ table.cal_entry td {
 	background-color: #9AFE2E;
 }
 
+
 .cal_type_2 {
 	background-color: #FA8258;
 }
 
+
 .cal_type_3  {
 	background-color: #F3F781;
 }
+
 
 .cal_user{
 	background-color: lightblue;
@@ -236,6 +239,37 @@ table.cal_table_small div.cal_entry_content{
 	overflow: hidden;
 }
 
+table.cal_table_micro {
+  	width: 100%;
+	
+	font-family: verdana,arial,sans-serif;
+	font-size:5pt;
+	color:#333333;
+	border-collapse: collapse;
+	background-color: #CED8F6;
+	
+}
+table.cal_table_micro td,
+table.cal_table_micro tr{
+
+	height: 10px;
+
+}
+table td.cal_timeline_micro {
+	width: 3%;
+}
+
+table.cal_table_micro td.cal_entry{
+	vertical-align: top;
+	cursor: pointer;
+	border: 1px solid rgba(0,0,0,.5)
+}
+table.cal_table_micro div.cal_entry_content{
+
+	overflow: hidden;
+}
+
+
 
 
 
@@ -318,26 +352,42 @@ div #cal_filter{
 	font-weight: bold;
 }
 
-div #cal_filter .checkbox_list li{
+div #cal_filter .checkbox_list li {
 	list-style: none outside none;
-	margin: 0 0.2em;
+	margin-top: 5px;
+	margin-bottom: 5px;
 	padding-left: 0.5em;
 	padding-right: 0.5em;
 	display: block;
+	width: 150px;
+	background-color: #CEECF5;
+}
+div #cal_filter .checkbox_list li:hover{
+	background-color: #81DAF5;
 }
 
-.cal_filter_item {
-	list-style: none outside none;
-	margin: 0 0.2em;
-	padding-left: 0.5em;
-	padding-right: 0.5em;
+div.filterusers,
+div.filtertypes{
+	margin-top: 5px;
+	background: rgba(0, 0, 255, 0.3);
+}
+div.filterusers:hover,
+div.filtertypes:hover {
+	margin-top: 5px;
+	background: rgba(0, 0, 255, 0.7);
+
+}
+div.filterusers label,
+div.filtertypes label {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	
+	
 }
 
-.cal_filter_item  a{
-	text-decoration: none;
-	color: black;
 
-}
+
+
 div #open_job{
 	float:none;
 	font-size: 8pt;
@@ -408,9 +458,9 @@ div #open_job{
 			cursor: pointer;
 			line-height: 15px;
 			font-family: verdana,arial,sans-serif;
-			-webkit-box-shadow: 2px 2px 3px 1px #00007a;
-			-moz-box-shadow: 2px 2px 3px 1px #00007a;
-			box-shadow: 2px 2px 3px 1px #00007a;
+			x-webkit-box-shadow: 2px 2px 3px 1px #00007a;
+			x-moz-box-shadow: 2px 2px 3px 1px #00007a;
+			xbox-shadow: 2px 2px 3px 1px #00007a;
 			
 			 }
 
@@ -604,6 +654,28 @@ table .list:hover ul li {
 	
 }
 
+table.job_show{
+	display: block;	
+	font-size: 10pt;
+}
+table.job_show tr,
+table.job_show td{
+}
+table.job_show th{
+	font-weight: bold;
+	background-color: #E7EEF6;
+}
+table.job_component{
+	display: block;	
+	font-size: 10pt;
+}
+table.job_component tr,
+table.job_component td{
+}
+table.job_component th{
+	font-weight: bold;
+	background-color: #E7EEF6;
+}
 
 
 

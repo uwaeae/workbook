@@ -14,41 +14,24 @@ class Store extends BaseStore
 {
 	public function __toString()
 	{
-		return  $this->getNumber()
-				.' | '.str_pad($this->getPostcode(),5)
+		return  ($this->getNumber() ==  0? ' ': $this->getNumber().' | ')
+				.str_pad($this->getPostcode(),5,"0", STR_PAD_LEFT)
 				.' '.$this->getCity()
 				.' '.$this->getStreet();
 	}
-	
-
-	
-	static public function retrieveForSelect($q, $limit, $customer)
-	  {
-	   // $criteria = new Criteria();
-	   // $criteria->add(store::Street, '%'.$q.'%', Criteria::LIKE);
-	   // $criteria->addAscendingOrderByColumn(store::Street);
-	   // $criteria->setLimit($limit);
-		$query = Doctrine_Core::getTable('Store')->createQuery('s')
-				->innerJoin('s.Customer c WITH c.number = '.$customer );
+	static public function retrieveForSelect($q, $limit, $customer = NULL)
+	{
+		$query = Doctrine_Core::getTable('Store')->createQuery('s');
+		if($customer) $query->innerJoin('s.Customer c WITH c.number = '.$customer );
 		
 		if(is_numeric($q)) $query->where(" s.number LIKE '$q%'");
 		else if(strlen($q) > 1) $query->where("s.street like '$q%' ");
-	
-
-	    $stores = array();
-	    foreach ($query->execute() as $store)
-	    {
-		   
-	      $stores[$store->getId()] = (string) $store;
-	/*	'<div style="display:inline-block; width:30px;" >'.$store->getCustomer()->getNumber().'</div>'.
-											'<div style="display:inline-block;width:120px;">'.substr($store->getCustomer()->getCompany(),0,15).'</div>'.
-											'<div style="display:inline-block;width:30px;" >'.$store->getNumber().'</div>'.
-											'|<div style="display:inline-block;width:40px;">'.$store->getPostcode().'</div>'.
-											'<div style="display:inline-block;width:200px;">'.$store->getStreet().'</div>';
-		*/
-	    }
-
-	    return $stores;
-	  }
+		
+		$stores = array();
+		foreach ($query->execute() as $store){
+				$stores[$store->getId()] = (string) $store;
+			}
+		return $stores;
+	}
 	
 }

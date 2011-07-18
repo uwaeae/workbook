@@ -64,11 +64,46 @@ class jobActions extends sfActions
 			->orderby('j.end')
 			->execute();
 			}
-
+		$this->formStore = new searchStoreForm(NULL,array(
+			'url' => $this->getController()->genUrl('job/findstore'),
+				));
+		$this->formCustomer = new searchCustomerForm(NULL,array(
+			'url' => $this->getController()->genUrl('job/findcustomer')
+			));
+		$this->setBack('job');
+			
   }
  
+ public function executeSearch(sfWebRequest $request)
+  {
+	if(!$request->isMethod(sfRequest::POST))  $this->redirect('job');
+	if($request->hasParameter('customer'))
+	$this->jobs = array();
+	$query = Doctrine_Query::create()
+			->select('j.*')
+			->from('Job j');
+	if($request->hasParameter('store') && is_numeric($request->getParameter('store'))) {
+		$this->jobs = $query->where('j.store_id = '.$request->getParameter('store'))
+			->orderby('j.end')
+			->execute();
+		}
+	
+	if($request->hasParameter('customer') && is_numeric($request->getParameter('customer'))){
+		$t = Doctrine_Query::create()
+					->select('id')->from('Store s')
+					->where('customer_id = '.$request->getParameter('customer'))->execute();
+		$stores = array();
+		foreach ( $t as $s) {
+					$stores[] = $s->getId();
+				}
+		 $this->jobs = $query->where('j.store_id IN ('.implode(",", $stores).')')
+						->orderby('j.end')
+						->execute();
+				}
+  }
  public function executeArchiv(sfWebRequest $request)
   {
+	
 	
 	$this->jobs = Doctrine_Query::create()
 			->select('j.*')
@@ -77,29 +112,15 @@ class jobActions extends sfActions
 			->andWhere(' j.id IN (select job_id from job_invoice) ')
 			->orderby('j.end')
 			->execute();
-			
-
-
-	
-
   }
-  public function executeFinish(sfWebRequest $request)
- 	{
- $this->forward404Unless($job = Doctrine_Core::getTable('Job')->find(array($request->getParameter('id'))), sprintf('Object job does not exist (%s).', $request->getParameter('id')));
-	if ($job->getJobStateId() > 1) 	$job->setJobStateId(1);
-	else $job->setJobStateId(2);
-
-	$job->save();
-	$this->job = $job;
-	$this->setTemplate('show');
-	
-	}
+  
 
   public function executeShow(sfWebRequest $request)
-  {
-	  
+  {	
+	$this->back = $this->getUser()->getAttribute('back');
     $this->forward404Unless($this->job = Doctrine_Core::getTable('Job')->find(array($request->getParameter('id'))));
 		$this->setBack('job/show?id='.$request->getParameter('id'));
+
 
   }
 
@@ -124,7 +145,7 @@ class jobActions extends sfActions
 	$this->customer = Doctrine_Core::getTable('Customer')->find(array($request->getParameter('customer')));
 	
     $this->form = new JobForm(NULL,array(
-	'url' => $this->getController()->genUrl('job/ajax/?customer='.$request->getParameter('customer')),
+	'url' => $this->getController()->genUrl('job/findstore/?customer='.$request->getParameter('customer')),
 	'type' => $request->getParameter('type'),
 	'customer' => $request->getParameter('customer'),	
 		));
@@ -132,7 +153,9 @@ class jobActions extends sfActions
 
   public function executePrenew(sfWebRequest $request)
   {
-    $this->form = new PreJobForm(NULL);
+    $this->form = new PreJobForm(NULL,array(
+			'url' => $this->getController()->genUrl('job/findcustomer')
+			));
   }
 
 
@@ -217,13 +240,24 @@ protected function processForm(sfWebRequest $request, sfForm $form)
   }
 
 
-public function executeAjax($request)
+public function executeFindstore($request)
 {
   $this->getResponse()->setContentType('application/json');
 
-  $stores = store::retrieveForSelect($request->getParameter('q'), $request->getParameter('limit'),$request->getParameter('customer'));
+  $stores = store::retrieveForSelect($request->getParameter('q'),
+$request->getParameter('limit'),$request->getParameter('customer'));
 
   return $this->renderText(json_encode($stores));
+}
+
+public function executeFindcustomer($request)
+{
+  $this->getResponse()->setContentType('application/json');
+
+  $cutomers = customer::retrieveForSelect($request->getParameter('q'),
+$request->getParameter('limit'),$request->getParameter('customer'));
+
+  return $this->renderText(json_encode($cutomers));
 }
 
 

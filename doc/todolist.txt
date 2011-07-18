@@ -6,16 +6,13 @@
 - Konfiguration Tabelle erstellen layout einfallen lassen
 
 
--Back buttons konzept erarbeiten und umsetzen.
-
-- Task Thermin ändern einbauen bzw user zuweisen
+-Back buttons konzept erarbeiten und umsetzen( array machen)
 
 
 
-- Calendar Fertig stellen
 
-- Calendar alles User anzeigen übersichtlicheremachen 
-	vieleicht durch weitere Überschriftsspalte und Timeline?
+
+
 
 Auftrag
 
@@ -39,3 +36,10 @@ FEATURES
 ERLEDIGT
 
 - Calendar User Filter funktoniert irgenwie nicht?!
+
+- Calendar Fertig stellen
+
+- Calendar alles User anzeigen übersichtlicheremachen 
+	vieleicht durch weitere Überschriftsspalte und Timeline?
+	
+	- Task Thermin ändern einbauen bzw user zuweisen
