@@ -22,9 +22,12 @@
 <td class="cal_day_col cal_timeline">
 	<?php include_partial('timeline', array('time' => $timeline,'type' => 'large')) ?>
 </td>	
-<td class="cal_day_col">
-	<?php include_partial('task_large', array('day' => $day,'users' => $UserArray)) ?>
-</td>	
+<?php foreach ($calendar as $day): ?>
+	<td class="cal_week_col"	>
+			<?php include_partial('task_large', array('day' => $day,'users' => $UserArray)) ?>
+		<?php // echo htmlspecialchars_decode($day) ?>
+	</td>	
+<?php endforeach ?>
 </tr>
 </tbody>
 </table>

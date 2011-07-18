@@ -373,10 +373,13 @@ public function executeWeek(sfWebRequest $request)
 			
 		
 		$date = mktime(0, 0, 0, date("m")  , date("d")+ $this->next, date("Y"));
-		$this->weekday['today'] = date('z') == date('z',$date);
-		$this->weekday['date'] = $this->tag[(date('w',$date))].' '.date("d.m.",$date);
-		$this->calendar = $this->renderDay($this->getTaskDay( $this->next,$this->type,$this->userid));
-		$this->timeline = $this->renderTimeline();
+			for ($i=0; $i < $this->days ; $i++) { 
+				$date = mktime(0, 0, 0, date("m")  , date("d")+ $i + $next, date("Y"));
+				$this->weekday[$i]['weekday'] = date('w');
+				$this->weekday[$i]['today'] = date('z') == date('z',$date);
+				$this->weekday[$i]['date'] = $this->tag[(date('w',$date))].' '.date("d.m.",$date);
+				$this->calendar[$i] = $this->renderDay($this->getTaskDay($i + $next),8,18);
+			}
 		$this->form = $this->makeFilterForm();
 		$this->setBack('calendar/day/?&next='.$this->next.'&user='.$this->userid);	
 	}

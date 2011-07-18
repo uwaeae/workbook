@@ -58,36 +58,3 @@
 
 
 
-<div>
-<table border="0" class="cal_table_large">
-<?php $full = 0; ?>
-
-<?php $even = true ?> 
-<?php foreach ($day as $tasks): ?>
-<tr class="cal_timerow_<?php if($even) {
-							echo 'odd';
-							$even = false;
-							} 
-						else {
-							echo 'even';
-							$even = true;} ?>" > 
-	<?php if (count($tasks) > 0): ?>
-	<?php foreach ($tasks as $task): ?>
-		
-	<?php if ($full < $task['duration']) $full = $task['duration'] ?>
-			
-
-	<?php endforeach ?>
-<?php else: ?>
-<?php if ($full > 0): ?>
- <td colspan="1"></td> 	
-<?php endif ?>	
- <td colspan="3"></td> 
-<?php $full-- ?>
-<?php endif ?>
-
-</tr> 
-
-<?php endforeach ?>
-</table>
-</div>
