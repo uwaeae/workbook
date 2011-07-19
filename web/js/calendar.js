@@ -1,14 +1,14 @@
 $(document).ready(function()
 {
- $('.cal_open_jobs_body').hide();
+ $('.open_jobs_body').hide();
  $('.cal_filter_body').hide();
  
-  $('.cal_open_jobs_head').click(function(key)
+  $('.open_jobs_head').click(function(key)
 	{
-	if ($(".cal_open_jobs_body").is(":hidden")) {
-	$('.cal_open_jobs_body').slideDown("slow");
+	if ($(".open_jobs_body").is(":hidden")) {
+	$('.open_jobs_body').slideDown("slow");
 	} else {
-    $('.cal_open_jobs_body').slideUp("slow");
+    $('.open_jobs_body').slideUp("slow");
 	}
 	});
 	
