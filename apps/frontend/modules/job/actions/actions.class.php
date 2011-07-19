@@ -76,8 +76,8 @@ class jobActions extends sfActions
  
  public function executeSearch(sfWebRequest $request)
   {
-	if(!$request->isMethod(sfRequest::POST))  $this->redirect('job');
-	if($request->hasParameter('customer'))
+	//if(!$request->isMethod(sfRequest::get))  $this->redirect('job');
+	//if($request->hasParameter('customer'))
 	$this->jobs = array();
 	$query = Doctrine_Query::create()
 			->select('j.*')
@@ -100,6 +100,7 @@ class jobActions extends sfActions
 						->orderby('j.end')
 						->execute();
 				}
+		$this->results = count($this->jobs);
   }
  public function executeArchiv(sfWebRequest $request)
   {

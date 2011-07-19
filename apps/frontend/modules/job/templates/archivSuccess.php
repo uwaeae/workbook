@@ -11,7 +11,7 @@
   </thead>
   <tbody>
     <?php foreach ($jobs as $job): ?>
-    <tr 	class="table_item" "
+    <tr 	class="table_item"
 			onclick="document.location = '<?php echo url_for('job/show?id='.$job->getId()) ?>'">
       <td><?php echo $job->getStore()->getCustomer()->getCompany() ?><br>
       <?php echo $job->getStore()->getStreet() ?><br>

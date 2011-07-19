@@ -91,11 +91,6 @@ class calendarActions extends sfActions
 	
 	protected function makeFilterForm()
 	  {
-		
-		
-		
-		
-		
 		$form = new sfForm();
 	
 		$form->setWidget('type',new sfWidgetFormDoctrineChoice(array(

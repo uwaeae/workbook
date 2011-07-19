@@ -58,6 +58,8 @@
 
 <?php endforeach ?>
 <div class="job_search">
-	<?php include_partial('search', array('form' => $formStore)) ?>
-	<?php include_partial('search', array('form' => $formCustomer)) ?>
+	<ul>
+	<li> <?php include_partial('search', array('form' => $formStore)) ?> </li>
+	<li> <?php include_partial('search', array('form' => $formCustomer)) ?> </li>
+	<ul>
 </div>
