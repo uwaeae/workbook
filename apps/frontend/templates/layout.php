@@ -20,7 +20,8 @@
 					<li><?php echo link_to('Admin', '@backend') ; ?></li>
 				<?php endif ?>
 					<li><?php echo link_to('Logout','sfGuardAuth/signout'); ?></li>
-					<li><?php echo link_to('Einstellungen','customer'); ?></li>
+					<li>
+					<?php echo link_to('Einstellungen','user/edit/?id='.$sf_user->getId()); ?></li>
 				</ul>
 		</div>
 		<?php endif ?>

@@ -17,6 +17,26 @@ class fileActions extends sfActions
       ->execute();
   }
 
+
+public function prepareDownload($response,$outFilename)
+  { 
+    $response->clearHttpHeaders();
+    $response->addCacheControlHttpHeader('Cache-control','must-revalidate, post-check=0, pre-check=0');
+    $response->setContentType('application/octet-stream',TRUE);    
+    $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
+    $response->setHttpHeader('Content-Disposition','attachment; filename='.$outFilename, TRUE);
+    $response->sendHttpHeaders();  
+  }
+
+public function executeGet(sfWebRequest $request)
+{
+	$this->forward404Unless($file = Doctrine_Core::getTable('File')->find(array($request->getParameter('id'))), sprintf('Object file does not exist (%s).', $request->getParameter('id')));
+	$this->prepareDownload($this->getResponse(),$file->getName());
+	readfile(sfConfig::get('sf_upload_dir').'/document/'.$file->getFile());
+	return sfView::NONE;
+}
+
+
   public function executeNew(sfWebRequest $request)
   {
     $this->form = new FileForm();
@@ -52,7 +72,7 @@ class fileActions extends sfActions
 
   public function executeDelete(sfWebRequest $request)
   {
-    $request->checkCSRFProtection();
+    //$request->checkCSRFProtection();
 
     $this->forward404Unless($file = Doctrine_Core::getTable('File')->find(array($request->getParameter('id'))), sprintf('Object file does not exist (%s).', $request->getParameter('id')));
     $file->delete();
@@ -65,19 +85,20 @@ class fileActions extends sfActions
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     if ($form->isValid())
     {
-		
-	  $file = $form->getValue('file');
-	  $filename = sha1($file->getOriginalName());
-	  $extension = $file->getExtension($file->getOriginalExtension());
-	  $file->save(sfConfig::get('sf_upload_dir').'/document/'.$filename.$extension);
-	  
-      
+		$file = $form->getValue('file');
+		$filename = sha1($file->getOriginalName());
+		$extension = $file->getExtension($file->getOriginalExtension());
+		$file->save(sfConfig::get('sf_upload_dir').'/document/'.$filename.$extension);
 		$upload = new file();
 		$upload->setName($file->getOriginalName()) ;
 		$upload->setFile($filename.$extension) ;
 		$upload->save();
-
-      $this->redirect('file/edit?id='.$upload->getId());
+		$filejob = new FileJob();
+		$filejob->setFileId($upload->getId());
+		$filejob->setJobId($request->getParameter('job'));
+		$filejob->save();
+		$this->redirect($this->getUser()->getAttribute('back'));
+		//$this->redirect('file/edit?id='.$upload->getId());
     }
   }
 }

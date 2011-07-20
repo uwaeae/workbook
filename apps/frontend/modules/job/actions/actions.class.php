@@ -119,7 +119,7 @@ class jobActions extends sfActions
   public function executeShow(sfWebRequest $request)
   {	
 	$this->back = $this->getUser()->getAttribute('back');
-    $this->forward404Unless($this->job = Doctrine_Core::getTable('Job')->find(array($request->getParameter('id'))));
+	$this->forward404Unless($this->job = Doctrine_Core::getTable('Job')->find(array($request->getParameter('id'))));
 		$this->setBack('job/show?id='.$request->getParameter('id'));
 		$this->openjobs =  Doctrine_Query::create()
 				->select('j.store_id s.id ')
@@ -130,6 +130,8 @@ class jobActions extends sfActions
 				->where('j.job_state_id = 1')
 				->orderby('j.end')
 				->execute();
+	$this->form = new FileForm(NULL);
+	//$this->form->setDefault('jobs_list', array($this->job->getId()));
 
 
   }
@@ -214,7 +216,7 @@ class jobActions extends sfActions
     $this->forward404Unless($job = Doctrine_Core::getTable('Job')->find(array($request->getParameter('id'))), 			   sprintf('Object job does not exist (%s).', $request->getParameter('id')));
 
     $this->form = new JobForm($job, array('url' => $this->getController()->genUrl('job/ajax')));
-
+	
   }
 
   public function executeUpdate(sfWebRequest $request)
@@ -269,9 +271,9 @@ $request->getParameter('limit'),$request->getParameter('customer'));
 
   return $this->renderText(json_encode($cutomers));
 }
-protected function saveFileForm( )
+protected function makeFileForm( )
   {
-    $this->form = new FileForm();
+    
   }
 
 

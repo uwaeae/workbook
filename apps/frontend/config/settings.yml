@@ -5,6 +5,7 @@ prod:
   .settings:
     no_script_name:         true
     logging_enabled:        false
+    cache:                  true
 
 dev:
   .settings:
@@ -42,3 +43,9 @@ all:
     secure_action:          secure
     # Helper
     standard_helpers:       [Partial, Cache]
+cache:
+  .settings:
+    error_reporting: <?php echo (E_ALL | E_STRICT)."\n" ?>
+    web_debug:       true
+    cache:           true
+    etag:            false

@@ -53,18 +53,16 @@ class calendarActions extends sfActions
 			$query = Doctrine_Query::create()
 							->select('u.id')
 							->from('sfGuardUser u');
+		
 			if($this->getUser()->hasGroup('admin') 
 							OR $this->getUser()->hasGroup('supervisor')){
-				$this->UserArray = $query->execute();
-					foreach ( $this->UserArray as $user) {
-						$this->Users[] = $user->getId();
-					}	
+				if(isset($this->Users)) 
+					$this->UserArray = $query->where('u.id IN ('.implode(",", $this->Users).')')->execute();
+				else  
+					$this->UserArray = $query->execute();
 				}
 			else {
 				$this->UserArray = $query->where('u.id = '.$this->getUser()->getID())->execute();
-				//unset($this->users);
-				$this->Users = array();
-				$this->Users[] = $this->getUser()->getID();
 			}
 
 	  }
@@ -73,21 +71,34 @@ class calendarActions extends sfActions
 	
 	protected function setOptions(sfWebRequest $request)
 	  {
-
 		if($request->isMethod(sfRequest::POST))  {
 			$this->TaskType = $request->getParameter('type');
 			$this->Users = $request->getParameter('user');
 			$this->getUserArray();
 		} else {
-			$TT = Doctrine_Query::create()
-							->select('t.id')
-							->from('TaskType t')
-							->execute();
-			$this->TaskType = array();
-			foreach ( $TT as $task) {
-				$this->TaskType[] = $task->getId();
+			
+			if($this->getUser()->hasAttribute('calendar')){
+				$attribute = $this->getUser()->getAttribute('calendar');
+				$this->Users = $attribute['user'];
+				$this->TaskType = $attribute['type'];
+				$this->getUserArray();
+			} else {
+				$TT = Doctrine_Query::create()
+								->select('t.id')
+								->from('TaskType t')
+								->execute();
+				$this->TaskType = array();
+				foreach ( $TT as $task) {
+					$this->TaskType[] = $task->getId();
+				}
+				
+				$this->getUserArray();
+				$this->Users = array();
+				foreach ( $this->UserArray as $user) {
+					$this->Users[] = $user->getId();
+				}
 			}
-			$this->getUserArray();	
+				
 		}
 		
 		if($request->hasParameter('next')){
@@ -95,8 +106,9 @@ class calendarActions extends sfActions
 			}
 		else {
 			    if($this->getUser()->hasAttribute('calendar')){
-				$options = $this->getUser()->getAttribute('calendar');	
-				$this->next = $options['next'];}
+					$options = $this->getUser()->getAttribute('calendar');	
+					$this->next = $options['next'];
+					}
 				else $this->next = 0;
 			}
 		}

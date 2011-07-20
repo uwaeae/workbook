@@ -17,7 +17,7 @@ job:
     with_wildcard_routes: true
 calendar:
   url: /calendar
-
+  
 sf_guard_signin:
   url:   /login
   param: { module: sfGuardAuth, action: signin }

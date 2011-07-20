@@ -55,6 +55,18 @@
      	 <th>Auftrag:</th>
 	      <td colspan="5"><?php echo $job->getDescription() ?></td>
     </tr>
+	<tr>
+	     	 <th>Dateien</th>
+		      <td colspan="5">
+				<ul>
+				<?php foreach ($job->getFiles() as $file): ?>
+					<li><?php echo link_to($file->getName(),'/file/get/?id='.$file->getID()) ?>
+						<?php echo link_to('löschen','/file/delete/id/'.$file->getID()) ?><li>
+				<?php endforeach ?>
+				<ul>
+				<?php include_partial('fileform', array('form' => $form,'job' => $job->getId())) ?>
+			</td>
+	</tr>
 
     <tr>
       <th>Erstellt am</th>
