@@ -1,34 +1,26 @@
-<h1>Users List</h1>
+<h1>Benutzer Liste</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Id</th>
-      <th>Login</th>
-      <th>Password</th>
-      <th>Lastname</th>
-      <th>Firstname</th>
-      <th>Street</th>
-      <th>Postcode</th>
-      <th>City</th>
-      <th>Role</th>
+      <th>ID</th>
+      <th>Vorname</th>
+      <th>Nachname</th>
+		<th>E-Mail Adresse</th>
+		<th>Letzer Login</th>
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($users as $user): ?>
+    <?php foreach ($sf_guard_users as $sf_guard_user): ?>
     <tr>
-      <td><a href="<?php echo url_for('user/show?id='.$user->getId()) ?>"><?php echo $user->getId() ?></a></td>
-      <td><?php echo $user->getLogin() ?></td>
-      <td><?php echo $user->getPassword() ?></td>
-      <td><?php echo $user->getLastname() ?></td>
-      <td><?php echo $user->getFirstname() ?></td>
-      <td><?php echo $user->getStreet() ?></td>
-      <td><?php echo $user->getPostcode() ?></td>
-      <td><?php echo $user->getCity() ?></td>
-      <td><?php echo $user->getRoleId() ?></td>
+      <td><?php echo $sf_guard_user->getId() ?></a></td>
+      <td><?php echo $sf_guard_user->getFirstName() ?></td>
+      <td><?php echo $sf_guard_user->getLastName() ?></td>
+      <td><?php echo $sf_guard_user->getEmailAddress() ?></td>
+      <td><?php echo $sf_guard_user->getUsername() ?></td>
+      <td><?php echo $sf_guard_user->getLastLogin() ?></td>
     </tr>
     <?php endforeach; ?>
   </tbody>
 </table>
 
-  <a href="<?php echo url_for('user/new') ?>">New</a>

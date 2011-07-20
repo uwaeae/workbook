@@ -48,16 +48,36 @@ class calendarActions extends sfActions
 		$this->tag[6] = "Sa";
 	
 	  }
+	protected function getUserArray()
+	  {
+			$query = Doctrine_Query::create()
+							->select('u.id')
+							->from('sfGuardUser u');
+			if($this->getUser()->hasGroup('admin') 
+							OR $this->getUser()->hasGroup('supervisor')){
+				$this->UserArray = $query->execute();
+					foreach ( $this->UserArray as $user) {
+						$this->Users[] = $user->getId();
+					}	
+				}
+			else {
+				$this->UserArray = $query->where('u.id = '.$this->getUser()->getID())->execute();
+				//unset($this->users);
+				$this->Users = array();
+				$this->Users[] = $this->getUser()->getID();
+			}
+
+	  }
+	
+	
+	
 	protected function setOptions(sfWebRequest $request)
 	  {
 
 		if($request->isMethod(sfRequest::POST))  {
 			$this->TaskType = $request->getParameter('type');
 			$this->Users = $request->getParameter('user');
-			$this->UserArray = array();
-			foreach($this->Users as $userID) {
-			$this->UserArray[]  = Doctrine::getTable('sfGuardUser')->find($userID);
-			}
+			$this->getUserArray();
 		} else {
 			$TT = Doctrine_Query::create()
 							->select('t.id')
@@ -66,17 +86,10 @@ class calendarActions extends sfActions
 			$this->TaskType = array();
 			foreach ( $TT as $task) {
 				$this->TaskType[] = $task->getId();
-
 			}
-			$this->UserArray = Doctrine_Query::create()
-							->select('u.id')
-							->from('sfGuardUser u')
-							->execute();
-			$this->Users = array();
-			foreach ( $this->UserArray as $user) {
-				$this->Users[] = $user->getId();
-				}
+			$this->getUserArray();	
 		}
+		
 		if($request->hasParameter('next')){
 			 $this->next =  $request->getParameter('next'); 
 			}
@@ -253,7 +266,9 @@ class calendarActions extends sfActions
 				$this->calendar[$i] = $this->renderCalendar(7,($i * 7 ) + $next,8,18);
 			}
 				$this->form = $this->makeFilterForm();
-			$this->setBack('calendar/month/?&next='.$this->next.'&user='.$this->userid);		
+			$this->setBack('calendar/month/?&next='.$this->next.'&user='.$this->userid);	
+			$this->getUser()->setAttribute('calendar',
+								array('next'=> $this->next,'type'=> $this->TaskType,'user' => $this->Users));	
 	}
 
 public function executeWeek(sfWebRequest $request)
@@ -267,6 +282,8 @@ public function executeWeek(sfWebRequest $request)
 		$this->timeline = $this->renderTimeline(8,18);
 		$this->form = $this->makeFilterForm();
 		$this->setBack('calendar/week/?&next='.$this->next);
+		$this->getUser()->setAttribute('calendar',
+							array('next'=> $this->next,'type'=> $this->TaskType,'user' => $this->Users));
 	}
 	
 public function executeDay(sfWebRequest $request)
@@ -277,6 +294,8 @@ public function executeDay(sfWebRequest $request)
 		$this->calendar = $this->renderCalendar($this->days,$this->next,8,18);
 		$this->form = $this->makeFilterForm();
 		$this->setBack('calendar/day/?&next='.$this->next);	
+		$this->getUser()->setAttribute('calendar',
+							array('next'=> $this->next,'type'=> $this->TaskType,'user' => $this->Users));
 	}
 public function executeSmall(sfWebRequest $request)
 	{
@@ -361,7 +380,8 @@ public function executeSmall(sfWebRequest $request)
 		public function postExecute()
 		  {
 		    $this->getUser()->setAttribute('calendar',
-								array('next'=> $this->next));
+								array('next'=> $this->next,'type'=> $this->TaskType,'user' => $this->Users));
+								
 							$routing = $this->getContext()->getRouting();
 			
 							$this->getUser()->setAttribute('back',$routing->getCurrentInternalUri());

@@ -1,11 +1,11 @@
 
 <?php foreach ($users as $user): ?>
-<div class="cal_user_day" style=" width:<?php echo round(100 / count($users)) ?>%;" >	
+<div class="cal_user_day" style=" width:<?php echo round(100 / count($users))-1 ?>%;" >	
 <table border="0" class="cal_table_large">
 <?php $full = 0; ?>
 <?php $even = true ?>
-<tr>
-	<th><?php echo $user->getUsername() ?>	</th>
+<tr class="cal_table_head">
+	<th colspan="2"><?php echo $user->getUsername() ?>	</th>
 </tr>	 
 <?php foreach ($day[$user->getUsername()] as $tasks): ?>
 <tr class="cal_timerow_<?php if($even) {
@@ -26,7 +26,7 @@
 					onclick="document.location='<?php echo url_for('job/show?id='.$task['task']->getJob()->getId()) ?>'" >
 	<a href="<?php echo url_for('task/edit?type=0&id='.$task['task']->getId()) ?>" style="float:right;" >
 			<img src="/images/icons/calendar_edit.png" ></a>				
-	<div class="cal_entry_content" style="height: <?php echo $task['duration']*50 ?>px;">
+	<div class="cal_entry_content" style="height: <?php echo $task['duration']*50 - 2  ?>px;">
 		<table border="0" cellspacing="5" cellpadding="5">
 			<tr>
 				<td>	<h2 id=""> 	<?php echo $task['task']->getJob()->getStore()->getCustomer()->getCompany() ?></h2></td>

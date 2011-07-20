@@ -1,5 +1,5 @@
 <table border="0" class="cal_table_<?php echo $type ?>">
-	<tr>
+	<tr class="cal_timerow_even ">
 		<th></th>
 	</tr>	
 <?php foreach ($time as $t): ?>

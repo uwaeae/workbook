@@ -40,6 +40,9 @@
 			<?php include_partial('task_small', array('day' => $day['task'],'users' => $UserArray)) ?>
 		</td>	
 		<?php endforeach ?>	
+		<td class="cal_day_col cal_timeline_small">
+		<?php include_partial('timeline', array('time' => $timeline,'type' => 'small')) ?>
+		</td>
 	</tr>
 <?php endforeach ?>
 

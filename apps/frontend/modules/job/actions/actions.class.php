@@ -121,6 +121,15 @@ class jobActions extends sfActions
 	$this->back = $this->getUser()->getAttribute('back');
     $this->forward404Unless($this->job = Doctrine_Core::getTable('Job')->find(array($request->getParameter('id'))));
 		$this->setBack('job/show?id='.$request->getParameter('id'));
+		$this->openjobs =  Doctrine_Query::create()
+				->select('j.store_id s.id ')
+				->from('Job j')
+				->innerJoin('j.Store s WITH s.postcode between '.
+				($this->job->getStore()->getPostcode() - 10).' and '.
+				($this->job->getStore()->getPostcode() + 10))
+				->where('j.job_state_id = 1')
+				->orderby('j.end')
+				->execute();
 
 
   }
@@ -260,29 +269,14 @@ $request->getParameter('limit'),$request->getParameter('customer'));
 
   return $this->renderText(json_encode($cutomers));
 }
-
-
-
- public function saveEmbeddedForms($con = null, $forms = null)
-{
-  	
-  if (null === $forms)
+protected function saveFileForm( )
   {
-    $files = $this->getValue('newFiles');
-    $forms = $this->embeddedForms;
-    //echo var_dump($files);
-    foreach ($this->embeddedForms['newFiles'] as $name => $form)
-    {
-	echo var_dump($files[$name]);
-      if (!isset($files[$name]) || strlen($files[$name]) == 0)
-      {
-        unset($forms['newFiles'][$name]);
-      }
-    }
+    $this->form = new FileForm();
   }
 
-  return parent::saveEmbeddedForms($con, $forms);
-} 
+
+
+
 protected function setBack($var){
 		$routing = $this->getContext()->getRouting();
 		$this->getUser()->setFlash('back',$var);

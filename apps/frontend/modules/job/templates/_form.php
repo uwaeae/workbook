@@ -69,38 +69,8 @@
 			      <th><?echo $form['description']->renderLabel() ?></th>
 			      <td colspan="3"><?php echo $form['description']->render(array('rows' => 5,'cols' => 80,)) ?></td>
 			 </tr>
-		 <tr>
-		      <th><?php echo $form['files_list']->renderLabel() ?></th>
-		      <td><?php echo $form['files_list']->render() ?></td>
-
-		  
-			<th><?php echo $form['newFiles']->renderLabel() ?></th>
-		      <td>
-			<table border="0" cellspacing="5" cellpadding="5">
-				<?php foreach ($form['newFiles'] as $value): ?>
-				<tr>	
-					<th>	<?php echo $value['name']->renderLabel() ?></th>
-					<td>	<?php echo $value['name']->render() ?> </td>
-				</tr>
-				<tr>
-						<th>	<?php echo $value['file']->renderLabel() ?></th>
-					<td>	<?php echo $value['file']->render() ?></td>
-				</tr>
-				<?php endforeach ?>
-			</table>
-			
-		
-		</td>
 	
-		
-		</tr>	
-	    <tr>
-	      <th>Erstellt</th>
-	      <td><?php //echo $form['created_at']->getCreatedAt() ?></td>
-
-	      <th>Zuletzt Bearbeitet</th>
-	      <td><?php //echo $form['name']->getUpdatedAt() ?></td>
-	    </tr>
+	   
 		<?php echo $form->renderHiddenFields() ?>
 	  </tbody>
 	</table>

@@ -1,5 +1,6 @@
 <?php  use_helper('Date');?>
-
+<?php use_javascript('jobshow.js') ?>
+<?php include_partial('openjob', array('jobs' => $openjobs)) ?>
 
 <table class="job_show">
   <tbody>
@@ -198,4 +199,5 @@
     </tr>
   </tfoot>
 </table>
+
 

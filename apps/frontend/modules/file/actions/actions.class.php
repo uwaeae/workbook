@@ -65,9 +65,19 @@ class fileActions extends sfActions
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     if ($form->isValid())
     {
-      $file = $form->save();
+		
+	  $file = $form->getValue('file');
+	  $filename = sha1($file->getOriginalName());
+	  $extension = $file->getExtension($file->getOriginalExtension());
+	  $file->save(sfConfig::get('sf_upload_dir').'/document/'.$filename.$extension);
+	  
+      
+		$upload = new file();
+		$upload->setName($file->getOriginalName()) ;
+		$upload->setFile($filename.$extension) ;
+		$upload->save();
 
-      $this->redirect('file/edit?id='.$file->getId());
+      $this->redirect('file/edit?id='.$upload->getId());
     }
   }
 }

@@ -1,12 +1,12 @@
 
 
 <?php foreach ($users as $user): ?>
-<div class="cal_user_day" style=" width:<?php echo round(100 / count($users)) ?>%;" >	
+<div class="cal_user_day" style=" width:<?php echo round(100 / count($users))-1?>%;" >	
 <table border="0" class="cal_table_user  " >
 <?php $full = 0; ?>
 <?php $even = true ?>
-<tr>
-	<th><?php echo $user->getUsername() ?>	</th>
+<tr class="cal_table_head">
+	<th colspan="2"><?php echo $user->getUsername() ?>	</th>
 </tr>	 
 <?php foreach ($day[$user->getUsername()] as $tasks): ?>
 <tr class="cal_timerow_<?php if($even) {
@@ -22,15 +22,21 @@
 	<?php if ($full < $task['duration']) $full = $task['duration'] ?>
 			
 	<td rowspan="<?php echo $task['duration'] ?>"
-		class="cal_entry cal_type_<?php echo $task['task']->getTaskTypeId() ?>
-					<?php echo (!$task['task']->getScheduled()? '_finshed':' ')?>" 
-					 >
-	<a href="<?php echo url_for('task/edit?type=0&id='.$task['task']->getId()) ?>" style="float:right;" >
-			<img src="/images/icons/calendar_edit.png" ></a>				
-	<div class="cal_entry_content" style="height: <?php echo $task['duration']*40 ?>px;" onclick="document.location='<?php echo url_for('job/show?id='.$task['task']->getJob()->getId()) ?>'">
-	
+		class="cal_entry cal_type_<?php echo $task['task']->getTaskTypeId() ?>"  <?php echo ((!$task['task']->getScheduled() AND $task['task']->getTaskTypeId() < 2)? 'style="opacity: 0.2;"':' ')?> >
+					
+	<div class="cal_entry_content" style="height: <?php echo $task['duration']*40 - 18 ?>px;" onclick="document.location='<?php echo url_for(
+	($task['task']->getTaskTypeId() < 2? 
+	'job/show?id='.$task['task']->getJob()->getId() : 
+	'task/edit?type='.$task['task']->getTaskTypeId().'&id='.$task['task']->getId() ) )  ?>'">
 			 	<?php echo $task['task']->getJob()->getId() ?>
+			
+				
 	</div>
+	
+		<a href="<?php echo url_for('task/edit?type=0&id='.$task['task']->getId()) ?>" style="float:right;position: relative;" >
+				<img src="/images/icons/calendar_edit.png" ></a>
+	
+	
 	</td>
 	<?php endforeach ?>
 <?php else: ?>

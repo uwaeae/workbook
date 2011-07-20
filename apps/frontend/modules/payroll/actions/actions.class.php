@@ -10,6 +10,61 @@
  */
 class payrollActions extends sfActions
 {
+
+protected function getMonth($number){
+	
+	$month = array();
+		$month[1] = 'Januar';
+		$month[2] = 'Februar';
+		$month[3] = 'März';
+		$month[4] = 'April';
+		$month[5] = 'Mai';
+		$month[6] = 'Juni';
+		$month[7] = 'Juli';
+		$month[8] = 'August';
+		$month[9] = 'September';
+		$month[10] = 'Oktober';
+		$month[11] = 'November';
+		$month[12] = 'Dezember';
+	return $month[$number];
+	
+	
+}
+
+protected function makeNavForm()
+  {
+	$form = new sfForm();
+	$month = Doctrine_Query::create()
+				->select('MONTH(t.start) month')
+				->from('Task t')
+				->groupBy('month')
+				->execute();
+	$this->taskmonth = array();
+	foreach ($month as $m) {
+		$this->taskmonth[$m->month] = $this->getMonth($m->month);
+	
+	}
+	
+	$form->setWidget('month',new sfWidgetFormChoice(array(
+			'choices' => $this->taskmonth,
+			'expanded' => true,
+	      	'multiple'	=> false,
+	 		 )));
+	$form->setDefault('month', date('n'));
+	
+	
+	$form->setWidget('user',new sfWidgetFormDoctrineChoice(array(
+	      	'model' => 'sfGuardUser', 
+	      	'add_empty' => false,
+			'expanded' => true,
+	      	'multiple'	=> false )));
+	$form->setDefault('user', $this->getUser()->getId());
+	
+
+	return $form;
+	
+  }
+
  /**
   * Executes index action
   *
@@ -18,11 +73,20 @@ class payrollActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
 	
-   		$this->taskmonth = Doctrine_Query::create()
+   		
+		$month = Doctrine_Query::create()
 					->select('MONTH(t.start) month')
 					->from('Task t')
 					->groupBy('month')
 					->execute();
+		$this->taskmonth = array();
+		foreach ($month as $m) {
+			$this->taskmonth[$m->month] = array();
+			$this->taskmonth[$m->month]['nr'] = $m->month ;
+			$this->taskmonth[$m->month]['month'] = $this->getMonth($m->month);
+		
+		}
+		
 		$this->tasks = array();
 		$this->worktime = 0;
 		$this->overtime = 0;
@@ -30,13 +94,16 @@ class payrollActions extends sfActions
 		$this->holyday = 0;
 		
 		
-		$t = Doctrine_Query::create()
+		$query = Doctrine_Query::create()
 					->select('t.*, ')
 					->from('Task t')
 					->leftJoin('TaskUser u')
-					->where('u.user_id ='.$this->getUser()->getId())
-					->andWhere('MONTH(t.start) = MONTH(NOW()) ')
+					->where('u.user_id ='.$this->getUser()->getId());
+		if($request->hasParameter('month'))
+				$t = $query->andWhere('MONTH(t.start) = '.$request->getParameter('month'))
 					->execute();
+		else $t = $query->andWhere('MONTH(t.start) = MONTH(NOW()) ')
+				->execute();
 					
 	 foreach ($t as $task) {
 	 	$tmp = array();
@@ -86,10 +153,11 @@ class payrollActions extends sfActions
 		$tmp['task'] = $task;
 	
 		$this->tasks[] = $tmp;
+		$this->form = $this->makeNavForm();
 	
 	 }
 		
   }
-	
+
   
 }
