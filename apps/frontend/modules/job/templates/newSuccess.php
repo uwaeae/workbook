@@ -1,6 +1,6 @@
 <?php use_javascript('/sfFormExtraPlugin/js/jquery.autocompleter.js') ?>
 <?php use_stylesheet('/sfFormExtraPlugin/css/jquery.autocompleter.css') ?>
-<table border="0" cellspacing="5" cellpadding="5">
+<table border="0" cellspacing="5" cellpadding="5" class="job_show">
 	
 	<tr>
 		<th>Kunde</th>

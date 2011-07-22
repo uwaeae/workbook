@@ -27,16 +27,15 @@
 	<a href="<?php echo url_for('task/edit?type=0&id='.$task['task']->getId()) ?>" style="float:right;" >
 			<img src="/images/icons/calendar_edit.png" ></a>				
 	<div class="cal_entry_content" style="height: <?php echo $task['duration']*50 - 2  ?>px;">
-		<table border="0" cellspacing="5" cellpadding="5">
-			<tr>
-				<td>	<h2 id=""> 	<?php echo $task['task']->getJob()->getStore()->getCustomer()->getCompany() ?></h2></td>
-				<td>	<strong>Adresse</strong><br>
+		
+		
+		 	<strong><?php echo $task['task']->getJob()->getStore()->getCustomer()->getCompany()?></strong>
+				<p> <strong>Adresse</strong>
 				<?php echo $task['task']->getJob()->getStore()->getStreet() ?>	<br>
-				<?php echo	$task['task']->getJob()->getStore()->getPostcode() ?> <?php echo $task['task']->getJob()->getStore()->getCity() ?><br></td>
-			</tr>
-			<tr><td colspan="2"><strong>Info</strong>
-			<?php echo 	$task['task']->getJob()->getDescription() ?></p></td></tr>
-		</table>
+				<?php echo	$task['task']->getJob()->getStore()->getPostcode() ?> <?php echo $task['task']->getJob()->getStore()->getCity() ?><br></p>
+			
+			<p><strong>Info</strong>
+			<?php echo 	$task['task']->getJob()->getDescription() ?></p>
 	</div>
 	</td>
 	<?php endforeach ?>

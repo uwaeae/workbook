@@ -29,6 +29,8 @@ class jobActions extends sfActions
 							GROUP BY job_id)')
 				->orderby('j.end')
 				->execute();
+	if($this->getUser()->hasGroup('admin') 
+					OR $this->getUser()->hasGroup('office')){
 	$this->jobstate[2]['type'] = 2;
 	$this->jobstate[2]['Name'] = 'Geplant';
 	$this->jobstate[2]['jobs'] = Doctrine_Query::create()
@@ -53,6 +55,7 @@ class jobActions extends sfActions
 			->andWhere(' j.id NOT IN (select job_id from job_invoice) ')
 			->orderby('j.end')
 			->execute();
+	}
     if ( $this->getUser()->hasPermission('Rechung')) {
 	$this->jobstate[4]['type'] = 4;			
 	$this->jobstate[4]['Name'] = 'Abgeschlossen'	;

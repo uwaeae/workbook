@@ -1,7 +1,8 @@
 
+
 <?php foreach ($users as $user): ?>
-<div class="cal_user_day" style=" width:<?php echo round(95 / count($users)) ?>%;" >	
-<table border="0" class="cal_table_medium  " >
+<div class="cal_user_day" style=" width:<?php echo round(95 / count($users)) - 1?>%;" >	
+<table border="0" class="cal_table_user  " >
 <?php $full = 0; ?>
 <?php $even = true ?>
 <tr class="cal_table_head">
@@ -21,17 +22,21 @@
 	<?php if ($full < $task['duration']) $full = $task['duration'] ?>
 			
 	<td rowspan="<?php echo $task['duration'] ?>"
-		class="cal_entry cal_type_<?php echo $task['task']->getTaskTypeId() ?>
-					<?php echo (!$task['task']->getScheduled()? '_finshed':' ')?>" 
-					 >
-	<a href="<?php echo url_for('task/edit?type=0&id='.$task['task']->getId()) ?>" style="float:right;" >
-			<img src="/images/icons/calendar_edit.png" ></a>				
-			<div class="cal_entry_content" style="height: <?php echo $task['duration']*30  - 2?>px;" onclick="document.location='<?php echo url_for('job/show?id='.$task['task']->getJob()->getId()) ?>'">
-		<p><strong><?php echo $task['task']->getJob()->getStore()->getCustomer()->getCompany() ?></strong></p>
-		<p><?php echo $task['task']->getJob()->getStore()->getStreet() ?>	<br>
-		<?php echo	$task['task']->getJob()->getStore()->getPostcode() ?> <?php echo $task['task']->getJob()->getStore()->getCity() ?></p>
-		<p><?php echo substr(	$task['task']->getJob()->getDescription(), 0, 100) ?></p>
-		</div>
+		class="cal_entry cal_type_<?php echo $task['task']->getTaskTypeId() ?>"  <?php echo ((!$task['task']->getScheduled() AND $task['task']->getTaskTypeId() < 2)? 'style="opacity: 0.2;"':' ')?> >
+					
+	<div class="cal_entry_content" style="height: <?php echo $task['duration']*40 - 18 ?>px;" onclick="document.location='<?php echo url_for(
+	($task['task']->getTaskTypeId() < 2? 
+	'job/show?id='.$task['task']->getJob()->getId() : 
+	'task/edit?type='.$task['task']->getTaskTypeId().'&id='.$task['task']->getId() ) )  ?>'">
+			 	<?php echo $task['task']->getJob()->getId() ?>
+			
+				
+	</div>
+	
+		<a href="<?php echo url_for('task/edit?type=0&id='.$task['task']->getId()) ?>" style="float:right;position: relative;" >
+				<img src="/images/icons/calendar_edit.png" ></a>
+	
+	
 	</td>
 	<?php endforeach ?>
 <?php else: ?>
@@ -48,5 +53,3 @@
 </table>
 </div>
 <?php endforeach ?>
-	
-

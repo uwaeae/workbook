@@ -1,12 +1,15 @@
 <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>
-<table>
+<table class="entry">
+	<thead>
  		<tr>
 			<th>Matchcode</th>
 			<th>Artikel</th>
 			<th>Anzahl</th>
 			<th>Einheit</th>
 		</tr>
+	</thead>
+	<tbody>
 		<?php foreach ($entrys as $entry): ?>
 		<tr>
 			
@@ -20,6 +23,8 @@
 					<img src="/images/icons/cross.png" /></a></td>
 	    </tr>
 	    <?php endforeach ?>
-  
+  </tbody>
+<tfoot>
 <?php  include_partial('form', array('form' => $form, 'job' => $job)) ?>
+</tfoot>
 </table>

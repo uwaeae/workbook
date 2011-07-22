@@ -6,7 +6,7 @@
 <input type="hidden" name="sf_method" value="put" />
 <?php endif; ?>
 
-<tfoot>
+
 		<tr>
 			<th>Suche</th>
 			<td > <?php echo $form['item_id']?></td>
@@ -29,5 +29,5 @@
 	        </td>
 	      </tr>
 
-		 </tfoot>
+		 
 </form>

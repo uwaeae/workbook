@@ -1,7 +1,7 @@
 
 
 <?php foreach ($users as $user): ?>
-<div class="cal_user_day" style=" width:<?php echo round(100 / count($users))-1 ?>%;" >	
+<div class="cal_user_day" style=" width:<?php echo round(95 / count($users))-1 ?>%;" >	
 <table border="0" class="cal_table_small  " >
 <?php $full = 0; ?>
 <?php $even = true ?>

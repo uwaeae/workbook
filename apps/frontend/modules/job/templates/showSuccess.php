@@ -9,7 +9,7 @@
       <td><?php echo $job->getId() ?></td>
 	<th>Status: </th>
       <td><?php echo $job->getJobState() ?></td>
-	<th>Art:</th>
+	<th>Typ:</th>
       <td><?php echo $job->getJobType() ?></td>
     </tr>
         <tr>
@@ -60,11 +60,16 @@
 		      <td colspan="5">
 				<ul>
 				<?php foreach ($job->getFiles() as $file): ?>
-					<li><?php echo link_to($file->getName(),'/file/get/?id='.$file->getID()) ?>
-						<?php echo link_to('löschen','/file/delete/id/'.$file->getID()) ?><li>
+					<li class="jobfile"><?php echo link_to($file->getName(),'/file/get/?id='.$file->getID()) ?>
+						<?php echo link_to('Delete', 'file/delete?id='.$file->getID(), array('method' => 'delete', 'confirm' => 'Are you sure?','class'=>'button','style'=> 'float:right;')) ?></li>
 				<?php endforeach ?>
-				<ul>
-				<?php include_partial('fileform', array('form' => $form,'job' => $job->getId())) ?>
+					<li class="jobfile newfilebutton"><label class="button newfilebutton">Neue Datei</label></li>
+					<li class="jobfile newfileform">
+	<?php include_partial('fileform', array('form' => $form,'job' => $job->getId())) ?>
+						</li>
+				
+				</ul>
+				
 			</td>
 	</tr>
 
@@ -90,6 +95,11 @@
 		<a class="button" href="<?php echo url_for('job/edit?id='.$job->getId()) ?>">
 				ändern</a></li>
 				<?php endif ?>
+				<?php if ($sf_user->hasPermission('Zuweisen')) :?>	
+					<li class="table_menu_left">
+						<a class="button" href="<?php echo url_for('task/new/?job='.$job->getId().'&type=0') ?>">	
+							neuer Termin</a></li>
+				<?php endif ?>
 		</ul>	
 		</td>
 		<td>
@@ -102,13 +112,13 @@
 				<a href="<?php echo url_for( 'job/finish/?id='.$job->getId()) ?>" 
 					onclick="return confirm('Sind sie sicher das sie den Auftrag Nummer 1 abschliesen möchten?');" 
 					class="button" >
-					Aufschliesen 
+					Aufschließen 
 				</a>
 		<?php else: ?>
 			<a href="<?php echo url_for( 'job/finish/?id='.$job->getId()) ?>" 
 				onclick="return confirm('Sind sie sicher das sie den Auftrag Nummer 1 wieder aufschliesen möchten?');" 
 				class="button" >
-				<img src="/images/icons/tick.png"  />Auftrag Abschliesen
+				<img src="/images/icons/tick.png"  />Auftrag Abschließen
 			</a>
 		<?php endif ?>
 	<?php endif ?>
@@ -119,7 +129,7 @@
 <hr />
 
 
-<h3 class="job_work" >Arbeiten und Thermine </h3>
+<h3 class="job_work" >Arbeiten und Termine </h3>
 <table class="job_component">
   <thead>
     <tr>
@@ -129,12 +139,9 @@
 			 neue Arbeit </a>
 				<?php endif ?>
 		
-		<?php if ($sf_user->hasPermission('Zuweisen')) :?>
-				
-				<a class="button" href="<?php echo url_for('task/new/?job='.$job->getId().'&type=0') ?>">	
-					neuer Thermin</a>
+		
 			
-				<?php endif ?>
+			
 			</td>
 	</tr>
 	<th style="width:100px;"> </th>
@@ -151,7 +158,7 @@
 	class="table_item"
 	onclick="document.location='<?php echo url_for('task/edit?id='.$task->getId()) ?>'"
 <?php endif ?> >
-		<td><?php echo ($task->getScheduled()? 'Thermin': 'Ausgeführt ') ?></td>
+		<td><?php echo ($task->getScheduled()? 'Termin': 'Ausgeführt ') ?></td>
 		<td><?php echo format_date($task->getStart(),'dd.MM.yyyy HH:mm') ?></td>
 		<td><?php echo format_date($task->getEnd() ,'dd.MM.yyyy HH:mm') ?></td>
 		<td><?php echo $task->getInfo() ?></td>
@@ -177,12 +184,12 @@
 			<img src="/images/icons/add.png" /></a>
 	<?php endif ?>
 	</h3>
-<table class="job_component job_items_body ">
+<table class="entry">
   <thead>
     <tr>
-      <th colspan="2" style="width:100px;">Einheit</th>
-      <th style="width:100px;">Artikel</th>
-      <th style="width:300px;">Beschreibung</th>
+      <th colspan="2" style="width:10%;">Einheit</th>
+      <th style="width:auto;">Artikel</th>
+      <th style="width:auto;">Beschreibung</th>
     </tr>
   </thead>
   <tbody>

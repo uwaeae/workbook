@@ -1,6 +1,6 @@
 
 <div id="open_job">
-<h1 class="open_jobs_head">Offene Aufträge (<?php echo count($jobs) ?>)</h1>
+<h1 class="open_jobs_head">(<?php echo count($jobs)  ?>) Offene Aufträge  in der Nähe</h1>
 
 <div class="open_jobs_body">
 	
