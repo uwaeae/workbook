@@ -1,30 +1,17 @@
--tabellen Struktur, Store zu Adresse
+Bug / TODOs
 
-- anzeige in bei der Bearbeitung eines Jobs welche Jobs sich in der nähe befinden
-- anzeige welche Jobs schon in dieser Adresse/Filiale bearbeitet worden sind.
-- Backend Einstellungen
-- Konfiguration Tabelle erstellen layout einfallen lassen
+Tabellen		Store zu Adresse
+Backend 		Einstellungen
 
+Konfiguration	Tabelle erstellen layout einfallen lassen
+Konfiguration	Modul Implementieren 
+Konfiguration	Optionen in den Modulen Laden
+Job				 anzeige welche Jobs schon in dieser Adresse/Filiale bearbeitet worden sind.
+Back Buttons	history array machen
+Auftrag 		Eingabe die Datepicker jQuery UI verwenden?
+Stundenzettel	Filter funktioniert nicht
+Kalender		Wochenanzeige pro Mitarbeiter eine Wochen anzeigen
 
--Back buttons konzept erarbeiten und umsetzen( array machen)
-
-
-
-
-
-
-
-Auftrag
-
-	Übersicht Filter/Suche einbauen User, Firma, usw. 
-	Dateihochladen und anzeigen
-	Eingabe die Datepicker jQuery UI verwenden?
-	
-Stundenzettel
-	Monatssyitsch
-	Admin Switsch zwischen unsern
-
-Konfigurations Datenbank
 
 FEATURES
 
@@ -35,11 +22,13 @@ FEATURES
 
 ERLEDIGT
 
-- Calendar User Filter funktoniert irgenwie nicht?!
-
-- Calendar Fertig stellen
-
-- Calendar alles User anzeigen übersichtlicheremachen 
-	vieleicht durch weitere Überschriftsspalte und Timeline?
-	
-	- Task Thermin ändern einbauen bzw user zuweisen
+Auftrag 		Übersicht Filter/Suche einbauen User, Firma, usw. 
+Auftrag 		Dateihochladen und anzeigen
+Stundenzettel	Monatssyitsch
+Stundenzettel	Admin Switsch zwischen unsern
+Job				 anzeige welche Jobs schon in dieser Adresse/Filiale bearbeitet worden sind.
+Job				 anzeige in bei der Bearbeitung eines Jobs welche Jobs sich in der nähe befinden
+Kalender		 User Filter funktoniert irgenwie nicht?!
+Kalender		 Fertig stellen
+Kalender		 alles User anzeigen übersichtlicheremachen vieleicht durch weitere Überschriftsspalte und Timeline?
+Kalender		 Task Thermin ändern einbauen bzw user zuweisen

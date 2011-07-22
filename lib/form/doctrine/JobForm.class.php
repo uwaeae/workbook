@@ -89,7 +89,7 @@ class JobForm extends BaseJobForm
 	//$this->setDefault('store_id', $defstore->getId() );
 	
 	
-	$subForm = new sfForm();
+/*	$subForm = new sfForm();
   	for ($i = 0; $i < 1; $i++)
   		{
     		$file = new File();
@@ -98,7 +98,7 @@ class JobForm extends BaseJobForm
     		$subForm->embedForm($i, $form);
   		}
   	$this->embedForm('newFiles', $subForm);
-	
+*/	
 	
 	$this->widgetSchema->setLabels(array(
 	  'description'    => 'Auftrag',
@@ -115,7 +115,7 @@ class JobForm extends BaseJobForm
 	));
 
   }
-
+/*
 public function saveEmbeddedForms($con = null, $forms = null)
 	{
 	 if (null === $forms)
@@ -128,7 +128,6 @@ public function saveEmbeddedForms($con = null, $forms = null)
 	  
 	     if (!isset($files[$name]))
 	     {
-		
 	       unset($forms['newFiles'][$name]);
 	     }
 	   }
@@ -137,6 +136,6 @@ public function saveEmbeddedForms($con = null, $forms = null)
 	 return parent::saveEmbeddedForms($con, $forms);
 	}
 
-
+*/
 
 }

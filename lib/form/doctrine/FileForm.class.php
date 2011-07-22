@@ -13,18 +13,15 @@ class FileForm extends BaseFileForm
   public function configure()
   {
 
-	$this->useFields(array('file', 'name'));
+	$this->useFields(array('file','jobs_list'));
 
-	  $this->setWidget('file', new sfWidgetFormInputFile());
-	  $this->setValidator('file', new sfValidatorFile(array(
+	//$this->setWidget('jobs_list', new sfWidgetFormInputHidden());
+
+	$this->setWidget('file', new sfWidgetFormInputFile());
+	$this->setValidator('file', new sfValidatorFile(array(
 	    'path' => sfConfig::get('sf_upload_dir').'/documents',
 		'required' => false,
 	  )));
-	
-	$this->validatorSchema['name']->setOption('required', false);
-//	$this->setValidatorSchema(new JobFileValidatorSchema());
-    $this->mergePostValidator(new JobFileValidatorSchema());
-	
 	
   }
 }

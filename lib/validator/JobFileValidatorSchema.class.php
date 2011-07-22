@@ -13,7 +13,7 @@ class JobFileValidatorSchema extends sfValidatorSchema
     $errorSchema = new sfValidatorErrorSchema($this);
    	 // echo var_dump($values );
  	
-	 if (!$values['file']  && $values["name"] )
+	 /*if (!$values['file']  && $values["name"] )
       {
         $errorSchema->addError(new sfValidatorError($this, 'required'), 'name');
       }
@@ -30,7 +30,8 @@ class JobFileValidatorSchema extends sfValidatorSchema
 	if (count($errorSchema))
 	    {
 	     throw new sfValidatorErrorSchema($this, $errorSchema);
-	    }
+	    }*/
+	//$values["name"]
 
 
 	if(isset($values)) return $values;

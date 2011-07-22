@@ -1,6 +1,18 @@
 $(document).ready(function()
 {
+ $('li.newfileform ').hide();
+
+$('label.newfilebutton').click(function(key)
+	{
+	$('li.newfilebutton ').slideUp("fast");
+	$('li.newfileform ').slideDown("fast");
+	 });
+
+
+
+
  $('.open_jobs_body').hide();
+
  
   $('.open_jobs_head').click(function(key)
 	{

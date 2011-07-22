@@ -1,4 +1,7 @@
 
+
+/* Allgemein */ 
+
 * {
 	font-family: verdana,arial,sans-serif;
 	padding: 0;
@@ -37,7 +40,26 @@ select {
 }
 
 
+table {
+	font-family: verdana,arial,sans-serif;
+	font-size:7pt;
+	color:#333333;
+	border-width: 1px;
+	border-color: #ccccff;
+}
 
+/* Fromulare */
+
+form th{
+	background-color: #CECEF6;
+	border-radius: 2px;
+	padding: 5px;
+}
+
+
+
+
+/* Layout */ 
 
 .header {
 	padding: 10px;
@@ -65,7 +87,7 @@ select {
 	margin: 0 auto;
 	padding: 10px;
 	display: inline-block;
-	width: 90%;
+	width: 85%;
 }
 
 .smallicon {
@@ -90,12 +112,12 @@ select {
 
  /* CALENDAR SECECTION   */
 .calendar{
-	
+	border-collapse: collapse;
 	font-family: verdana,arial,sans-serif;
 	font-size:7pt;
 	color:#333333;
 	float:left;
-	width: 90%;
+	width: 100%;
 	
 }
 .cal_col_even,
@@ -135,11 +157,11 @@ table.cal_entry td {
 }
 
 .cal_timerow_odd {
-	background-color: #CED8F6;
+	background-color: #A9D0F5;
 }
 
 .cal_timerow_even {
-	background-color: #CEF6CE;
+	background-color: #CEF6F5;
 }
 
 .calender_today{
@@ -149,8 +171,10 @@ table.cal_entry td {
 	list-style: none;
 	display: inline;
 }
-
-
+.cal_table_head{
+	border-bottom: 1px solid grey;
+	background-color:  #CED8F6;;
+}
 .cal_timeline{
 	width: 40px;
 	
@@ -273,18 +297,22 @@ table.cal_table_micro div.cal_entry_content{
 
 
 
+
 table.cal_table_user {
 	font-family: verdana,arial,sans-serif;
 	font-size:5pt;
 	color:#333333;
-	xborder-collapse: collapse;
-	
+	border-collapse: collapse;
 	width: 100%;
 	border: 0;
 	
 }
 div.cal_user_day {
 	float:left;
+	border-left: 1px solid gray;
+}
+div.cal_user_day th {
+	text-align: center;
 }
 div.cal_day {
 	 width: 15em;	
@@ -297,7 +325,7 @@ table.cal_table_user tr:first-child{
 
 td.cal_week_col{
 
-	background-color: #E0ECF8;
+	
 
 }
 
@@ -339,17 +367,24 @@ div #cal_filter{
 	left: 50%;
 	font-size: 8pt;
 	font-family: verdana,arial,sans-serif;
+	margin: 0 0.2em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
 }
 
 .cal_filter_head{
 	text-align:center;
-    background-color: #E7EEF6;
+	color: white;
+	background-color: steelblue;
+	padding: 2px 5px;
+	font-size:10px;
 	list-style: none outside none;
-	margin: 0 0.2em;
-	padding-left: 0.5em;
-	padding-right: 0.5em;
-	font-size: 9pt;
-	font-weight: bold;
+
+	
+}
+.cal_filter_head:hover{
+	background-color: #A9F5F2;
+	color: blue;
 }
 
 div #cal_filter .checkbox_list li {
@@ -360,7 +395,7 @@ div #cal_filter .checkbox_list li {
 	padding-right: 0.5em;
 	display: block;
 	width: 150px;
-	background-color: #CEECF5;
+	background-color: steelblue;
 }
 div #cal_filter .checkbox_list li:hover{
 	background-color: #81DAF5;
@@ -369,18 +404,19 @@ div #cal_filter .checkbox_list li:hover{
 div.filterusers,
 div.filtertypes{
 	margin-top: 5px;
-	background: rgba(0, 0, 255, 0.3);
+	background: rgba(0, 0, 126, 0.3);
 }
 div.filterusers:hover,
 div.filtertypes:hover {
 	margin-top: 5px;
-	background: rgba(0, 0, 255, 0.7);
+	background: rgba(0, 0, 126, 0.9);
 
 }
 div.filterusers label,
 div.filtertypes label {
 	margin-top: 5px;
 	margin-bottom: 5px;
+	color: white;
 	
 	
 }
@@ -396,24 +432,30 @@ div #open_job{
 	left:65%;
 }
 
-.cal_open_jobs_head{
+.open_jobs_head{
 	text-align:center;
-    background-color: #E7EEF6;
+	color: white;
+	background-color: steelblue;
+	padding: 2px 5px;
+	font-size:10px;
 	list-style: none outside none;
 	margin: 0 0.2em;
 	padding-left: 0.5em;
 	padding-right: 0.5em;
-	font-size: 9pt;
-	font-weight: bold;
 	width: 25em;
 	margin-bottom: 5px;
 }
-.cal_open_jobs_body{
+.open_jobs_head:hover{
+	background-color: #A9F5F2;
+	color: blue;
+}
+	
+.open_jobs_body{
 	height: 40em;
 	overflow: auto;
 }
 
-.cal_oen_jobs_item{
+.oen_jobs_item{
 	 background-color: #CEECF5;
 	list-style: none outside none;
 	border: 1px solid rgba(0, 0, 0, 0.5);
@@ -421,7 +463,7 @@ div #open_job{
 	margin-top:5px;
 	margin-right: 5px;
 }
-.cal_oen_jobs_item:hover{
+.oen_jobs_item:hover{
 	 background-color: #81DAF5;
 }
 
@@ -449,18 +491,15 @@ div #open_job{
 			text-align:center;
 			color: white;
 			border-radius:2px;
-			border-style:none; 
-			border-width:3px; 
-			padding:5px;
+			
+			padding: 2px 5px;
 			font-size:10px;
 			text-decoration:none;
 			background-color: steelblue;
 			cursor: pointer;
 			line-height: 15px;
 			font-family: verdana,arial,sans-serif;
-			x-webkit-box-shadow: 2px 2px 3px 1px #00007a;
-			x-moz-box-shadow: 2px 2px 3px 1px #00007a;
-			xbox-shadow: 2px 2px 3px 1px #00007a;
+
 			
 			 }
 
@@ -468,7 +507,7 @@ div #open_job{
 .menu {
 	
 	padding-top: 4px;
-	width: 8%;
+ 	width: 100px;
 	display: block;
 	color: white; 
 	float:left;
@@ -654,12 +693,20 @@ table .list:hover ul li {
 	
 }
 
+/* Job Styles */
+
 table.job_show{
 	display: block;	
 	font-size: 10pt;
+	padding-top: 35px;
 }
 table.job_show tr,
 table.job_show td{
+	padding-bottom: 5px;
+	padding-left: 10px;
+	padding-top: 5px;
+	
+	
 }
 table.job_show th{
 	font-weight: bold;
@@ -677,37 +724,199 @@ table.job_component th{
 	background-color: #E7EEF6;
 }
 
-
-
-
 table.job{
-	display: block;	
-
+	width:90%;
+	margin: 1em;
+	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-collapse: collapse; 
 } 
+
+table.job td,
+table.job th{
+	font-weight: bold;
+
+	padding: .3em;
+	border-right: 1px #ccc solid;
+	border-bottom: 1px #ccc solid;
+}
+table.job thead {
+	background-color: #CED8F6;
+}
+table.job tr.table_item:hover {
+	background-color: #E7EEF6;
+	cursor:pointer; 
+}
+
+table.job tr.table_item:hover {
+	background-color: lightblue;
+	cursor:pointer; 
+}
+
+
 .job_type_head {
 	min-width:800px;
 	background-color: #CED8F6;
-	border-radius: 1em 1em 1em 1em;
 	cursor: pointer;
 }
 .job_type_head:hover {
 	background-color: #E0E6F8;
 }
 
-table {
-	font-family: verdana,arial,sans-serif;
-	font-size:7pt;
-	color:#333333;
-	border-width: 1px;
-	border-color: #ccccff;
+div.job_search  {
+	margin-top: 10px;
+	
+}
+div.job_search li {
+	float:left;
+	list-style: none;
+	background-color: #E0E6F8;
+	padding: 2px 5px 2px 5px;
+	border-radius: 3px;
+	margin-left: 5px;
+	margin-right: 5px;
+		
 }
 
-/* Fromulare */
+.jobfile{
+	list-style: none;
+	background-color: #E0E6F8;
+	padding: 2px 5px 2px 5px;
+	border-radius: 3px;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;	
+}
+.jobfile a{
+	text-decoration:none;
+}
 
-form th{
-	background-color: #CECEF6;
-	border-radius: 2px;
+
+
+/* Payrole */
+div.payroll_nav div{
+	display: inline-block;
+	background-color: steelblue;
+	color: white;
+	margin: 5px;
 	padding: 5px;
+	border-radius: 3px;
+}
+div.payroll_nav	 li{
+	list-style:none;
+	float:left;
+	margin-right: 10px;
+	font-size: 8pt;	
+	cursor:pointer;
+	padding: 5px;
+	border-radius: 3px;
+}
+div.payroll_nav	 li:hover,
+div.payroll_nav	  li > input:checked  {
+	background-color: lightblue;
+	}
+
+table.payroll {
+	font-family: verdana,arial,sans-serif;
+	font-size:5pt;
+	color:#333333;
+	border-collapse: collapse;
+	width: 100%;
+	border: 0;
+	
+}
+table.payroll td,
+table.payroll th{
+	font-weight: bold;
+	padding: .3em;
+	border-right: 1px #ccc solid;
+	border-bottom: 1px #ccc solid;
+
+}
+table.payroll td.number{
+	text-align: center;
+}
+
+table.payroll thead {
+	background-color: #CED8F6;
+	border-left: 1px #ccc solid;
+	font-size:8pt;
+	
+}
+table.payroll tbody {
+	border-left: 1px #ccc solid;
+}
+table.payroll tfoot {
+	font-size: 10pt;
+	font-weight: bold;
+}
+table.payroll tfoot td  {
+	border-style:none;
+}
+table.payroll tfoot td.number  {
+	border-top: 4px #ccc solid;
+	border-left: 1px #ccc solid;
+	border-bottom: 4px #ccc double;
+}
+
+
+table.payroll tr.payrole_entry:hover {
+	background-color: #E7EEF6;
+	cursor:pointer; 
+}
+
+table.payroll tr.table_item:hover {
+	background-color: lightblue;
+	cursor:pointer; 
+}
+
+/* ENTRY section*/
+table.entry {
+	font-family: verdana,arial,sans-serif;
+	font-size:8pt;
+	color:#333333;
+	border-collapse: collapse;
+	width: 100%;
+	border: 0;
+	
+}
+table.entry td,
+table.entry th{
+	font-weight: bold;
+	padding: .3em;
+
+}
+
+table.entry thead {
+	background-color: #CED8F6;
+	border-left: 1px #ccc solid;
+	font-size:8pt;
+	border-bottom: 1px #ccc solid;
+}
+table.entry thead th{
+		border-left: 1px #ccc solid;
+}
+table.entry tbody {
+	border-left: 1px #ccc solid;
+}
+table.entry tbody td {
+	border-right: 1px #ccc solid;
+	border-bottom: 1px #ccc solid;
+}
+table.entry tfoot td input[type=text] {
+	width: 100%;
+}
+width: 100%;
+
+table.entry tfoot {
+
+
+	font-size:8pt;
+}
+table.entry tfoot th{
+	font-weight: bold;
+	background-color: #E7EEF6;
+	font-size:8pt;
 }
 
 
