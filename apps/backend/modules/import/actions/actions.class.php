@@ -245,7 +245,7 @@ class importActions extends sfActions
 	
 	//$request->getPostParameter($name, $default = null)
 	$file = fopen($this->filename,'r');	
-
+	$this->count = 0;
 	switch($this->typ){
 		case 0: //Kunden
 			
@@ -301,8 +301,9 @@ class importActions extends sfActions
 							<td>'.$row[$postcode].'</td>
 							<td>'.$row[$street].'</td>
 							</tr>';
+						$this->count += 1;
 						}
-					
+						
 					}		
 			}
 		

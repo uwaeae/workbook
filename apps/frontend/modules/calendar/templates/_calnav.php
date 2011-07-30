@@ -17,7 +17,7 @@
 		Tag</a>
 	</li>	
 	<li class="table_menu_left">	
-		<a class="button" href="<?php echo url_for('calendar/'.$type) ?>">
+		<a class="button" href="<?php echo url_for('calendar/'.$type.'/?&next=0') ?>">
 		Heute</a>
 	</li>	
 	<li class="table_menu_left">		

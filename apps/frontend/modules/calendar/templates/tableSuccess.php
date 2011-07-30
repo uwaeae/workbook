@@ -22,7 +22,7 @@
 </thead>	
 </tbody>
 
-<?php foreach ($users as $user): ?>
+<?php foreach ( $UserArray as $user): ?>
 <tr>
 		<th>Zeit</th>
 	<?php foreach ($calendar as $day): ?>
@@ -37,8 +37,11 @@
 
 <?php foreach ($calendar as $day): ?>
 	<td class="cal_week_col"	>
-			<?php include_partial('task_users', array('day' => $day['task'],'users' => $UserArray)) ?>
+		
+			<?php include_partial('task_users', array('day' => $day['task'],'user' => $user,'style'=> 'width:'.round(100 / count($UserArray)))) ?>
 		<?php // echo htmlspecialchars_decode($day) ?>
+		<div class="cal_user_day"  >
+		</div>
 	</td>	
 <?php endforeach ?>	
 

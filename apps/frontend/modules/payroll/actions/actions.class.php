@@ -93,12 +93,16 @@ protected function makeNavForm()
 		$this->sickness = 0;
 		$this->holyday = 0;
 		
-		
+		$part = intval(Doctrine_Core::getTable('Option')->getOptionByName('payroll_hour_split')->getValue());
 		$query = Doctrine_Query::create()
 					->select('t.*, ')
-					->from('Task t')
-					->leftJoin('TaskUser u')
-					->where('u.user_id ='.$this->getUser()->getId());
+					->from('Task t');
+					
+		if($request->hasParameter('user')){
+			$query->where('t.id  IN ( select task_id from task_user where user_id ='.$request->getParameter('user').')'); }	
+		else{
+			$query->where('t.id  IN ( select task_id from task_user where user_id ='.$this->getUser()->getId().')'); }
+		
 		if($request->hasParameter('month'))
 				$t = $query->andWhere('MONTH(t.start) = '.$request->getParameter('month'))
 					->execute();
@@ -126,7 +130,11 @@ protected function makeNavForm()
 			else {
 				$Stunden =  date('H',strtotime($task->getEnd())) - date('H',strtotime($task->getStart()))  - $task->getOvertime();
 			 	$Minuten = (date('i',strtotime($task->getEnd())) - date('i',strtotime($task->getStart())))	;
-				$Minuten = round($Minuten / 30, 0) * 30;
+
+// Hier noch die Eintsllungsparameter für die Stunden berechnung einbauen
+
+			
+				$Minuten = round($Minuten / $part, 0) * $part;
 				if($Minuten != 0) $Stunden += round($Minuten / 60,2);
 			}
 
@@ -153,10 +161,10 @@ protected function makeNavForm()
 		$tmp['task'] = $task;
 	
 		$this->tasks[] = $tmp;
-		$this->form = $this->makeNavForm();
+	
 	
 	 }
-		
+		$this->form = $this->makeNavForm();	
   }
 
   

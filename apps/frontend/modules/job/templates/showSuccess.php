@@ -31,7 +31,7 @@
 		</tr>
 		<?php endif ?>
 	<tr>
-      <th colspan="2">Ansprechpartner vor Ort :</th>
+      <th colspan="2">Auftraggeber</th>
       <td colspan="4"><?php echo $job->getContactPerson() ?></td>
 	</tr>
 
@@ -98,7 +98,7 @@
 				<?php if ($sf_user->hasPermission('Zuweisen')) :?>	
 					<li class="table_menu_left">
 						<a class="button" href="<?php echo url_for('task/new/?job='.$job->getId().'&type=0') ?>">	
-							neuer Termin</a></li>
+							Termin Planen</a></li>
 				<?php endif ?>
 		</ul>	
 		</td>
@@ -149,6 +149,7 @@
 	<th style="width:150px;">Ende</th>
 	<th style="width:350px;">Arbeiten</th>
 	<th style="width:150px;">Erstellt</th>
+	<th style="width:200px;">Mitarbeiter</th>
     </tr>
   </thead>
   <tbody>
@@ -163,6 +164,9 @@
 		<td><?php echo format_date($task->getEnd() ,'dd.MM.yyyy HH:mm') ?></td>
 		<td><?php echo $task->getInfo() ?></td>
 		<td><?php echo format_date($task->getCreatedAt(),'dd.MM.yyyy') ?></td>
+		<td><?php foreach ($task->getUsers() as $user): ?>
+			<?php echo $user ?><br>
+		<?php endforeach ?></td>
 	</tr>
     <?php endforeach; ?>
   </tbody>

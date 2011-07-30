@@ -269,8 +269,7 @@ class calendarActions extends sfActions
 			$this->setOptions( $request);
 			
 			$this->timeline = $this->renderTimeline(8,18);
-			$next =  $this->days * $this->next  - ( date('j') ) - ( date('w',mktime(0, 0, 0, date("m")  , date("d") - date('j') , date("Y")))) ;
-			
+			$next =  $this->days * $this->next  - ( date('w') - 1);
 			
 			
 			for ($i=0 ; $i < ($this->days / 7) ; $i++) { 
@@ -290,20 +289,21 @@ public function executeWeek(sfWebRequest $request)
 		$this->setOptions( $request);
 		//Wochentags verschiebung auf anfang der woche also das das erste Element im Claendar der Montag ist
 		$next =  $this->days * $this->next  - ( date('w') - 1);
-		$this->calendar = $this->renderCalendar($this->days,$next,8,18);
-		$this->timeline = $this->renderTimeline(8,18);
+		$this->calendar = $this->renderCalendar($this->days,$next,7,22);
+		$this->timeline = $this->renderTimeline(7,22);
 		$this->form = $this->makeFilterForm();
 		$this->setBack('calendar/week/?&next='.$this->next);
 		$this->getUser()->setAttribute('calendar',
 							array('next'=> $this->next,'type'=> $this->TaskType,'user' => $this->Users));
+		   //$this->setTemplate('table');
 	}
 	
 public function executeDay(sfWebRequest $request)
 	{
 		$this->days = 1;
 		$this->setOptions( $request);
-		$this->timeline = $this->renderTimeline(8,18);
-		$this->calendar = $this->renderCalendar($this->days,$this->next,8,18);
+		$this->timeline = $this->renderTimeline(7,22);
+		$this->calendar = $this->renderCalendar($this->days,$this->next,7,22);
 		$this->form = $this->makeFilterForm();
 		$this->setBack('calendar/day/?&next='.$this->next);	
 		$this->getUser()->setAttribute('calendar',
@@ -316,8 +316,8 @@ public function executeSmall(sfWebRequest $request)
 		$this->setOptions( $request);
 		//Wochentags verschiebung auf anfang der woche also das das erste Element im Claendar der Montag ist
 		$next =  $this->days * $this->next  - ( date('w') - 1);
-		$this->calendar = $this->renderCalendar($this->days,$next,8,18);
-		$this->timeline = $this->renderTimeline(8,18);
+		$this->calendar = $this->renderCalendar($this->days,$next,7,22);
+		$this->timeline = $this->renderTimeline(7,22);
 		$this->form = $this->makeFilterForm();
 		$this->setBack('calendar/week/?&next='.$this->next);
 		$this->setLayout(false);

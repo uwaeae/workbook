@@ -34,9 +34,12 @@
 </td>
 
 <?php foreach ($calendar as $day): ?>
+
 	<td class="cal_week_col"	>
-			<?php include_partial('task_users', array('day' => $day['task'],'users' => $UserArray)) ?>
+			<?php foreach ( $UserArray as $user): ?>
+			<?php include_partial('task_users', array('day' => $day['task'],'user' => $user,'style'=> 'width:'.round(100 / count($UserArray)-1).'%')) ?>
 		<?php // echo htmlspecialchars_decode($day) ?>
+		<?php endforeach ?>
 	</td>	
 <?php endforeach ?>	
 

@@ -1,3 +1,12 @@
+option:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Option
+    module:               option
+    prefix_path:          /option
+    column:               id
+    with_wildcard_routes: true
+
 invoice:
   class: sfDoctrineRouteCollection
   options:
