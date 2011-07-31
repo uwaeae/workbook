@@ -17,9 +17,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>open</td>
-	<td>/login</td>
-	<td></td>
+	<td>type</td>
+	<td>id=signin_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=signin_password</td>
+	<td>admin</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -141,7 +146,6 @@
 	<td>/logout</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

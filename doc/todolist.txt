@@ -3,8 +3,7 @@ Bug / TODOs
 Tabellen		Store zu Adresse
 Backend 		Einstellungen
 
-Konfiguration	Tabelle erstellen layout einfallen lassen
-Konfiguration	Modul Implementieren 
+
 Konfiguration	Optionen in den Modulen Laden
 Job				anzeige welche Jobs schon in dieser Adresse/Filiale bearbeitet worden sind.
 Job				Geplanter Termin und Arbeit in 2 Listen
@@ -54,3 +53,5 @@ Kalender		 User Filter funktoniert irgenwie nicht?!
 Kalender		 Fertig stellen
 Kalender		 alles User anzeigen übersichtlicheremachen vieleicht durch weitere Überschriftsspalte und Timeline?
 Kalender		 Task Thermin ändern einbauen bzw user zuweisen
+Konfiguration	Tabelle erstellen layout einfallen lassen
+Konfiguration	Modul Implementieren
