@@ -6,11 +6,33 @@ Backend 		Einstellungen
 Konfiguration	Tabelle erstellen layout einfallen lassen
 Konfiguration	Modul Implementieren 
 Konfiguration	Optionen in den Modulen Laden
-Job				 anzeige welche Jobs schon in dieser Adresse/Filiale bearbeitet worden sind.
-Back Buttons	history array machen
+Job				anzeige welche Jobs schon in dieser Adresse/Filiale bearbeitet worden sind.
+Job				Geplanter Termin und Arbeit in 2 Listen
+Job				User hinterlegen beim Speichern oder Ändern
+Job				Aufträge in der nächste ohne den eigenen
+
+Back Buttons	Historie Array machen
+Auftrag			Eigene Meine geplanten/ Meine in Bearbeitung Aufträge in einer liste anzeigen
+
 Auftrag 		Eingabe die Datepicker jQuery UI verwenden?
-Stundenzettel	Filter funktioniert nicht
+
+Stundenzettel	Filter User funktioniert nicht
+Stundenzettel	Feiertage eingeben im Backend
+Stundenzettel	Feiertage als normale Arbeit berechne außer Wochenende
+Stundenzettel	wenn urlaub als normal stunden (krank nachfragen)
+Stundenzettel	Buero Arbeit erstellen mit allem
+Stundenzettel	Alle Task Typen als buttons ausgeben.
+
 Kalender		Wochenanzeige pro Mitarbeiter eine Wochen anzeigen
+Kalendar		Task Kundenname, Adresse, Info 50 Zeichen
+Kalendar		alle sehen, nur eigene bearbeiten 
+
+
+Job 			Datei Mime Type mit speichern und übergeben bein download
+
+Task			Job Termin zuweisen Berechtigung in New Task verschieben.
+Task			nur der erstellter oder Admin kann bearbeiten
+Task			Bearbeiter anzeigen!
 
 
 FEATURES
