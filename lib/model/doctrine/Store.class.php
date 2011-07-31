@@ -22,7 +22,7 @@ class Store extends BaseStore
 	static public function retrieveForSelect($q, $limit, $customer = NULL)
 	{
 		$query = Doctrine_Core::getTable('Store')->createQuery('s');
-		if($customer) $query->innerJoin('s.Customer c WITH c.number = '.$customer );
+		if($customer) $query->innerJoin('s.Customer c WITH c.id = '.$customer );
 		
 		if(is_numeric($q)) $query->where(" s.number LIKE '$q%'");
 		else if(strlen($q) > 1) $query->where("s.street like '$q%' ");

@@ -330,5 +330,21 @@ Invoice:
       class: Job
       refClass: JobInvoice
       cascade: [delete]
-    
+Option:
+  actAs: [Timestampable]
+  tableName: settings
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: ture
+    name:
+      type: string
+      notnull: true
+    value:
+      type: string
+      notnull: true
+    type:
+      type: string
+      notnull: true
         

@@ -19,12 +19,15 @@ class OptionTable extends Doctrine_Table
 	
 	public function getOptionByName($option)
 	  {
-	    return	Doctrine_Query::create()
+	    $value = Doctrine_Query::create()
 						->select('*')
 						->from('Option o')
 						->where("o.name = '$option'")
 						->fetchOne();
-	  }
+	    $return = $value->getValue();
+		settype($return,$value->getType());
+	  	return $return;
+	}
 
 
 

@@ -8,13 +8,16 @@
  * @property integer $id
  * @property string $name
  * @property string $value
+ * @property string $type
  * 
  * @method integer getId()    Returns the current record's "id" value
  * @method string  getName()  Returns the current record's "name" value
  * @method string  getValue() Returns the current record's "value" value
+ * @method string  getType()  Returns the current record's "type" value
  * @method Option  setId()    Sets the current record's "id" value
  * @method Option  setName()  Sets the current record's "name" value
  * @method Option  setValue() Sets the current record's "value" value
+ * @method Option  setType()  Sets the current record's "type" value
  * 
  * @package    workbook
  * @subpackage model
@@ -31,12 +34,15 @@ abstract class BaseOption extends sfDoctrineRecord
              'primary' => true,
              'autoincrement' => true,
              ));
-        $this->hasColumn('name', 'string', 64, array(
+        $this->hasColumn('name', 'string', null, array(
              'type' => 'string',
              'notnull' => true,
-             'length' => 64,
              ));
         $this->hasColumn('value', 'string', null, array(
+             'type' => 'string',
+             'notnull' => true,
+             ));
+        $this->hasColumn('type', 'string', null, array(
              'type' => 'string',
              'notnull' => true,
              ));

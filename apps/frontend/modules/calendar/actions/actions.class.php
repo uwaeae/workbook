@@ -300,10 +300,12 @@ public function executeWeek(sfWebRequest $request)
 	
 public function executeDay(sfWebRequest $request)
 	{
+		$beginn = Doctrine_Core::getTable('Option')->getOptionByName('workday_beginn');
+		$end = Doctrine_Core::getTable('Option')->getOptionByName('workday_end');
 		$this->days = 1;
 		$this->setOptions( $request);
 		$this->timeline = $this->renderTimeline(7,22);
-		$this->calendar = $this->renderCalendar($this->days,$this->next,7,22);
+		$this->calendar = $this->renderCalendar($this->days,$this->next,$beginn,$end);
 		$this->form = $this->makeFilterForm();
 		$this->setBack('calendar/day/?&next='.$this->next);	
 		$this->getUser()->setAttribute('calendar',

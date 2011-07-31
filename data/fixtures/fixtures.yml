@@ -56,3 +56,18 @@ TaskType:
     name: Urlaub
   Buero:
     name: Büro    
+    
+Option:
+  Stundenabrechnung:
+    name: payroll_hour_split
+    value: 15
+    type: integer
+  BeginnArbeitstag:
+    name: workday_beginn
+    value: 7
+    type: integer
+  EndeArbeitstag:
+    name: workday_end 
+    value: 22
+    type: integer
+       

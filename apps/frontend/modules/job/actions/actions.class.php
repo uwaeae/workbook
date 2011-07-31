@@ -160,7 +160,7 @@ class jobActions extends sfActions
 	$this->customer = Doctrine_Core::getTable('Customer')->find(array($request->getParameter('customer')));
 	
     $this->form = new JobForm(NULL,array(
-	'url' => $this->getController()->genUrl('job/findstore/?customer='.$request->getParameter('customer')),
+	'url' => $this->getController()->genUrl('job/findstore/?customer='.$this->customer->getId()),
 	'type' => $request->getParameter('type'),
 	'customer' => $request->getParameter('customer'),	
 		));

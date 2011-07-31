@@ -93,7 +93,7 @@ protected function makeNavForm()
 		$this->sickness = 0;
 		$this->holyday = 0;
 		
-		$part = intval(Doctrine_Core::getTable('Option')->getOptionByName('payroll_hour_split')->getValue());
+		$part = Doctrine_Core::getTable('Option')->getOptionByName('payroll_hour_split');
 		$query = Doctrine_Query::create()
 					->select('t.*, ')
 					->from('Task t');
