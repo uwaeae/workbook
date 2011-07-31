@@ -1,0 +1,76 @@
+<?php
+class Example extends PHPUnit_Extensions_SeleniumTestCase
+{
+  protected function setUp()
+  {
+    $this->setBrowser("*chrome");
+    $this->setBrowserUrl("http://127.0.0.1/");
+  }
+
+  public function testMyTestCase()
+  {
+    $this->open("/calendar/day");
+    $this->click("link=Neu");
+    $this->waitForPageToLoad("30000");
+    $this->typeKeys("id=autocomplete_customer", "aldi");
+    for ($second = 0; ; $second++) {
+        if ($second >= 60) $this->fail("timeout");
+        try {
+            if ($this->isTextPresent("0009 Aldi Seefeld")) break;
+        } catch (Exception $e) {}
+        sleep(1);
+    }
+
+    $this->click("css=li.ac_even");
+    $this->click("css=input.button");
+    $this->waitForPageToLoad("30000");
+    $this->verifyTextPresent("Ende");
+    $this->verifyTextPresent("Beginn");
+    $this->verifyTextPresent("Kontaktperson");
+    $this->verifyTextPresent("Filiale");
+    $this->verifyTextPresent("Auftrag");
+    $this->verifyTextPresent("Status");
+    $this->typeKeys("id=autocomplete_job_store_id", "9");
+    $this->type("id=autocomplete_job_store_id", "9");
+    for ($second = 0; ; $second++) {
+        if ($second >= 60) $this->fail("timeout");
+        try {
+            if ($this->isTextPresent("9 | 15370 Fredersdorf-Vogelsdf. Frankfurter Chaussee 48")) break;
+        } catch (Exception $e) {}
+        sleep(1);
+    }
+
+    $this->click("css=li.ac_even");
+    $this->type("id=autocomplete_job_store_id", "");
+    $this->typeKeys("id=autocomplete_job_store_id", "Hauptstr");
+    for ($second = 0; ; $second++) {
+        if ($second >= 60) $this->fail("timeout");
+        try {
+            if ($this->isElementPresent("//div[6]/ul/li[4]")) break;
+        } catch (Exception $e) {}
+        sleep(1);
+    }
+
+    $this->click("//div[6]/ul/li[4]");
+    $this->type("id=autocomplete_job_store_id", "");
+    $this->typeKeys("id=autocomplete_job_store_id", "");
+    for ($second = 0; ; $second++) {
+        if ($second >= 60) $this->fail("timeout");
+        try {
+            if ($this->isTextPresent("68 | 12689 Berlin Havemannstraße 33")) break;
+        } catch (Exception $e) {}
+        sleep(1);
+    }
+
+    $this->click("//li[68]");
+    $this->type("id=job_description", "TEST");
+    $this->click("css=input.button");
+    $this->waitForPageToLoad("30000");
+    try {
+        $this->assertEquals("", $this->getLocation());
+    } catch (PHPUnit_Framework_AssertionFailedError $e) {
+        array_push($this->verificationErrors, $e->toString());
+    }
+  }
+}
+?>

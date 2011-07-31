@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://127.0.0.1/" />
+<title>job_overview</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">job_overview</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=signin_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=signin_password</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=submit]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Auftäge</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=th.job_type_1_head.job_type_head</td>
+	<td>regexp:Offen*</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=th.job_type_2_head.job_type_head</td>
+	<td>regexp:Geplant*</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=th.job_type_3_head.job_type_head</td>
+	<td>regexp:in Bearbeitung*</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=th.job_type_4_head.job_type_head</td>
+	<td>regexp:Abgeschlossen*</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=th.job_type_1_head.job_type_head</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=tr.job_type_1_body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=th.job_type_2_head.job_type_head</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=tr.job_type_2_body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=th.job_type_3_head.job_type_head</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=tr.job_type_3_body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=th.job_type_4_head.job_type_head</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=tr.job_type_4_body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>id=autocomplete_store</td>
+	<td>Hau</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=li.ac_even.ac_over</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=li.ac_even.ac_over</td>
+	<td>10827 Berlin Hauptstr. 8</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=li.ac_even</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>id=autocomplete_customer</td>
+	<td>Ebu</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=li.ac_even.ac_over</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0001 Ebuero AG</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[6]/ul/li</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

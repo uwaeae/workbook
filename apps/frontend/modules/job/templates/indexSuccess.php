@@ -1,5 +1,11 @@
 <?php  use_helper('Date');?>
 <?php use_javascript('jobs.js') ?>
+<div class="job_search">
+	<ul>
+	<li> <?php include_partial('search', array('form' => $formStore)) ?> </li>
+	<li> <?php include_partial('search', array('form' => $formCustomer)) ?> </li>
+	<ul>
+</div>
 <?php foreach ($jobstate as $state ): ?>
 
 <table class="job">
@@ -57,9 +63,4 @@
 </table>
 
 <?php endforeach ?>
-<div class="job_search">
-	<ul>
-	<li> <?php include_partial('search', array('form' => $formStore)) ?> </li>
-	<li> <?php include_partial('search', array('form' => $formCustomer)) ?> </li>
-	<ul>
-</div>
+

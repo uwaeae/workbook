@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://127.0.0.1/" />
+<title>newjob</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">newjob</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=signin_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=signin_password</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=submit]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Neu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>id=autocomplete_customer</td>
+	<td>aldi</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>0009 Aldi Seefeld</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=li.ac_even</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Ende</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Beginn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Kontaktperson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Filiale</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Auftrag</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Status</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>id=autocomplete_job_store_id</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=autocomplete_job_store_id</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>9 | 15370 Fredersdorf-Vogelsdf. Frankfurter Chaussee 48</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=li.ac_even</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=autocomplete_job_store_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>id=autocomplete_job_store_id</td>
+	<td>Hauptstr</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[6]/ul/li[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[6]/ul/li[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=autocomplete_job_store_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>id=autocomplete_job_store_id</td>
+	<td> </td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>68 | 12689 Berlin Havemannstraße 33</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//li[68]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=job_description</td>
+	<td>TEST</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyLocation</td>
+	<td>regexp:./job/*</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/logout</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
