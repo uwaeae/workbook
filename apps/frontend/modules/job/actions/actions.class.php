@@ -175,27 +175,7 @@ class jobActions extends sfActions
 
 
 
- public function executeRandom(sfWebRequest $request)
-  {
-	$job = new Job();
-
-	$job->setContactPerson('Herr Müller')  ;
-	$job->setContactInfo('im Buero zu Erreichen')   ;
-	$job->setJobTypeId(rand ( 1 ,  4 ))    ;
-	$day = rand ( 1 ,  20 );
-	$month = rand ( 0 , 2 );
-	$job->setEnd(date('c',mktime(0,0,0,date("m")+$month ,date("d")+$day,date("Y"))))         ;
-	$job->setStart(date('c',mktime(0,0,0,date("m")+$month ,date("d") +$day -1,date("Y"))))         ;
-	$job->setDescription('Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.')    ;
-	$job->setTimeinterval(0)  ;
-	$job->setJobStateId(1)    ;
-	$job-> setStoreId(rand ( 1 ,  30 ))       ;
-	
-		 $job->save();
-	
-	
-  $this->redirect('job/index');
-  }
+ 
 
  public function executeCreate(sfWebRequest $request)
   {

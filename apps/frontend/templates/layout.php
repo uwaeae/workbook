@@ -33,7 +33,7 @@
 			<li><?php echo link_to('Auftäge','job'); ?></li>
 		<?php if ($sf_user->hasPermission('Neu')): ?>
 			<li><?php echo link_to('Neu','job/new'); ?></li>
-			<li><?php echo link_to('Neu(Random)','job/random'); ?></li>
+			<!-- <li><?php echo link_to('Neu(Random)','job/random'); ?></li> -->
 		<?php endif ?>	
 			</li>
 		<?php if ($sf_user->hasPermission('Kunden')): ?>
