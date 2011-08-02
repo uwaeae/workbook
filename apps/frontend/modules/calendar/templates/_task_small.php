@@ -25,11 +25,11 @@
 		class="cal_entry cal_type_<?php echo $task['task']->getTaskTypeId() ?>
 					<?php echo (!$task['task']->getScheduled()? '_finshed':' ')?>" 
 					 >
-	<a href="<?php echo url_for('task/edit?type=0&id='.$task['task']->getId()) ?>" style="position:absolute;" >
-			<img src="/images/icons/calendar_edit.png" ></a>				
+<!--	<a href="<?php echo url_for('task/edit?type=0&id='.$task['task']->getId()) ?>" style="position:absolute;" >
+			<img src="/images/icons/calendar_edit.png" ></a>	-->			
 	<div class="cal_entry_content" style="height: <?php echo $task['duration']*10 - 2 ?>px;" onclick="document.location='<?php echo url_for('job/show?id='.$task['task']->getJob()->getId()) ?>'">
-	
-			 	<?php echo $task['task']->getJob()->getId() ?>
+				<?php echo substr($task['task']->getJob()->getStore()->getStreet(),0,15) ?>
+			 	<?php echo substr($task['task']->getJob()->getStore(),0,15) ?>
 	</div>
 	</td>
 	<?php endforeach ?>

@@ -1,5 +1,5 @@
 <?php $even = true ?>
-<table border="0" class="cal_table_<?php echo $type ?>">
+<table border="0" class="cal_timeline cal_table_<?php echo $type ?>">
 	<tr class="cal_table_head">
 		<th></th>
 	</tr>	

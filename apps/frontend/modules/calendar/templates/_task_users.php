@@ -1,4 +1,4 @@
-
+<?php  use_helper('Date');?>
 
 
 	
@@ -23,18 +23,33 @@
 			
 	<td rowspan="<?php echo $task['duration'] ?>"
 		class="cal_entry cal_type_<?php echo $task['task']->getTaskTypeId() ?>"  <?php echo ((!$task['task']->getScheduled() AND $task['task']->getTaskTypeId() < 2)? 'style="opacity: 0.2;"':' ')?> >
-					
-	<div class="cal_entry_content" style="height: <?php echo $task['duration']*40 - 18 ?>px;" onclick="document.location='<?php echo url_for(
-	($task['task']->getTaskTypeId() < 2? 
-	'job/show?id='.$task['task']->getJob()->getId() : 
-	'task/edit?type='.$task['task']->getTaskTypeId().'&id='.$task['task']->getId() ) )  ?>'">
-			 	<?php echo $task['task']->getJob()->getId() ?>
+	
+
+	<div class="cal_entry_content_over" style="" >
+						 	<a href="<?php echo url_for('task/edit?type=0&id='.$task['task']->getId()) ?>" style="float: right;" >
+										<img src="/images/icons/calendar_edit.png" ></a>						
+							<span onclick="document.location='<?php echo url_for(
+											($task['task']->getTaskTypeId() < 2? 
+											'job/show?id='.$task['task']->getJob()->getId() : 
+											'task/edit?type='.$task['task']->getTaskTypeId().'&id='.$task['task']->getId() ) )  ?>'">
+							<p>	<?php echo format_date($task['task']->getStart(),'dd.MM.yyyy HH:mm')   ?>	</p>	
+								<p>	<?php echo $task['task']->getJob()->getStore()->getCustomer()->getCompany() ?><br>
+							<?php echo $task['task']->getJob()->getStore()->getStreet() ?><br>
+							<?php echo $task['task']->getJob()->getStore()->getPostcode() ?>	
+							<?php echo $task['task']->getJob()->getStore()->getCity() ?>
+							<?php echo $task['task']->getJob()->getStore()->getDestrict() ?></p>
+							<p><?php echo $task['task']->getJob()->getDescription() ?></p></span>
+							
+	</div>							
+	<div class="cal_entry_content" style="height: <?php echo $task['duration']*40 -5 ?>px;">
+			 	<?php //echo $task['task']->getJob()->getID() ?>
+				<?php echo substr($task['task']->getJob()->getStore()->getCustomer()->getCompany(),0,15) ?><br>
+				<?php echo substr($task['task']->getJob()->getStore(),0,15) ?><br>
 			
 				
 	</div>
 	
-		<a href="<?php echo url_for('task/edit?type=0&id='.$task['task']->getId()) ?>" style="float:right;position: relative;" >
-				<img src="/images/icons/calendar_edit.png" ></a>
+	
 	
 	
 	</td>
@@ -42,7 +57,7 @@
 <?php else: ?>
 <?php if ($full > 1): ?>
  <td colspan="1"></td> 	
-<?php endif ?>	
+<?php endif ?>		
  <td colspan="3"></td> 
 <?php $full-- ?>
 <?php endif ?>

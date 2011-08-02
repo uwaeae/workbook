@@ -39,19 +39,25 @@ EOF;
 	for ($i=1; $i < 4 ; $i++) { 
 		$users[$i] = array();
 	}
+	$weekend = 0;
+	
 	
 	for ($i=1; $i < $arguments['amount']; $i++) { 
 	
-	$day = round($i/15); 
+	$day = round(($i + $weekend)/15); 
 	//rand ( 1 ,  20 );
-	$month = round($i/(15*31)); 
+	$month = 0;round(($i + $weekend)/(15*31)); 
 	//rand ( 0 , 2 ); 
+	$we = date('w',mktime(0,0,0,date("m")+$month ,date("d")+$day,date("Y")));
+	if(	$we == 0 ) {$weekend ++;  $day++;}
+	if( $we == 6 ){ $weekend +=2; $day += 2;}
 	$user = rand(1,3);  
 	$job = new Job();
 	$day_z = date('z',mktime(0,0,0,date("m")+$month ,date("d")+$day,date("Y")));
 	$user_end = 10;
 	if(isset($users[$user][$day_z])) {
 			$user_end = $users[$user][$day_z] + 2;
+			
 	}
 
 	$this->logSection($i, $day_z.' Time '.date('Y-m-d',mktime(0,0,0,date("m")+$month ,date("d")+$day,date("Y"))));
@@ -66,7 +72,7 @@ EOF;
 	$job->setTimeinterval(0)  ;
 	$job->setJobStateId(1)    ;
 	$job-> setStoreId(rand ( 1 ,  30 ))       ;
-	//$job->save();
+	$job->save();
 	$this->logSection($i, 'generate Job '.$job->getId());
 	$task= new Task();
 	$task->setJobId($job->getId());
@@ -76,13 +82,13 @@ EOF;
 	$task->setScheduled(true) ;
 	$task->setTaskTypeId(1);
 	
-	//$task->save();
+	$task->save();
 		$this->logSection($i,'generate Task  '.$task->getId().' at '.$user_end);
 	$taskuser = new TaskUser();
 	$taskuser->setUserId($user);
 	$taskuser->setTaskId($task->getID());
 	$this->logSection($i,'Add User'.$user.' to Task '.$task->getId());
-	//$taskuser->save();
+	$taskuser->save();
 	
 	$users[$user][$day_z] = $user_end;
 	$this->logSection(' ', ' ');

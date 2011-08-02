@@ -177,6 +177,7 @@ table.cal_entry td {
 }
 .cal_timeline{
 	width: 40px;
+	padding-right: 2px;
 	
 }
 table.cal_table_large {
@@ -303,8 +304,9 @@ table.cal_table_user {
 	font-size:5pt;
 	color:#333333;
 	border-collapse: collapse;
-	width: 100%;
 	border: 0;
+	float: left;
+	width: 100%;
 	
 }
 div.cal_user_day {
@@ -325,7 +327,7 @@ table.cal_table_user tr:first-child{
 
 td.cal_week_col{
 
-	
+	width: 1em;
 
 }
 
@@ -345,6 +347,23 @@ table.cal_table_user  td.cal_entry{
 	cursor: pointer;
 	border: 1px solid rgba(0,0,0,.5)
 }
+
+
+table.cal_table_user  td.cal_entry div.cal_entry_content_over{
+	display: none;
+	position: absolute;
+	font-size: 10pt;
+	background-color: #81DAF5;
+	width: 20em;
+	padding:10px;
+}
+table.cal_table_user  td.cal_entry div.cal_entry_content_over p{
+	padding-bottom: 5px;
+}
+table.cal_table_user  td.cal_entry:hover div.cal_entry_content_over{
+	display: block;
+}
+
 table.cal_table_user div.cal_entry_content{
 
 	overflow: hidden;

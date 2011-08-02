@@ -11,16 +11,59 @@ sfGuardUser:
     first_name:     Gretchen   
     last_name:      Müller
     email_address:  gm@workbook.com
-    username:       test1
-    password:       test1
+    username:       office1
+    password:       office1
     is_super_admin: false
     Groups:         [Group_office]
   User_worker:
     first_name:     Hans   
     last_name:      Wurst
-    email_address:  hw@workbook.com
+    email_address:  t1@workbook.com
+    username:       test1
+    password:       test1
+    is_super_admin: false
+    Groups:         [Group_workers]
+  User_worker2:
+    first_name:     Dieter    
+    last_name:      Müller
+    email_address:  t2@workbook.com
     username:       test2
     password:       test2
+    is_super_admin: false
+    Groups:         [Group_workers]
+    
+  User_worker3:
+    first_name:     Dieter    
+    last_name:      Müller
+    email_address:  t3@workbook.com
+    username:       test3
+    password:       test3
+    is_super_admin: false
+    Groups:         [Group_workers]
+
+  User_worker4:
+    first_name:     Dieter    
+    last_name:      Müller
+    email_address:  t4@workbook.com
+    username:       test4
+    password:       test4
+    is_super_admin: false
+    Groups:         [Group_workers]
+  User_worker5:
+    first_name:     Dieter    
+    last_name:      Müller
+    email_address:  t5@workbook.com
+    username:       test5
+    password:       test5
+    is_super_admin: false
+    Groups:         [Group_workers]
+
+  User_worker6:
+    first_name:     Dieter    
+    last_name:      Müller
+    email_address:  t6@workbook.com
+    username:       test6
+    password:       test6
     is_super_admin: false
     Groups:         [Group_workers]
 
