@@ -10,63 +10,106 @@
  */
 class jobActions extends sfActions
 {
+
+	protected function getJobStateArray($type,$name,$query,$page = 1,$results= 25)
+	  {
+		// Creating pager object
+		$output = array();
+		$pager = new Doctrine_Pager( $query,
+						$page, // Current page of request
+						$results // (Optional) Number of results per page. Default is 25
+						);
+		//$pager->getExecuted();
+		$output['type'] = $type;
+		$output['Name'] = $name;
+		$output['jobs'] = $pager->execute();
+		$output['pager'] =  $pager;
+		$routing = $this->getContext()->getRouting();
+		$output['url'] = $routing->getCurrentInternalUri();
+		return $output;
+	  }
+
+public function executeOpen(sfWebRequest $request)
+  	{
+	
+	$this->state = $this->getJobStateArray(1,'Offen',
+									Doctrine_Query::create()
+						            	->select('j.*')
+										->from('Job j')
+										->where('j.id NOT IN (select job_id from task 
+											where job_id IS NOT NULL
+											AND scheduled IS NOT NULL
+											GROUP BY job_id)')
+										->orderby('j.end')
+									,$request->getParameter('page'),$request->getParameter('max'));
+	 $this->setTemplate('table');								
+	}
+public function executeSheduled(sfWebRequest $request)
+	  	{
+		$this->state = 	$this->getJobStateArray(2,'geplant',
+										Doctrine_Query::create()
+							            	->select('j.*')
+											->from('Job j')
+											->where('j.id IN (select job_id from task 
+																where job_id IS NOT NULL 
+																AND scheduled IS TRUE 
+																GROUP BY job_id)')
+											->orderby('j.end')
+										, $request->getParameter('page'),$request->getParameter('max'));
+		 $this->setTemplate('table');		
+		$this->setLayout(false);						
+		}	
+	
   public function executeIndex(sfWebRequest $request)
   {
+	
    // $this->jobs = Doctrine_Core::getTable('Job')
      // ->createQuery('j')
 	//->leftJoin('j.Users u')
 	 // ->where('u.id = ?',$this->getUser()->getId() )
      // ->execute();
 	$this->jobstate = array();
+
+
+	$this->jobstate[1]['Name'] = 'offen';					
 	$this->jobstate[1]['type'] = 1;
-	$this->jobstate[1]['Name']  = 'Offen';
-	$this->jobstate[1]['jobs'] = Doctrine_Query::create()
-				->select('j.*')
-				->from('Job j')
-				->where('j.id NOT IN (select job_id from task 
-							where job_id IS NOT NULL
-							AND scheduled IS NOT NULL
-							GROUP BY job_id)')
-				->orderby('j.end')
-				->execute();
+								
+	
 	if($this->getUser()->hasGroup('admin') 
 					OR $this->getUser()->hasGroup('office')){
+											
+						
+
+	$this->jobstate[2]['Name'] = 'geplant';					
 	$this->jobstate[2]['type'] = 2;
-	$this->jobstate[2]['Name'] = 'Geplant';
-	$this->jobstate[2]['jobs'] = Doctrine_Query::create()
-			->select('j.*')
-			->from('Job j')
-			->where('j.id IN (select job_id from task 
-					where job_id IS NOT NULL 
-					AND scheduled IS TRUE 
-					GROUP BY job_id)')
-			->orderby('j.end')
-			->execute();
-	$this->jobstate[3]['type'] = 3;		
-	$this->jobstate[3]['Name'] = 'in Bearbeitung';
-	$this->jobstate[3]['jobs'] = Doctrine_Query::create()
-			->select('j.*')
-			->from('Job j')
-			->where('j.id IN (select job_id from task 
-							where job_id IS NOT NULL 
-							AND scheduled IS NOT TRUE 
-							GROUP BY job_id)')
-			->andWhere('j.job_state_id = 1')
-			->andWhere(' j.id NOT IN (select job_id from job_invoice) ')
-			->orderby('j.end')
-			->execute();
+	}				
+	
+			
+	/*$this->jobstate[3] = $this->getJobStateArray(3,'in Bearbeitung',
+									Doctrine_Query::create()
+									->select('j.*')
+									->from('Job j')
+									->where('j.id IN (select job_id from task 
+													where job_id IS NOT NULL 
+													AND scheduled IS NOT TRUE 
+													GROUP BY job_id)')
+									->andWhere('j.job_state_id = 1')
+									->andWhere(' j.id NOT IN (select job_id from job_invoice) ')
+									->orderby('j.end')
+								,$page = 1,$results= 50);
 	}
+	
     if ( $this->getUser()->hasPermission('Rechung')) {
-	$this->jobstate[4]['type'] = 4;			
-	$this->jobstate[4]['Name'] = 'Abgeschlossen'	;
-	$this->jobstate[4]['jobs'] = Doctrine_Query::create()
-			->select('j.*')
-			->from('Job j')
-			->where('j.job_state_id > 1')
-			->andWhere(' j.id NOT IN (select job_id from job_invoice) ')
-			->orderby('j.end')
-			->execute();
-			}
+	
+	$this->jobstate[4] = $this->getJobStateArray(4,'Abgeschlossen',
+										Doctrine_Query::create()
+												->select('j.*')
+												->from('Job j')
+												->where('j.job_state_id > 1')
+												->andWhere(' j.id NOT IN (select job_id from job_invoice) ')
+												->orderby('j.end')
+									,$page = 1,$results= 50);
+	} */
 		$this->formStore = new searchStoreForm(NULL,array(
 			'url' => $this->getController()->genUrl('job/findstore'),
 				));
@@ -254,10 +297,6 @@ $request->getParameter('limit'),$request->getParameter('customer'));
 
   return $this->renderText(json_encode($cutomers));
 }
-protected function makeFileForm( )
-  {
-    
-  }
 
 
 
