@@ -744,8 +744,7 @@ table.job_component th{
 }
 
 table.job{
-	width:90%;
-	margin: 1em;
+	width:100%;
 	border-top: 1px solid #ccc;
 	border-left: 1px solid #ccc;
 	border-collapse: collapse; 
@@ -774,9 +773,11 @@ table.job tr.table_item:hover {
 
 
 .job_type_head {
-	min-width:800px;
+	width: 100%;
 	background-color: #CED8F6;
 	cursor: pointer;
+	text-align: center;
+	display: inline-block;
 }
 .job_type_head:hover {
 	background-color: #E0E6F8;

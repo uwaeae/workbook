@@ -15,6 +15,7 @@ job:
     prefix_path:          /job
     column:               id
     with_wildcard_routes: true
+    
 calendar:
   url: /calendar
   

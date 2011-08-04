@@ -15,48 +15,44 @@ class jobActions extends sfActions
 	  {
 		// Creating pager object
 		$output = array();
-		$pager = new Doctrine_Pager( $query,
-						$page, // Current page of request
-						$results // (Optional) Number of results per page. Default is 25
-						);
+		//$pager = new Doctrine_Pager( $query,
+		//				$page, // Current page of request
+		//				$results // (Optional) Number of results per page. Default is 25
+		//				);
+		$pager = new sfDoctrinePager('Job',10);
+				
+		 $pager->setQuery($query);
+		 $pager->setPage($page);
+		 $pager->init();				
 		//$pager->getExecuted();
 		$output['type'] = $type;
 		$output['Name'] = $name;
-		$output['jobs'] = $pager->execute();
-		$output['pager'] =  $pager;
+		$pager->init();
+		$output['jobs'] = $pager->getResults();
+		$output['pager'] = $pager;
 		$routing = $this->getContext()->getRouting();
 		$output['url'] = $routing->getCurrentInternalUri();
 		return $output;
 	  }
 
-public function executeOpen(sfWebRequest $request)
+public function executeTable(sfWebRequest $request)
   	{
-	
+	 $job = new Job();
 	$this->state = $this->getJobStateArray(1,'Offen',
-									Doctrine_Query::create()
-						            	->select('j.*')
-										->from('Job j')
-										->where('j.id NOT IN (select job_id from task 
-											where job_id IS NOT NULL
-											AND scheduled IS NOT NULL
-											GROUP BY job_id)')
-										->orderby('j.end')
+									$job->getOpenJobs()
 									,$request->getParameter('page'),$request->getParameter('max'));
-	 $this->setTemplate('table');								
+
+ 	$this->setTemplate('table');								
+	$this->setLayout(false);						
 	}
 public function executeSheduled(sfWebRequest $request)
 	  	{
-		$this->state = 	$this->getJobStateArray(2,'geplant',
-										Doctrine_Query::create()
-							            	->select('j.*')
-											->from('Job j')
-											->where('j.id IN (select job_id from task 
-																where job_id IS NOT NULL 
-																AND scheduled IS TRUE 
-																GROUP BY job_id)')
-											->orderby('j.end')
-										, $request->getParameter('page'),$request->getParameter('max'));
-		 $this->setTemplate('table');		
+ 	 	$job = new Job();
+		$this->state = 	$this->getJobStateArray(2,'geplant'
+										,$job->getSheduledJobs()
+										,$request->getParameter('page')
+										,$request->getParameter('max'));
+		$this->setTemplate('table');		
 		$this->setLayout(false);						
 		}	
 	

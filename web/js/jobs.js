@@ -27,4 +27,6 @@ $('.job_type_4_head').click(function(key)
 	$('.job_type_4_body').fadeToggle();
 	});
   
+
+
 });

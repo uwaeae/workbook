@@ -31,5 +31,40 @@ class Job extends BaseJob
 		else return false;
 	}
 	
+	public function getOpenJobs(){
+		return Doctrine_Query::create()
+        	->select('j.*')
+			->from('Job j')
+			->where('j.id NOT IN (select job_id from task 
+				where job_id IS NOT NULL
+				AND scheduled IS NOT NULL
+				GROUP BY job_id)')
+			->orderby('j.end');
+		
+	}
+	public function getSheduledJobs(){
+		return 	Doctrine_Query::create()
+            	->select('j.*')
+				->from('Job j')
+				->where('j.id IN (select job_id from task 
+									where job_id IS NOT NULL 
+									AND scheduled IS TRUE 
+									GROUP BY job_id)')
+				->orderby('j.end');
+		
+	}
+	public function getWorkedJobs(){
+		
+		
+	}
+	public function getFinishedJobs(){
+		
+		
+	}
+	public function getCompletedJobs(){
+		
+		
+	}
+	
 	
 }
