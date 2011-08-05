@@ -30,15 +30,29 @@ class Job extends BaseJob
 		}
 		else return false;
 	}
-	
+	public function getOwnJobs($id){
+		return 	Doctrine_Query::create()
+            	->select('j.*')
+				->from('Job j')
+				/*->where('j.id IN (select job_id from task 
+									where job_id IS NOT NULL 
+									AND scheduled IS TRUE 
+									GROUP BY job_id)')*/
+				->leftJoin('j.Tasks t')
+				->innerJoin('t.TaskUser u ON t.id = u.task_id AND u.user_id ='.$id )
+				->orderby('j.end');
+		
+	}
 	public function getOpenJobs(){
 		return Doctrine_Query::create()
         	->select('j.*')
 			->from('Job j')
-			->where('j.id NOT IN (select job_id from task 
+			/*->where('j.id NOT IN (select job_id from task 
 				where job_id IS NOT NULL
 				AND scheduled IS NOT NULL
-				GROUP BY job_id)')
+				GROUP BY job_id)')*/
+			->leftJoin('j.Tasks t')
+			->where('t.scheduled IS null OR FALSE')
 			->orderby('j.end');
 		
 	}
@@ -46,23 +60,51 @@ class Job extends BaseJob
 		return 	Doctrine_Query::create()
             	->select('j.*')
 				->from('Job j')
-				->where('j.id IN (select job_id from task 
+				/*->where('j.id IN (select job_id from task 
 									where job_id IS NOT NULL 
 									AND scheduled IS TRUE 
-									GROUP BY job_id)')
+									GROUP BY job_id)')*/
+				->leftJoin('j.Tasks t')
+				->where('t.scheduled IS TRUE')
 				->orderby('j.end');
 		
 	}
 	public function getWorkedJobs(){
+		return  Doctrine_Query::create()
+			->select('j.*')
+			->from('Job j')
+			->leftJoin('j.Tasks t')
+			->where('t.scheduled IS NOT TRUE')
+			->andWhere('j.job_state_id = 1')
+			->leftJoin('j.Invoices i')
+			->andWhere('i.id is null   ')
+			->orderby('j.end');
 		
 		
 	}
 	public function getFinishedJobs(){
+			return  Doctrine_Query::create()
+				->select('j.*')
+				->from('Job j')
+				->leftJoin('j.Tasks t')
+				->where('t.scheduled IS NOT TRUE')
+				->andWhere('j.job_state_id = 2')
+				->leftJoin('j.Invoices i')
+				->andWhere('i.id is null   ')
+				->orderby('j.end');
 		
 		
 	}
 	public function getCompletedJobs(){
-		
+		return  Doctrine_Query::create()
+			->select('j.*')
+			->from('Job j')
+			->leftJoin('j.Tasks t')
+			->where('t.scheduled IS NOT TRUE')
+			->andWhere('j.job_state_id = 2')
+			->leftJoin('j.Invoices i')
+			->andWhere('i.id is not null   ')
+			->orderby('j.end');
 		
 	}
 	

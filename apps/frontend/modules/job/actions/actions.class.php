@@ -11,7 +11,7 @@
 class jobActions extends sfActions
 {
 
-	protected function getJobStateArray($type,$name,$query,$page = 1,$results= 25)
+	protected function getJobStateArray($type,$name,$query,$page = 1,$results = 10)
 	  {
 		// Creating pager object
 		$output = array();
@@ -19,42 +19,60 @@ class jobActions extends sfActions
 		//				$page, // Current page of request
 		//				$results // (Optional) Number of results per page. Default is 25
 		//				);
-		$pager = new sfDoctrinePager('Job',10);
-				
-		 $pager->setQuery($query);
-		 $pager->setPage($page);
-		 $pager->init();				
-		//$pager->getExecuted();
+		
+		$pager = new sfDoctrinePager('Job', 10);	
+		$pager->setQuery($query);
+		$pager->setPage($page);
+		$pager->init();	
+		$output['pager'] = $pager;			
 		$output['type'] = $type;
-		$output['Name'] = $name;
-		$pager->init();
-		$output['jobs'] = $pager->getResults();
-		$output['pager'] = $pager;
-		$routing = $this->getContext()->getRouting();
-		$output['url'] = $routing->getCurrentInternalUri();
+		$output['name'] = $name;
+		//$this->pager->init();
+		//$output['jobs'] = $pager->getResults();
+		//$output['pager'] = $pager;
+		$output['url']  = 'job/table/?type='.$type;
 		return $output;
+		
 	  }
 
 public function executeTable(sfWebRequest $request)
   	{
 	 $job = new Job();
-	$this->state = $this->getJobStateArray(1,'Offen',
-									$job->getOpenJobs()
-									,$request->getParameter('page'),$request->getParameter('max'));
+	switch ($request->getParameter('type')) {
+		case '0':
+			$query = $job->getOwnJobs($this->getUser()->getId());
+			$name = 'Offen';
+			break;
+		case '1':
+			$query = $job->getOpenJobs();
+			$name = 'offen'	;
+			break;
+		case '2':
+			$query = $job->getSheduledJobs();
+			$name = 'geplant';	
+			break;
+		case '3':
+			$query = $job->getWorkedJobs();
+			$name = 'in Bearbeitung';
+			break;
+		case '4':
+			$query = $job->getFinishedJobs();
+			$name = 'erledigt';
+			break;
+		case '5':
+			$query = $job->getCompletedJobs();
+			$name = 'Abgeschlossen';
+			break;
+	}
+ 	$this->state = $this->getJobStateArray($request->getParameter('type'),'Offen'
+									,
+									$query
+									,$request->getParameter('page')
+									,$request->getParameter('max'));
 
  	$this->setTemplate('table');								
 	$this->setLayout(false);						
 	}
-public function executeSheduled(sfWebRequest $request)
-	  	{
- 	 	$job = new Job();
-		$this->state = 	$this->getJobStateArray(2,'geplant'
-										,$job->getSheduledJobs()
-										,$request->getParameter('page')
-										,$request->getParameter('max'));
-		$this->setTemplate('table');		
-		$this->setLayout(false);						
-		}	
 	
   public function executeIndex(sfWebRequest $request)
   {
@@ -65,47 +83,38 @@ public function executeSheduled(sfWebRequest $request)
 	 // ->where('u.id = ?',$this->getUser()->getId() )
      // ->execute();
 	$this->jobstate = array();
+	$job = new Job();
+	$this->jobstate[0] = $this->getJobStateArray(0,'Meine Aufträge'
+									,$job->getOwnJobs($this->getUser()->getId())
+									,$request->getParameter('page')
+									,$request->getParameter('max'));
+	
 
-
-	$this->jobstate[1]['Name'] = 'offen';					
-	$this->jobstate[1]['type'] = 1;
+	$this->jobstate[1] = $this->getJobStateArray(1,'offene Aufträge '
+									,$job->getOpenJobs()
+									,$request->getParameter('page')
+									,$request->getParameter('max'));
 								
 	
-	if($this->getUser()->hasGroup('admin') 
-					OR $this->getUser()->hasGroup('office')){
-											
-						
+	if(	$this->getUser()->hasGroup('admin') 
+		OR $this->getUser()->hasGroup('office')){
+						$this->jobstate[2] = $this->getJobStateArray(2,'geplante Aufträge'
+													,$job->getSheduledJobs()
+													,$request->getParameter('page')
+													,$request->getParameter('max'));
+						$this->jobstate[3] 	= $this->getJobStateArray(3,'in Bearbeitung'
+										,$job->getWorkedJobs()
+										,$request->getParameter('page')
+										,$request->getParameter('max'));
+					}
+	 if ( $this->getUser()->hasPermission('Rechung')) {
 
-	$this->jobstate[2]['Name'] = 'geplant';					
-	$this->jobstate[2]['type'] = 2;
-	}				
+	$this->jobstate[4] = $this->getJobStateArray(4,'Abgeschlossen Aufträge'
+								,$job->getFinishedJobs()
+								,$request->getParameter('page')
+								,$request->getParameter('max'));}				
 	
 			
-	/*$this->jobstate[3] = $this->getJobStateArray(3,'in Bearbeitung',
-									Doctrine_Query::create()
-									->select('j.*')
-									->from('Job j')
-									->where('j.id IN (select job_id from task 
-													where job_id IS NOT NULL 
-													AND scheduled IS NOT TRUE 
-													GROUP BY job_id)')
-									->andWhere('j.job_state_id = 1')
-									->andWhere(' j.id NOT IN (select job_id from job_invoice) ')
-									->orderby('j.end')
-								,$page = 1,$results= 50);
-	}
-	
-    if ( $this->getUser()->hasPermission('Rechung')) {
-	
-	$this->jobstate[4] = $this->getJobStateArray(4,'Abgeschlossen',
-										Doctrine_Query::create()
-												->select('j.*')
-												->from('Job j')
-												->where('j.job_state_id > 1')
-												->andWhere(' j.id NOT IN (select job_id from job_invoice) ')
-												->orderby('j.end')
-									,$page = 1,$results= 50);
-	} */
 		$this->formStore = new searchStoreForm(NULL,array(
 			'url' => $this->getController()->genUrl('job/findstore'),
 				));
@@ -146,7 +155,6 @@ public function executeSheduled(sfWebRequest $request)
   }
  public function executeArchiv(sfWebRequest $request)
   {
-	
 	
 	$this->jobs = Doctrine_Query::create()
 			->select('j.*')
