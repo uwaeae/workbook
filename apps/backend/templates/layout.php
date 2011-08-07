@@ -14,7 +14,19 @@
   <body>
 	<div class="header">
 		<h1>WORKBOOK Administration</h1>
+			<?php if ($sf_user->isAuthenticated()): ?>
+			<?php echo $sf_user  ?> 	
+			<div class="usermenu">
+					<ul>
+					
+						<li><a href="/">zurück</a></li>
+				
+					
+					</ul>
+			</div>
+			<?php endif ?>
 	</div>
+	<?php if ($sf_user->isAuthenticated()): ?>
 	<div class="menu">
 		<ul>
 			<li><div id='#box'>
@@ -61,12 +73,13 @@
 				<!-- <li><a href="<?php echo url_for('job_state'); ?>">Status</a></li> -->
 				<li><a href="<?php echo url_for('file'); ?>">Dateien</a></li>
 				<li><a href="<?php echo url_for('import/index'); ?>">Import</a></li>
-				<li><a href="<?php //echo url_for('guard/permissions'); ?>">Export</a></li>
+				<!--<li><a href="<?php //echo url_for('guard/permissions'); ?>">Export</a></li>-->
 				<ul>
 				</div>	
 			</li>	
 		</ul>	
 	</div>
+	<?php endif ?>
 	<div class="content">
     <?php echo $sf_content ?>
 	</div>
