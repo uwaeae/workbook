@@ -73,9 +73,9 @@
 		$(document).ready(function(){
 		 $(".job_type_<?php echo $type ?>_body a").click(function()
 			{
-
+			$('.job_type_<?php echo $type ?>_head #loader').show();	
 			$('.job_type_<?php echo $type ?>_body').load($(this).attr("href"),function() {
-				 // $('.job_type_2_body').fadeIn();
+				$('.job_type_<?php echo $type ?>_head #loader').hide();
 				});
 			return false;
 

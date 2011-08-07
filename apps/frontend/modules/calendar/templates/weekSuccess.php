@@ -5,13 +5,15 @@
 	
 <colgroup>
 	<col class="cal_col_timeline" />
-	<?php foreach ($weekday as $day): ?>
-		<col class=" 
-		<?php if($day['today']) echo 'cal_col_today '?>
-		<?php echo ((($day['weekday']%2) != 1)? 'cal_col_even': 'cal_col_odd') ?>
-		" />
-	<?php endforeach ?>
-
+	<col class="cal_col_even" />
+	<col class="cal_col_odd" />
+	<col class="cal_col_even" />
+	<col class="cal_col_odd" />
+	<col class="cal_col_even" />
+	<col class="cal_col_odd" />
+	<col class="cal_col_even" />
+	<col class="cal_col_odd" />
+	
 </colgroup>
 <thead>
 	<tr>
@@ -29,7 +31,7 @@
 	
 	
 </tr>
-<td class="cal_week_col cal_timeline">
+<td class="cal_timeline">
 	<?php include_partial('timeline', array('time' => $timeline,'type' => 'user')) ?>
 </td>
 
@@ -38,7 +40,7 @@
 	<td class="cal_week_col"	>
 			<?php foreach ( $UserArray as $user): ?>
 			<?php include_partial('task_users', array('day' => $day['task'],'user' => $user,
-				'style'=> ' width:'.round(100 / count($UserArray)).'%')) ?>
+				'style'=> ' xwidth:'.round(100 / count($UserArray) - 1).'%')) ?>
 		<?php // echo htmlspecialchars_decode($day) ?>
 		<?php endforeach ?>
 	</td>	

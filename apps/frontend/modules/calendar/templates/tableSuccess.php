@@ -3,16 +3,17 @@
 <div id="calendar">
 <table class="calendar">
 	
-<colgroup>
-	<col class="cal_col_timeline" />
-	<?php foreach ($weekday as $day): ?>
-		<col class=" 
-		<?php if($day['today']) echo 'cal_col_today '?>
-		<?php echo ((($day['weekday']%2) != 1)? 'cal_col_even': 'cal_col_odd') ?>
-		" />
-	<?php endforeach ?>
-
-</colgroup>
+	<colgroup>
+		<col class="cal_col_timeline" />
+		<col class="cal_col_even" />
+		<col class="cal_col_odd" />
+		<col class="cal_col_even" />
+		<col class="cal_col_odd" />
+		<col class="cal_col_even" />
+		<col class="cal_col_odd" />
+		<col class="cal_col_even" />
+		<col class="cal_col_odd" />
+	</colgroup>
 <thead>
 	<tr>
 			<td colspan="7" style="background-color: white;">
@@ -32,13 +33,13 @@
 	
 </tr>
 <td class="cal_week_col cal_timeline">
-	<?php include_partial('timeline', array('time' => $timeline,'type' => 'user')) ?>
+	<?php include_partial('timeline', array('time' => $timeline,'type' => 'medium')) ?>
 </td>
 
 <?php foreach ($calendar as $day): ?>
 	<td class="cal_week_col"	>
 		
-			<?php include_partial('task_users', array('day' => $day['task'],'user' => $user,'style'=> 'width:'.round(100 / count($UserArray)))) ?>
+			<?php include_partial('task_medium', array('day' => $day['task'],'user' => $user,'style'=> 'xwidth:'.round(100 / count($UserArray)))) ?>
 		<?php // echo htmlspecialchars_decode($day) ?>
 		<div class="cal_user_day"  >
 		</div>
@@ -52,6 +53,6 @@
 </div>
 
 <?php include_partial('openjob', array('jobs' => $jobs)) ?>
-<?php include_partial('filterform', array('form' => $form , 'type' => 'week')) ?>
+<?php include_partial('filterform', array('form' => $form , 'type' => 'table')) ?>
 
 

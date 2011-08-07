@@ -10,7 +10,11 @@
 	</li>	
 	<li class="table_menu_left">
 		<a class="button" href="<?php echo url_for('calendar/week') ?>">
-		Woche</a>
+		Woche Übersicht</a>
+	</li>
+	<li class="table_menu_left">
+		<a class="button" href="<?php echo url_for('calendar/table') ?>">
+		Woche Tabelle</a>
 	</li>	
 	<li class="table_menu_left">	
 		<a class="button" href="<?php echo url_for('calendar/day') ?>">

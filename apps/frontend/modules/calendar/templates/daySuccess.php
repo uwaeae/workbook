@@ -3,9 +3,11 @@
 
 
 
-<div id="calendar">
-<table class="calendar"><colgroup>
-
+<div id="calendar" >
+<table class="calendar" style="width: 100%;">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%">
 </colgroup>
 <thead>
 	<tr>
