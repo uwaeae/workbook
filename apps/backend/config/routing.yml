@@ -1,3 +1,21 @@
+task_change_log:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                TaskChangeLog
+    module:               taskchangelog
+    prefix_path:          /taskchangelog
+    column:               id
+    with_wildcard_routes: true
+
+job_change_log:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                JobChangeLog
+    module:               jobchangelog
+    prefix_path:          /jobchangelog
+    column:               id
+    with_wildcard_routes: true
+
 option:
   class: sfDoctrineRouteCollection
   options:

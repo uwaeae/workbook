@@ -13,9 +13,22 @@ generator:
 
     config:
       actions: ~
-      fields:  ~
-      list:    ~
-      filter:  ~
+      fields:
+        id: { label: Auftragsnummer }  
+        start: { label: Beginn, help: Beginn des Auftrags }
+        end: { label: Ende, help: Ende des Auftrags}
+        store: { label: Adresse, help: Die Adresse des Kunden oder des Auftrags}
+      list:    
+        title: Auftragsverwaltung
+        display: [id, start, end, store]
+        object_actions:
+             _edit: ~
+             _delete: ~
+      filter:  
+        display: [start, end,store_id]
       form:    ~
-      edit:    ~
-      new:     ~
+      edit:
+        title: Bearbeiten von Auftrag Nummer %%id%%<br> in %%store%%  
+      new:
+        title: Neuer Auftrag
+

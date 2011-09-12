@@ -163,7 +163,6 @@ Task:
     TaskType:
       foreignAlias: Tasks
       
-      
 Entry:
   tableName: Entry
   columns:
@@ -347,4 +346,60 @@ Option:
     type:
       type: string
       notnull: true
-        
+Holiday:
+  tableName: holiday
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    name:
+      type: string
+      notnull: true
+    date:
+      type: date
+      notnull: true
+JobChangelog:
+  tableName: jobchangelog
+  actAs:
+    Timestampable: ~
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    job_id:
+      type: integer
+      notnull: true
+    user_id:
+      type: integer
+      notnull: true
+    action:
+      type: string
+    created_at:
+      type: timestamp
+    updated_at:
+      type: timestamp
+      
+TaskChangelog:
+  tableName: jobchangelog
+  actAs:
+    Timestampable: ~
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    task_id:
+      type: integer
+      notnull: true
+    user_id:
+      type: integer
+      notnull: true
+    action:
+      type: string
+    created_at:
+      type: timestamp
+    updated_at:
+      type: timestamp
+         
