@@ -183,13 +183,18 @@
   </tfoot>
 </table>
 <h3 class="job_items_head">Material 
-	<?php if ($job->getJobStateId() < 2): ?>
-			<a href="<?php echo url_for('entry/new/?job='.$job->getId()) ?>">
-			<img src="/images/icons/add.png" /></a>
-	<?php endif ?>
+
 	</h3>
-<table class="entry">
+<table class="job_component">
   <thead>
+	  <tr>
+			<td colspan="2">
+				<?php if ($job->getJobStateId() < 2): ?>
+						<a class="button" href="<?php echo url_for('entry/new/?job='.$job->getId()) ?>">
+						bearbeiten</a>
+				<?php endif ?>
+				</td>
+		</tr>
     <tr>
       <th colspan="2" style="width:10%;">Einheit</th>
       <th style="width:auto;">Artikel</th>

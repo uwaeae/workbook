@@ -13,9 +13,20 @@ generator:
 
     config:
       actions: ~
-      fields:  ~
-      list:    ~
-      filter:  ~
+      fields:   
+        ID: { label: ID }
+        End: { label: Ende }
+        Start: { label: Start }
+        Store: { label: Adresse }
+        Job: { label: Auftrag }
+      list:     
+        title: Arbeitseinträge
+        display: [id,job,Start,End]
+        object_actions:
+          _edit: ~
+          _delete: ~
+      filter:
+        display: [users_list,job_id,start,end,scheduled,task_type_id]
       form:    ~
       edit:    ~
       new:     ~

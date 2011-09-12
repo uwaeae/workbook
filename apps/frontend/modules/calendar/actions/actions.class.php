@@ -297,6 +297,21 @@ public function executeWeek(sfWebRequest $request)
 							array('next'=> $this->next,'type'=> $this->TaskType,'user' => $this->Users));
 		   //$this->setTemplate('table');
 	}
+	public function executeTable(sfWebRequest $request)
+		{
+
+			$this->days = 7;
+			$this->setOptions( $request);
+			//Wochentags verschiebung auf anfang der woche also das das erste Element im Claendar der Montag ist
+			$next =  $this->days * $this->next  - ( date('w') - 1);
+			$this->calendar = $this->renderCalendar($this->days,$next,7,22);
+			$this->timeline = $this->renderTimeline(7,22);
+			$this->form = $this->makeFilterForm();
+			$this->setBack('calendar/week/?&next='.$this->next);
+			$this->getUser()->setAttribute('calendar',
+								array('next'=> $this->next,'type'=> $this->TaskType,'user' => $this->Users));
+			   //$this->setTemplate('table');
+		}
 	
 public function executeDay(sfWebRequest $request)
 	{

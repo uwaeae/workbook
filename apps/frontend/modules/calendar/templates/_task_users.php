@@ -5,8 +5,9 @@
 <table border="0" class="cal_table_user" style="<?php echo $style ?>" >
 <?php $full = 0; ?>
 <?php $even = true ?>
+
 <tr class="cal_table_head">
-	<th colspan="2"><?php echo $user->getUsername() ?>	</th>
+	<th colspan="2" ><?php echo $user->getUsername() ?>	</th>
 </tr>	 
 <?php foreach ($day[$user->getUsername()] as $tasks): ?>
 <tr class="cal_timerow_<?php if($even) {
@@ -22,7 +23,7 @@
 	<?php if ($full < $task['duration']) $full = $task['duration'] ?>
 			
 	<td rowspan="<?php echo $task['duration'] ?>"
-		class="cal_entry cal_type_<?php echo $task['task']->getTaskTypeId() ?>"  <?php echo ((!$task['task']->getScheduled() AND $task['task']->getTaskTypeId() < 2)? 'style="opacity: 0.2;"':' ')?> >
+		class="cal_entry cal_type_<?php echo $task['task']->getTaskTypeId() ?><?php echo ((!$task['task']->getScheduled() AND $task['task']->getTaskTypeId() < 2)? '_finshed':' ')?>" >
 	
 
 	<div class="cal_entry_content_over" style="" >

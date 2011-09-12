@@ -1,0 +1,267 @@
+
+
+/* Allgemein */ 
+
+* {
+	font-family: verdana,arial,sans-serif;
+	padding: 0;
+	margin: 0;
+}
+
+body{
+	margin-left: 10%;
+	margin-right: 10%;
+
+	
+}
+
+h1 {
+	font-size: 18pt;
+	text-transform:uppercase;
+	letter-spacing:2px;
+	background-color: #E7EEF6;
+ 	border-radius: 5px 5px 5px 5px;
+}
+h3 {
+	background-color: #E7EEF6;
+    padding: 2px;
+    color: steelblue;
+}
+
+input,
+select {
+	
+	background: none repeat scroll 0 0 #F8F8F8;
+	border: 1px solid #AAAACC;
+	color: #000000;
+	font-size: 13px;
+	margin-left: 2px;
+	padding-left: 2px;
+}
+
+
+table {
+	font-family: verdana,arial,sans-serif;
+	font-size:7pt;
+	color:#333333;
+	border-width: 1px;
+	border-color: #ccccff;
+}
+
+/* Fromulare */
+
+form th{
+	background-color: #CECEF6;
+	border-radius: 2px;
+	padding: 5px;
+}
+
+
+
+
+/* Layout */ 
+
+.header {
+	padding: 10px;
+	font-family:Sans-serif;
+	font-weight: bold;
+	font-size: 12pt;
+	color: white;
+	border-radius: 5px;
+	padding: 1em;
+	margin:2em;
+	text-shadow: 2px 2px 2px #000;
+	background-color: steelblue;
+
+	
+}
+.header h1 {
+	padding: 0;
+	margin: 0;
+	display: inline;
+	background-color: steelblue;
+
+}
+
+.content {
+	margin: 0 auto;
+	padding: 10px;
+	display: inline-block;
+	width: 85%;
+}
+
+.smallicon {
+	height: 20px;
+	width: 20px;
+	border: 0px;
+}
+.fault{
+	color: black;
+	background: none repeat scroll 0 0 #ff9999;
+	
+}
+.list_button {
+	background-color: white;
+	color: black;
+}
+.list_button:hover {
+	background-color: #9999ff;
+	color: black;
+}
+
+
+
+
+
+/* NAVIGATIONS BUTTONS */
+
+.button_selected,
+.button_selected:visited,
+.button_selected:active { 
+			background-color: #0101DF;
+			color: white;
+			}
+
+.button:hover { 
+			background-color: #A9F5F2;
+			color: blue; }
+
+.button,
+.button:visited
+.button:active
+ 		{ 	display: inline-block; 
+			margin: 0px;
+			text-align:center;
+			color: white;
+			border-radius:2px;
+			
+			padding: 2px 5px;
+			font-size:10px;
+			text-decoration:none;
+			background-color: steelblue;
+			cursor: pointer;
+			line-height: 15px;
+			font-family: verdana,arial,sans-serif;
+
+			
+			 }
+
+/* MENU */
+.menu {
+	
+	padding-top: 4px;
+ 	
+	display: block;
+	color: white; 
+	float:left;
+}
+.menu a {
+	text-decoration: none;
+	color: white; 
+	font-family:Sans-serif;
+	width: 60px;
+	display: block;
+	xpadding: 0.2em;
+}
+
+
+.menu ul {
+	
+	padding: 0;
+	margin: 0;
+}
+
+.menu li {
+	list-style: none;
+	border-radius:3px;
+	margin: 10px;
+	padding: 0.5em;
+	background-color: steelblue;
+
+	-webkit-box-shadow: 2px 2px 3px 1px #00007a;
+	-moz-box-shadow: 2px 2px 3px 1px #00007a;
+	box-shadow: 2px 2px 3px 1px #00007a;
+
+}
+.menu li:hover {
+	background-color: blue;
+	color: lightblue;
+}
+
+.menu li ul{
+	xposition: absolute;
+	margin: 0;
+		display: block;
+}
+
+.menu ul li:hover ul {
+	color: black;
+
+	
+}
+
+.menu ul li ul li {
+	float: none;
+	display: block;
+	color: white; 
+	xmargin: 0.5em;
+	background-color: steelblue;
+	
+}
+
+.usermenu {
+	
+	padding-top: 4px;
+	xbackground-color: #CCCCCC;
+	height: 24px;
+	color: white; 
+	float: right;
+}
+.usermenu a {
+	text-decoration: none;
+	color: white; 
+}
+.usermenu a:hover {
+
+	color: lightblue;
+	xtext-shadow: 3px 3px 3px blue;
+}
+
+.usermenu ul {
+	
+	padding: 0;
+	margin: 0;
+}
+
+.usermenu li {
+	float: left;
+	list-style: none;
+	margin: 0 0.2em 0 0.2em  ;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	background-color: steelblue;
+}
+.usermenu li ul{
+	position: absolute;
+	display: none;
+	
+	margin: 0;
+}
+
+.usermenu ul li:hover ul {
+	
+	display: block;
+	
+}
+
+.usermenu ul li ul li {
+	float: none;
+	display: block;
+	color: white; 
+	margin: 0.5em;
+	background-color: steelblue;
+	
+}
+
+
+

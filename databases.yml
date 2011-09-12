@@ -1,7 +1,0 @@
-all:
-  doctrine:
-    class: sfDoctrineDatabase
-    param:
-      dsn: 'mysql:host=localhost;dbname=workbook'
-      username: db10582151-dev
-      password: a7<DF(aCg5Kb

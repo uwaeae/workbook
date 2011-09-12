@@ -15,7 +15,7 @@ Auftrag			Eigene Meine geplanten/ Meine in Bearbeitung Aufträge in einer liste 
 
 Auftrag 		Eingabe die Datepicker jQuery UI verwenden?
 
-Stundenzettel	Filter User funktioniert nicht
+
 Stundenzettel	Feiertage eingeben im Backend
 Stundenzettel	Feiertage als normale Arbeit berechne außer Wochenende
 Stundenzettel	wenn urlaub als normal stunden (krank nachfragen)
@@ -46,6 +46,7 @@ ERLEDIGT
 Auftrag 		Übersicht Filter/Suche einbauen User, Firma, usw. 
 Auftrag 		Dateihochladen und anzeigen
 Stundenzettel	Monatssyitsch
+Stundenzettel	Filter User funktioniert nicht
 Stundenzettel	Admin Switsch zwischen unsern
 Job				 anzeige welche Jobs schon in dieser Adresse/Filiale bearbeitet worden sind.
 Job				 anzeige in bei der Bearbeitung eines Jobs welche Jobs sich in der nähe befinden

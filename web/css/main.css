@@ -117,7 +117,7 @@ form th{
 	font-size:7pt;
 	color:#333333;
 	float:left;
-	width: 100%;
+	xwidth: 100%;
 	
 }
 .cal_col_even,
@@ -134,17 +134,17 @@ table.cal_entry td {
 }
 
 .cal_type_1_finshed {
-	background-color: #9AFE2E;
+	background-color: #ffff00;
 }
 
 
 .cal_type_2 {
-	background-color: #FA8258;
+	background-color: #33ccff;
 }
 
 
 .cal_type_3  {
-	background-color: #F3F781;
+	background-color: #9900cc;
 }
 
 
@@ -157,11 +157,11 @@ table.cal_entry td {
 }
 
 .cal_timerow_odd {
-	background-color: #A9D0F5;
+	background-color: #9999FF;
 }
 
 .cal_timerow_even {
-	background-color: #CEF6F5;
+	background-color: #eeeeee;
 }
 
 .calender_today{
@@ -176,7 +176,7 @@ table.cal_entry td {
 	background-color:  #CED8F6;;
 }
 .cal_timeline{
- 	width: 4%;
+  
 	padding-right: 2px;
 	
 }
@@ -225,8 +225,30 @@ table.cal_table_medium tr{
 table.cal_table_medium  td.cal_entry{
 	vertical-align: top;
 	cursor: pointer;
-	border: 1px solid rgba(0,0,0,.5)
+	border-bottom: 1px solid  #E6E6E6;
+	border-right: 1px solid #E6E6E6;
 }
+table.cal_table_medium  td.cal_entry div.cal_entry_content_over{
+	display: none;
+	position: absolute;
+	font-size: 10pt;
+ 	background-color: #EEEEEE;
+	
+	padding:10px;
+	margin-left: 20px;
+	margin-top: 20px;
+	position: fixed;
+	width: 20em;
+	
+	-webkit-box-shadow: 2px 3px 3px 2px #000000;
+	-moz-box-shadow: 2px 3px 3px 2px #000000;
+	box-shadow: 2px 3px 3px 2px #000000;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+
 table.cal_table_medium div.cal_entry_content{
 
 	overflow: hidden;
@@ -252,12 +274,14 @@ table.cal_table_small tr{
 }
 table td.cal_timeline_small {
 	width: 3%;
+	padding-right: 3px;
 }
 
 table.cal_table_small  td.cal_entry{
 	vertical-align: top;
 	cursor: pointer;
-	border: 1px solid rgba(0,0,0,.5)
+
+
 }
 table.cal_table_small div.cal_entry_content{
 
@@ -305,8 +329,7 @@ table.cal_table_user {
 	color:#333333;
 	border-collapse: collapse;
 	border: 0;
-	float: left;
-	width: 100%;
+	display: table-cell;
 	
 }
 div.cal_user_day {
@@ -330,8 +353,9 @@ td.cal_week_col{
 	width: 1em;
 
 }
-
-
+table.cal_table_user th{
+	width: 50px;
+}
 table.cal_table_user td,
 table.cal_table_user tr{
 
@@ -345,27 +369,46 @@ table td.cal_timeline_user {
 table.cal_table_user  td.cal_entry{
 	vertical-align: top;
 	cursor: pointer;
-	border: 1px solid rgba(0,0,0,.5)
-}
+	border-bottom: 1px solid  #E6E6E6;
+	border-right: 1px solid #E6E6E6;
 
+}
 
 table.cal_table_user  td.cal_entry div.cal_entry_content_over{
 	display: none;
 	position: absolute;
 	font-size: 10pt;
-	background-color: #81DAF5;
+ 	background-color: #EEEEEE;
+	
 	width: 20em;
 	padding:10px;
+	margin-left: 25px;
+	margin-top: 25px;
+	position: fixed;
+	width: 20em;
+	
+	-webkit-box-shadow: 2px 3px 3px 2px #000000;
+	-moz-box-shadow: 2px 3px 3px 2px #000000;
+	box-shadow: 2px 3px 3px 2px #000000;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 }
+table.cal_table_medium  td.cal_entry div.cal_entry_content_over p,
 table.cal_table_user  td.cal_entry div.cal_entry_content_over p{
 	padding-bottom: 5px;
 }
+table.cal_table_medium  td.cal_entry:hover,
+table.cal_table_user  td.cal_entry:hover{
+	background-color: #FAAC58;
+}
+table.cal_table_medium  td.cal_entry:hover div.cal_entry_content_over,
 table.cal_table_user  td.cal_entry:hover div.cal_entry_content_over{
 	display: block;
 }
 
 table.cal_table_user div.cal_entry_content{
-
+	width: 50px;
 	overflow: hidden;
 }
 

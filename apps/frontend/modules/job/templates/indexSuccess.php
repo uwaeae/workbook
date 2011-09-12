@@ -10,6 +10,7 @@
 
 <div class="job_type_<?php echo $state['type'] ?>_head job_type_head" colspan = "7">
 	<?php echo $state['name'] ?> (<?php echo $state['pager']->count() ?>)
+	 <?php echo image_tag('ajax-loader.gif',array('id'=>'loader')) ?>	
 </div>
 
 <div class="job_type_<?php echo $state['type'] ?>_body job_type_body" colspan = "7">
