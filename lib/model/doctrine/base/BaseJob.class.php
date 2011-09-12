@@ -26,6 +26,7 @@
  * @property Doctrine_Collection $Entry
  * @property Doctrine_Collection $Message
  * @property Doctrine_Collection $Files
+ * @property Doctrine_Collection $Changelog
  * 
  * @method integer             getId()             Returns the current record's "id" value
  * @method string              getContactPerson()  Returns the current record's "contact_person" value
@@ -48,6 +49,7 @@
  * @method Doctrine_Collection getEntry()          Returns the current record's "Entry" collection
  * @method Doctrine_Collection getMessage()        Returns the current record's "Message" collection
  * @method Doctrine_Collection getFiles()          Returns the current record's "Files" collection
+ * @method Doctrine_Collection getChangelog()      Returns the current record's "Changelog" collection
  * @method Job                 setId()             Sets the current record's "id" value
  * @method Job                 setContactPerson()  Sets the current record's "contact_person" value
  * @method Job                 setContactInfo()    Sets the current record's "contact_info" value
@@ -69,6 +71,7 @@
  * @method Job                 setEntry()          Sets the current record's "Entry" collection
  * @method Job                 setMessage()        Sets the current record's "Message" collection
  * @method Job                 setFiles()          Sets the current record's "Files" collection
+ * @method Job                 setChangelog()      Sets the current record's "Changelog" collection
  * 
  * @package    workbook
  * @subpackage model
@@ -166,6 +169,10 @@ abstract class BaseJob extends sfDoctrineRecord
              'refClass' => 'FileJob',
              'local' => 'job_id',
              'foreign' => 'file_id'));
+
+        $this->hasMany('JobChangelog as Changelog', array(
+             'local' => 'id',
+             'foreign' => 'job_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);

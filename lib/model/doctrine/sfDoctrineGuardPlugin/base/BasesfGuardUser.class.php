@@ -24,6 +24,8 @@
  * @property sfGuardForgotPassword $ForgotPassword
  * @property Doctrine_Collection $Message
  * @property Doctrine_Collection $TaskUser
+ * @property Doctrine_Collection $JobChangelog
+ * @property Doctrine_Collection $TaskChangelog
  * 
  * @method string                getFirstName()             Returns the current record's "first_name" value
  * @method string                getLastName()              Returns the current record's "last_name" value
@@ -44,6 +46,8 @@
  * @method sfGuardForgotPassword getForgotPassword()        Returns the current record's "ForgotPassword" value
  * @method Doctrine_Collection   getMessage()               Returns the current record's "Message" collection
  * @method Doctrine_Collection   getTaskUser()              Returns the current record's "TaskUser" collection
+ * @method Doctrine_Collection   getJobChangelog()          Returns the current record's "JobChangelog" collection
+ * @method Doctrine_Collection   getTaskChangelog()         Returns the current record's "TaskChangelog" collection
  * @method sfGuardUser           setFirstName()             Sets the current record's "first_name" value
  * @method sfGuardUser           setLastName()              Sets the current record's "last_name" value
  * @method sfGuardUser           setEmailAddress()          Sets the current record's "email_address" value
@@ -63,6 +67,8 @@
  * @method sfGuardUser           setForgotPassword()        Sets the current record's "ForgotPassword" value
  * @method sfGuardUser           setMessage()               Sets the current record's "Message" collection
  * @method sfGuardUser           setTaskUser()              Sets the current record's "TaskUser" collection
+ * @method sfGuardUser           setJobChangelog()          Sets the current record's "JobChangelog" collection
+ * @method sfGuardUser           setTaskChangelog()         Sets the current record's "TaskChangelog" collection
  * 
  * @package    workbook
  * @subpackage model
@@ -168,6 +174,14 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'foreign' => 'sender'));
 
         $this->hasMany('TaskUser', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('JobChangelog', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('TaskChangelog', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 

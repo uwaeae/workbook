@@ -380,9 +380,15 @@ JobChangelog:
       type: timestamp
     updated_at:
       type: timestamp
-      
+  relations:
+    Job:
+      foreignAlias: Changelog
+    User:
+      class: sfGuardUser
+      local: user_id
+        
 TaskChangelog:
-  tableName: jobchangelog
+  tableName: taskchangelog
   actAs:
     Timestampable: ~
   columns:
@@ -390,9 +396,6 @@ TaskChangelog:
       type: integer
       primary: true
       autoincrement: true
-    task_id:
-      type: integer
-      notnull: true
     user_id:
       type: integer
       notnull: true
@@ -402,4 +405,12 @@ TaskChangelog:
       type: timestamp
     updated_at:
       type: timestamp
-         
+    task_id:
+      type: integer
+  relations:
+    Task:
+      foreignAlias: Changelog
+    User:
+      class: sfGuardUser
+      local: user_id
+     

@@ -71,6 +71,7 @@
 				Optionen
 				<ul>
 				<!-- <li><a href="<?php echo url_for('job_state'); ?>">Status</a></li> -->
+				<li><a href="<?php echo url_for('holiday'); ?>">Feiertage</a></li> 
 				<li><a href="<?php echo url_for('file'); ?>">Dateien</a></li>
 				<li><a href="<?php echo url_for('import/index'); ?>">Import</a></li>
 				<!--<li><a href="<?php //echo url_for('guard/permissions'); ?>">Export</a></li>-->
