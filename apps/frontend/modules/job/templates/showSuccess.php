@@ -95,11 +95,7 @@
 		<a class="button" href="<?php echo url_for('job/edit?id='.$job->getId()) ?>">
 				ändern</a></li>
 				<?php endif ?>
-				<?php if ($sf_user->hasPermission('Zuweisen')) :?>	
-					<li class="table_menu_left">
-						<a class="button" href="<?php echo url_for('task/new/?job='.$job->getId().'&type=0') ?>">	
-							Termin Planen</a></li>
-				<?php endif ?>
+				
 		</ul>	
 		</td>
 		<td>
@@ -129,7 +125,59 @@
 <hr />
 
 
-<h3 class="job_work" >Arbeiten und Termine </h3>
+<h3 class="job_work" >Termin </h3>
+<table class="job_component">
+  <thead>
+    <tr>
+		<td colspan="2">
+			<?php if ($sf_user->hasPermission('Zuweisen')) :?>	
+					<a class="button" href="<?php echo url_for('task/new/?job='.$job->getId().'&type=0') ?>">	
+					Termin Planen</a></li>
+			<?php endif ?>
+		</td>
+	</tr>
+	<th style="width:150px;">Start</th>
+	<th style="width:150px;">Ende</th>
+	<th style="width:200px;">Eingeplant</th>
+	<th style="width:150px;">Erstellt</th>
+	<th style="width:150px;"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($job->getTasks() as $task): ?>
+<?php if ($task->getScheduled()): ?>
+	
+  
+<tr 
+<?php if ($job->getJobStateId() < 2): ?> 
+	class="table_item"
+<?php endif ?> >
+		<td><?php echo format_date($task->getStart(),'dd.MM.yyyy HH:mm') ?></td>
+		<td><?php echo format_date($task->getEnd() ,'dd.MM.yyyy HH:mm') ?></td>
+		<td><?php foreach ($task->getUsers() as $user): ?>
+			<?php echo $user ?><br>
+		<?php endforeach ?></td>
+		<td><?php echo format_date($task->getCreatedAt(),'dd.MM.yyyy') ?></td>
+		<td>
+		<?php if ($sf_user->hasPermission('Zuweisen')) :?>	
+			<a class="button" href="<?php echo url_for('task/edit?id='.$task->getId().'&type=0') ?>">
+		Bearbeiten</a>
+		<?php endif ?>
+		<?php if ($task->getUsers()->contains($sf_user->getId())): ?>
+				<a class="button" href="<?php echo url_for('task/edit?id='.$task->getId()) ?>">
+				Ausgeführt</a>
+		<?php endif ?> 
+	
+		</td>
+	</tr>
+	<?php endif ?>  
+    <?php endforeach; ?>
+  </tbody>
+</table>
+
+
+
+<h3 class="job_work" >Arbeiten </h3>
 <table class="job_component">
   <thead>
     <tr>
@@ -138,28 +186,25 @@
 			 <a class="button" href="<?php echo url_for('task/new/?job='.$job->getId()) ?>">
 			 neue Arbeit </a>
 				<?php endif ?>
-		
-		
-			
-			
-			</td>
+		</td>
 	</tr>
-	<th style="width:100px;"> </th>
 	<th style="width:150px;">Start</th>
 	<th style="width:150px;">Ende</th>
 	<th style="width:350px;">Arbeiten</th>
-	<th style="width:150px;">Erstellt</th>
 	<th style="width:200px;">Mitarbeiter</th>
-    </tr>
+	<th style="width:150px;">Erstellt</th>
+	</tr>
   </thead>
   <tbody>
     <?php foreach ($job->getTasks() as $task): ?>
-    <tr 
+<?php if (!$task->getScheduled()): ?>
+	
+  
+<tr 
 <?php if ($job->getJobStateId() < 2): ?> 
 	class="table_item"
 	onclick="document.location='<?php echo url_for('task/edit?id='.$task->getId()) ?>'"
 <?php endif ?> >
-		<td><?php echo ($task->getScheduled()? 'Termin': 'Ausgeführt ') ?></td>
 		<td><?php echo format_date($task->getStart(),'dd.MM.yyyy HH:mm') ?></td>
 		<td><?php echo format_date($task->getEnd() ,'dd.MM.yyyy HH:mm') ?></td>
 		<td><?php echo $task->getInfo() ?></td>
@@ -168,19 +213,9 @@
 			<?php echo $user ?><br>
 		<?php endforeach ?></td>
 	</tr>
+	<?php endif ?>  
     <?php endforeach; ?>
   </tbody>
-	<tfoot>	
-    <tr>
-	 <td ></td>
-	<td ></td>
-	<td ></td>
-	<td ></td>
-      <td >
-				</a>
-      </td>
-    </tr>
-  </tfoot>
 </table>
 <h3 class="job_items_head">Material 
 

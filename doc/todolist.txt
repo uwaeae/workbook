@@ -9,6 +9,7 @@ Job				anzeige welche Jobs schon in dieser Adresse/Filiale bearbeitet worden sin
 Job				Geplanter Termin und Arbeit in 2 Listen
 Job				User hinterlegen beim Speichern oder Ändern
 Job				Aufträge in der nächste ohne den eigenen
+job				Offene Aufträge Aktuellen Auftrag ausblenden
 
 Back Buttons	Historie Array machen
 Auftrag			Eigene Meine geplanten/ Meine in Bearbeitung Aufträge in einer liste anzeigen
