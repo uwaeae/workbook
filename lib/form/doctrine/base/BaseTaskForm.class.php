@@ -26,7 +26,9 @@ abstract class BaseTaskForm extends BaseFormDoctrine
       'job_id'       => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Job'), 'add_empty' => true)),
       'task_type_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('TaskType'), 'add_empty' => true)),
       'created_at'   => new sfWidgetFormDateTime(),
+      'created_from' => new sfWidgetFormInputText(),
       'updated_at'   => new sfWidgetFormDateTime(),
+      'updated_from' => new sfWidgetFormInputText(),
       'users_list'   => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser')),
     ));
 
@@ -42,7 +44,9 @@ abstract class BaseTaskForm extends BaseFormDoctrine
       'job_id'       => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Job'), 'required' => false)),
       'task_type_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('TaskType'), 'required' => false)),
       'created_at'   => new sfValidatorDateTime(),
+      'created_from' => new sfValidatorInteger(array('required' => false)),
       'updated_at'   => new sfValidatorDateTime(),
+      'updated_from' => new sfValidatorInteger(array('required' => false)),
       'users_list'   => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser', 'required' => false)),
     ));
 

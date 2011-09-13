@@ -16,4 +16,86 @@ class JobTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('Job');
     }
+
+	public static function getSimilarOpenJobs($postcode,$range,$id = 0)
+    {
+        return Doctrine_Query::create()
+					->select('*')
+					->from('Job j')
+					->innerJoin('j.Store s WITH s.postcode between '.
+					($postcode - $range).' and '.
+					($postcode + $range))
+					->where('j.job_state_id = 1')
+					->andWhere('j.id <>'.$id)
+					->orderby('j.end')
+					->execute();
+		
+    }
+	public function getOwnJobs($id){
+		return 	Doctrine_Query::create()
+            	->select('j.*')
+				->from('Job j')
+				->leftJoin('j.Tasks t')
+				->innerJoin('t.TaskUser u ON t.id = u.task_id AND u.user_id ='.$id )
+				->orderby('j.end');
+		
+	}
+	public function getOpenJobs(){
+		return Doctrine_Query::create()
+        	->select('j.*')
+			->from('Job j')
+			->leftJoin('j.Tasks t')
+			->where('t.scheduled IS null OR FALSE')
+			->orderby('j.end');
+		
+	}
+	public function getSheduledJobs(){
+		return 	Doctrine_Query::create()
+            	->select('j.*')
+				->from('Job j')
+				->leftJoin('j.Tasks t')
+				->where('t.scheduled IS TRUE')
+				->orderby('j.end');
+		
+	}
+	public function getWorkedJobs(){
+		return  Doctrine_Query::create()
+			->select('j.*')
+			->from('Job j')
+			->leftJoin('j.Tasks t')
+			->where('t.scheduled IS NOT TRUE')
+			->andWhere('j.job_state_id = 1')
+			->leftJoin('j.Invoices i')
+			->andWhere('i.id is null   ')
+			->orderby('j.end');
+		
+		
+	}
+	public function getFinishedJobs(){
+			return  Doctrine_Query::create()
+				->select('j.*')
+				->from('Job j')
+				->leftJoin('j.Tasks t')
+				->where('t.scheduled IS NOT TRUE')
+				->andWhere('j.job_state_id = 2')
+				->leftJoin('j.Invoices i')
+				->andWhere('i.id is null   ')
+				->orderby('j.end');
+		
+		
+	}
+	public function getCompletedJobs(){
+		return  Doctrine_Query::create()
+			->select('j.*')
+			->from('Job j')
+			->leftJoin('j.Tasks t')
+			->where('t.scheduled IS NOT TRUE')
+			->andWhere('j.job_state_id = 2')
+			->leftJoin('j.Invoices i')
+			->andWhere('i.id is not null   ')
+			->orderby('j.end');
+		
+	}
+
+	 
 }

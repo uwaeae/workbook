@@ -102,8 +102,12 @@ Job:
       type: integer
     created_at:
       type: timestamp
+    created_from:
+      type: integer
     updated_at:
-      type: timestamp 
+      type: timestamp
+    updated_from:
+      type: integer 
   relations:
     Store:
       foreignType: one 
@@ -147,8 +151,12 @@ Task:
       default: 1
     created_at:
       type: timestamp
+    created_from:
+      type: integer
     updated_at:
       type: timestamp
+    updated_from:
+      type: integer
   actAs:
     Timestampable: ~
   relations:

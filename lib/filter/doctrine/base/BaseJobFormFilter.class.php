@@ -24,7 +24,9 @@ abstract class BaseJobFormFilter extends BaseFormFilterDoctrine
       'job_state_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('JobState'), 'add_empty' => true)),
       'store_id'       => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Store'), 'add_empty' => true)),
       'created_at'     => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
+      'created_from'   => new sfWidgetFormFilterInput(),
       'updated_at'     => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
+      'updated_from'   => new sfWidgetFormFilterInput(),
       'invoices_list'  => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Invoice')),
       'files_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'File')),
     ));
@@ -41,7 +43,9 @@ abstract class BaseJobFormFilter extends BaseFormFilterDoctrine
       'job_state_id'   => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('JobState'), 'column' => 'id')),
       'store_id'       => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Store'), 'column' => 'id')),
       'created_at'     => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
+      'created_from'   => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'updated_at'     => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
+      'updated_from'   => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'invoices_list'  => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Invoice', 'required' => false)),
       'files_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'File', 'required' => false)),
     ));
@@ -111,7 +115,9 @@ abstract class BaseJobFormFilter extends BaseFormFilterDoctrine
       'job_state_id'   => 'ForeignKey',
       'store_id'       => 'ForeignKey',
       'created_at'     => 'Date',
+      'created_from'   => 'Number',
       'updated_at'     => 'Date',
+      'updated_from'   => 'Number',
       'invoices_list'  => 'ManyKey',
       'files_list'     => 'ManyKey',
     );

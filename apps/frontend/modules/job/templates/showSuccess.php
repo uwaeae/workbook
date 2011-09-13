@@ -74,6 +74,7 @@
 	</tr>
 
     <tr>
+	
       <th>Erstellt am</th>
       <td colspan="3"><?php echo format_date($job->getCreatedAt(),'dd.MM.yyyy HH:mm') ?></td>
   

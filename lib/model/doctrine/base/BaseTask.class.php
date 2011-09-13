@@ -16,7 +16,9 @@
  * @property integer $job_id
  * @property integer $task_type_id
  * @property timestamp $created_at
+ * @property integer $created_from
  * @property timestamp $updated_at
+ * @property integer $updated_from
  * @property Job $Job
  * @property TaskType $TaskType
  * @property Doctrine_Collection $Users
@@ -33,7 +35,9 @@
  * @method integer             getJobId()        Returns the current record's "job_id" value
  * @method integer             getTaskTypeId()   Returns the current record's "task_type_id" value
  * @method timestamp           getCreatedAt()    Returns the current record's "created_at" value
+ * @method integer             getCreatedFrom()  Returns the current record's "created_from" value
  * @method timestamp           getUpdatedAt()    Returns the current record's "updated_at" value
+ * @method integer             getUpdatedFrom()  Returns the current record's "updated_from" value
  * @method Job                 getJob()          Returns the current record's "Job" value
  * @method TaskType            getTaskType()     Returns the current record's "TaskType" value
  * @method Doctrine_Collection getUsers()        Returns the current record's "Users" collection
@@ -49,7 +53,9 @@
  * @method Task                setJobId()        Sets the current record's "job_id" value
  * @method Task                setTaskTypeId()   Sets the current record's "task_type_id" value
  * @method Task                setCreatedAt()    Sets the current record's "created_at" value
+ * @method Task                setCreatedFrom()  Sets the current record's "created_from" value
  * @method Task                setUpdatedAt()    Sets the current record's "updated_at" value
+ * @method Task                setUpdatedFrom()  Sets the current record's "updated_from" value
  * @method Task                setJob()          Sets the current record's "Job" value
  * @method Task                setTaskType()     Sets the current record's "TaskType" value
  * @method Task                setUsers()        Sets the current record's "Users" collection
@@ -101,8 +107,14 @@ abstract class BaseTask extends sfDoctrineRecord
         $this->hasColumn('created_at', 'timestamp', null, array(
              'type' => 'timestamp',
              ));
+        $this->hasColumn('created_from', 'integer', null, array(
+             'type' => 'integer',
+             ));
         $this->hasColumn('updated_at', 'timestamp', null, array(
              'type' => 'timestamp',
+             ));
+        $this->hasColumn('updated_from', 'integer', null, array(
+             'type' => 'integer',
              ));
     }
 

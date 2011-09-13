@@ -17,7 +17,9 @@
  * @property integer $job_state_id
  * @property integer $store_id
  * @property timestamp $created_at
+ * @property integer $created_from
  * @property timestamp $updated_at
+ * @property integer $updated_from
  * @property Store $Store
  * @property JobState $JobState
  * @property JobType $JobType
@@ -40,7 +42,9 @@
  * @method integer             getJobStateId()     Returns the current record's "job_state_id" value
  * @method integer             getStoreId()        Returns the current record's "store_id" value
  * @method timestamp           getCreatedAt()      Returns the current record's "created_at" value
+ * @method integer             getCreatedFrom()    Returns the current record's "created_from" value
  * @method timestamp           getUpdatedAt()      Returns the current record's "updated_at" value
+ * @method integer             getUpdatedFrom()    Returns the current record's "updated_from" value
  * @method Store               getStore()          Returns the current record's "Store" value
  * @method JobState            getJobState()       Returns the current record's "JobState" value
  * @method JobType             getJobType()        Returns the current record's "JobType" value
@@ -62,7 +66,9 @@
  * @method Job                 setJobStateId()     Sets the current record's "job_state_id" value
  * @method Job                 setStoreId()        Sets the current record's "store_id" value
  * @method Job                 setCreatedAt()      Sets the current record's "created_at" value
+ * @method Job                 setCreatedFrom()    Sets the current record's "created_from" value
  * @method Job                 setUpdatedAt()      Sets the current record's "updated_at" value
+ * @method Job                 setUpdatedFrom()    Sets the current record's "updated_from" value
  * @method Job                 setStore()          Sets the current record's "Store" value
  * @method Job                 setJobState()       Sets the current record's "JobState" value
  * @method Job                 setJobType()        Sets the current record's "JobType" value
@@ -128,8 +134,14 @@ abstract class BaseJob extends sfDoctrineRecord
         $this->hasColumn('created_at', 'timestamp', null, array(
              'type' => 'timestamp',
              ));
+        $this->hasColumn('created_from', 'integer', null, array(
+             'type' => 'integer',
+             ));
         $this->hasColumn('updated_at', 'timestamp', null, array(
              'type' => 'timestamp',
+             ));
+        $this->hasColumn('updated_from', 'integer', null, array(
+             'type' => 'integer',
              ));
     }
 

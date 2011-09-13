@@ -10,7 +10,7 @@
 	<?php foreach ($jobs as $job): ?>
 	
 	
-	<li class="oen_jobs_item" 	onclick="document.location = '<?php  echo url_for('job/'.$job->getId()) ?>'">
+	<li class="oen_jobs_item" 	onclick="document.location = '<?php  echo url_for('job/show?id='.$job->getId()) ?>'">
 	<?php echo $job->getId()?><br>
 		Ende: <?php echo format_date($job->getEnd(),'dd.MM.') ?><br>
 		Anfang: <?php echo format_date($job->getStart(),'dd.MM.') ?>

@@ -128,7 +128,7 @@ class taskActions extends sfActions
     $this->forward404Unless($request->isMethod(sfRequest::POST));
 
     $this->form = new TaskForm();
-    $this->processForm($request, $this->form);
+    $this->processForm($request, $this->form,"Create");
 	$this->setTemplate('edit');
   }
 
@@ -154,7 +154,7 @@ class taskActions extends sfActions
     $this->forward404Unless($task = Doctrine_Core::getTable('Task')->find(array($request->getParameter('id'))), sprintf('Object task does not exist (%s).', $request->getParameter('id')));
     $this->form = new TaskForm($task);
 
-    $this->processForm($request, $this->form);
+    $this->processForm($request, $this->form,"Update");
 
     $this->setTemplate('edit');
   }
@@ -176,17 +176,26 @@ class taskActions extends sfActions
     $this->redirect('calendar/index');
   }
 
-  protected function processForm(sfWebRequest $request, sfForm $form)
+  protected function processForm(sfWebRequest $request, sfForm $form,$action)
   {
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     if ($form->isValid())
     {
       $task = $form->save();
+			$this->changelog($task, $action);
 	  $this->redirect($this->getUser()->getAttribute('back'));
     // $this->redirect('job/show/?id='.$task->getJob()->getId());
     }
 	 
   }
+protected function changelog(Task $task,$action )
+	{
+		$cl = new TaskChangeLog();
+		$cl->setTask($task);
+		$cl->setUserId($this->getUser()->getId());
+		$cl->setAction($action);
+		$cl->save();
+	}
  
 
 

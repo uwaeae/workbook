@@ -27,7 +27,9 @@ abstract class BaseJobForm extends BaseFormDoctrine
       'job_state_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('JobState'), 'add_empty' => false)),
       'store_id'       => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Store'), 'add_empty' => true)),
       'created_at'     => new sfWidgetFormDateTime(),
+      'created_from'   => new sfWidgetFormInputText(),
       'updated_at'     => new sfWidgetFormDateTime(),
+      'updated_from'   => new sfWidgetFormInputText(),
       'invoices_list'  => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Invoice')),
       'files_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'File')),
     ));
@@ -45,7 +47,9 @@ abstract class BaseJobForm extends BaseFormDoctrine
       'job_state_id'   => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('JobState'))),
       'store_id'       => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Store'), 'required' => false)),
       'created_at'     => new sfValidatorDateTime(),
+      'created_from'   => new sfValidatorInteger(array('required' => false)),
       'updated_at'     => new sfValidatorDateTime(),
+      'updated_from'   => new sfValidatorInteger(array('required' => false)),
       'invoices_list'  => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Invoice', 'required' => false)),
       'files_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'File', 'required' => false)),
     ));

@@ -1,19 +1,24 @@
+
+Changelog Fertigstellen
+Feitertage import
+Stundenberechnung Feiertage einbeziehen
+
+
+
 Bug / TODOs
 
 Tabellen		Store zu Adresse
 Backend 		Einstellungen Menu Einbindung
 
-
 Konfiguration	Optionen in den Modulen Laden
+
 Job				anzeige welche Jobs schon in dieser Adresse/Filiale bearbeitet worden sind.
-Job				Geplanter Termin und Arbeit in 2 Listen
 Job				User hinterlegen beim Speichern oder Ändern
-Job				Aufträge in der nächste ohne den eigenen
 job				Offene Aufträge Aktuellen Auftrag ausblenden
 
 Back Buttons	Historie Array machen
-Auftrag			Eigene Meine geplanten/ Meine in Bearbeitung Aufträge in einer liste anzeigen
 
+Auftrag			Eigene Meine geplanten/ Meine in Bearbeitung Aufträge in einer liste anzeigen
 Auftrag 		Eingabe die Datepicker jQuery UI verwenden?
 
 
@@ -51,6 +56,8 @@ Stundenzettel	Filter User funktioniert nicht
 Stundenzettel	Admin Switsch zwischen unsern
 Job				 anzeige welche Jobs schon in dieser Adresse/Filiale bearbeitet worden sind.
 Job				 anzeige in bei der Bearbeitung eines Jobs welche Jobs sich in der nähe befinden
+Job				Geplanter Termin und Arbeit in 2 Listen
+Job				Aufträge in der nächste ohne den eigenen
 Kalender		 User Filter funktoniert irgenwie nicht?!
 Kalender		 Fertig stellen
 Kalender		 alles User anzeigen übersichtlicheremachen vieleicht durch weitere Überschriftsspalte und Timeline?

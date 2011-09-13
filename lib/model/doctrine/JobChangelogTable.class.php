@@ -16,4 +16,17 @@ class JobChangelogTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('JobChangelog');
     }
+
+	public static function getLastChange($id)
+    {
+        
+	$changes = Doctrine_Query::create()
+						->select('*')
+						->from('JobChangelog j')
+						->where('j.job_id = '.$id)
+						->orderby('j.updated_at')
+						->execute();
+     return  $changes[0];
+	}
+	
 }

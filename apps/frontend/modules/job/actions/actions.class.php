@@ -40,27 +40,27 @@ public function executeTable(sfWebRequest $request)
 	 $job = new Job();
 	switch ($request->getParameter('type')) {
 		case '0':
-			$query = $job->getOwnJobs($this->getUser()->getId());
+			$query = Doctrine_Core::getTable('Job')->getOwnJobs($this->getUser()->getId());
 			$name = 'Offen';
 			break;
 		case '1':
-			$query = $job->getOpenJobs();
+			$query = Doctrine_Core::getTable('Job')->getOpenJobs();
 			$name = 'offen'	;
 			break;
 		case '2':
-			$query = $job->getSheduledJobs();
+			$query = Doctrine_Core::getTable('Job')->getSheduledJobs();
 			$name = 'geplant';	
 			break;
 		case '3':
-			$query = $job->getWorkedJobs();
+			$query = Doctrine_Core::getTable('Job')->getWorkedJobs();
 			$name = 'in Bearbeitung';
 			break;
 		case '4':
-			$query = $job->getFinishedJobs();
+			$query = Doctrine_Core::getTable('Job')->getFinishedJobs();
 			$name = 'erledigt';
 			break;
 		case '5':
-			$query = $job->getCompletedJobs();
+			$query = Doctrine_Core::getTable('Job')->getCompletedJobs();
 			$name = 'Abgeschlossen';
 			break;
 	}
@@ -85,13 +85,13 @@ public function executeTable(sfWebRequest $request)
 	$this->jobstate = array();
 	$job = new Job();
 	$this->jobstate[0] = $this->getJobStateArray(0,'Meine Aufträge'
-									,$job->getOwnJobs($this->getUser()->getId())
+									,Doctrine_Core::getTable('Job')->getOwnJobs($this->getUser()->getId())
 									,$request->getParameter('page')
 									,$request->getParameter('max'));
 	
 
 	$this->jobstate[1] = $this->getJobStateArray(1,'offene Aufträge '
-									,$job->getOpenJobs()
+									,Doctrine_Core::getTable('Job')->getOpenJobs()
 									,$request->getParameter('page')
 									,$request->getParameter('max'));
 								
@@ -99,7 +99,7 @@ public function executeTable(sfWebRequest $request)
 	if(	$this->getUser()->hasGroup('admin') 
 		OR $this->getUser()->hasGroup('office')){
 						$this->jobstate[2] = $this->getJobStateArray(2,'geplante Aufträge'
-													,$job->getSheduledJobs()
+													,Doctrine_Core::getTable('Job')->getSheduledJobs()
 													,$request->getParameter('page')
 													,$request->getParameter('max'));
 						$this->jobstate[3] 	= $this->getJobStateArray(3,'in Bearbeitung'
@@ -110,7 +110,7 @@ public function executeTable(sfWebRequest $request)
 	 if ( $this->getUser()->hasPermission('Rechung')) {
 
 	$this->jobstate[4] = $this->getJobStateArray(4,'Abgeschlossen Aufträge'
-								,$job->getFinishedJobs()
+								,Doctrine_Core::getTable('Job')->getFinishedJobs()
 								,$request->getParameter('page')
 								,$request->getParameter('max'));}				
 	
@@ -169,17 +169,11 @@ public function executeTable(sfWebRequest $request)
   public function executeShow(sfWebRequest $request)
   {	
 	$this->back = $this->getUser()->getAttribute('back');
-	$this->forward404Unless($this->job = Doctrine_Core::getTable('Job')->find(array($request->getParameter('id'))));
-		$this->setBack('job/show?id='.$request->getParameter('id'));
-		$this->openjobs =  Doctrine_Query::create()
-				->select('j.store_id s.id ')
-				->from('Job j')
-				->innerJoin('j.Store s WITH s.postcode between '.
-				($this->job->getStore()->getPostcode() - 10).' and '.
-				($this->job->getStore()->getPostcode() + 10))
-				->where('j.job_state_id = 1')
-				->orderby('j.end')
-				->execute();
+	$this->forward404Unless($this->job = 
+		Doctrine_Core::getTable('Job')->find(array($request->getParameter('id'))));
+	$this->setBack('job/show?id='.$request->getParameter('id'));
+	$this->changelog = Doctrine_Core::getTable('JobChangeLog')->getLastChange($this->job->getId());
+	$this->openjobs = Doctrine_Core::getTable('Job')->getSimilarOpenJobs($this->job->getStore()->getPostcode() ,10,$this->job->getId());
 	$this->form = new FileForm(NULL);
 	//$this->form->setDefault('jobs_list', array($this->job->getId()));
 
@@ -229,8 +223,8 @@ public function executeTable(sfWebRequest $request)
     $this->forward404Unless($request->isMethod(sfRequest::POST));
 
     $this->form = new JobForm();
-
-    $this->processForm($request, $this->form);
+	
+    $this->processForm($request, $this->form,"Create");
 
     $this->setTemplate('new');
   }
@@ -254,8 +248,8 @@ public function executeTable(sfWebRequest $request)
     $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
     $this->forward404Unless($job = Doctrine_Core::getTable('Job')->find(array($request->getParameter('id'))), sprintf('Object job does not exist (%s).', $request->getParameter('id')));
     $this->form = new JobForm($job);
-
-    $this->processForm($request, $this->form);
+	
+    $this->processForm($request, $this->form,"Update");
 
     $this->setTemplate('edit');
   }
@@ -270,16 +264,24 @@ public function executeTable(sfWebRequest $request)
     $this->redirect('job/index');
   }
 
-protected function processForm(sfWebRequest $request, sfForm $form)
+protected function processForm(sfWebRequest $request, sfForm $form,$action)
   {
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     if ($form->isValid())
     {
       $job = $form->save();
-
+		$this->changelog($job, $action);
       $this->redirect('job/show/?id='.$job->getId());
     }
   }
+protected function changelog(Job $job,$action )
+	{
+		$cl = new JobChangeLog();
+		$cl->setJob($job);
+		$cl->setUserId($this->getUser()->getId());
+		$cl->setAction($action);
+		$cl->save();
+	}
 
 
 public function executeFindstore($request)
