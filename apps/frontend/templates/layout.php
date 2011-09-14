@@ -18,7 +18,7 @@
 		<div class="usermenu">
 				<ul>
 				<?php if ($sf_user->hasPermission('admin')): ?>
-					<li><?php echo link_to('Admin', '@backend') ; ?></li>
+					<li><?php echo link_to('Admin', '/backend.php') ; ?></li>
 				<?php endif ?>
 					<li><?php echo link_to('Logout','sfGuardAuth/signout'); ?></li>
 					<li>

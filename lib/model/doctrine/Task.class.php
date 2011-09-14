@@ -12,4 +12,17 @@
  */
 class Task extends BaseTask
 {
+	public function hasUser($id)
+		{
+		foreach ($this->getUsers() as $user) {
+			if($user->getId() == $id) return true;
+		}
+		return false;
+	}
+	public function getCreator()
+		{
+		return 	Doctrine_Core::getTable('sfGuardUser')
+							->find($this->getCreatedFrom() );
+	}
+	
 }

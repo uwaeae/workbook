@@ -162,7 +162,6 @@ Task:
   relations:
     Job:
       foreignAlias: Tasks
-      cascade: [delete]
     Users:
       foreignAlias: Tasks
       class: User
@@ -418,6 +417,7 @@ TaskChangelog:
   relations:
     Task:
       foreignAlias: Changelog
+      cascade: [delete]
     User:
       class: sfGuardUser
       local: user_id

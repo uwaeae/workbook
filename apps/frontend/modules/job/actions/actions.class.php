@@ -171,6 +171,11 @@ public function executeTable(sfWebRequest $request)
 	$this->back = $this->getUser()->getAttribute('back');
 	$this->forward404Unless($this->job = 
 		Doctrine_Core::getTable('Job')->find(array($request->getParameter('id'))));
+	$this->create  = Doctrine_Core::getTable('sfGuardUser')
+					->find($this->job->getCreatedFrom() );
+	$this->update  = 			Doctrine_Core::getTable('sfGuardUser')
+								->find($this->job->getUpdatedFrom() );
+		
 	$this->setBack('job/show?id='.$request->getParameter('id'));
 	$this->changelog = Doctrine_Core::getTable('JobChangeLog')->getLastChange($this->job->getId());
 	$this->openjobs = Doctrine_Core::getTable('Job')->getSimilarOpenJobs($this->job->getStore()->getPostcode() ,10,$this->job->getId());
@@ -205,7 +210,9 @@ public function executeTable(sfWebRequest $request)
 	'type' => $request->getParameter('type'),
 	'customer' => $request->getParameter('customer'),	
 		));
- }
+ 	$this->form->setDefault('created_from',$this->getUser()->getId());
+	$this->form->setDefault('updated_from',$this->getUser()->getId());
+}
 
   public function executePrenew(sfWebRequest $request)
   {
@@ -223,7 +230,7 @@ public function executeTable(sfWebRequest $request)
     $this->forward404Unless($request->isMethod(sfRequest::POST));
 
     $this->form = new JobForm();
-	
+
     $this->processForm($request, $this->form,"Create");
 
     $this->setTemplate('new');
@@ -234,6 +241,8 @@ public function executeTable(sfWebRequest $request)
     $this->forward404Unless($job = Doctrine_Core::getTable('Job')->find(array($request->getParameter('id'))), sprintf('Object job does not exist (%s).', $request->getParameter('id')));
 
     $this->form = new JobForm($job, array('url' => $this->getController()->genUrl('job/ajax')));
+	//$this->form->setOption('updated_from',$this->getUser());
+	$this->form->setDefault('updated_from',$this->getUser()->getId());
   }
  public function executeWork(sfWebRequest $request)
   {
@@ -248,7 +257,7 @@ public function executeTable(sfWebRequest $request)
     $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
     $this->forward404Unless($job = Doctrine_Core::getTable('Job')->find(array($request->getParameter('id'))), sprintf('Object job does not exist (%s).', $request->getParameter('id')));
     $this->form = new JobForm($job);
-	
+	//$this->form->setOption('updated_from',$this->getUser()->getId());
     $this->processForm($request, $this->form,"Update");
 
     $this->setTemplate('edit');
@@ -270,7 +279,7 @@ protected function processForm(sfWebRequest $request, sfForm $form,$action)
     if ($form->isValid())
     {
       $job = $form->save();
-		$this->changelog($job, $action);
+	//$this->changelog($job, $action);
       $this->redirect('job/show/?id='.$job->getId());
     }
   }

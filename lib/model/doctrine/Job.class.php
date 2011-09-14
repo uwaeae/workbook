@@ -17,6 +17,18 @@ class Job extends BaseJob
 		return  substr($this->getStore()->getCustomer()->getCompany(),0,20).' - '.$this->getStore();
 	}
 	
+	public function getCreator()
+		{
+		return 	Doctrine_Core::getTable('sfGuardUser')
+							->find($this->getCreatedFrom() );
+	}
+	
+	public function getUpdater()
+		{
+		return 	Doctrine_Core::getTable('sfGuardUser')
+							->find($this->getUpdatedFrom() );
+	}
+	
 	public function hasSheduledTasks()
 	{
 		$tasks = Doctrine_Query::create()

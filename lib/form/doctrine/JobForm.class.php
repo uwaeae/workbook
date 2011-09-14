@@ -15,6 +15,7 @@ class JobForm extends BaseJobForm
 	unset(
 			$this['created_at'], $this['updated_at']
 				 );
+
 		
 			$this->widgetSchema['end'] =  new sfWidgetFormJQueryDate(array( 'image' => '/images/icons/calendar.png','config' => '{}',));
 				$this->widgetSchema['start'] =  new sfWidgetFormJQueryDate(array( 'image' => '/images/icons/calendar.png','config' => '{}',));
@@ -82,23 +83,11 @@ class JobForm extends BaseJobForm
 		'model' => 'Store',
 		'url'   => $this->getOption('url'),
 		'config'=>'{ width: 500,max: 100,highlight:false ,scroll: true,scrollHeight: 300}'	));
+		
+	$this->widgetSchema['created_from']  = new sfWidgetFormInputHidden();
+	$this->widgetSchema['updated_from']  = new sfWidgetFormInputHidden();
 
 	
-	//$defstore = Doctrine_Core::getTable('Store')->createQuery('s')->where('s.number = 0 and s.customer_id ='.$this->getOption('customer'))->execute()->getFirst();
-
-	//$this->setDefault('store_id', $defstore->getId() );
-	
-	
-/*	$subForm = new sfForm();
-  	for ($i = 0; $i < 1; $i++)
-  		{
-    		$file = new File();
-    		$file->Jobs->add($this->getObject());
-    		$form = new FileForm($file);
-    		$subForm->embedForm($i, $form);
-  		}
-  	$this->embedForm('newFiles', $subForm);
-*/	
 	
 	$this->widgetSchema->setLabels(array(
 	  'description'    => 'Auftrag',

@@ -3,7 +3,7 @@ Changelog Fertigstellen
 Feitertage import
 Stundenberechnung Feiertage einbeziehen
 
-
+007bb6 blue
 
 Bug / TODOs
 
@@ -13,12 +13,9 @@ Backend 		Einstellungen Menu Einbindung
 Konfiguration	Optionen in den Modulen Laden
 
 Job				anzeige welche Jobs schon in dieser Adresse/Filiale bearbeitet worden sind.
-Job				User hinterlegen beim Speichern oder Ändern
-job				Offene Aufträge Aktuellen Auftrag ausblenden
 
 Back Buttons	Historie Array machen
 
-Auftrag			Eigene Meine geplanten/ Meine in Bearbeitung Aufträge in einer liste anzeigen
 Auftrag 		Eingabe die Datepicker jQuery UI verwenden?
 
 
@@ -32,13 +29,19 @@ Kalender		Wochenanzeige pro Mitarbeiter eine Wochen anzeigen
 Kalendar		Task Kundenname, Adresse, Info 50 Zeichen
 Kalendar		alle sehen, nur eigene bearbeiten 
 
-
 Job 			Datei Mime Type mit speichern und übergeben bein download
+job				Arbeit Stunden pro task
+job				Summe Stunden
+Job				TESTEN
 
 Task			Job Termin zuweisen Berechtigung in New Task verschieben.
 Task			nur der erstellter oder Admin kann bearbeiten
 Task			Bearbeiter anzeigen!
-
+Task 			Abschliesen wen Job dicht
+Task			Anfahrt Standart 30 Minuten
+Task			Minuten angabe in 15 Minuten
+Task			Material 
+Task			TESTen
 
 FEATURES
 
@@ -49,6 +52,7 @@ FEATURES
 
 ERLEDIGT
 
+Auftrag			Eigene Meine geplanten/ Meine in Bearbeitung Aufträge in einer liste anzeigen
 Auftrag 		Übersicht Filter/Suche einbauen User, Firma, usw. 
 Auftrag 		Dateihochladen und anzeigen
 Stundenzettel	Monatssyitsch
@@ -58,6 +62,9 @@ Job				 anzeige welche Jobs schon in dieser Adresse/Filiale bearbeitet worden si
 Job				 anzeige in bei der Bearbeitung eines Jobs welche Jobs sich in der nähe befinden
 Job				Geplanter Termin und Arbeit in 2 Listen
 Job				Aufträge in der nächste ohne den eigenen
+Job				User hinterlegen beim Speichern oder Ändern 1409
+job				Offene Aufträge Aktuellen Auftrag ausblenden 1409
+
 Kalender		 User Filter funktoniert irgenwie nicht?!
 Kalender		 Fertig stellen
 Kalender		 alles User anzeigen übersichtlicheremachen vieleicht durch weitere Überschriftsspalte und Timeline?

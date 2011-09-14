@@ -123,10 +123,7 @@ abstract class BaseTask extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('Job', array(
              'local' => 'job_id',
-             'foreign' => 'id',
-             'cascade' => array(
-             0 => 'delete',
-             )));
+             'foreign' => 'id'));
 
         $this->hasOne('TaskType', array(
              'local' => 'task_type_id',

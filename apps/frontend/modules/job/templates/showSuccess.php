@@ -75,11 +75,13 @@
 
     <tr>
 	
-      <th>Erstellt am</th>
-      <td colspan="3"><?php echo format_date($job->getCreatedAt(),'dd.MM.yyyy HH:mm') ?></td>
-  
-      <th>Zuletzt Bearbeitet am</th>
-      <td><?php echo format_date($job->getUpdatedAt(),'dd.MM.yyyy HH:mm') ?></td>
+ 		<th>Erstellt am</th>
+		<td ><?php echo format_date($job->getCreatedAt(),'dd.MM.yyyy HH:mm') ?></td>
+		<td ><?php echo $create->getUsername() ?></td>
+		<th>Zuletzt Bearbeitet am</th>
+		<td><?php echo format_date($job->getUpdatedAt(),'dd.MM.yyyy HH:mm') ?></td>
+		<td ><?php echo $update->getUsername() ?></td>
+	
     </tr>
 
 	</tbody>
@@ -131,10 +133,8 @@
   <thead>
     <tr>
 		<td colspan="2">
-			<?php if ($sf_user->hasPermission('Zuweisen')) :?>	
 					<a class="button" href="<?php echo url_for('task/new/?job='.$job->getId().'&type=0') ?>">	
 					Termin Planen</a></li>
-			<?php endif ?>
 		</td>
 	</tr>
 	<th style="width:150px;">Start</th>
@@ -158,13 +158,16 @@
 		<td><?php foreach ($task->getUsers() as $user): ?>
 			<?php echo $user ?><br>
 		<?php endforeach ?></td>
-		<td><?php echo format_date($task->getCreatedAt(),'dd.MM.yyyy') ?></td>
+		<td><?php echo format_date($task->getCreatedAt(),'dd.MM.yyyy') ?>
+			<?php echo $task->getCreator() ?>
+		</td>
 		<td>
-		<?php if ($sf_user->hasPermission('Zuweisen')) :?>	
+		
+		<?php if ($task->hasUser($sf_user->getId()) OR $sf_user->hasGroup('admin')):?>
 			<a class="button" href="<?php echo url_for('task/edit?id='.$task->getId().'&type=0') ?>">
 		Bearbeiten</a>
 		<?php endif ?>
-		<?php if ($task->getUsers()->contains($sf_user->getId())): ?>
+		<?php if ($task->hasUser($sf_user->getId())):?>
 				<a class="button" href="<?php echo url_for('task/edit?id='.$task->getId()) ?>">
 				Ausgeführt</a>
 		<?php endif ?> 

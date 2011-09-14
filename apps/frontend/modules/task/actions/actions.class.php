@@ -116,7 +116,17 @@ class taskActions extends sfActions
 		$task->setDefault('job_id', $jobid);
 	}
 		
+
+	
+	if (!$this->getUser()->hasPermission('Zuweisen')) {
+			 $task->setWidget('users_list',new sfWidgetFormInputHidden());
+			$task->setDefault('users_list', $this->getUser()->getId());
+	}
+	else{
 	$task->setDefault('users_list', array($this->getUser()->getId()));
+	}
+	$task->setDefault('created_from',$this->getUser()->getId());
+	$task->setDefault('updated_from',$this->getUser()->getId());
 
     $this->form = $task;
 
@@ -143,7 +153,8 @@ class taskActions extends sfActions
     $this->form = new TaskForm($task,array(
 		'type' => ($request->hasParameter('type')? $request->getParameter('type'): $task->getTaskTypeId()),	
 		));
-	$this->form->setDefault('scheduled', 0);	
+	$this->form->setDefault('scheduled', 0);
+	$this->form->setDefault('updated_from',$this->getUser()->getId());	
  	$this->setTemplate('new');
   }
 
@@ -171,9 +182,12 @@ class taskActions extends sfActions
 	foreach ($taskusers as $tu) {
 		$tu->delete();
 	}
+	/*$changelog = Doctrine_Core::getTable('TaskChangeLog')->createQuery('t')
+	  ->where('t.task_id ='.$task->getId())
+      ->execute();*/
 	$task->delete();
 
-    $this->redirect('calendar/index');
+    $this->redirect($this->getUser()->getAttribute('back'));
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form,$action)
@@ -182,7 +196,7 @@ class taskActions extends sfActions
     if ($form->isValid())
     {
       $task = $form->save();
-			$this->changelog($task, $action);
+	//$this->changelog($task, $action);
 	  $this->redirect($this->getUser()->getAttribute('back'));
     // $this->redirect('job/show/?id='.$task->getJob()->getId());
     }

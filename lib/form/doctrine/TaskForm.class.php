@@ -27,6 +27,7 @@ class TaskForm extends BaseTaskForm
 			$this->widgetSchema['break'] = new sfWidgetFormInputHidden();
 			$this->widgetSchema['overtime'] = new sfWidgetFormInputHidden();
 			$this->widgetSchema['info'] = new sfWidgetFormInputHidden();
+
 			$this->setDefault('scheduled',1);
 			$this->setDefault('end', date('Y/m/d H:i', mktime(16,0,0,date("m"),date("d") + 1,date("Y"))));
 			$this->setDefault('start', date('Y/m/d H:i',mktime(8,0,0,date("m"),date("d") + 1,date("Y"))));
@@ -34,10 +35,10 @@ class TaskForm extends BaseTaskForm
 		case '1': //auftrag
 			$this->setDefault('task_type_id',1);
 			$this->widgetSchema['task_type_id'] = new sfWidgetFormInputHidden();
-			for ($i=1; $i < 13; $i++) { 
+			for ($i=0; $i < 13; $i++) { 
 				$approach[] = $i * 15;	
 			}
-			$this->widgetSchema['break'] = new sfWidgetFormChoice(array('choices' => array('15','30', '45', '60')));
+			$this->widgetSchema['break'] = new sfWidgetFormChoice(array('choices' => array('0','15','30', '45', '60')));
 			$this->widgetSchema['approach'] = new sfWidgetFormChoice(array('choices' => 	$approach));
 			$this->setDefault('end', date('Y/m/d H:i', time()));
 			$this->setDefault('start', date('Y/m/d H:i',mktime(8,0,0,date("m"),date("d"),date("Y"))));
@@ -48,7 +49,7 @@ class TaskForm extends BaseTaskForm
 			$this->setDefault('start', date('Y/m/d H:i',mktime(8,0,0,date("m"),date("d"),date("Y"))));
 			$this->setDefault('task_type_id',2);
 		//	$this->widgetSchema['users_list'] = new sfWidgetFormInputHidden();
-			$this->setDefault('approach',0);
+			$this->setDefault('approach',30);
 			$this->widgetSchema['approach'] = new sfWidgetFormInputHidden();
 			$this->setDefault('break',0);
 			$this->widgetSchema['break'] = new sfWidgetFormInputHidden();
@@ -78,7 +79,9 @@ class TaskForm extends BaseTaskForm
 	$this->widgetSchema['end'] = new sfWidgetFormJQueryDate(array( 'image' => '/images/icons/calendar.png','config' => '{}',));
 	$this->widgetSchema['start'] =  new sfWidgetFormJQueryDate(array( 'image' => '/images/icons/calendar.png','config' => '{}',));
 
-//	$this->setDefault('users_list', $sf_user);
+	$this->widgetSchema['created_from']  = new sfWidgetFormInputHidden();
+	$this->widgetSchema['updated_from']  = new sfWidgetFormInputHidden();
+
 
 
 	$this->widgetSchema->setLabels(array(
