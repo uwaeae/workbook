@@ -181,7 +181,7 @@ public function executeTable(sfWebRequest $request)
 	$this->openjobs = Doctrine_Core::getTable('Job')->getSimilarOpenJobs($this->job->getStore()->getPostcode() ,10,$this->job->getId());
 	$this->form = new FileForm(NULL);
 	//$this->form->setDefault('jobs_list', array($this->job->getId()));
-
+    $this->entrys  = Doctrine_Core::getTable('Entry')->getEntypByJob($this->job->getId());
 
   }
 

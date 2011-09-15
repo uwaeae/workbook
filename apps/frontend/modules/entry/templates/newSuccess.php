@@ -28,7 +28,7 @@
 <?php  include_partial('form', array('form' => $form, 'task' => $task)) ?>
 <tr>
 		<td> 
-		<a class="button" href="<?php echo url_for('task/edit?id='.$entry->getTaskId()) ?>	">
+		<a class="button" href="<?php echo url_for('task/edit?id='.$task->getId()) ?>	">
 			zurück</a></td>
 <tr>	
 </tfoot>

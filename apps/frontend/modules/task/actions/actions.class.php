@@ -169,9 +169,9 @@ class taskActions extends sfActions
 //	$this->back = $this->getUser()->getFlash('back');
 //$this->job = Doctrine_Core::getTable('Job')->find($task->getJobId());
 	//echo $this->getUser()->getFlash('job');
-	$this->type =  $request->getParameter('type');
+	$this->type =  ($request->hasParameter('type')? $request->getParameter('type'): $this->task->getTaskTypeId());
     $this->form = new TaskForm($this->task,array(
-		'type' => ($request->hasParameter('type')? $request->getParameter('type'): $this->task->getTaskTypeId()),	
+		'type' => 	$this->type ,	
 		));
 	if (!$this->getUser()->hasPermission('Zuweisen')) {
 			$this->form->setWidget('users_list',new sfWidgetFormInputHidden());

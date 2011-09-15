@@ -16,4 +16,35 @@ class EntryTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('Entry');
     }
+
+	public function getEntypByJob($Job){
+		
+		$output = array();
+		
+		$tasks = $this->jobs = Doctrine_Query::create()
+				->select('*')
+				->from('Task t')
+				->where('t.job_id = '.$Job)
+				->execute();
+		
+		foreach ($tasks as $task) {
+			
+			
+			foreach ($task->getEntry() as $entry) {
+			$mc = $entry->getItem()->getCode();
+			if(!$output[$mc]){
+				$output[$mc] = array();
+				$output[$mc]['amount'] = 0;
+			}
+	
+			$output[$mc]['amount'] += $entry->getAmount();
+			$output[$mc]['item'] =	$entry->getItem();
+			$output[$mc]['description'] =	$entry->getDescription();
+			}
+			
+		}
+		
+		return $output;
+		
+	}
 }
