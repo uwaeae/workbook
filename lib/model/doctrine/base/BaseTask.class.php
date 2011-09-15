@@ -22,6 +22,7 @@
  * @property Job $Job
  * @property TaskType $TaskType
  * @property Doctrine_Collection $Users
+ * @property Doctrine_Collection $Entry
  * @property Doctrine_Collection $Changelog
  * 
  * @method integer             getId()           Returns the current record's "id" value
@@ -41,6 +42,7 @@
  * @method Job                 getJob()          Returns the current record's "Job" value
  * @method TaskType            getTaskType()     Returns the current record's "TaskType" value
  * @method Doctrine_Collection getUsers()        Returns the current record's "Users" collection
+ * @method Doctrine_Collection getEntry()        Returns the current record's "Entry" collection
  * @method Doctrine_Collection getChangelog()    Returns the current record's "Changelog" collection
  * @method Task                setId()           Sets the current record's "id" value
  * @method Task                setStart()        Sets the current record's "start" value
@@ -59,6 +61,7 @@
  * @method Task                setJob()          Sets the current record's "Job" value
  * @method Task                setTaskType()     Sets the current record's "TaskType" value
  * @method Task                setUsers()        Sets the current record's "Users" collection
+ * @method Task                setEntry()        Sets the current record's "Entry" collection
  * @method Task                setChangelog()    Sets the current record's "Changelog" collection
  * 
  * @package    workbook
@@ -133,6 +136,10 @@ abstract class BaseTask extends sfDoctrineRecord
              'refClass' => 'TaskUser',
              'local' => 'task_id',
              'foreign' => 'user_id'));
+
+        $this->hasMany('Entry', array(
+             'local' => 'id',
+             'foreign' => 'task_id'));
 
         $this->hasMany('TaskChangelog as Changelog', array(
              'local' => 'id',

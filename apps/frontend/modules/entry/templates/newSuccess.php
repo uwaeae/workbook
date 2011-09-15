@@ -25,6 +25,11 @@
 	    <?php endforeach ?>
   </tbody>
 <tfoot>
-<?php  include_partial('form', array('form' => $form, 'job' => $job)) ?>
+<?php  include_partial('form', array('form' => $form, 'task' => $task)) ?>
+<tr>
+		<td> 
+		<a class="button" href="<?php echo url_for('task/edit?id='.$entry->getTaskId()) ?>	">
+			zurück</a></td>
+<tr>	
 </tfoot>
 </table>

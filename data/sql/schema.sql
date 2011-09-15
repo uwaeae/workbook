@@ -2,7 +2,7 @@ CREATE TABLE Calendar (id BIGINT AUTO_INCREMENT, beginn DATETIME NOT NULL, durat
 CREATE TABLE CalendarType (id BIGINT AUTO_INCREMENT, name TEXT NOT NULL, PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE calendar_user (calendar_id BIGINT, user_id BIGINT, PRIMARY KEY(calendar_id, user_id)) ENGINE = INNODB;
 CREATE TABLE customer (id BIGINT AUTO_INCREMENT, company VARCHAR(255) NOT NULL, logo VARCHAR(255), url VARCHAR(255), number BIGINT UNIQUE NOT NULL, headoffice BIGINT NOT NULL, INDEX headoffice_idx (headoffice), PRIMARY KEY(id)) ENGINE = INNODB;
-CREATE TABLE Entry (id BIGINT AUTO_INCREMENT, description VARCHAR(255), amount BIGINT NOT NULL, item_id BIGINT, job_id BIGINT, INDEX job_id_idx (job_id), INDEX item_id_idx (item_id), PRIMARY KEY(id)) ENGINE = INNODB;
+CREATE TABLE Entry (id BIGINT AUTO_INCREMENT, description VARCHAR(255), amount BIGINT NOT NULL, item_id BIGINT, task_id BIGINT, INDEX task_id_idx (task_id), INDEX item_id_idx (item_id), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE file (id BIGINT AUTO_INCREMENT, name VARCHAR(64) NOT NULL, file VARCHAR(255), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE file_job (file_id BIGINT, job_id BIGINT, PRIMARY KEY(file_id, job_id)) ENGINE = INNODB;
 CREATE TABLE holiday (id BIGINT AUTO_INCREMENT, name TEXT NOT NULL, date DATE NOT NULL, PRIMARY KEY(id)) ENGINE = INNODB;
@@ -37,7 +37,7 @@ ALTER TABLE Calendar ADD CONSTRAINT Calendar_job_id_job_id FOREIGN KEY (job_id) 
 ALTER TABLE calendar_user ADD CONSTRAINT calendar_user_user_id_sf_guard_user_id FOREIGN KEY (user_id) REFERENCES sf_guard_user(id);
 ALTER TABLE calendar_user ADD CONSTRAINT calendar_user_calendar_id_Calendar_id FOREIGN KEY (calendar_id) REFERENCES Calendar(id);
 ALTER TABLE customer ADD CONSTRAINT customer_headoffice_store_id FOREIGN KEY (headoffice) REFERENCES store(id);
-ALTER TABLE Entry ADD CONSTRAINT Entry_job_id_job_id FOREIGN KEY (job_id) REFERENCES job(id);
+ALTER TABLE Entry ADD CONSTRAINT Entry_task_id_task_id FOREIGN KEY (task_id) REFERENCES task(id);
 ALTER TABLE Entry ADD CONSTRAINT Entry_item_id_item_id FOREIGN KEY (item_id) REFERENCES item(id);
 ALTER TABLE file_job ADD CONSTRAINT file_job_job_id_job_id FOREIGN KEY (job_id) REFERENCES job(id);
 ALTER TABLE file_job ADD CONSTRAINT file_job_file_id_file_id FOREIGN KEY (file_id) REFERENCES file(id);

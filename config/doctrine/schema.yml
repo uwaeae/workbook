@@ -184,10 +184,10 @@ Entry:
       notnull: true
     item_id:
       type: integer
-    job_id:
+    task_id:
       type: integer
   relations:
-    Job:
+    Task:
       foreignAlias: Entry
     Item:
       foreignAlias: Entry

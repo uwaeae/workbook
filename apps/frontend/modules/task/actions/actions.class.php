@@ -100,9 +100,11 @@ class taskActions extends sfActions
 
   public function executeNew(sfWebRequest $request)
   {
-		$this->back = $this->getUser()->getAttribute('back');
+	$this->back = $this->getUser()->getAttribute('back');
+	$type =	($request->hasParameter('type')? $request->getParameter('type'): 1);
+	$this->getUser()->setFlash('type',$type);
 	$task = new TaskForm(NULL,array(
-	'type' => ($request->hasParameter('type')? $request->getParameter('type'): 1),	
+	'type' => $type,	
 		));
 	//$this->job = null;
 	if ($request->hasParameter('job')) {
@@ -111,7 +113,7 @@ class taskActions extends sfActions
 		$this->tasks = Doctrine_Core::getTable('Task')->createQuery('t')
 		  ->where('t.job_id ='.$jobid)
 	      ->execute();
-		$this->getUser()->setFlash('jobid',$this->job->getId());
+	
 
 		$task->setDefault('job_id', $jobid);
 	}
@@ -119,7 +121,7 @@ class taskActions extends sfActions
 
 	
 	if (!$this->getUser()->hasPermission('Zuweisen')) {
-			 $task->setWidget('users_list',new sfWidgetFormInputHidden());
+			$task->setWidget('users_list',new sfWidgetFormInputHidden());
 			$task->setDefault('users_list', $this->getUser()->getId());
 	}
 	else{
@@ -129,33 +131,49 @@ class taskActions extends sfActions
 	$task->setDefault('updated_from',$this->getUser()->getId());
 
     $this->form = $task;
-
+	$this->getUser()->setFlash('type',($request->hasParameter('type')? $request->getParameter('type'): 1));
   }
 
   public function executeCreate(sfWebRequest $request)
   {
-	//$this->forward404Unless($this->getUser()->setFlash('jobid',$this->getUser()->getFlash('jobid')));
+	//$this->forward404Unless($this->getUser()->setFlash('jobid',);
     $this->forward404Unless($request->isMethod(sfRequest::POST));
 
     $this->form = new TaskForm();
-    $this->processForm($request, $this->form,"Create");
-	$this->setTemplate('edit');
+    $task = $this->processForm($request, $this->form,"Create");
+	$type =  $this->getUser()->getFlash('type');
+	if($type == 1){
+		$this->redirect('task/edit?id='.$task->getId().'&type='.$type);
+	}
+	else {
+		$this->redirect($this->getUser()->getAttribute('back'));
+	}
+	
+	
+	//$this->setTemplate('edit');
   }
 
   public function executeEdit(sfWebRequest $request)
   {
 	$this->back = $this->getUser()->getAttribute('back');
-    $this->forward404Unless($task = Doctrine_Core::getTable('Task')->find(array($request->getParameter('id'))), sprintf('Object task does not exist (%s).', $request->getParameter('id')));
+    $this->forward404Unless($this->task = Doctrine_Core::getTable('Task')->find(array($request->getParameter('id'))), sprintf('Object task does not exist (%s).', $request->getParameter('id')));
 //	$this->back = $this->getUser()->getFlash('back');
 //$this->job = Doctrine_Core::getTable('Job')->find($task->getJobId());
 	//echo $this->getUser()->getFlash('job');
-	
-    $this->form = new TaskForm($task,array(
-		'type' => ($request->hasParameter('type')? $request->getParameter('type'): $task->getTaskTypeId()),	
+	$this->type =  $request->getParameter('type');
+    $this->form = new TaskForm($this->task,array(
+		'type' => ($request->hasParameter('type')? $request->getParameter('type'): $this->task->getTaskTypeId()),	
 		));
+	if (!$this->getUser()->hasPermission('Zuweisen')) {
+			$this->form->setWidget('users_list',new sfWidgetFormInputHidden());
+			$this->form->setDefault('users_list', $this->getUser()->getId());
+	}
+	else{
+	$this->form->setDefault('users_list', array($this->getUser()->getId()));
+	}
 	$this->form->setDefault('scheduled', 0);
 	$this->form->setDefault('updated_from',$this->getUser()->getId());	
- 	$this->setTemplate('new');
+ //	$this->setTemplate('edit');
   }
 
   public function executeUpdate(sfWebRequest $request)
@@ -167,7 +185,13 @@ class taskActions extends sfActions
 
     $this->processForm($request, $this->form,"Update");
 
-    $this->setTemplate('edit');
+    $type =  $this->getUser()->getFlash('type');
+	if($type == 1){
+		$this->redirect('task/edit?id='.$task->getId().'&type='.$type);
+	}
+	else {
+		$this->redirect($this->getUser()->getAttribute('back'));
+	}
   }
 
   public function executeDelete(sfWebRequest $request)
@@ -195,9 +219,9 @@ class taskActions extends sfActions
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     if ($form->isValid())
     {
-      $task = $form->save();
+      return $form->save();
 	//$this->changelog($task, $action);
-	  $this->redirect($this->getUser()->getAttribute('back'));
+	 
     // $this->redirect('job/show/?id='.$task->getJob()->getId());
     }
 	 

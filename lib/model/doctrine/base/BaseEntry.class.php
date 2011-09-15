@@ -9,23 +9,23 @@
  * @property string $description
  * @property integer $amount
  * @property integer $item_id
- * @property integer $job_id
- * @property Job $Job
+ * @property integer $task_id
+ * @property Task $Task
  * @property Item $Item
  * 
  * @method integer getId()          Returns the current record's "id" value
  * @method string  getDescription() Returns the current record's "description" value
  * @method integer getAmount()      Returns the current record's "amount" value
  * @method integer getItemId()      Returns the current record's "item_id" value
- * @method integer getJobId()       Returns the current record's "job_id" value
- * @method Job     getJob()         Returns the current record's "Job" value
+ * @method integer getTaskId()      Returns the current record's "task_id" value
+ * @method Task    getTask()        Returns the current record's "Task" value
  * @method Item    getItem()        Returns the current record's "Item" value
  * @method Entry   setId()          Sets the current record's "id" value
  * @method Entry   setDescription() Sets the current record's "description" value
  * @method Entry   setAmount()      Sets the current record's "amount" value
  * @method Entry   setItemId()      Sets the current record's "item_id" value
- * @method Entry   setJobId()       Sets the current record's "job_id" value
- * @method Entry   setJob()         Sets the current record's "Job" value
+ * @method Entry   setTaskId()      Sets the current record's "task_id" value
+ * @method Entry   setTask()        Sets the current record's "Task" value
  * @method Entry   setItem()        Sets the current record's "Item" value
  * 
  * @package    workbook
@@ -54,7 +54,7 @@ abstract class BaseEntry extends sfDoctrineRecord
         $this->hasColumn('item_id', 'integer', null, array(
              'type' => 'integer',
              ));
-        $this->hasColumn('job_id', 'integer', null, array(
+        $this->hasColumn('task_id', 'integer', null, array(
              'type' => 'integer',
              ));
     }
@@ -62,8 +62,8 @@ abstract class BaseEntry extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('Job', array(
-             'local' => 'job_id',
+        $this->hasOne('Task', array(
+             'local' => 'task_id',
              'foreign' => 'id'));
 
         $this->hasOne('Item', array(

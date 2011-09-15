@@ -16,14 +16,14 @@ abstract class BaseEntryFormFilter extends BaseFormFilterDoctrine
       'description' => new sfWidgetFormFilterInput(),
       'amount'      => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'item_id'     => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Item'), 'add_empty' => true)),
-      'job_id'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Job'), 'add_empty' => true)),
+      'task_id'     => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Task'), 'add_empty' => true)),
     ));
 
     $this->setValidators(array(
       'description' => new sfValidatorPass(array('required' => false)),
       'amount'      => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'item_id'     => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Item'), 'column' => 'id')),
-      'job_id'      => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Job'), 'column' => 'id')),
+      'task_id'     => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Task'), 'column' => 'id')),
     ));
 
     $this->widgetSchema->setNameFormat('entry_filters[%s]');
@@ -47,7 +47,7 @@ abstract class BaseEntryFormFilter extends BaseFormFilterDoctrine
       'description' => 'Text',
       'amount'      => 'Number',
       'item_id'     => 'ForeignKey',
-      'job_id'      => 'ForeignKey',
+      'task_id'     => 'ForeignKey',
     );
   }
 }

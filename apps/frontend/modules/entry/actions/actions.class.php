@@ -25,16 +25,16 @@ class entryActions extends sfActions
 
   public function executeNew(sfWebRequest $request)
   {
-	$this->forward404Unless($this->job = Doctrine_Core::getTable('Job')->find(array($request->getParameter('job'))));
-	$jobid = $this->job->getId();
+	$this->forward404Unless($this->task = Doctrine_Core::getTable('Task')->find(array($request->getParameter('taskid'))));
+	$taskid = $this->task->getId();
 	$this->entrys = Doctrine_Core::getTable('Entry')->createQuery('e')
-	 ->where('e.job_id ='.$jobid)
+	 ->where('e.task_id ='.$taskid)
       ->execute();
-	$this->getUser()->setFlash('jobid',$this->job->getId());
+	$this->getUser()->setFlash('taskid',$this->task->getId());
 	$this->form = new EntryForm(NULL,array(
 	'url' => $this->getController()->genUrl('entry/ajax')	
 		));
-	$this->form ->setDefault('job_id', $jobid);
+	$this->form ->setDefault('task_id', $taskid);
     
   }
 
@@ -46,7 +46,7 @@ class entryActions extends sfActions
 
     $this->processForm($request, $this->form);
 
-	$this->redirect('entry/new?job='.$entry->getJob()->getId());	
+	//$this->redirect('entry/new?taskid='.$entry->getTaskId());	
   }
 
   public function executeEdit(sfWebRequest $request)
@@ -73,7 +73,7 @@ class entryActions extends sfActions
     $this->forward404Unless($entry = Doctrine_Core::getTable('Entry')->find(array($request->getParameter('id'))), sprintf('Object entry does not exist (%s).', $request->getParameter('id')));
     $entry->delete();
 
-      $this->redirect('entry/new?job='.$entry->getJob()->getId());
+      $this->redirect('entry/new?taskid='.$entry->getTaskId());
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
@@ -83,7 +83,7 @@ class entryActions extends sfActions
     {
       $entry = $form->save();
 
-      $this->redirect('entry/new?job='.$entry->getJob()->getId());
+      $this->redirect('entry/new?taskid='.$entry->getTaskId());
     }
   }
 public function executeAjax($request)

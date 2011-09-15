@@ -20,8 +20,7 @@
 		</tr>	
 		<tr>
 	        <td colspan="2">
-	       		<a class="button" href="<?php echo url_for('job/show?id='.$job->getId()) ?>">
-					 zurück</a>
+	       	
 	          <?php if (!$form->getObject()->isNew()): ?>
 	            &nbsp;<?php echo link_to('Delete', 'entry/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => 'Are you sure?')) ?>
 

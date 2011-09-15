@@ -1,4 +1,8 @@
 
 <?php include_partial('form', array('form' => $form, 'user' => $sf_user)) ?>
+<?php if ($type == 1 ): ?>
+	<?php include_partial('entry', array('task' => $task, 'user' => $sf_user)) ?>
+<?php endif ?>
 
-<a href="<?php echo url_for('job/show/?id='.$job->getId()) ?>">Zurück</a>
+
+

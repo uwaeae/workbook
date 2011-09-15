@@ -19,7 +19,7 @@ abstract class BaseEntryForm extends BaseFormDoctrine
       'description' => new sfWidgetFormInputText(),
       'amount'      => new sfWidgetFormInputText(),
       'item_id'     => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Item'), 'add_empty' => true)),
-      'job_id'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Job'), 'add_empty' => true)),
+      'task_id'     => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Task'), 'add_empty' => true)),
     ));
 
     $this->setValidators(array(
@@ -27,7 +27,7 @@ abstract class BaseEntryForm extends BaseFormDoctrine
       'description' => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'amount'      => new sfValidatorInteger(),
       'item_id'     => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Item'), 'required' => false)),
-      'job_id'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Job'), 'required' => false)),
+      'task_id'     => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Task'), 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('entry[%s]');

@@ -25,7 +25,6 @@
  * @property JobType $JobType
  * @property Doctrine_Collection $Invoices
  * @property Doctrine_Collection $Tasks
- * @property Doctrine_Collection $Entry
  * @property Doctrine_Collection $Message
  * @property Doctrine_Collection $Files
  * @property Doctrine_Collection $Changelog
@@ -50,7 +49,6 @@
  * @method JobType             getJobType()        Returns the current record's "JobType" value
  * @method Doctrine_Collection getInvoices()       Returns the current record's "Invoices" collection
  * @method Doctrine_Collection getTasks()          Returns the current record's "Tasks" collection
- * @method Doctrine_Collection getEntry()          Returns the current record's "Entry" collection
  * @method Doctrine_Collection getMessage()        Returns the current record's "Message" collection
  * @method Doctrine_Collection getFiles()          Returns the current record's "Files" collection
  * @method Doctrine_Collection getChangelog()      Returns the current record's "Changelog" collection
@@ -74,7 +72,6 @@
  * @method Job                 setJobType()        Sets the current record's "JobType" value
  * @method Job                 setInvoices()       Sets the current record's "Invoices" collection
  * @method Job                 setTasks()          Sets the current record's "Tasks" collection
- * @method Job                 setEntry()          Sets the current record's "Entry" collection
  * @method Job                 setMessage()        Sets the current record's "Message" collection
  * @method Job                 setFiles()          Sets the current record's "Files" collection
  * @method Job                 setChangelog()      Sets the current record's "Changelog" collection
@@ -166,10 +163,6 @@ abstract class BaseJob extends sfDoctrineRecord
              'foreign' => 'invoice_id'));
 
         $this->hasMany('Task as Tasks', array(
-             'local' => 'id',
-             'foreign' => 'job_id'));
-
-        $this->hasMany('Entry', array(
              'local' => 'id',
              'foreign' => 'job_id'));
 

@@ -24,7 +24,7 @@ class EntryForm extends BaseEntryForm
 	$this->widgetSchema['description'] = new sfWidgetFormInputText();
 	
 	
-	$this->widgetSchema['job_id'] = new sfWidgetFormInputHidden();
+	$this->widgetSchema['task_id'] = new sfWidgetFormInputHidden();
 	$this->setDefault('amount', 1 );
 	$this->widgetSchema->setLabels(array(
 		'description'    => 'Beschreibung',
