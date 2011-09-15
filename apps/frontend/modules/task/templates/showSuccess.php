@@ -1,46 +1,65 @@
-<table>
-  <tbody>
-    <tr>
-      <th>Id:</th>
-      <td><?php echo $task->getId() ?></td>
-    </tr>
-    <tr>
-      <th>Number:</th>
-      <td><?php echo $task->getNumber() ?></td>
-    </tr>
-    <tr>
-      <th>Start:</th>
-      <td><?php echo $task->getStart() ?></td>
-    </tr>
-    <tr>
-      <th>End:</th>
-      <td><?php echo $task->getEnd() ?></td>
-    </tr>
-    <tr>
-      <th>Break:</th>
-      <td><?php echo $task->getBreak() ?></td>
-    </tr>
-    <tr>
-      <th>Approach:</th>
-      <td><?php echo $task->getApproach() ?></td>
-    </tr>
-    <tr>
-      <th>Job:</th>
-      <td><?php echo $task->getJobId() ?></td>
-    </tr>
-    <tr>
-      <th>Created at:</th>
-      <td><?php echo $task->getCreatedAt() ?></td>
-    </tr>
-    <tr>
-      <th>Updated at:</th>
-      <td><?php echo $task->getUpdatedAt() ?></td>
-    </tr>
-  </tbody>
-</table>
+ <table class="showtable">
+      <tr>
+        <th>Beginn</th>
+        <td>
+          <?php echo $task->getStart() ?>
+        </td>
 
-<hr />
+		 <th>30 %</th>
+	        <td>
+	          <?php echo $task->getOvertime()  ?> Stunden
+	        </td>
 
-<a href="<?php echo url_for('task/edit?id='.$task->getId()) ?>">Edit</a>
-&nbsp;
-<a href="<?php echo url_for('task/index') ?>">List</a>
+      </tr>
+      <tr>
+        <th>Ende</th>
+        <td>
+          <?php echo $task->getEnd() ?>
+        </td>
+      </tr>
+	 <tr>
+		
+	    <th>Type</th>
+	        <td>
+	          <?php echo $task->getTaskType() ?>
+	        </td>
+		
+	    <th>Anfahrt</th>
+        <td>
+          <?php echo $task->getApproach() ?> Minuten
+        </td>
+
+        <th>Pause</th>
+        <td>
+          <?php echo $task->getBreak() ?> Minuten
+        </td>
+
+      </tr>
+      <tr>
+        <th>Info</th>
+        <td colspan="3">
+          <?php echo $task->getInfo() ?>
+         </td>
+      </tr>
+
+      <tr>
+        <th>Auftrag</th>
+        <td>
+          <?php echo $task->getJob()?>
+        </td>
+      </tr> 
+
+
+      <tr>
+        <th>Mitarbeiter</th>
+        <td>
+		<?php foreach ($task->getUsers() as $user): ?>
+			<?php echo $user; ?>
+		<?php endforeach ?>
+          
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+

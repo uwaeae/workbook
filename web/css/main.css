@@ -56,6 +56,16 @@ form th{
 	padding: 5px;
 }
 
+.showtable th{
+	background-color: #CECEF6;
+	border-radius: 2px;
+	padding: 5px;
+}
+.showtable td{
+	font-size:7pt;
+	
+	
+}
 
 
 

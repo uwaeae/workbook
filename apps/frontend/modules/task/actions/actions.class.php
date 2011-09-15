@@ -152,6 +152,15 @@ class taskActions extends sfActions
 	
 	//$this->setTemplate('edit');
   }
+  public function executeShow(sfWebRequest $request)
+  {
+	$this->back = $this->getUser()->getAttribute('back');
+    $this->forward404Unless($this->task = Doctrine_Core::getTable('Task')->find(array($request->getParameter('id'))), sprintf('Object task does not exist (%s).', $request->getParameter('id')));
+  
+
+  }
+
+
 
   public function executeEdit(sfWebRequest $request)
   {

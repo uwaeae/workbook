@@ -140,8 +140,8 @@
 	<th style="width:150px;">Start</th>
 	<th style="width:150px;">Ende</th>
 	<th style="width:200px;">Eingeplant</th>
-	<th style="width:150px;">Erstellt</th>
-	<th style="width:150px;"></th>
+	<th style="width:200px;">Erstellt</th>
+	<th style="width:200px;"></th>
     </tr>
   </thead>
   <tbody>
@@ -158,17 +158,16 @@
 		<td><?php foreach ($task->getUsers() as $user): ?>
 			<?php echo $user ?><br>
 		<?php endforeach ?></td>
-		<td><?php echo format_date($task->getCreatedAt(),'dd.MM.yyyy') ?>
-			<?php echo $task->getCreator() ?>
+		<td><?php echo format_date($task->getCreatedAt(),'dd.MM.yyyy HH:mm') ?>
+			<?php echo $task->getCreator()->getUsername() ?>
 		</td>
 		<td>
 		
-		<?php if ($task->hasUser($sf_user->getId()) OR $sf_user->hasGroup('admin')):?>
+		
 			<a class="button" href="<?php echo url_for('task/edit?id='.$task->getId().'&type=0') ?>">
 		Bearbeiten</a>
-		<?php endif ?>
 		<?php if ($task->hasUser($sf_user->getId())):?>
-				<a class="button" href="<?php echo url_for('task/edit?id='.$task->getId()) ?>">
+				<a class="button" href="<?php echo url_for('task/edit?id='.$task->getId().'&type=1') ?>">
 				Ausgeführt</a>
 		<?php endif ?> 
 	
@@ -207,7 +206,7 @@
 <tr 
 <?php if ($job->getJobStateId() < 2): ?> 
 	class="table_item"
-	onclick="document.location='<?php echo url_for('task/edit?id='.$task->getId()) ?>'"
+	onclick="document.location='<?php echo url_for('task/'.($task->hasUser($sf_user->getId())?'edit':'show').'id='.$task->getId()) ?>'"
 <?php endif ?> >
 		<td><?php echo format_date($task->getStart(),'dd.MM.yyyy HH:mm') ?></td>
 		<td><?php echo format_date($task->getEnd() ,'dd.MM.yyyy HH:mm') ?></td>

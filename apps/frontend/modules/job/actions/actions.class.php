@@ -96,8 +96,8 @@ public function executeTable(sfWebRequest $request)
 									,$request->getParameter('max'));
 								
 	
-	if(	$this->getUser()->hasGroup('admin') 
-		OR $this->getUser()->hasGroup('office')){
+//	if(	$this->getUser()->hasGroup('admin') 
+//		OR $this->getUser()->hasGroup('office')){
 						$this->jobstate[2] = $this->getJobStateArray(2,'geplante Aufträge'
 													,Doctrine_Core::getTable('Job')->getSheduledJobs()
 													,$request->getParameter('page')
@@ -106,7 +106,7 @@ public function executeTable(sfWebRequest $request)
 										,$job->getWorkedJobs()
 										,$request->getParameter('page')
 										,$request->getParameter('max'));
-					}
+//					}
 	 if ( $this->getUser()->hasPermission('Rechung')) {
 
 	$this->jobstate[4] = $this->getJobStateArray(4,'Abgeschlossen Aufträge'
