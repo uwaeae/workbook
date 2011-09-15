@@ -171,7 +171,7 @@ class taskActions extends sfActions
 	else{
 	$this->form->setDefault('users_list', array($this->getUser()->getId()));
 	}
-	$this->form->setDefault('scheduled', 0);
+	if($this->type != 0) $this->form->setDefault('scheduled', 0);
 	$this->form->setDefault('updated_from',$this->getUser()->getId());	
  //	$this->setTemplate('edit');
   }
