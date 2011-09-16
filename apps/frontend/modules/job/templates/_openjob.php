@@ -1,8 +1,8 @@
 
-<div id="open_job">
-<h1 class="open_jobs_head">(<?php echo count($jobs)  ?>) Offene Aufträge  in der Nähe</h1>
+<div id="<?php echo $type ?>">
+<h1 class="<?php echo $type ?>_head">(<?php echo count($jobs)  ?>) <?php echo $info ?></h1>
 
-<div class="open_jobs_body">
+<div class="<?php echo $type ?>_body">
 	
 
 <ul >
@@ -10,7 +10,7 @@
 	<?php foreach ($jobs as $job): ?>
 	
 	
-	<li class="oen_jobs_item" 	onclick="document.location = '<?php  echo url_for('job/show?id='.$job->getId()) ?>'">
+	<li class="<?php echo $type ?>_item" 	onclick="document.location = '<?php  echo url_for('job/show?id='.$job->getId()) ?>'">
 	<?php echo $job->getId()?><br>
 		Ende: <?php echo format_date($job->getEnd(),'dd.MM.') ?><br>
 		Anfang: <?php echo format_date($job->getStart(),'dd.MM.') ?>

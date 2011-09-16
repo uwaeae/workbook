@@ -17,20 +17,33 @@ class JobTable extends Doctrine_Table
         return Doctrine_Core::getTable('Job');
     }
 
-	public static function getSimilarOpenJobs($postcode,$range,$id = 0)
+	public static function getSimilarOpenJobs($postcode,$range,$id = 0,$store)
     {
         return Doctrine_Query::create()
 					->select('*')
 					->from('Job j')
 					->innerJoin('j.Store s WITH s.postcode between '.
 					($postcode - $range).' and '.
-					($postcode + $range))
+					($postcode + $range).' AND s.id <> '.$store) 
+					->where('j.job_state_id = 1')
+					->andWhere('j.id <> '.$id)
+					->orderby('j.end')
+					->execute();
+		
+    }
+public static function getStoreOpenJobs($id,$store)
+    {
+        return Doctrine_Query::create()
+					->select('*')
+					->from('Job j')
+					->innerJoin('j.Store s WITH s.id ='.$store)
 					->where('j.job_state_id = 1')
 					->andWhere('j.id <>'.$id)
 					->orderby('j.end')
 					->execute();
 		
     }
+
 	public function getOwnJobs($id){
 		return 	Doctrine_Query::create()
             	->select('j.*')

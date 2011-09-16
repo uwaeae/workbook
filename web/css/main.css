@@ -496,7 +496,7 @@ div.filtertypes label {
 
 
 
-div #open_job{
+div #open_jobs{
 	float:none;
 	font-size: 8pt;
 	font-family: verdana,arial,sans-serif;
@@ -527,7 +527,7 @@ div #open_job{
 	overflow: auto;
 }
 
-.oen_jobs_item{
+.open_jobs_item{
 	 background-color: #CEECF5;
 	list-style: none outside none;
 	border: 1px solid rgba(0, 0, 0, 0.5);
@@ -535,7 +535,50 @@ div #open_job{
 	margin-top:5px;
 	margin-right: 5px;
 }
-.oen_jobs_item:hover{
+.open_jobs_item:hover{
+	 background-color: #81DAF5;
+}
+
+div #open_filiale{
+	float:none;
+	font-size: 8pt;
+	font-family: verdana,arial,sans-serif;
+	position: absolute;
+	left:40%;
+}
+
+.open_filiale_head{
+	text-align:center;
+	color: white;
+	background-color: steelblue;
+	padding: 2px 5px;
+	font-size:10px;
+	list-style: none outside none;
+	margin: 0 0.2em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	width: 25em;
+	margin-bottom: 5px;
+}
+.open_filiale_head:hover{
+	background-color: #A9F5F2;
+	color: blue;
+}
+	
+.open_filiale_body{
+	height: 40em;
+	overflow: auto;
+}
+
+.open_filiale_item{
+	 background-color: #CEECF5;
+	list-style: none outside none;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	cursor: pointer;
+	margin-top:5px;
+	margin-right: 5px;
+}
+.open_filiale_item:hover{
 	 background-color: #81DAF5;
 }
 

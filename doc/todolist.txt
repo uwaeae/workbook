@@ -18,7 +18,7 @@ Back Buttons	Historie Array machen
 
 Auftrag 		Eingabe die Datepicker jQuery UI verwenden?
 
-
+Stundenzettel	FA berechung falsch, pausen werden nicht abgezogen
 Stundenzettel	Feiertage eingeben im Backend
 Stundenzettel	Feiertage als normale Arbeit berechne außer Wochenende
 Stundenzettel	wenn urlaub als normal stunden (krank nachfragen)

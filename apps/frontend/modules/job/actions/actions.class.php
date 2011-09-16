@@ -84,7 +84,7 @@ public function executeTable(sfWebRequest $request)
      // ->execute();
 	$this->jobstate = array();
 	$job = new Job();
-	$this->jobstate[0] = $this->getJobStateArray(0,'Meine Aufträge'
+	$this->jobstate[0] = $this->getJobStateArray(0,'meine Aufträge'
 									,Doctrine_Core::getTable('Job')->getOwnJobs($this->getUser()->getId())
 									,$request->getParameter('page')
 									,$request->getParameter('max'));
@@ -109,7 +109,7 @@ public function executeTable(sfWebRequest $request)
 //					}
 	 if ( $this->getUser()->hasPermission('Rechung')) {
 
-	$this->jobstate[4] = $this->getJobStateArray(4,'Abgeschlossen Aufträge'
+	$this->jobstate[4] = $this->getJobStateArray(4,'abgeschlossen Aufträge'
 								,Doctrine_Core::getTable('Job')->getFinishedJobs()
 								,$request->getParameter('page')
 								,$request->getParameter('max'));}				
@@ -167,14 +167,18 @@ public function executeTable(sfWebRequest $request)
   }
  public function executeArchiv(sfWebRequest $request)
   {
-	
-	$this->jobs = Doctrine_Query::create()
-			->select('j.*')
-			->from('Job j')
-			->where('j.job_state_id > 1')
-			->andWhere(' j.id IN (select job_id from job_invoice) ')
-			->orderby('j.end')
-			->execute();
+		$max = 25;
+		if($request->hasParameter('max')) $max = $request->getParameter('max');
+		$this->pager = new sfDoctrinePager('Job',$max );	
+		$this->pager->setQuery( Doctrine_Query::create()
+				->select('j.*')
+				->from('Job j')
+				->where('j.job_state_id > 1')
+				->andWhere(' j.id IN (select job_id from job_invoice) ')
+				->orderby('j.end'));
+		$this->pager->setPage($request->getParameter('page'));
+		$this->pager->init();
+		
   }
   
 
@@ -190,7 +194,11 @@ public function executeTable(sfWebRequest $request)
 		
 	$this->setBack('job/show?id='.$request->getParameter('id'));
 	$this->changelog = Doctrine_Core::getTable('JobChangeLog')->getLastChange($this->job->getId());
-	$this->openjobs = Doctrine_Core::getTable('Job')->getSimilarOpenJobs($this->job->getStore()->getPostcode() ,10,$this->job->getId());
+	
+	$this->openjobs_near = Doctrine_Core::getTable('Job')->getSimilarOpenJobs($this->job->getStore()->getPostcode() ,10,$this->job->getId(),$this->job->getStore()->getId());
+	$this->openjobs_same = Doctrine_Core::getTable('Job')->getStoreOpenJobs($this->job->getId(),$this->job->getStore()->getId());
+	
+	
 	$this->form = new FileForm(NULL);
 	//$this->form->setDefault('jobs_list', array($this->job->getId()));
     $this->entrys  = Doctrine_Core::getTable('Entry')->getEntypByJob($this->job->getId());
@@ -203,7 +211,7 @@ public function executeTable(sfWebRequest $request)
 			
 			$Stunden =  date('H',strtotime($task->getEnd())) - date('H',strtotime($task->getStart()))  - $task->getOvertime();
 		 	$Minuten = (date('i',strtotime($task->getEnd())) - date('i',strtotime($task->getStart())));
-			$Minuten = round($Minuten / $part, 0) * $part;
+			$Minuten = round(($Minuten - ($task->getBreak()*15)) / $part, 0) * $part;
 			if($Minuten != 0) $Stunden += round($Minuten / 60,2);
 			$this->worksumme += $Stunden;
 			$t = array('time' => $Stunden, 'task'=> $task);

@@ -33,9 +33,9 @@ Customer:
 
 JobState:
   Offen:
-    name: Offen
+    name: offen
   Erledigt:
-    name: Erledigt
+    name: erledigt
  
         
 JobType:
@@ -51,7 +51,7 @@ TaskType:
   Job:
     name: Auftrag
   Sickness:
-    name: Krank
+    name: krank
   Holiday:
     name: Urlaub
   Buero:

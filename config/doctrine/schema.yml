@@ -149,6 +149,10 @@ Task:
     task_type_id:
       type: integer
       default: 1
+    correction_time:
+      type: integer
+    correction_info:
+      type: string
     created_at:
       type: timestamp
     created_from:

@@ -1,6 +1,7 @@
 <?php  use_helper('Date');?>
 <?php use_javascript('jobshow.js') ?>
-<?php include_partial('openjob', array('jobs' => $openjobs)) ?>
+<?php include_partial('openjob', array('jobs' => $openjobs_near,'type'=> 'open_jobs','info'=> 'Offene Aufträge  in der Nähe')) ?>
+<?php include_partial('openjob', array('jobs' => $openjobs_same,'type'=> 'open_filiale','info'=> 'Offene Aufträge  in der Filiale')) ?>
 
 <table class="job_show">
   <tbody>
@@ -76,10 +77,10 @@
 
     <tr>
 	
- 		<th>Erstellt am</th>
+ 		<th>erstellt am</th>
 		<td ><?php echo format_date($job->getCreatedAt(),'dd.MM.yyyy HH:mm') ?></td>
 		<td ><?php echo $create->getUsername() ?></td>
-		<th>Zuletzt Bearbeitet am</th>
+		<th>Zuletzt bearbeitet am</th>
 		<td><?php echo format_date($job->getUpdatedAt(),'dd.MM.yyyy HH:mm') ?></td>
 		<td ><?php echo $update->getUsername() ?></td>
 	
@@ -111,15 +112,15 @@
 				<a class="button" href="<?php echo url_for('invoice/new/?job='.$job->getId()) ?>">
 				Rechnungsnummer erstellen</a>
 				<a href="<?php echo url_for( 'job/finish/?id='.$job->getId()) ?>" 
-					onclick="return confirm('Sind sie sicher das sie den Auftrag Nummer 1 abschliesen möchten?');" 
+					onclick="return confirm('Sind sie sicher das sie den Auftrag Nummer <?php echo $job->getId() ?> wieder einstellen möchten?');" 
 					class="button" >
-					Aufschließen 
+					Auftrag wieder einstellen 
 				</a>
 		<?php else: ?>
 			<a href="<?php echo url_for( 'job/finish/?id='.$job->getId()) ?>" 
-				onclick="return confirm('Sind sie sicher das sie den Auftrag Nummer 1 wieder aufschliesen möchten?');" 
+				onclick="return confirm('Sind sie sicher das sie den Auftrag Nummer <?php echo $job->getId() ?> wieder abschliesen möchten?');" 
 				class="button" >
-				<img src="/images/icons/tick.png"  />Auftrag Abschließen
+				<img src="/images/icons/tick.png"  />Auftrag abschließen
 			</a>
 		<?php endif ?>
 	</tr>
@@ -208,10 +209,20 @@
 	</thead>
 	<tbody>
 <?php foreach ($work as $task): ?>
-		<tr <?php if ($job->getJobStateId() < 2): ?> 
+		<tr 
+		
+		<?php if ($job->getJobStateId() < 2): ?> 
 			class="table_item"
 			onclick="document.location='<?php echo url_for('task/'.(($task['task']->hasUser($sf_user->getId()) OR $sf_user->hasGroup('admin')) ?'edit':'show').'?id='.$task['task']->getId()) ?>'"
-			<?php endif ?> >
+			<?php else: ?>
+			<?php if ($sf_user->hasGroup('admin')): ?>
+					class="table_item"
+						onclick="document.location='<?php echo url_for('task/edit?id='.$task['task']->getId()) ?>'"
+			<?php endif ?>	
+		
+			
+			<?php endif ?> 
+			>
 		<td><?php echo format_date($task['task']->getStart(),'dd.MM.yyyy HH:mm') ?></td>
 		<td><?php echo format_date($task['task']->getEnd() ,'dd.MM.yyyy HH:mm') ?></td>
 
