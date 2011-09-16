@@ -182,6 +182,28 @@ public function executeTable(sfWebRequest $request)
 	$this->form = new FileForm(NULL);
 	//$this->form->setDefault('jobs_list', array($this->job->getId()));
     $this->entrys  = Doctrine_Core::getTable('Entry')->getEntypByJob($this->job->getId());
+	$this->date = array();
+	$this->work = array();
+	$this->worksumme = 0;
+	$part = Doctrine_Core::getTable('Option')->getOptionByName('payroll_hour_split');
+	foreach ($this->job->getTasks() as $task) {
+		if(!$task->getScheduled()){
+			
+			$Stunden =  date('H',strtotime($task->getEnd())) - date('H',strtotime($task->getStart()))  - $task->getOvertime();
+		 	$Minuten = (date('i',strtotime($task->getEnd())) - date('i',strtotime($task->getStart())));
+			$Minuten = round($Minuten / $part, 0) * $part;
+			if($Minuten != 0) $Stunden += round($Minuten / 60,2);
+			$this->worksumme += $Stunden;
+			$t = array('time' => $Stunden, 'task'=> $task);
+			
+			$this->work[] = $t;
+		}
+		else{
+			$this->date[] = $task;
+		}
+		
+	}
+
 
   }
 

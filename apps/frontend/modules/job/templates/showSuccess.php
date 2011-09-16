@@ -185,40 +185,51 @@
   <thead>
     <tr>
 		<td colspan="2">
-			<?php if ($job->getJobStateId() < 2): ?>
+		
 			 <a class="button" href="<?php echo url_for('task/new/?job='.$job->getId()) ?>">
 			 neue Arbeit </a>
-				<?php endif ?>
+				
 		</td>
 	</tr>
 	<th style="width:150px;">Start</th>
 	<th style="width:150px;">Ende</th>
+
 	<th style="width:350px;">Arbeiten</th>
 	<th style="width:200px;">Mitarbeiter</th>
+	<th style="width:50px;">Stunden</th>
 	<th style="width:150px;">Erstellt</th>
 	</tr>
-  </thead>
-  <tbody>
-    <?php foreach ($job->getTasks() as $task): ?>
-<?php if (!$task->getScheduled()): ?>
-	
-  
-<tr 
-<?php if ($job->getJobStateId() < 2): ?> 
-	class="table_item"
-	onclick="document.location='<?php echo url_for('task/'.($task->hasUser($sf_user->getId())?'edit':'show').'?id='.$task->getId()) ?>'"
-<?php endif ?> >
-		<td><?php echo format_date($task->getStart(),'dd.MM.yyyy HH:mm') ?></td>
-		<td><?php echo format_date($task->getEnd() ,'dd.MM.yyyy HH:mm') ?></td>
-		<td><?php echo $task->getInfo() ?></td>
-		<td><?php echo format_date($task->getCreatedAt(),'dd.MM.yyyy') ?></td>
-		<td><?php foreach ($task->getUsers() as $user): ?>
+	</thead>
+	<tbody>
+<?php foreach ($work as $task): ?>
+		<tr <?php if ($job->getJobStateId() < 2): ?> 
+			class="table_item"
+			onclick="document.location='<?php echo url_for('task/'.($task['task']->hasUser($sf_user->getId())?'edit':'show').'?id='.$task['task']->getId()) ?>'"
+			<?php endif ?> >
+		<td><?php echo format_date($task['task']->getStart(),'dd.MM.yyyy HH:mm') ?></td>
+		<td><?php echo format_date($task['task']->getEnd() ,'dd.MM.yyyy HH:mm') ?></td>
+
+		<td><?php echo $task['task']->getInfo() ?></td>
+		<td><?php foreach ($task['task']->getUsers() as $user): ?>
 			<?php echo $user ?><br>
 		<?php endforeach ?></td>
+		<td><?php echo $task['time'] ?></td>
+		<td><?php // echo format_date($task['task']->getCreatedAt(),'dd.MM.yyyy') ?>
+			<?php echo $task['task']->getCreator()->getUsername() ?>
+			</td>
 	</tr>
-	<?php endif ?>  
-    <?php endforeach; ?>
-  </tbody>
+<?php endforeach; ?>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td ></td>
+			<td ></td>
+			<th colspan="2">Summe</th>
+			<td ><strong><?php echo $worksumme ?></strong></td>
+
+			<td ></td>
+		</tr>
+	</tfoot>
 </table>
 
 <h3 class="job_items_head">Material 
@@ -228,8 +239,6 @@
   <thead>
 	  <tr>
 			<td colspan="2">
-						<a class="button" href="<?php echo url_for('entry/new/?taskid='.$task->getId()) ?>">
-						bearbeiten</a>
 				</td>
 		</tr>
     <tr>

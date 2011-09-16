@@ -32,7 +32,7 @@ class EntryTable extends Doctrine_Table
 			
 			foreach ($task->getEntry() as $entry) {
 			$mc = $entry->getItem()->getCode();
-			if(!$output[$mc]){
+			if(!isset($output[$mc])){
 				$output[$mc] = array();
 				$output[$mc]['amount'] = 0;
 			}
