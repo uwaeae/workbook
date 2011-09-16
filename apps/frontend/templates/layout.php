@@ -30,7 +30,7 @@
 	<?php if ($sf_user->isAuthenticated()): ?>
 	<div class="menu">
 		<ul>
-			<li><?php echo link_to('Kalender','calendar/day/?next='.($calendar['next'])); ?></li>
+			<li><?php echo link_to('Kalender','calendar/table/?next='.($calendar['next'])); ?></li>
 			<li><?php echo link_to('Auftäge','job'); ?></li>
 		<?php if ($sf_user->hasPermission('Neu')): ?>
 			<li><?php echo link_to('Neu','job/new'); ?></li>

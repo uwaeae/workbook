@@ -71,7 +71,7 @@ sfGuardGroup:
   Group_admin:
     name:           admin
     description:    Administrator group
-    Permissions:    [Permission_admin,Job_Neu, Job_Edit,Job_assign,Job_Invoice, Customer]
+    Permissions:    [Permission_admin,Job_Neu, Job_Edit,Job_assign,Job_Invoice, Customer,Correctur]
   Group_office:
     name:           supervisor
     description:    Buero Gruppe
@@ -99,7 +99,10 @@ sfGuardPermission:
     description:    Einen Auftrag Bearbeiten
   Job_Invoice:
     name:           Rechung
-    description:    Rechungsnummer Erstellen    
+    description:    Rechungsnummer Erstellen
+  Correctur:
+    name:           Korrektur
+    description:    Arbeitssunden Korrigieren    
   Item:
     name:           Material
     description:    Material verwalten

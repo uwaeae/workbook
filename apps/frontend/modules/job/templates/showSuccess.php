@@ -143,8 +143,8 @@
 	</tr>
 	<th style="width:150px;">Start</th>
 	<th style="width:150px;">Ende</th>
-	<th style="width:200px;">Eingeplant</th>
-	<th style="width:200px;">Erstellt</th>
+	<th style="width:200px;">eingeplant</th>
+	<th style="width:200px;">erstellt</th>
 	<th style="width:200px;"></th>
     </tr>
   </thead>

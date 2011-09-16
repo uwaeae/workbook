@@ -88,13 +88,29 @@
 <?php endif ?>
  <?php if (!$form['users_list']->isHidden()): ?>
       <tr>
-        <th><?php echo $form['users_list']->renderLabel() ?></th>
-        <td>
+        <th rowspan="2"><?php echo $form['users_list']->renderLabel() ?></th>
+        <td rowspan="2">
           <?php echo $form['users_list']->renderError() ?>
           <?php echo $form['users_list'] ?>
         </td>
-      </tr>
+      
 <?php endif ?> 
+<?php if (isset($form['correction_time'])): ?>
+      
+        <th><?php echo $form['correction_time']->renderLabel() ?></th>
+        <td>
+          <?php echo $form['correction_time']->renderError() ?>
+          <?php echo $form['correction_time'] ?> Stunden
+	</tr>
+	<tr>
+		<th><?php echo $form['correction_info']->renderLabel() ?></th>
+        <td>
+          <?php echo $form['correction_info']->renderError() ?>
+          <?php echo $form['correction_info'] ?>
+        </td>
+      </tr>
+<?php endif ?>
+ </tr>
     </tbody>
   </table>
 

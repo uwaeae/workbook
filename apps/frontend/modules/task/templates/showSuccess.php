@@ -1,4 +1,7 @@
- <table class="showtable">
+<h3 class="job_items_head">Arbeit 
+</h3> 
+
+<table class="job_component">
       <tr>
         <th>Beginn</th>
         <td>
@@ -43,9 +46,13 @@
       </tr>
 
       <tr>
-        <th>Auftrag</th>
+        <th>Adresse</th>
         <td>
-          <?php echo $task->getJob()?>
+			<?php echo $task->getJob()->getStore()->getCustomer()->getCompany() ?><br>
+			<?php echo $task->getJob()->getStore()->getStreet() ?><br>
+			<?php echo $task->getJob()->getStore()->getPostcode() ?>
+			<?php echo $task->getJob()->getStore()->getCity() ?>
+			<?php echo $task->getJob()->getStore()->getDestrict() ?>
         </td>
       </tr> 
 
@@ -62,4 +69,43 @@
 
     </tbody>
   </table>
+<h3 class="job_items_head">Material 
+
+	</h3>
+<table class="job_component">
+  <thead>
+    <tr>
+      <th colspan="2" style="width:10%;">Einheit</th>
+      <th style="width:auto;">Artikel</th>
+      <th style="width:auto;">Beschreibung</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($task->getEntry() as $entry): ?>
+    <tr>
+		<td><?php echo $entry->getAmount() ?> </td>
+		<td><?php echo $entry->getItem()->getUnit()  ?></td>		
+		<td><?php echo $entry->getItem()->getCode() ?></td>
+		<td>
+		<?php 
+		 echo $entry->getItem()->getDescription();
+		 echo $entry->getDescription(); ?></td>
+
+    </tr>
+    <?php endforeach; ?>
+  </tbody>
+	<tfoot>	
+    <tr>
+		<td ></td>
+		<td ></td>
+		<td ></td>
+
+      <td >
+
+      </td>
+    </tr>
+  </tfoot>
+</table>
+<?php echo link_to('zurück',$back,array('class'=>'button')) ?>
+
 

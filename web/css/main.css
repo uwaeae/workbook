@@ -127,7 +127,7 @@ form th{
 	font-size:7pt;
 	color:#333333;
 	float:left;
-	xwidth: 100%;
+	margin-top: 25px;
 	
 }
 .cal_col_even,

@@ -17,6 +17,9 @@ class TaskForm extends BaseTaskForm
 		 );
 	$this->widgetSchema['job_id'] = new sfWidgetFormInputHidden();
 	$this->widgetSchema['scheduled'] = new sfWidgetFormInputHidden();
+	$this->widgetSchema['correction_time'] = new sfWidgetFormInputText();
+    $this->widgetSchema['correction_info'] = new sfWidgetFormTextarea();
+	
 	$this->setDefault('scheduled',0);
 		
 	switch ($this->getOption('type')) {
@@ -73,7 +76,7 @@ class TaskForm extends BaseTaskForm
 			break;
 		
 	}
-
+	
 
 
 	$this->widgetSchema['end'] = new sfWidgetFormJQueryDate(array( 'image' => '/images/icons/calendar.png','config' => '{}',));
@@ -92,7 +95,10 @@ class TaskForm extends BaseTaskForm
 	  'start'   => 'Beginn',
 	 'users_list' => 'Mitarbeiter',
 	'overtime' => '30 % Stunden',
-	'task_type_id' => 'Type'	
+	'task_type_id' => 'Type',
+	'correction_time' => 'Korrektur Zeit',
+	'correction_info' => 'Korrektur Bemerkung'
+	
 	));	
   }
 
