@@ -9,7 +9,7 @@
 		<th>Typ</th>
 		<th>bis zum</th>
 	<?php if ($type > 1): ?>
-		<th>Thermin</th>
+		<th>Termin</th>
 	<?php endif ?>	
 	</tr>
 	</thead>

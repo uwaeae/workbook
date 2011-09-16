@@ -37,6 +37,7 @@ class JobTable extends Doctrine_Table
 				->from('Job j')
 				->leftJoin('j.Tasks t')
 				->innerJoin('t.TaskUser u ON t.id = u.task_id AND u.user_id ='.$id )
+				->andWhere('j.job_state_id < 2')
 				->orderby('j.end');
 		
 	}
@@ -46,6 +47,7 @@ class JobTable extends Doctrine_Table
 			->from('Job j')
 			->leftJoin('j.Tasks t')
 			->where('t.scheduled IS null OR FALSE')
+			->andWhere('j.job_state_id < 2')
 			->orderby('j.end');
 		
 	}
@@ -75,11 +77,9 @@ class JobTable extends Doctrine_Table
 			return  Doctrine_Query::create()
 				->select('j.*')
 				->from('Job j')
-				->leftJoin('j.Tasks t')
-				->where('t.scheduled IS NOT TRUE')
-				->andWhere('j.job_state_id = 2')
+				->where('j.job_state_id = 2')
 				->leftJoin('j.Invoices i')
-				->andWhere('i.id is null   ')
+				->andWhere('i.id is null ')
 				->orderby('j.end');
 		
 		
@@ -88,8 +88,6 @@ class JobTable extends Doctrine_Table
 		return  Doctrine_Query::create()
 			->select('j.*')
 			->from('Job j')
-			->leftJoin('j.Tasks t')
-			->where('t.scheduled IS NOT TRUE')
 			->andWhere('j.job_state_id = 2')
 			->leftJoin('j.Invoices i')
 			->andWhere('i.id is not null   ')

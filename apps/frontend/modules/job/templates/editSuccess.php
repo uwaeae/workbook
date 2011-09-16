@@ -1,2 +1,2 @@
-<?php include_partial('form', array('form' => $form)) ?>
+<?php include_partial('form', array('form' => $form, 'backurl' => $back)) ?>
 

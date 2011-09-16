@@ -31,23 +31,27 @@
           <?php echo $form['jobs_list']->renderError() ?>
           <?php echo $form['jobs_list'] ?>
 			<?php if (isset($job)): ?>
-
-				<?php foreach ($job->getCalendar() as $thermin): ?>
-					<?php echo  format_date($thermin->getBeginn(),'dd.MM.yyyy HH:mm') ?><br>
-				<?php endforeach ?>
-			
-				<?php echo $job->getStore()->getCustomer()->getCompany() ?>
-				<br>
+			<p>
+				<?php echo $job->getStore()->getCustomer()->getCompany() ?>	<br>
+				
 				
 				<?php echo $job->getStore()->getStreet() ?>
 				<br>
 				<?php echo $job->getStore()->getPostcode() ?>
 
 				<?php echo $job->getStore()->getCity() ?>
-					<br>
+			</p>
+			<p>	
 				<?php echo $job->getDescription() ?>
-			<?php endif ?>
+			</p>
+		
         </td>
+		<td>
+			Auftragsnummer <?php echo $job->getID() ?> <br>
+			 <?php echo format_date($job->getStart(),'dd.MM.yyyy HH:mm') ?> -
+		     <?php echo format_date($job->getEnd(),'dd.MM.yyyy HH:mm') ?> <br>
+				<?php endif ?>
+		</td>	
 		<tr>
 	        <th><?php echo $form['number']->renderLabel() ?></th>
 	        <td>

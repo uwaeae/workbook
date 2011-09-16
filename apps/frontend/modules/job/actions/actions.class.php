@@ -124,6 +124,18 @@ public function executeTable(sfWebRequest $request)
 		$this->setBack('job');
 			
   }
+
+ public function executeFinish(sfWebRequest $request)
+  {
+ $this->forward404Unless($job = Doctrine_Core::getTable('Job')->find(array($request->getParameter('id'))), 		sprintf('Object job does not exist (%s).', $request->getParameter('id')));
+	if ($job->getJobStateId() > 1) $job->setJobStateId(1);
+	else $job->setJobStateId(2);
+
+	$job->save();
+	//$this->job = $job;
+    $this->redirect('job/show/?id='.$job->getId());
+
+}
  
  public function executeSearch(sfWebRequest $request)
   {

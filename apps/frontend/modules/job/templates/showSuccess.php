@@ -63,11 +63,12 @@
 					<li class="jobfile"><?php echo link_to($file->getName(),'/file/get/?id='.$file->getID()) ?>
 						<?php echo link_to('Delete', 'file/delete?id='.$file->getID(), array('method' => 'delete', 'confirm' => 'Are you sure?','class'=>'button','style'=> 'float:right;')) ?></li>
 				<?php endforeach ?>
+				<?php if ($job->getJobStateId() < 2): ?> 	
 					<li class="jobfile newfilebutton"><label class="button newfilebutton">Neue Datei</label></li>
 					<li class="jobfile newfileform">
 	<?php include_partial('fileform', array('form' => $form,'job' => $job->getId())) ?>
 						</li>
-				
+				<?php endif ?>
 				</ul>
 				
 			</td>
@@ -93,16 +94,17 @@
 			<a class="button" href="<?php echo   url_for($back) ?>">	
 				zurück</a></li>
 				<?php if ($sf_user->hasPermission('Bearbeiten')): ?>
-					
+				<?php if ($job->getJobStateId() < 2): ?> 	
 			<li class="table_menu_left">
+						
 		<a class="button" href="<?php echo url_for('job/edit?id='.$job->getId()) ?>">
 				ändern</a></li>
+				<?php endif ?>
 				<?php endif ?>
 				
 		</ul>	
 		</td>
 		<td>
-		<?php if (!$job->hasSheduledTasks()): ?>
 			
     		
 		<?php if ($job->getJobStateId() > 1): ?>
@@ -120,7 +122,6 @@
 				<img src="/images/icons/tick.png"  />Auftrag Abschließen
 			</a>
 		<?php endif ?>
-	<?php endif ?>
 	</tr>
 	</tfood>	
 </table>
@@ -133,8 +134,10 @@
   <thead>
     <tr>
 		<td colspan="2">
+			<?php if ($job->getJobStateId() < 2): ?> 
 					<a class="button" href="<?php echo url_for('task/new/?job='.$job->getId().'&type=0') ?>">	
-					Termin Planen</a></li>
+					Termin planen</a></li>
+			<?php endif ?>
 		</td>
 	</tr>
 	<th style="width:150px;">Start</th>
@@ -185,9 +188,12 @@
   <thead>
     <tr>
 		<td colspan="2">
-		
+			<?php if ($job->getJobStateId() < 2): ?> 
 			 <a class="button" href="<?php echo url_for('task/new/?job='.$job->getId()) ?>">
 			 neue Arbeit </a>
+		
+				
+			<?php endif ?>
 				
 		</td>
 	</tr>
@@ -204,7 +210,7 @@
 <?php foreach ($work as $task): ?>
 		<tr <?php if ($job->getJobStateId() < 2): ?> 
 			class="table_item"
-			onclick="document.location='<?php echo url_for('task/'.($task['task']->hasUser($sf_user->getId())?'edit':'show').'?id='.$task['task']->getId()) ?>'"
+			onclick="document.location='<?php echo url_for('task/'.(($task['task']->hasUser($sf_user->getId()) OR $sf_user->hasGroup('admin')) ?'edit':'show').'?id='.$task['task']->getId()) ?>'"
 			<?php endif ?> >
 		<td><?php echo format_date($task['task']->getStart(),'dd.MM.yyyy HH:mm') ?></td>
 		<td><?php echo format_date($task['task']->getEnd() ,'dd.MM.yyyy HH:mm') ?></td>
