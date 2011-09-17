@@ -15,15 +15,14 @@ Konfiguration	Optionen in den Modulen Laden
 
 
 Back Buttons	Historie Array machen
-
+Auftrag 		Neu über die Übersicht und aus dem Hauptmenu raus
 Auftrag 		Eingabe die Datepicker jQuery UI verwenden?
+Auftrag 		übersicht Statutes prüfen ob Querys richtig
 
-Stundenzettel	FA berechung falsch, pausen werden nicht abgezogen
-Stundenzettel	Feiertage eingeben im Backend
-Stundenzettel	Feiertage als normale Arbeit berechne außer Wochenende
-Stundenzettel	wenn urlaub als normal stunden (krank nachfragen)
+
 Stundenzettel	Buero Arbeit erstellen mit allem
 Stundenzettel	Alle Task Typen als buttons ausgeben.
+Stundenzettel	Korrekturwert mit Kommastellen angeben
 
 
 Kalendar		Task Kundenname, Adresse, Info 50 Zeichen
@@ -40,6 +39,7 @@ Archiv			Suche nach Rechungsnummer/Name/Adresse/Filialnummer
 
 Task			Anfahrt Standart 30 Minuten
 Task			Minuten angabe in 15 Minuten
+Task 			Korrektur ausblenden wenn Job noch offen ist
 Task			TESTen
 
 FEATURES
@@ -57,6 +57,13 @@ Auftrag 		Dateihochladen und anzeigen
 Stundenzettel	Monatssyitsch
 Stundenzettel	Filter User funktioniert nicht
 Stundenzettel	Admin Switsch zwischen unsern
+Stundenzettel	FA berechung falsch, pausen werden nicht abgezogen 1709
+Stundenzettel	Feiertage eingeben im Backend 1709
+Stundenzettel	Feiertage als normale Arbeit berechne außer Wochenende 1709
+Stundenzettel	wenn urlaub als normal stunden (krank nachfragen) 1709
+
+
+
 Job				 anzeige welche Jobs schon in dieser Adresse/Filiale bearbeitet worden sind.
 Job				 anzeige in bei der Bearbeitung eines Jobs welche Jobs sich in der nähe befinden
 Job				Geplanter Termin und Arbeit in 2 Listen
