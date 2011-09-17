@@ -43,9 +43,9 @@
 		<?php echo $task['task']->getJob()->getStore()->getCity() ?>
 		</td>
 		<td><?php echo $task['task']->getInfo() ?></td>
-		<td class="number"><?php echo $task['task']->getApproach() * 0.15 ?></td>
+		<td class="number"><?php if(isset($task['approach']))echo $task['approach'] ?></td>
 		<td class="number"><?php if(isset($task['worktime'])) echo $task['worktime'] ?></td>
-		<td class="number"><?php  echo $task['task']->getOvertime() ?></td>
+		<td class="number"><?php if($task['task']->getOvertime() != 0) echo $task['task']->getOvertime() ?></td>
 		<td class="number"><?php if(isset($task['holyday'])) echo $task['holyday'] ?></td>
 		<td class="number"><?php if(isset($task['sickness']))echo $task['sickness'] ?></td>
 		
@@ -58,19 +58,31 @@
 		<td></td>
 		<td></td>
 		<td></td>
+		<td>Summe</td>
+	
+	<td class="number"><?php echo $approach ?></td>
+	<td class="number"><?php echo $worktime ?></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
 		
-		<td colspan="2">Summe</td>
-		<td class="number"><?php echo $worktime ?></td>
+		<td colspan="1">Summe mit FA</td>
+		<td colspan="2" class="number"><?php echo $approach+ $worktime ?></td>
 		<td class="number"><?php echo $overtime ?></td>
 		<td class="number"><?php echo $holyday ?></td>
 		<td class="number"><?php echo $sickness  ?></td>
-		<td class="number"><?php echo ($sickness + $holyday+$overtime+ $worktime) ?></td>	
+		<td class="number"><?php echo ($sickness + $holyday+$overtime+$approach+ $worktime) ?></td>	
 	</tr>	
 	<tr>
 		<td colspan="10">
-			<a class="button" href="<?php echo url_for('task/new?type=1') ?>">Arbeit</a>
-			<a class="button" href="<?php echo url_for('task/new?type=2') ?>">Krank</a>
-			<a class="button" href="<?php echo url_for('task/new?type=3') ?>">Urlaub</a>
+			<?php foreach ($TaskType as $type): ?>
+			<a class="button" href="<?php echo url_for('task/new?type='.$type->getId()) ?>"><?php echo $type->getName() ?></a>
+			<?php endforeach ?>
 			
 		</td>
 	</tr>

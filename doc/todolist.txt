@@ -12,7 +12,7 @@ Backend 		Einstellungen Menu Einbindung
 
 Konfiguration	Optionen in den Modulen Laden
 
-Job				anzeige welche Jobs schon in dieser Adresse/Filiale bearbeitet worden sind.
+
 
 Back Buttons	Historie Array machen
 
@@ -25,22 +25,21 @@ Stundenzettel	wenn urlaub als normal stunden (krank nachfragen)
 Stundenzettel	Buero Arbeit erstellen mit allem
 Stundenzettel	Alle Task Typen als buttons ausgeben.
 
-Kalender		Wochenanzeige pro Mitarbeiter eine Wochen anzeigen
+
 Kalendar		Task Kundenname, Adresse, Info 50 Zeichen
 Kalendar		alle sehen, nur eigene bearbeiten 
 
 Job 			Datei Mime Type mit speichern und übergeben bein download
-job				Arbeit Stunden pro task
-job				Summe Stunden
+Job				anzeige welche Jobs schon in dieser Adresse/Filiale bearbeitet worden sind.
 Job				TESTEN
 
-Task			Job Termin zuweisen Berechtigung in New Task verschieben.
-Task			nur der erstellter oder Admin kann bearbeiten
-Task			Bearbeiter anzeigen!
-Task 			Abschliesen wen Job dicht
+Kunden			Anzeige sortieren nach FirmenName
+Kunden			Suche nach Filialnummer/Name/Adresse
+
+Archiv			Suche nach Rechungsnummer/Name/Adresse/Filialnummer
+
 Task			Anfahrt Standart 30 Minuten
 Task			Minuten angabe in 15 Minuten
-Task			Material 
 Task			TESTen
 
 FEATURES
@@ -64,7 +63,16 @@ Job				Geplanter Termin und Arbeit in 2 Listen
 Job				Aufträge in der nächste ohne den eigenen
 Job				User hinterlegen beim Speichern oder Ändern 1409
 job				Offene Aufträge Aktuellen Auftrag ausblenden 1409
+job				Arbeit Stunden pro task 1709
+job				Summe Stunden 1709
 
+Task			Job Termin zuweisen Berechtigung in New Task verschieben. 1709
+Task			nur der erstellter oder Admin kann bearbeiten 1709
+Task			Bearbeiter anzeigen! 1709
+Task 			Abschliesen wen Job dicht 1709
+Task			Material 1709
+
+Kalender		Wochenanzeige pro Mitarbeiter eine Wochen anzeigen 1709
 Kalender		 User Filter funktoniert irgenwie nicht?!
 Kalender		 Fertig stellen
 Kalender		 alles User anzeigen übersichtlicheremachen vieleicht durch weitere Überschriftsspalte und Timeline?

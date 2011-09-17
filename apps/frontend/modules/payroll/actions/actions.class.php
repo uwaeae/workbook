@@ -31,7 +31,7 @@ protected function getMonth($number){
 	
 }
 
-protected function makeNavForm()
+protected function makeNavForm($user)
   {
 	$form = new sfForm();
 	$month = Doctrine_Query::create()
@@ -58,7 +58,7 @@ protected function makeNavForm()
 	      	'add_empty' => false,
 			'expanded' => true,
 	      	'multiple'	=> false )));
-	$form->setDefault('user', $this->getUser()->getId());
+	$form->setDefault('user', $user);
 	
 
 	return $form;
@@ -88,6 +88,8 @@ protected function makeNavForm()
 		}
 		
 		$this->tasks = array();
+		
+		$this->approach = 0;
 		$this->worktime = 0;
 		$this->overtime = 0;
 		$this->sickness = 0;
@@ -97,28 +99,28 @@ protected function makeNavForm()
 		$query = Doctrine_Query::create()
 					->select('t.*, ')
 					->from('Task t');
+		
+		$user = ($request->hasParameter('user')? $request->getParameter('user') : $this->getUser()->getId());
 					
-		if($request->hasParameter('user')){
-			$query->where('t.id  IN ( select task_id from task_user where user_id ='.$request->getParameter('user').')'); }	
-		else{
-			$query->where('t.id  IN ( select task_id from task_user where user_id ='.$this->getUser()->getId().')'); }
+		$query->where('t.id  IN ( select task_id from task_user where user_id = '.$user.')');
+		$query->andWhere('t.scheduled is not TRUE');
 		
 		if($request->hasParameter('month'))
 				$t = $query->andWhere('MONTH(t.start) = '.$request->getParameter('month'))
 					->execute();
 		else $t = $query->andWhere('MONTH(t.start) = MONTH(NOW()) ')
 				->execute();
-					
+		$this->setBack('payroll/index/?user='.$user.($request->hasParameter('month')? '&month='.$request->getParameter('month'):''));			
 	 foreach ($t as $task) {
 	 	$tmp = array();
 			$start = strtotime($task->getStart());
 			$diff = date_diff(new DateTime($task->getStart()), new DateTime($task->getEnd()));
 			if($diff->format('%d') > 0 ){
 				$Stunden = 0;
-				for($i = 1; $i < $diff->format('%d'); $i++)
+				for($i = 0; $i <= $diff->format('%d'); $i++)
 				{
 		   			$date = mktime(0, 0, 0, date("m",$start)  , date("d",$start)+ $i , date("Y",$start));	
-					if(	date('w',$date) != 0 or date('w',$date) != 6)
+					if(	date('w',$date) != 0 AND date('w',$date) != 6 AND  !Doctrine_Core::getTable('Holiday')->isHoliday($date))
 					{
 					$Stunden++;
 					}
@@ -144,6 +146,8 @@ protected function makeNavForm()
 			//	echo '<td>'.$Stunden.'</td><td>'.($task->getOvertime() == 0?' ':$task->getOvertime() ).'</td><td></td><td></td>';
 					$tmp['worktime'] = $Stunden;
 					$this->worktime += $Stunden;
+					$tmp['approach'] = $task->getApproach() * 0.25;
+					$this->approach += $task->getApproach() * 0.25;
 					break;
 				case '2':
 				//	echo '<td></td><td>'.($task->getOvertime() == 0?' ':$task->getOvertime() ).'</td><td>'.$Stunden.'</td><td></td>';
@@ -164,8 +168,24 @@ protected function makeNavForm()
 	
 	
 	 }
-		$this->form = $this->makeNavForm();	
+		$this->form = $this->makeNavForm($user);
+		$this->TaskType  = Doctrine_Query::create()
+						->select('t.*, ')
+						->from('TaskType t')
+						->orderBy('t.name')
+						->execute();
+			
   }
+
+
+protected function setBack($var){
+		$routing = $this->getContext()->getRouting();
+		$this->getUser()->setFlash('back',$var);
+		$this->getUser()->setAttribute('back',$var);
+		}
+
+
+
 
   
 }

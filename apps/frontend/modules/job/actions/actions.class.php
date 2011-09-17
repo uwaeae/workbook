@@ -184,7 +184,7 @@ public function executeTable(sfWebRequest $request)
 
   public function executeShow(sfWebRequest $request)
   {	
-	$this->back = $this->getUser()->getAttribute('back');
+//	$this->back = $this->getUser()->getAttribute('back');
 	$this->forward404Unless($this->job = 
 		Doctrine_Core::getTable('Job')->find(array($request->getParameter('id'))));
 	$this->create  = Doctrine_Core::getTable('sfGuardUser')
@@ -192,7 +192,7 @@ public function executeTable(sfWebRequest $request)
 	$this->update  = 			Doctrine_Core::getTable('sfGuardUser')
 								->find($this->job->getUpdatedFrom() );
 		
-	$this->setBack('job/show?id='.$request->getParameter('id'));
+
 	$this->changelog = Doctrine_Core::getTable('JobChangeLog')->getLastChange($this->job->getId());
 	
 	$this->openjobs_near = Doctrine_Core::getTable('Job')->getSimilarOpenJobs($this->job->getStore()->getPostcode() ,10,$this->job->getId(),$this->job->getStore()->getId());
@@ -221,6 +221,7 @@ public function executeTable(sfWebRequest $request)
 		else{
 			$this->date[] = $task;
 		}
+		$this->setBack('job/show?id='.$request->getParameter('id'));	
 		
 	}
 

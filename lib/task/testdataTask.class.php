@@ -65,7 +65,8 @@ EOF;
 	$job->setContactInfo($contactinfo[rand(0,5)]);
 	$job->setJobTypeId(rand ( 1 ,  4 ))    ;
 
-	
+	$job->setCreatedFrom($user);
+	$job->setUpdatedFrom($user);
 	$job->setEnd(date('c',mktime(0,0,0,date("m")+$month ,date("d")+$day,date("Y"))))         ;
 	$job->setStart(date('c',mktime(0,0,0,date("m")+$month ,date("d") +$day -1,date("Y"))))         ;
 	$job->setDescription('Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.')    ;
@@ -81,7 +82,8 @@ EOF;
 	$task->setEnd(date('c',mktime($user_end ,0,0,date("m")+$month ,date("d") +$day ,date("Y"))));
 	$task->setScheduled(true) ;
 	$task->setTaskTypeId(1);
-	
+	$task->setCreatedFrom($user);
+	$task->setUpdatedFrom($user);
 	$task->save();
 		$this->logSection($i,'generate Task  '.$task->getId().' at '.$user_end);
 	$taskuser = new TaskUser();

@@ -19,7 +19,7 @@ class importActions extends sfActions
   {
    	$this->form = new sfForm();
 	  $this->form->setWidgets( array(
-		 'typ' => new sfWidgetFormChoice(array('choices' => array('Kunden', 'Filialen', 'Mitarbeiter', 'Artikel'),'label'=>'Improttyp',)),
+		 'typ' => new sfWidgetFormChoice(array('choices' => array('Kunden', 'Filialen', 'Mitarbeiter', 'Artikel','Feiertage'),'label'=>'Improttyp',)),
 	    'file'    => new sfWidgetFormInputFile(array('label'=>'Datei')),
 	  ));
 	
@@ -223,6 +223,21 @@ class importActions extends sfActions
 				  ));
 
 			break;
+		case 4: // Feiertage
+				$input = array_pad($input, 3, '<empty>');
+				$this->form->setWidgets( array(
+					'name' => new sfWidgetFormChoice(array(
+						'choices' => $input,
+						'label'=>'Name',
+						'default'=>array_search('Feiertag', $input),)),
+					'date' => new sfWidgetFormChoice(array(
+						'choices' => $input,
+						'label'=>'Datum',
+						'default'=>array_search('Datum', $input),)),
+					
+					  ));
+
+				break;	
 		
 	}
 	$this->getUser()->setFlash('import_typ',$this->typ);
@@ -434,6 +449,36 @@ class importActions extends sfActions
 					$this->return[] = " ";
 
 				break;
+					case 4: // Feiertage
+							$name =  $request->getPostParameter('name');
+							$date = $request->getPostParameter('date');
+							$this->count = 0;
+
+							while(!feof($file)) {
+								if($row = explode(";",fgets($file,4096)))
+									{
+									$ci = count($row);
+									for ($i=0; $i < $ci ; $i++) { 
+										$row[$i] = str_replace('"','',$row[$i]);
+									}
+									if(count($row) >= 2 and !is_numeric($row[$name] AND $this->count != 0))
+									{	
+										$h = new holiday();
+										$tmp = strtotime($row[$date]);
+										$h->setDate(date("Ymd",$tmp));
+										$h->setName($row[$name]);
+										$h->save();
+										$this->return[] = '<tr>
+												<td>'.date("m/d/Y",$tmp).'</td>
+												<td>'.$row[$name].'</td>
+												</tr>';
+										}
+									$this->count += 1;
+									}		
+							}
+							$this->return[] = " ";
+
+						break;
 		
 	}
 	

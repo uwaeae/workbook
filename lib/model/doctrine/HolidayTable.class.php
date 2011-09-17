@@ -16,4 +16,20 @@ class HolidayTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('Holiday');
     }
+	public  function isHoliday($date)
+    {
+		$holiday  = Doctrine_Query::create()
+						->select('*, ')
+						->from('Holiday h')
+						->execute();
+		foreach ($holiday  as $h) {
+			$tmp = strtotime($h->getDate());
+			$d1 = mktime(0, 0, 0, date("m",$date)  , date("d",$date) , date("Y",$date));
+			$d2 = mktime(0, 0, 0, date("m",$tmp)  , date("d",$tmp) , date("Y",$tmp));
+			if($d1 == $d2) return true;
+			
+		}				
+		
+        return false;
+    }
 }
