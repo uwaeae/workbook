@@ -16,11 +16,14 @@
 			<th rowspan="2">Tätigkeit</th>
 			<th rowspan="2">FA</th>
 			<th colspan="4">Stunden</th>
+			<th colspan="2">Korrektur</th>
 		</tr>	
 			<th>Stunden</th>
 			<th>ab 20 Uhr</th>
 			<th>Krank</th>
 			<th>Urlaub</th>
+			<th>Stunden</th>
+			<th>Info</th>
 		</tr>
 	</thead>
 
@@ -48,6 +51,8 @@
 		<td class="number"><?php if($task['task']->getOvertime() != 0) echo $task['task']->getOvertime() ?></td>
 		<td class="number"><?php if(isset($task['holyday'])) echo $task['holyday'] ?></td>
 		<td class="number"><?php if(isset($task['sickness']))echo $task['sickness'] ?></td>
+		<td class="number"><?php echo $task['task']->getCorrectionTime()?></td>
+		<td class="number"><?php echo $task['task']->getCorrectionInfo() ?></td>
 		
 
 	</tr>

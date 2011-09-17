@@ -130,7 +130,7 @@ protected function makeNavForm($user)
 
 			}
 			else {
-				$Stunden =  date('H',strtotime($task->getEnd())) - date('H',strtotime($task->getStart()))  - $task->getOvertime();
+				$Stunden =  date('H',strtotime($task->getEnd())) - date('H',strtotime($task->getStart()))  - $task->getOvertime() +$task->getCorrectionTime();
 			 	$Minuten = (date('i',strtotime($task->getEnd())) - date('i',strtotime($task->getStart())))	;
 
 // Hier noch die Eintsllungsparameter für die Stunden berechnung einbauen
