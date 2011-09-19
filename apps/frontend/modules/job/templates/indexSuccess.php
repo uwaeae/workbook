@@ -1,5 +1,7 @@
 <?php  use_helper('Date');?>
 <?php use_javascript('jobs.js') ?>
+
+<?php echo link_to('neuer Auftrag','job/new',array('class'=>'button')); ?>
 <div class="job_search">
 	<ul>
 	<li> <?php include_partial('search', array('form' => $formStore)) ?> </li>

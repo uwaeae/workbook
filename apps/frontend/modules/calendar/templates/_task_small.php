@@ -28,6 +28,9 @@
 <!--	<a href="<?php echo url_for('task/edit?type=0&id='.$task['task']->getId()) ?>" style="position:absolute;" >
 			<img src="/images/icons/calendar_edit.png" ></a>	-->			
 	<div class="cal_entry_content" style="height: <?php echo $task['duration']*10 - 2 ?>px;" onclick="document.location='<?php echo url_for('job/show?id='.$task['task']->getJob()->getId()) ?>'">
+			<?php if($task['task']->getJob()->getJobTypeId() == 1): ?>
+			<span class="fault">FIX</span>		
+			<?php endif ?>
 				<?php echo substr($task['task']->getJob()->getStore()->getStreet(),0,15) ?>
 			 	<?php echo substr($task['task']->getJob()->getStore(),0,15) ?>
 	</div>

@@ -1,18 +1,19 @@
 <h1>Benutzer Liste</h1>
 
-<table>
+<table class="job">
   <thead>
     <tr>
       <th>ID</th>
       <th>Vorname</th>
       <th>Nachname</th>
 		<th>E-Mail Adresse</th>
+			<th>Username</th>
 		<th>Letzer Login</th>
     </tr>
   </thead>
   <tbody>
     <?php foreach ($sf_guard_users as $sf_guard_user): ?>
-    <tr>
+    <tr class="table_item">
       <td><?php echo $sf_guard_user->getId() ?></a></td>
       <td><?php echo $sf_guard_user->getFirstName() ?></td>
       <td><?php echo $sf_guard_user->getLastName() ?></td>

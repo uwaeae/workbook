@@ -17,8 +17,11 @@ class JobForm extends BaseJobForm
 				 );
 
 		
-			$this->widgetSchema['end'] =  new sfWidgetFormJQueryDate(array( 'image' => '/images/icons/calendar.png','config' => '{}',));
-				$this->widgetSchema['start'] =  new sfWidgetFormJQueryDate(array( 'image' => '/images/icons/calendar.png','config' => '{}',));
+			$this->widgetSchema['end'] =  new sfWidgetFormJQueryDate(array( 'image' => '/images/icons/calendar.png','config' => '{}','culture' => 'de'));
+				$this->widgetSchema['start'] =  new sfWidgetFormJQueryDate(array( 'image' => '/images/icons/calendar.png','config' => '{}', 'culture' => 'de'));
+		
+	//	$this->widgetSchema['end'] = new sfWidgetFormInput();
+	//	$this->widgetSchema['start'] = new sfWidgetFormInput();
 	
 	switch ($this->getOption('type')) {
 		case 1:

@@ -44,15 +44,13 @@
 		<?php endif ?>
 			<?php if (isset($form['start'])): ?>
 				<th><?echo $form['start']->renderLabel() ?></th>
-				<td><?php echo $form['start']->render()?></td>
+				<td>
+				<?php echo $form['start']->render() ?>
+				</td>
+				
 			<?php endif ?>
 	      <th><?echo $form['end']->renderLabel() ?></th>
 	      <td><?php echo $form['end']->render() ?></td>
-
-	
-	      
-
-
 	    </tr>
 	   
 		<tr>

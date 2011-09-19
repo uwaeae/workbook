@@ -1,3 +1,3 @@
-<h1>New Customer</h1>
+<h1>Neuer Kunde</h1>
 
 <?php include_partial('form', array('form' => $form)) ?>

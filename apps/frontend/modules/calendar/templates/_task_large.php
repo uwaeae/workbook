@@ -28,6 +28,9 @@
 	<a href="<?php echo url_for('task/edit?type=0&id='.$task['task']->getId()) ?>" style="float:right;" >
 			<img src="/images/icons/calendar_edit.png" ></a>				
 	<div class="cal_entry_content" style="height: <?php echo $task['duration']*50 - 2  ?>px;">
+			<?php if($task['task']->getJob()->getJobTypeId() == 1): ?>
+			<span class="fault">FIX</span>		
+			<?php endif ?>
 		
 		
 		 	<strong><?php echo $task['task']->getJob()->getStore()->getCustomer()->getCompany()?></strong>

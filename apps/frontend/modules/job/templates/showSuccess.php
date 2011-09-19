@@ -11,7 +11,7 @@
 	<th>Status: </th>
       <td><?php echo $job->getJobState() ?></td>
 	<th>Typ:</th>
-      <td><?php echo $job->getJobType() ?></td>
+      <td <?php echo ($job->getJobTypeId() == 1? 'class="fault"':'') ?>><?php echo $job->getJobType() ?></td>
     </tr>
         <tr>
       <th>Ende</th>

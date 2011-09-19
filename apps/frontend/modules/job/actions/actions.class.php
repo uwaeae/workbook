@@ -109,7 +109,7 @@ public function executeTable(sfWebRequest $request)
 //					}
 	 if ( $this->getUser()->hasPermission('Rechung')) {
 
-	$this->jobstate[4] = $this->getJobStateArray(4,'abgeschlossen Aufträge'
+	$this->jobstate[4] = $this->getJobStateArray(4,'abgeschlossene Aufträge'
 								,Doctrine_Core::getTable('Job')->getFinishedJobs()
 								,$request->getParameter('page')
 								,$request->getParameter('max'));}				

@@ -70,6 +70,7 @@ public static function getStoreOpenJobs($id,$store)
 				->from('Job j')
 				->leftJoin('j.Tasks t')
 				->where('t.scheduled IS TRUE')
+				->andWhere('j.job_state_id = 1')
 				->orderby('j.end');
 		
 	}

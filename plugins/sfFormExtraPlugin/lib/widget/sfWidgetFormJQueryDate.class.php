@@ -39,16 +39,16 @@ class sfWidgetFormJQueryDate extends sfWidgetForm
   {
     $this->addOption('image', false);
     $this->addOption('config', '{}');
-    $this->addOption('culture', '');
+    $this->addOption('culture', 'de');
 	
-    $this->addOption('date_widget', new sfWidgetFormDateTime(array('format' => '%date% - %time%',
-'date'=> array('format' => '%day%.%month%.%year%',),)));
+    $this->addOption('date_widget', new sfWidgetFormDateTime(array('format' => '%date% - %time%','date'=> array('format' => '%day%.%month%.%year%',),)));
+	//$this->addOption('date_widget',new sfWidgetFormInput());
 
     parent::configure($options, $attributes);
 
     if ('en' == $this->getOption('culture'))
     {
-      $this->setOption('culture', 'en');
+      $this->setOption('culture', 'de');
     }
   }
 

@@ -22,7 +22,7 @@
 		<td><?php echo $job->getStore()->getStreet() ?><br>
 		<?php echo $job->getStore()->getPostcode() ?> <?php echo $job->getStore()->getCity() ?></td>
 		<td><?php echo substr($job->getDescription(), 0, 50).'...' ?></td>
-		<td><?php echo $job->getJobType() ?></td>
+		<td <?php echo ($job->getJobTypeId() == 1? 'class="fault"':'') ?>><?php echo $job->getJobType() ?></td>
 		<td <?php if($job->getEnd() < date('c') AND $type < 4)  echo 'class="fault"'; ?>>
 		<?php echo format_date($job->getEnd(),'dd.MM.yyyy HH:mm') ?></td>
 		

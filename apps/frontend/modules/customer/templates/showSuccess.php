@@ -1,7 +1,7 @@
 
 <img src=<?php echo '"'.$customer->getUrl().'"' ?>  alt=""/>
 <h1 id=""><?php echo $customer->getNumber() ?> - <?php echo $customer->getCompany() ?></h1>
-<table border="0" cellspacing="5" cellpadding="5">
+<table class="job_show"border="0" cellspacing="5" cellpadding="5">
 	
 	<tr>
 		<td> <?php echo $customer->getStore()->getStreet() ?></td>
@@ -29,32 +29,30 @@
   </tbody>
 </table>
 
-<table border="0" cellspacing="5" cellpadding="5">
+<table class="job_component" border="0" cellspacing="5" cellpadding="5">
+	<thead>
 	<tr>
 		<th>Filialnummer</th>
 		<th>Strasse</th>
 		<th>PLZ</th>
 		<th>Stadt</th>
-		<th>Land</th>
-		<th>Ansprechpartner</th>
-		<th>Info</th>
 		<th>Telefon</th>
 		<th>Fax</th>
 	</tr>
+	<thead>
 	<?php foreach ($customer->getStores() as $store ): ?>
-	<tr>
+	<tr class="table_item">
 		<td><?php echo $store->getNumber() ?></td>
 		<td><?php echo $store->getStreet() ?></td>
 		<td><?php echo $store->getPostcode() ?></td>
 		<td><?php echo $store->getCity() ?> <?php echo $store->getDestrict() ?></td>
-		<td><?php echo $store->getCountry() ?></td>
-		<td><?php echo $store->getContact() ?></td>
-		<td><?php echo $store->getInfo() ?></td>
+
+
 		<td><?php echo $store->getFon() ?></td>
 		<td><?php echo $store->getFax() ?></td>
 	</tr>	
 	
 	<?php endforeach ?>
 </table>
-
+<?php //include_partial('pageing', array('pager' => $stores,'url' => ' ')) ?>
 

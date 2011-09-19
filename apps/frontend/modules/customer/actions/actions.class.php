@@ -12,9 +12,15 @@ class customerActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-    $this->customers = Doctrine_Core::getTable('Customer')
-      ->createQuery('a')
-      ->execute();
+  
+		$this->pager = new sfDoctrinePager('Customer', ($request->hasParameter('max')? $request->getParameter('max'): 30));	
+		$this->pager->setQuery(Doctrine_Core::getTable('Customer')
+	      ->createQuery('c')
+		  ->orderBy('c.company'));
+		$this->pager->setPage($request->getParameter('page'));
+		$this->pager->init();
+
+
   }
 
   public function executeShow(sfWebRequest $request)

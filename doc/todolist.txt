@@ -20,7 +20,7 @@ Auftrag 		Eingabe die Datepicker jQuery UI verwenden?
 Auftrag 		übersicht Statutes prüfen ob Querys richtig
 
 
-Stundenzettel	Buero Arbeit erstellen mit allem
+
 Stundenzettel	Alle Task Typen als buttons ausgeben.
 Stundenzettel	Korrekturwert mit Kommastellen angeben
 
@@ -61,6 +61,7 @@ Stundenzettel	FA berechung falsch, pausen werden nicht abgezogen 1709
 Stundenzettel	Feiertage eingeben im Backend 1709
 Stundenzettel	Feiertage als normale Arbeit berechne außer Wochenende 1709
 Stundenzettel	wenn urlaub als normal stunden (krank nachfragen) 1709
+Stundenzettel	Buero Arbeit erstellen mit allem
 
 
 
@@ -72,6 +73,7 @@ Job				User hinterlegen beim Speichern oder Ändern 1409
 job				Offene Aufträge Aktuellen Auftrag ausblenden 1409
 job				Arbeit Stunden pro task 1709
 job				Summe Stunden 1709
+Job				Fix makiert im Job und Kalender und in der Übersicht 1909
 
 Task			Job Termin zuweisen Berechtigung in New Task verschieben. 1709
 Task			nur der erstellter oder Admin kann bearbeiten 1709

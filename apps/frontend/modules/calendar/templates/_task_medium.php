@@ -33,6 +33,9 @@
 												($task['task']->getTaskTypeId() < 2? 
 												'job/show?id='.$task['task']->getJob()->getId() : 
 												'task/edit?type='.$task['task']->getTaskTypeId().'&id='.$task['task']->getId() ) )  ?>'">
+								<?php if($task['task']->getJob()->getJobTypeId() == 1): ?>
+									<span class="fault">FIX</span>		
+								<?php endif ?>
 								<p>	<?php echo format_date($task['task']->getStart(),'dd.MM.yyyy HH:mm')   ?>	</p>	
 									<p>	<?php echo $task['task']->getJob()->getStore()->getCustomer()->getCompany() ?><br>
 								<?php echo $task['task']->getJob()->getStore()->getStreet() ?><br>
@@ -44,6 +47,10 @@
 		</div>							
 		<div class="cal_entry_content" style="height: <?php echo $task['duration']*30 -1 ?>px;">
 				 	<?php //echo $task['task']->getJob()->getID() ?>
+				 		
+				 	<?php if($task['task']->getJob()->getJobTypeId() == 1): ?>
+						<span class="fault">FIX</span>		
+					<?php endif ?>
 					<?php echo substr($task['task']->getJob()->getStore()->getCustomer()->getCompany(),0,15) ?><br>
 					<?php echo substr($task['task']->getJob()->getStore(),0,15) ?><br>
 
