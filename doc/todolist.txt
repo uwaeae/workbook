@@ -1,46 +1,36 @@
 
-Changelog Fertigstellen
-Feitertage import
-Stundenberechnung Feiertage einbeziehen
 
-007bb6 blue
+
 
 Bug / TODOs
+
+Layout 			Anpassung auf Eis-Ber
 
 Tabellen		Store zu Adresse
 Backend 		Einstellungen Menu Einbindung
 
 Konfiguration	Optionen in den Modulen Laden
 
-
-
 Back Buttons	Historie Array machen
+
 Auftrag 		Neu über die Übersicht und aus dem Hauptmenu raus
-Auftrag 		Eingabe die Datepicker jQuery UI verwenden?
-Auftrag 		übersicht Statutes prüfen ob Querys richtig
+Auftrag 		Eingabe die Datepicker jQuery UI verwenden und Deutsch?
 
-
-
-Stundenzettel	Alle Task Typen als buttons ausgeben.
 Stundenzettel	Korrekturwert mit Kommastellen angeben
-
 
 Kalendar		Task Kundenname, Adresse, Info 50 Zeichen
 Kalendar		alle sehen, nur eigene bearbeiten 
+Kalendar		Filtereinstellungen Speichern
 
 Job 			Datei Mime Type mit speichern und übergeben bein download
 Job				anzeige welche Jobs schon in dieser Adresse/Filiale bearbeitet worden sind.
-Job				TESTEN
 
-Kunden			Anzeige sortieren nach FirmenName
 Kunden			Suche nach Filialnummer/Name/Adresse
 
 Archiv			Suche nach Rechungsnummer/Name/Adresse/Filialnummer
 
 Task			Anfahrt Standart 30 Minuten
 Task			Minuten angabe in 15 Minuten
-Task 			Korrektur ausblenden wenn Job noch offen ist
-Task			TESTen
 
 FEATURES
 
@@ -54,6 +44,8 @@ ERLEDIGT
 Auftrag			Eigene Meine geplanten/ Meine in Bearbeitung Aufträge in einer liste anzeigen
 Auftrag 		Übersicht Filter/Suche einbauen User, Firma, usw. 
 Auftrag 		Dateihochladen und anzeigen
+Auftrag 		übersicht Statutes prüfen ob Querys richtig
+
 Stundenzettel	Monatssyitsch
 Stundenzettel	Filter User funktioniert nicht
 Stundenzettel	Admin Switsch zwischen unsern
@@ -62,8 +54,9 @@ Stundenzettel	Feiertage eingeben im Backend 1709
 Stundenzettel	Feiertage als normale Arbeit berechne außer Wochenende 1709
 Stundenzettel	wenn urlaub als normal stunden (krank nachfragen) 1709
 Stundenzettel	Buero Arbeit erstellen mit allem
+Stundenzettel	Alle Task Typen als buttons ausgeben.
 
-
+Kunden			Anzeige sortieren nach FirmenName
 
 Job				 anzeige welche Jobs schon in dieser Adresse/Filiale bearbeitet worden sind.
 Job				 anzeige in bei der Bearbeitung eines Jobs welche Jobs sich in der nähe befinden
@@ -80,6 +73,7 @@ Task			nur der erstellter oder Admin kann bearbeiten 1709
 Task			Bearbeiter anzeigen! 1709
 Task 			Abschliesen wen Job dicht 1709
 Task			Material 1709
+Task 			Korrektur ausblenden wenn Job noch offen ist 1909
 
 Kalender		Wochenanzeige pro Mitarbeiter eine Wochen anzeigen 1709
 Kalender		 User Filter funktoniert irgenwie nicht?!

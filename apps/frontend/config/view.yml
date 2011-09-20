@@ -14,7 +14,7 @@ default:
 
   stylesheets:    [main.css, start/jquery-ui-1.8.16.custom.css]
 # 
-  javascripts:    [jquery-1.6.2.min.js, jquery-ui-1.8.16.custom.min.js]
+  javascripts:    [jquery-1.4.4.min.js, jquery-ui-1.8.11.custom.min.js]
 # 
   has_layout:     true
   layout:         layout

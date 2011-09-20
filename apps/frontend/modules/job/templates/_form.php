@@ -45,12 +45,14 @@
 			<?php if (isset($form['start'])): ?>
 				<th><?echo $form['start']->renderLabel() ?></th>
 				<td>
+				<?php echo $form['start']->renderError() ?>
 				<?php echo $form['start']->render() ?>
 				</td>
 				
 			<?php endif ?>
 	      <th><?echo $form['end']->renderLabel() ?></th>
-	      <td><?php echo $form['end']->render() ?></td>
+	      <td><?php echo $form['end']->renderError() ?>
+	<?php echo $form['end']->render() ?></td>
 	    </tr>
 	   
 		<tr>
@@ -61,7 +63,8 @@
 	    </tr>
 	    <tr>
 	      <th><?echo $form['store_id']->renderLabel() ?></th>
-	      <td colspan="3"><?php echo $form['store_id']->render(array('size' => 100,)) ?></td>
+	      <td colspan="3"><?php echo $form['store_id']->renderError() ?>
+	<?php echo $form['store_id']->render(array('size' => 100,)) ?></td>
 	    </tr>
 			 <tr>
 			      <th><?echo $form['description']->renderLabel() ?></th>

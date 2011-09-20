@@ -17,8 +17,8 @@ class JobForm extends BaseJobForm
 				 );
 
 		
-			$this->widgetSchema['end'] =  new sfWidgetFormJQueryDate(array( 'image' => '/images/icons/calendar.png','config' => '{}','culture' => 'de'));
-				$this->widgetSchema['start'] =  new sfWidgetFormJQueryDate(array( 'image' => '/images/icons/calendar.png','config' => '{}', 'culture' => 'de'));
+			$this->widgetSchema['end'] =  new sfWidgetFormJQueryDate(array( 'image' => '/images/icons/calendar.png','config' => '{}'));
+				$this->widgetSchema['start'] =  new sfWidgetFormJQueryDate(array( 'image' => '/images/icons/calendar.png','config' => '{}' ));
 		
 	//	$this->widgetSchema['end'] = new sfWidgetFormInput();
 	//	$this->widgetSchema['start'] = new sfWidgetFormInput();
@@ -90,7 +90,8 @@ class JobForm extends BaseJobForm
 	$this->widgetSchema['created_from']  = new sfWidgetFormInputHidden();
 	$this->widgetSchema['updated_from']  = new sfWidgetFormInputHidden();
 
-	
+
+  
 	
 	$this->widgetSchema->setLabels(array(
 	  'description'    => 'Auftrag',

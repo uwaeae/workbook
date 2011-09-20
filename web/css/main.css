@@ -104,6 +104,18 @@ form th{
 	width: 20px;
 	border: 0px;
 }
+
+.error_list{
+	color: black;
+	background: none repeat scroll 0 0 #ff9999;
+	
+}
+.error_list li{
+	list-style: none outside none;
+	
+}
+
+
 .fault{
 	color: black;
 	background: none repeat scroll 0 0 #ff9999;
