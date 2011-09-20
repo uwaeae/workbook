@@ -117,7 +117,7 @@ class taskActions extends sfActions
 
 		$task->setDefault('job_id', $jobid);
 	}
-	if (!$this->getUser()->hasPermission('Korrektur') OR $this->task->getJob()->getJobStateId() < 2 ) {
+	if (!$this->getUser()->hasPermission('Korrektur') OR $this->job->getJobStateId() < 2 ) {
 			unset($task['correction_info'],$task['correction_time']);
 			//$task->setWidget(,new sfWidgetFormInputHidden());
 			//$task->setWidget(,new sfWidgetFormInputHidden());
