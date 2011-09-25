@@ -106,7 +106,7 @@ class taskActions extends sfActions
 	$task = new TaskForm(NULL,array(
 	'type' => $type,	
 		));
-	//$this->job = null;
+	$this->job = null;
 	if ($request->hasParameter('job')) {
 		$this->job = Doctrine_Core::getTable('Job')->find(array($request->getParameter('job')));
 		$jobid = $this->job->getId();
@@ -117,10 +117,9 @@ class taskActions extends sfActions
 
 		$task->setDefault('job_id', $jobid);
 	}
-	if (!$this->getUser()->hasPermission('Korrektur') OR $this->job->getJobStateId() < 2 ) {
+	
+	if (!$this->getUser()->hasPermission('Korrektur') or $type != 1) { 
 			unset($task['correction_info'],$task['correction_time']);
-			//$task->setWidget(,new sfWidgetFormInputHidden());
-			//$task->setWidget(,new sfWidgetFormInputHidden());
 	}
 
 	
