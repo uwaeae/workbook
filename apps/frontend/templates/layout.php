@@ -31,7 +31,7 @@
 	<div class="menu">
 		<ul>
 			<li><?php echo link_to('Kalender','calendar/table/?next='.($calendar['next'])); ?></li>
-			<li><?php echo link_to('Auftäge','job'); ?></li>
+			<li><?php echo link_to('Aufträge','job'); ?></li>
 		<?php if ($sf_user->hasPermission('Neu')): ?>
 			<!-- <li><?php echo link_to('Neu','job/new'); ?></li> -->
 			<!-- <li><?php echo link_to('Neu(Random)','job/random'); ?></li> -->
