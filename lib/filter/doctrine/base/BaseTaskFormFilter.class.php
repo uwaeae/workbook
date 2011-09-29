@@ -41,7 +41,7 @@ abstract class BaseTaskFormFilter extends BaseFormFilterDoctrine
       'approach'        => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'job_id'          => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Job'), 'column' => 'id')),
       'task_type_id'    => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('TaskType'), 'column' => 'id')),
-      'correction_time' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'correction_time' => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
       'correction_info' => new sfValidatorPass(array('required' => false)),
       'created_at'      => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'created_from'    => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),

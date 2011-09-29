@@ -150,7 +150,8 @@ Task:
       type: integer
       default: 1
     correction_time:
-      type: integer
+      type: decimal
+      scale: 2
     correction_info:
       type: string
     created_at:

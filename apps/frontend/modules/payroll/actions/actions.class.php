@@ -98,7 +98,8 @@ protected function makeNavForm($user)
 		$part = Doctrine_Core::getTable('Option')->getOptionByName('payroll_hour_split');
 		$query = Doctrine_Query::create()
 					->select('t.*, ')
-					->from('Task t');
+					->from('Task t')
+					->orderBy('t.start');
 		
 		$user = ($request->hasParameter('user')? $request->getParameter('user') : $this->getUser()->getId());
 					

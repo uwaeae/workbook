@@ -108,7 +108,7 @@
 		<td>
 			
     		
-		<?php if ($job->getJobStateId() > 1): ?>
+		<?php if ($job->getJobStateId() == 2 AND $job->getInvoices()->count() == 0 ): ?>
 				<a class="button" href="<?php echo url_for('invoice/new/?job='.$job->getId()) ?>">
 				Rechnungsnummer erstellen</a>
 				<a href="<?php echo url_for( 'job/finish/?id='.$job->getId()) ?>" 
@@ -116,7 +116,8 @@
 					class="button" >
 					Auftrag wieder einstellen 
 				</a>
-		<?php else: ?>
+		<?php endif ?>
+		<?php  if($job->getJobStateId() == 1): ?>
 			<a href="<?php echo url_for( 'job/finish/?id='.$job->getId()) ?>" 
 				onclick="return confirm('Sind sie sicher das sie den Auftrag Nummer <?php echo $job->getId() ?> wieder abschliesen möchten?');" 
 				class="button" >
@@ -153,10 +154,7 @@
 <?php if ($task->getScheduled()): ?>
 	
   
-<tr 
-<?php if ($job->getJobStateId() < 2): ?> 
-	class="table_item"
-<?php endif ?> >
+<tr class="table_item">
 		<td><?php echo format_date($task->getStart(),'dd.MM.yyyy HH:mm') ?></td>
 		<td><?php echo format_date($task->getEnd() ,'dd.MM.yyyy HH:mm') ?></td>
 		<td><?php foreach ($task->getUsers() as $user): ?>
@@ -166,6 +164,8 @@
 			<?php echo $task->getCreator()->getUsername() ?>
 		</td>
 		<td>
+		<?php if ($job->getJobStateId() < 2): ?> 
+			
 		
 		
 			<a class="button" href="<?php echo url_for('task/edit?id='.$task->getId().'&type=0') ?>">
@@ -174,7 +174,7 @@
 				<a class="button" href="<?php echo url_for('task/edit?id='.$task->getId().'&type=1') ?>">
 				Ausgeführt</a>
 		<?php endif ?> 
-	
+		<?php endif ?> 
 		</td>
 	</tr>
 	<?php endif ?>  
@@ -209,16 +209,12 @@
 	</thead>
 	<tbody>
 <?php foreach ($work as $task): ?>
-		<tr 
-		
-		<?php if ($job->getJobStateId() < 2): ?> 
-			class="table_item"
+		<tr class="table_item"
+		<?php if ($job->getJobStateId() < 2 or $sf_user->hasGroup('admin') ): ?> 
+			
 			onclick="document.location='<?php echo url_for('task/'.(($task['task']->hasUser($sf_user->getId()) OR $sf_user->hasGroup('admin')) ?'edit':'show').'?id='.$task['task']->getId()) ?>'"
 			<?php else: ?>
-			<?php if ($sf_user->hasGroup('admin')): ?>
-					class="table_item"
-						onclick="document.location='<?php echo url_for('task/edit?id='.$task['task']->getId()) ?>'"
-			<?php endif ?>	
+			
 		
 			
 			<?php endif ?> 

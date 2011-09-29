@@ -42,7 +42,7 @@ class TaskForm extends BaseTaskForm
 				$approach[] = $i * 15;	
 			}
 			$this->widgetSchema['break'] = new sfWidgetFormChoice(array('choices' => array('0','15','30', '45', '60')));
-			$this->widgetSchema['approach'] = new sfWidgetFormChoice(array('choices' => 	$approach));
+			$this->widgetSchema['approach'] = new sfWidgetFormChoice(array('choices' => 	$approach,'default'   => '2'));
 			$this->setDefault('end', date('Y/m/d H:i', time()));
 			$this->setDefault('start', date('Y/m/d H:i',mktime(8,0,0,date("m"),date("d"),date("Y"))));
 			$this->setDefault('overtime', (date('H') > 20? date('H')-20: 0));

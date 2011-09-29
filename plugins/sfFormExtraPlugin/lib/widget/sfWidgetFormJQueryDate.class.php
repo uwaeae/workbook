@@ -40,9 +40,11 @@ class sfWidgetFormJQueryDate extends sfWidgetForm
     $this->addOption('image', false);
     $this->addOption('config', '{}');
     $this->addOption('culture', '');
-	
+	$minutesa = array( 0, 15, 30, 45);
+	$minutesb = array( '00', 15, 30, 45);
+
     $this->addOption('date_widget', new sfWidgetFormDateTime(array('format' => '%date% - %time%',
-'date'=> array('format' => '%day%.%month%.%year%',),)));
+'date'=> array('format' => '%day%.%month%.%year%'),'time'=> array('minutes' => array_combine($minutesa, $minutesb)))));
 
     parent::configure($options, $attributes);
 

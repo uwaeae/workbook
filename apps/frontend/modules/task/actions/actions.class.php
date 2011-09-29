@@ -132,6 +132,7 @@ class taskActions extends sfActions
 	}
 	$task->setDefault('created_from',$this->getUser()->getId());
 	$task->setDefault('updated_from',$this->getUser()->getId());
+	$task->setDefault('updated_from',$this->getUser()->getId());
 
     $this->form = $task;
 	$this->getUser()->setFlash('type',($request->hasParameter('type')? $request->getParameter('type'): 1));

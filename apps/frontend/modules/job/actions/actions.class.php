@@ -76,7 +76,7 @@ public function executeTable(sfWebRequest $request)
 	
   public function executeIndex(sfWebRequest $request)
   {
-	
+	$this->setBack('job/index');	
    // $this->jobs = Doctrine_Core::getTable('Job')
      // ->createQuery('j')
 	//->leftJoin('j.Users u')
@@ -184,7 +184,7 @@ public function executeTable(sfWebRequest $request)
 
   public function executeShow(sfWebRequest $request)
   {	
-//	$this->back = $this->getUser()->getAttribute('back');
+	$this->back = $this->getUser()->getAttribute('back');
 	$this->forward404Unless($this->job = 
 		Doctrine_Core::getTable('Job')->find(array($request->getParameter('id'))));
 	$this->create  = Doctrine_Core::getTable('sfGuardUser')

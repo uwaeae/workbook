@@ -15,7 +15,7 @@
  * @property integer $approach
  * @property integer $job_id
  * @property integer $task_type_id
- * @property integer $correction_time
+ * @property decimal $correction_time
  * @property string $correction_info
  * @property timestamp $created_at
  * @property integer $created_from
@@ -37,7 +37,7 @@
  * @method integer             getApproach()        Returns the current record's "approach" value
  * @method integer             getJobId()           Returns the current record's "job_id" value
  * @method integer             getTaskTypeId()      Returns the current record's "task_type_id" value
- * @method integer             getCorrectionTime()  Returns the current record's "correction_time" value
+ * @method decimal             getCorrectionTime()  Returns the current record's "correction_time" value
  * @method string              getCorrectionInfo()  Returns the current record's "correction_info" value
  * @method timestamp           getCreatedAt()       Returns the current record's "created_at" value
  * @method integer             getCreatedFrom()     Returns the current record's "created_from" value
@@ -113,8 +113,9 @@ abstract class BaseTask extends sfDoctrineRecord
              'type' => 'integer',
              'default' => 1,
              ));
-        $this->hasColumn('correction_time', 'integer', null, array(
-             'type' => 'integer',
+        $this->hasColumn('correction_time', 'decimal', null, array(
+             'type' => 'decimal',
+             'scale' => 2,
              ));
         $this->hasColumn('correction_info', 'string', null, array(
              'type' => 'string',

@@ -825,12 +825,14 @@ table.job_show{
 	display: block;	
 	font-size: 10pt;
 	padding-top: 35px;
+	border-collapse: collapse;
 }
 table.job_show tr,
 table.job_show td{
 	padding-bottom: 5px;
 	padding-left: 10px;
 	padding-top: 5px;
+	border-bottom: 2px solid gray;
 	
 	
 }
