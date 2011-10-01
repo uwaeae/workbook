@@ -144,7 +144,7 @@ form th{
 }
 .cal_col_even,
 .cal_col_odd{
-	width: 13%;
+	xwidth: 13%;
 }
 
 table.cal_entry td {
@@ -183,7 +183,7 @@ table.cal_entry td {
 }
 
 .cal_timerow_even {
-	background-color: #eeeeee;
+	background-color: #99ddcc;
 }
 
 .calender_today{
@@ -350,10 +350,15 @@ table.cal_table_user {
 	font-size:5pt;
 	color:#333333;
 	border-collapse: collapse;
-	border: 0;
-	display: table-cell;
+	border-left: 5px solid white;
+	display: table-cell;	
+}
+table.cal_table_user:first-child {
+	border-left: 1px none ;
 	
 }
+
+
 div.cal_user_day {
 	float:left;
 	border-left: 1px solid gray;
@@ -372,7 +377,7 @@ table.cal_table_user tr:first-child{
 
 td.cal_week_col{
 
-	width: 1em;
+	border-left: 10px solid White
 
 }
 table.cal_table_user th{

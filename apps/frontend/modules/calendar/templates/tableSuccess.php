@@ -4,20 +4,20 @@
 <table class="calendar">
 	
 	<colgroup>
-		<col class="cal_col_timeline" />
-		<col class="cal_col_even" />
-		<col class="cal_col_odd" />
-		<col class="cal_col_even" />
-		<col class="cal_col_odd" />
-		<col class="cal_col_even" />
-		<col class="cal_col_odd" />
-		<col class="cal_col_even" />
-		<col class="cal_col_odd" />
+		<col class="cal_col_timeline"style="width:4%;" />
+		<col class="cal_col_even" style="width:13%;" />
+		<col class="cal_col_odd" style="width:13%;"/>
+		<col class="cal_col_even" style="width:13%;"/>
+		<col class="cal_col_odd" style="width:13%;"/>
+		<col class="cal_col_even" style="width:13%;"/>
+		<col class="cal_col_odd" style="width:13%;"/>
+		<col class="cal_col_even"style="width:13%;" />
+		<col class="cal_col_odd" style="width:13%;"/>
 	</colgroup>
 <thead>
 	<tr>
 			<td colspan="7" style="background-color: white;">
-						<?php include_partial('calnav', array('type' => 'week','next' => $next)) ?>
+						<?php include_partial('calnav', array('type' => 'table','next' => $next)) ?>
 		</td>
 	</tr>
 </thead>	
@@ -39,7 +39,7 @@
 <?php foreach ($calendar as $day): ?>
 	<td class="cal_week_col"	>
 		
-			<?php include_partial('task_medium', array('day' => $day['task'],'user' => $user,'style'=> 'xwidth:'.round(100 / count($UserArray)))) ?>
+			<?php include_partial('task_medium', array('day' => $day['task'],'user' => $user,'style'=> 'width:'.round(30 * count($UserArray)))) ?>
 		<?php // echo htmlspecialchars_decode($day) ?>
 		<div class="cal_user_day"  >
 		</div>

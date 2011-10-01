@@ -2,7 +2,7 @@
 
 
 	
-<table border="0" class="cal_table_user" style="<?php echo $style ?>" >
+<table  class="cal_table_user" style="<?php echo $style ?>" >
 <?php $full = 0; ?>
 <?php $even = true ?>
 
