@@ -43,6 +43,18 @@ public static function getStoreOpenJobs($id,$store)
 					->execute();
 		
     }
+public static function getStoreOldJobs($id,$store)
+	    {
+	        return Doctrine_Query::create()
+						->select('*')
+						->from('Job j')
+						->innerJoin('j.Store s WITH s.id ='.$store)
+						->where('j.job_state_id = 2')
+						->andWhere('j.id <>'.$id)
+						->orderby('j.end')
+						->execute();
+
+	    }
 
 	public function getOwnJobs($id){
 		return 	Doctrine_Query::create()

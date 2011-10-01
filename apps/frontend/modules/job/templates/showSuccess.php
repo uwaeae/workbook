@@ -2,7 +2,7 @@
 <?php use_javascript('jobshow.js') ?>
 <?php include_partial('openjob', array('jobs' => $openjobs_near,'type'=> 'open_jobs','info'=> 'Offene Aufträge  in der Nähe')) ?>
 <?php include_partial('openjob', array('jobs' => $openjobs_same,'type'=> 'open_filiale','info'=> 'Offene Aufträge  in der Filiale')) ?>
-
+<?php include_partial('openjob', array('jobs' => $jobsold,'type'=> 'jobsold','info'=> 'Erledigte Aufträge')) ?>
 <table class="job_show">
   <tbody>
     <tr>
@@ -80,7 +80,7 @@
  		<th>erstellt am</th>
 		<td ><?php echo format_date($job->getCreatedAt(),'dd.MM.yyyy HH:mm') ?></td>
 		<td ><?php echo $create->getUsername() ?></td>
-		<th>Zuletzt bearbeitet am</th>
+		<th>zuletzt bearbeitet am</th>
 		<td><?php echo format_date($job->getUpdatedAt(),'dd.MM.yyyy HH:mm') ?></td>
 		<td ><?php echo $update->getUsername() ?></td>
 	

@@ -513,7 +513,7 @@ div #open_jobs{
 	font-size: 8pt;
 	font-family: verdana,arial,sans-serif;
 	position: absolute;
-	left:65%;
+	left:60%;
 }
 
 .open_jobs_head{
@@ -594,6 +594,48 @@ div #open_filiale{
 	 background-color: #81DAF5;
 }
 
+div #jobsold{
+	float:none;
+	font-size: 8pt;
+	font-family: verdana,arial,sans-serif;
+	position: absolute;
+	left:20%;
+}
+
+.jobsold_head{
+	text-align:center;
+	color: white;
+	background-color: #007bb6;
+	padding: 2px 5px;
+	font-size:10px;
+	list-style: none outside none;
+	margin: 0 0.2em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	width: 25em;
+	margin-bottom: 5px;
+}
+.jobsold_head:hover{
+	background-color: #A9F5F2;
+	color: blue;
+}
+	
+.jobsold_body{
+	height: 40em;
+	overflow: auto;
+}
+
+.jobsold_item{
+	 background-color: #CEECF5;
+	list-style: none outside none;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	cursor: pointer;
+	margin-top:5px;
+	margin-right: 5px;
+}
+.jobsold_item:hover{
+	 background-color: #81DAF5;
+}
 
 
 
@@ -833,7 +875,7 @@ table.job_show td{
 	padding-bottom: 5px;
 	padding-left: 10px;
 	padding-top: 5px;
-	border-bottom: 2px solid gray;
+	border-bottom: 2px solid lightblue;
 	
 	
 }
@@ -845,6 +887,7 @@ table.job_component{
 	display: block;	
 	font-size: 10pt;
 	border-collapse: collapse;
+	border-top: 2px solid lightBlue;
 }
 table.job_component tr,
 table.job_component td{
