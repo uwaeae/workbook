@@ -25,7 +25,7 @@
 			<th>Rechnungsnummer</th>
 			<td>
 				<?php foreach ($job->getInvoices() as $invoice): ?>
-					<?php echo link_to($invoice->getNumber(),'invoice/edit?id='.$invoice->getId()) ?>
+					             <?php echo link_to($invoice->getNumber(),'invoice/edit?id='.$invoice->getId()) ?>
 				<br>
 				<?php endforeach ?>
 			</td>
