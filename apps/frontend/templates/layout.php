@@ -11,12 +11,16 @@
 		<?php include_javascripts() ?>
 	</head>
 	<body>
-	<div class="header">
-		<h1>WORKBOOK</h1>
+	<div class="header" >
+		
+		<?php echo image_tag('logo.jpg') ?>
 		<?php if ($sf_user->isAuthenticated()): ?>
-		<?php echo $sf_user  ?> 	
+	
 		<div class="usermenu">
 				<ul>
+					<li>
+								<?php echo $sf_user  ?> 
+					</li>	
 				<?php if ($sf_user->hasPermission('admin')): ?>
 					<li><?php echo link_to('Admin', '/backend.php') ; ?></li>
 				<?php endif ?>

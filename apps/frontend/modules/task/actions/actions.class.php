@@ -118,9 +118,9 @@ class taskActions extends sfActions
 		$task->setDefault('job_id', $jobid);
 	}
 	
-	if (!$this->getUser()->hasPermission('Korrektur') or $type != 1) { 
-			unset($task['correction_info'],$task['correction_time']);
-	}
+	
+	unset($task['correction_info'],$task['correction_time']);
+	
 
 	
 	if (!$this->getUser()->hasPermission('Zuweisen')) {

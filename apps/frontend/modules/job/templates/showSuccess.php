@@ -131,17 +131,14 @@
 <hr />
 
 
-<h3 class="job_work" >Termin </h3>
+<h3 class="job_work" >Termin 	</h3>
+	<?php if ($job->getJobStateId() < 2): ?> 
+				<a class="button" href="<?php echo url_for('task/new/?job='.$job->getId().'&type=0') ?>">	
+				Termin planen</a></li>
+	<?php endif ?>
 <table class="job_component">
   <thead>
-    <tr>
-		<td colspan="2">
-			<?php if ($job->getJobStateId() < 2): ?> 
-					<a class="button" href="<?php echo url_for('task/new/?job='.$job->getId().'&type=0') ?>">	
-					Termin planen</a></li>
-			<?php endif ?>
-		</td>
-	</tr>
+	<tr>
 	<th style="width:150px;">Start</th>
 	<th style="width:150px;">Ende</th>
 	<th style="width:200px;">eingeplant</th>
@@ -185,19 +182,17 @@
 
 
 <h3 class="job_work" >Arbeiten </h3>
+	<?php if ($job->getJobStateId() < 2): ?> 
+	 <a class="button" href="<?php echo url_for('task/new/?job='.$job->getId()) ?>">
+	 neue Arbeit </a>
+
+		
+	<?php endif ?>
+
 <table class="job_component">
   <thead>
-    <tr>
-		<td colspan="2">
-			<?php if ($job->getJobStateId() < 2): ?> 
-			 <a class="button" href="<?php echo url_for('task/new/?job='.$job->getId()) ?>">
-			 neue Arbeit </a>
-		
-				
-			<?php endif ?>
-				
-		</td>
-	</tr>
+   
+	<tr>
 	<th style="width:150px;">Start</th>
 	<th style="width:150px;">Ende</th>
 
@@ -245,15 +240,12 @@
 	</tfoot>
 </table>
 
-<h3 class="job_items_head">Material 
+<h3 class="job_work">Material 
 
 	</h3>
 <table class="job_component">
   <thead>
-	  <tr>
-			<td colspan="2">
-				</td>
-		</tr>
+	
     <tr>
       <th colspan="2" style="width:150px;">Einheit</th>
       <th style="width:250px;">Artikel</th>
