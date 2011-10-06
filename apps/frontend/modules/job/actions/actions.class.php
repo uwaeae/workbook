@@ -178,6 +178,13 @@ public function executeTable(sfWebRequest $request)
 				->orderby('j.end'));
 		$this->pager->setPage($request->getParameter('page'));
 		$this->pager->init();
+			$this->formStore = new searchStoreForm(NULL,array(
+				'url' => $this->getController()->genUrl('job/findstore'),
+					));
+			$this->formCustomer = new searchCustomerForm(NULL,array(
+				'url' => $this->getController()->genUrl('job/findcustomer')
+				));
+			$this->setBack('job');
 		
   }
   

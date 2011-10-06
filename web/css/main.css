@@ -259,7 +259,7 @@ table.cal_table_medium  td.cal_entry div.cal_entry_content_over{
 	padding:10px;
 	margin-left: 20px;
 	margin-top: 20px;
-	position: fixed;
+	
 	width: 20em;
 	
 	-webkit-box-shadow: 2px 3px 3px 2px #000000;
@@ -896,7 +896,13 @@ table.job_component{
 }
 table.job_component tr,
 table.job_component td{
-		border-right: 2px solid lightblue;
+		xborder-right: 2px solid lightblue;
+		xborder-bottom: 2px solid lightblue;
+		height: 25px;
+		padding: 0 10px;
+}
+table.job_component tr{
+		border-bottom: 2px solid lightblue;
 }
 
 table.job_component td:first-child,
@@ -908,8 +914,8 @@ table.job_component td:first-child,
 table.job_component th{
 	font-weight: bold;
 	background-color: #E7EEF6;
-	border-right: 2px solid lightblue;
-	border-bottom: 2px solid lightblue;
+	xborder-right: 2px solid lightblue;
+	xborder-bottom: 2px solid lightblue;
 }
 
 
@@ -1034,7 +1040,7 @@ div.payroll_nav	  li > input:checked  {
 
 table.payroll {
 	font-family: verdana,arial,sans-serif;
-	font-size:5pt;
+	
 	color:#333333;
 	border-collapse: collapse;
 	width: 100%;

@@ -52,14 +52,14 @@ protected function makeNavForm($user)
 	 		 )));
 	$form->setDefault('month', date('n'));
 	
-	
+	if ( $this->getUser()->hasPermission('admin')) {
 	$form->setWidget('user',new sfWidgetFormDoctrineChoice(array(
 	      	'model' => 'sfGuardUser', 
 	      	'add_empty' => false,
 			'expanded' => true,
 	      	'multiple'	=> false )));
 	$form->setDefault('user', $user);
-	
+	}
 
 	return $form;
 	
@@ -101,7 +101,12 @@ protected function makeNavForm($user)
 					->from('Task t')
 					->orderBy('t.start');
 		
+		if ( $this->getUser()->hasPermission('admin')) {
 		$user = ($request->hasParameter('user')? $request->getParameter('user') : $this->getUser()->getId());
+		} 
+		else {
+			$user = $this->getUser()->getId();
+		}
 					
 		$query->where('t.id  IN ( select task_id from task_user where user_id = '.$user.')');
 		$query->andWhere('t.scheduled is not TRUE');
@@ -145,6 +150,7 @@ protected function makeNavForm($user)
 			switch ($task->getTaskTypeId()) {
 				case '1':
 			//	echo '<td>'.$Stunden.'</td><td>'.($task->getOvertime() == 0?' ':$task->getOvertime() ).'</td><td></td><td></td>';
+					$Stunden = $Stunden - ($task->getBreak() * 0.25) ;
 					$tmp['worktime'] = $Stunden;
 					$this->worktime += $Stunden;
 					$tmp['approach'] = $task->getApproach() * 0.25;
@@ -161,6 +167,13 @@ protected function makeNavForm($user)
 					$tmp['sickness'] = $Stunden;
 					$this->sickness += $Stunden;
 					break;
+				case '4':
+					$Stunden = $Stunden - ($task->getBreak() * 0.25) ;
+					$tmp['worktime'] = $Stunden;
+					$this->worktime += $Stunden;
+					$tmp['approach'] = $task->getApproach() * 0.25;
+					$this->approach += $task->getApproach() * 0.25;
+					break;	
 			}
 	
 		$tmp['task'] = $task;

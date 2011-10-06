@@ -1,10 +1,10 @@
-<h3 class="job_items_head">Arbeit 
+<h3 class="job_work">Arbeit 
 </h3> 
 
 <table class="job_component">
       <tr>
         <th>Beginn</th>
-        <td>
+        <td colspan="3">
           <?php echo $task->getStart() ?>
         </td>
 
@@ -16,7 +16,7 @@
       </tr>
       <tr>
         <th>Ende</th>
-        <td>
+        <td colspan="5">
           <?php echo $task->getEnd() ?>
         </td>
       </tr>
@@ -29,18 +29,18 @@
 		
 	    <th>Anfahrt</th>
         <td>
-          <?php echo $task->getApproach() ?> Minuten
+          <?php echo $task->getApproach()*15 ?> Minuten
         </td>
 
         <th>Pause</th>
         <td>
-          <?php echo $task->getBreak() ?> Minuten
+          <?php echo $task->getBreak()*15 ?> Minuten
         </td>
 
       </tr>
       <tr>
         <th>Info</th>
-        <td colspan="3">
+        <td colspan="5">
           <?php echo $task->getInfo() ?>
          </td>
       </tr>
@@ -69,7 +69,7 @@
 
     </tbody>
   </table>
-<h3 class="job_items_head">Material 
+<h3 class="job_work">Material 
 
 	</h3>
 <table class="job_component">

@@ -1,5 +1,10 @@
 <?php  use_helper('Date');?>
-
+<div class="job_search">
+	<ul>
+	<li> <?php include_partial('search', array('form' => $formStore)) ?> </li>
+	<li> <?php include_partial('search', array('form' => $formCustomer)) ?> </li>
+	<ul>
+</div>
 <table class="job">
   <thead>
     <tr>

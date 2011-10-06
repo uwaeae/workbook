@@ -94,13 +94,13 @@
 			<li class="table_menu_left">	
 			<a class="button" href="<?php echo   url_for($back) ?>">	
 				zurück</a></li>
-				<?php if ($sf_user->hasPermission('Bearbeiten')): ?>
-				<?php if ($job->getJobStateId() < 2): ?> 	
+				<?php if ($sf_user->hasPermission('bearbeiten') and $job->getJobStateId() < 2 ): ?>
+				
 			<li class="table_menu_left">
 						
 		<a class="button" href="<?php echo url_for('job/edit?id='.$job->getId()) ?>">
 				ändern</a></li>
-				<?php endif ?>
+			
 				<?php endif ?>
 				
 		</ul>	
@@ -108,7 +108,7 @@
 		<td>
 			
     		
-		<?php if ($job->getJobStateId() == 2 AND $job->getInvoices()->count() == 0 ): ?>
+		<?php if ($job->getJobStateId() == 2 AND $job->getInvoices()->count() == 0 AND $sf_user->hasPermission('bearbeiten') ): ?>
 				<a class="button" href="<?php echo url_for('invoice/new/?job='.$job->getId()) ?>">
 				Rechnungsnummer erstellen</a>
 				<a href="<?php echo url_for( 'job/finish/?id='.$job->getId()) ?>" 
@@ -119,7 +119,7 @@
 		<?php endif ?>
 		<?php  if($job->getJobStateId() == 1): ?>
 			<a href="<?php echo url_for( 'job/finish/?id='.$job->getId()) ?>" 
-				onclick="return confirm('Sind sie sicher das sie den Auftrag Nummer <?php echo $job->getId() ?> wieder abschliesen möchten?');" 
+				onclick="return confirm('Sind sie sicher das sie den Auftrag Nummer <?php echo $job->getId() ?> abschliesen möchten?');" 
 				class="button" >
 				<img src="/images/icons/tick.png"  />Auftrag abschließen
 			</a>
@@ -205,14 +205,10 @@
 	<tbody>
 <?php foreach ($work as $task): ?>
 		<tr class="table_item"
-		<?php if ($job->getJobStateId() < 2 or $sf_user->hasGroup('admin') ): ?> 
+	
 			
 			onclick="document.location='<?php echo url_for('task/'.(($task['task']->hasUser($sf_user->getId()) OR $sf_user->hasGroup('admin')) ?'edit':'show').'?id='.$task['task']->getId()) ?>'"
-			<?php else: ?>
-			
-		
-			
-			<?php endif ?> 
+
 			>
 		<td><?php echo format_date($task['task']->getStart(),'dd.MM.yyyy HH:mm') ?></td>
 		<td><?php echo format_date($task['task']->getEnd() ,'dd.MM.yyyy HH:mm') ?></td>

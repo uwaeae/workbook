@@ -168,8 +168,13 @@ class taskActions extends sfActions
 
   public function executeEdit(sfWebRequest $request)
   {
+	
+	
 	$this->back = $this->getUser()->getAttribute('back');
     $this->forward404Unless($this->task = Doctrine_Core::getTable('Task')->find(array($request->getParameter('id'))), sprintf('Object task does not exist (%s).', $request->getParameter('id')));
+	if (!$this->getUser()->hasPermission('admin') AND $this->task->getJob()->getJobStateId() == 2 ) {
+		$this->redirect('task/show/?id='.$this->task->getId());
+	}
 //	$this->back = $this->getUser()->getFlash('back');
 //$this->job = Doctrine_Core::getTable('Job')->find($task->getJobId());
 	//echo $this->getUser()->getFlash('job');
@@ -188,7 +193,7 @@ class taskActions extends sfActions
 			$this->form->setDefault('users_list', $this->getUser()->getId());
 	}
 	else{
-	$this->form->setDefault('users_list', array($this->getUser()->getId()));
+	//$this->form->setDefault('users_list', array($this->getUser()->getId()));
 	}
 	if($this->type != 0) $this->form->setDefault('scheduled', 0);
 	$this->form->setDefault('updated_from',$this->getUser()->getId());	
