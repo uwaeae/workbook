@@ -152,21 +152,25 @@ table.cal_entry td {
 }
 
 .cal_type_1  {
-	background-color: #5882FA;
+	background-color: #3333ff;
 }
 
 .cal_type_1_finshed {
-	background-color: #ffff00;
+	background-color: #ccccff;
 }
 
 
 .cal_type_2 {
-	background-color: #33ccff;
+	background-color: #ff3333;
 }
 
 
 .cal_type_3  {
-	background-color: #9900cc;
+	background-color: #33ff33;
+}
+
+.cal_type_4{
+	background-color: #ccffff;
 }
 
 

@@ -51,8 +51,12 @@
 				 	<?php if($task['task']->getJob()->getJobTypeId() == 1): ?>
 						<span class="fault">FIX</span>		
 					<?php endif ?>
-					<?php echo substr($task['task']->getJob()->getStore()->getCustomer()->getCompany(),0,15) ?><br>
-					<?php echo substr($task['task']->getJob()->getStore(),0,15) ?><br>
+						<?php if ($task['task']->getTaskTypeId() == 1): ?>
+								<?php echo substr($task['task']->getJob()->getStore()->getCustomer()->getCompany(),0,15) ?><br>
+								<?php echo substr($task['task']->getJob()->getStore(),0,15) ?><br>
+						<?php else: ?>
+								<strong><?php echo $task['task']->getTaskType() ?></strong>
+						<?php endif ?>
 
 
 		</div>

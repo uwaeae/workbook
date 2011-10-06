@@ -31,15 +31,20 @@
 			<?php if($task['task']->getJob()->getJobTypeId() == 1): ?>
 			<span class="fault">FIX</span>		
 			<?php endif ?>
-		
+			<?php if ($task['task']->getTaskTypeId() == 1): ?>
+				
 		
 		 	<strong><?php echo $task['task']->getJob()->getStore()->getCustomer()->getCompany()?></strong>
 				<p> <strong>Adresse</strong>
 				<?php echo $task['task']->getJob()->getStore()->getStreet() ?>	<br>
-				<?php echo	$task['task']->getJob()->getStore()->getPostcode() ?> <?php echo $task['task']->getJob()->getStore()->getCity() ?><br></p>
+				<?php echo	$task['task']->getJob()->getStore()->getPostcode() ?> 
+				<?php echo $task['task']->getJob()->getStore()->getCity() ?><br></p>
 			
 			<p><strong>Info</strong>
 			<?php echo 	$task['task']->getJob()->getDescription() ?></p>
+				<?php else: ?>
+						<strong><?php echo $task['task']->getTaskType() ?></strong>
+				<?php endif ?>
 	</div>
 	</td>
 	<?php endforeach ?>
