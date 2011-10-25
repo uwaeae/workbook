@@ -108,7 +108,7 @@
 		<td>
 			
     		
-		<?php if ($job->getJobStateId() == 2 AND $job->getInvoices()->count() == 0 AND $sf_user->hasPermission('bearbeiten') ): ?>
+		<?php if ($job->getJobStateId() == 2 AND $job->getInvoices()->count() == 0 AND $sf_user->hasPermission('Rechung') ): ?>
 				<a class="button" href="<?php echo url_for('invoice/new/?job='.$job->getId()) ?>">
 				Rechnungsnummer erstellen</a>
 				<a href="<?php echo url_for( 'job/finish/?id='.$job->getId()) ?>" 
