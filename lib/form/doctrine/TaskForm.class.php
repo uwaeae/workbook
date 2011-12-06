@@ -48,7 +48,7 @@ class TaskForm extends BaseTaskForm
 			$this->setDefault('overtime', (date('H') > 20? date('H')-20: 0));
 			break;
 		case '2': //krank
-			$this->setDefault('end', date('Y/m/d H:i',mktime(15,59,0,date("m"),date("d"),date("Y"))));
+			$this->setDefault('end', date('Y/m/d H:i',mktime(15,00,0,date("m"),date("d"),date("Y"))));
 			$this->setDefault('start', date('Y/m/d H:i',mktime(8,0,0,date("m"),date("d"),date("Y"))));
 			$this->setDefault('task_type_id',2);
 		//	$this->widgetSchema['users_list'] = new sfWidgetFormInputHidden();
@@ -61,7 +61,7 @@ class TaskForm extends BaseTaskForm
 			$this->setDefault('info','Krank');
 			break;
 		case '3': //urlaub
-			$this->setDefault('end', date('Y/m/d H:i',mktime(15,59,0,date("m"),date("d"),date("Y"))));
+			$this->setDefault('end', date('Y/m/d H:i',mktime(15,00,0,date("m"),date("d"),date("Y"))));
 			$this->setDefault('start', date('Y/m/d H:i',mktime(8,0,0,date("m"),date("d"),date("Y"))));
 			$this->setDefault('info','Urlaub');
 			$this->setDefault('task_type_id',3);
@@ -74,7 +74,17 @@ class TaskForm extends BaseTaskForm
 			$this->widgetSchema['overtime'] = new sfWidgetFormInputHidden();
 			
 			break;
-		
+		default: // der Rest
+			$this->setDefault('end', date('Y/m/d H:i',mktime(16,00,0,date("m"),date("d"),date("Y"))));
+			$this->setDefault('start', date('Y/m/d H:i',mktime(8,0,0,date("m"),date("d"),date("Y"))));
+			$this->setDefault('info','Bitte hier die erledigten Arbeiten Eintragen');
+			$this->setDefault('task_type_id',$this->getOption('type'));
+			$this->setOption('task_type',array('disabled'=>'disabled'));
+			$this->widgetSchema['break'] = new sfWidgetFormChoice(array('choices' => array('0','15','30', '45', '60')));
+			$this->setDefault('approach',0);
+			$this->widgetSchema['approach'] = new sfWidgetFormInputHidden();
+			$this->setDefault('overtime',0);
+			$this->widgetSchema['overtime'] = new sfWidgetFormInputHidden();
 	}
 	
 

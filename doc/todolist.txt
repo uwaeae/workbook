@@ -4,7 +4,6 @@
 
 Bug / TODOs
 
-Layout 			Anpassung auf Eis-Ber
 
 Tabellen		Store zu Adresse
 Backend 		Einstellungen Menu Einbindung
@@ -15,6 +14,7 @@ Back Buttons	Historie Array machen
 
 Auftrag 		Neu über die Übersicht und aus dem Hauptmenu raus
 Auftrag 		Eingabe die Datepicker jQuery UI verwenden und Deutsch?
+Auftrag			Löschen( Rechnungsnummer, Files, Tasks(material))
 
 Stundenzettel	Korrekturwert mit Kommastellen angeben
 
@@ -25,11 +25,12 @@ Kalendar		Filtereinstellungen Speichern
 Job 			Datei Mime Type mit speichern und übergeben bein download
 Job				anzeige welche Jobs schon in dieser Adresse/Filiale bearbeitet worden sind.
 Job				Abgeschlossen Thermin bearbeitung ausschalten
-
-
+Job 			Löschen (Material )
 
 Kunden			Suche nach Filialnummer/Name/Adresse
 Kunden			100 Kunden anzeigen
+Kunden NEU		Adresseingabe
+Kunden 			Filiale Anlegen
 
 Archiv			Suche nach Rechungsnummer/Name/Adresse/Filialnummer
 
@@ -43,6 +44,9 @@ FEATURES
 	
 
 ERLEDIGT
+
+
+Layout 			Anpassung auf Eis-Ber
 
 Auftrag			Eigene Meine geplanten/ Meine in Bearbeitung Aufträge in einer liste anzeigen
 Auftrag 		Übersicht Filter/Suche einbauen User, Firma, usw. 
