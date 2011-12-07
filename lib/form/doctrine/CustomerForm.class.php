@@ -12,5 +12,19 @@ class CustomerForm extends BaseCustomerForm
 {
   public function configure()
   {
+	unset(
+			$this['headoffice']
+				 );
+	//	$this->widgetSchema['end'] = new sfWidgetFormInput();
+	//	$this->widgetSchema['start'] = new sfWidgetFormInput();
+	$this->widgetSchema->setLabels(array(
+	  'company'    => 'Firma / Name',
+	  'logo'      => 'Logo',
+	  'url'   => 'Link',
+	  'number'   => 'Kundennummer',
+	));
+	
+	
+	
   }
 }

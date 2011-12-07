@@ -1,8 +1,17 @@
 <h1>Kunden </h1>
+<div class="job_search">
+	<ul>
+	<li> <?php include_partial('search', array('form' => $formStore)) ?> </li>
+	<li> <?php include_partial('search', array('form' => $formCustomer)) ?> </li>
+	
+	<ul>
+</div>
 
-<a class="button" href="<?php echo url_for('customer/new') ?>">Neuer Kunde</a>
 <table class="job">
   <thead>
+	<tr><td colspan="4">
+	<a class="button" href="<?php echo url_for('customer/new') ?>">Neuer Kunde</a>
+	</td></tr>
     <tr>
       <th>Frimenname</th>
       <th>Straße</th>

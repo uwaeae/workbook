@@ -918,6 +918,7 @@ table.job_component td:first-child,
 table.job_component th{
 	font-weight: bold;
 	background-color: #E7EEF6;
+	padding-right: 10px;
 	xborder-right: 2px solid lightblue;
 	xborder-bottom: 2px solid lightblue;
 }

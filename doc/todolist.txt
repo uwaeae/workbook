@@ -1,4 +1,6 @@
 
+Datenbank verändern
+ALTER TABLE `customer` DROP FOREIGN KEY `customer_headoffice_store_id` ;
 
 
 

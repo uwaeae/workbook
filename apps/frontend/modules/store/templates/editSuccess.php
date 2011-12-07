@@ -1,3 +1,3 @@
-<h1>Edit Store</h1>
+<h1>Bearbeite Filiale</h1>
 
 <?php include_partial('form', array('form' => $form)) ?>

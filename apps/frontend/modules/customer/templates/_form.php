@@ -9,11 +9,11 @@
     <tfoot>
       <tr>
         <td colspan="2">
-          &nbsp;<a href="<?php echo url_for('customer/index') ?>">Back to list</a>
           <?php if (!$form->getObject()->isNew()): ?>
-            &nbsp;<?php echo link_to('Delete', 'customer/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => 'Are you sure?')) ?>
+			<a class="button" href="<?php echo url_for('customer/show?id='.$form->getObject()->getId()) ?>">zurück</a>
+            &nbsp;<?php echo link_to('Löschen', 'customer/delete?id='.$form->getObject()->getId(), array('class'=>'button','method' => 'delete', 'confirm' => 'Sind sie sicher das sie diesen Kunden löschen wollen?')) ?>
           <?php endif; ?>
-          <input type="submit" value="Save" />
+          <input class="button" type="submit" value="Speichern" />
         </td>
       </tr>
     </tfoot>

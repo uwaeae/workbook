@@ -19,14 +19,8 @@ Customer:
       unique: true
       type: integer(5)
     headoffice:
-      notnull: true
-      type: integer(5)
-  relations:
-    Store:
-      local: headoffice
-      foreign: id
-      type: one
-      foreignType: one        
+      notnull: false
+      type: integer(5)     
 Store:
   actAs: [Timestampable]
   tableName: store

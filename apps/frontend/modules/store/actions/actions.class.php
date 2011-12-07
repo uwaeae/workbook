@@ -25,7 +25,18 @@ class storeActions extends sfActions
 
   public function executeNew(sfWebRequest $request)
   {
-    $this->form = new StoreForm();
+	 $options = array();
+	if ($request->hasParameter('customer')) {
+	$this->forward404Unless(
+		 $this->customer = Doctrine_Core::getTable('Customer')->find(array($request->getParameter('customer'))), sprintf('Angegebener Kunde existiert nicht ID (%s).', $request->getParameter('customer')));
+		$options['customer'] = $this->customer->getID();
+	}
+	if ($request->hasParameter('hq')) {
+		$options['hq'] = $request->getParameter('hq');
+	}
+		
+	$this->form = new StoreForm(NULL,$options);
+	
   }
 
   public function executeCreate(sfWebRequest $request)
@@ -61,9 +72,10 @@ class storeActions extends sfActions
     $request->checkCSRFProtection();
 
     $this->forward404Unless($store = Doctrine_Core::getTable('Store')->find(array($request->getParameter('id'))), sprintf('Object store does not exist (%s).', $request->getParameter('id')));
-    $store->delete();
+    $cid = $store->getCustomerID();
+	$store->delete();
 
-    $this->redirect('store/index');
+    $this->redirect('customer/show?id='.$cid);
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
@@ -72,8 +84,12 @@ class storeActions extends sfActions
     if ($form->isValid())
     {
       $store = $form->save();
-
-      $this->redirect('store/edit?id='.$store->getId());
+		if($store->getNumber() == 0){
+			$customer = $store->getCustomer();
+			$customer->setHeadoffice($store->getID());
+			$customer->save();
+		}
+      $this->redirect('customer/show?id='.$store->getCustomerID());
     }
   }
 }

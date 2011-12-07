@@ -19,6 +19,13 @@ class customerActions extends sfActions
 		  ->orderBy('c.company'));
 		$this->pager->setPage($request->getParameter('page'));
 		$this->pager->init();
+		
+			$this->formStore = new searchStoreForm(NULL,array(
+				'url' => $this->getController()->genUrl('customer/findstore'),
+					));
+			$this->formCustomer = new searchCustomerForm(NULL,array(
+				'url' => $this->getController()->genUrl('customer/findcustomer')
+				));
 
 
   }
@@ -38,15 +45,36 @@ class customerActions extends sfActions
 		}
   }
 
+ public function executeSearch(sfWebRequest $request)
+  {
+	//if(!$request->isMethod(sfRequest::get))  $this->redirect('job');
+	//if($request->hasParameter('customer'))
+	
+	if($request->hasParameter('store') && is_numeric($request->getParameter('store'))) {
+		$store = Doctrine_Core::getTable('store')->find(array($request->getParameter('store')));
+		$this->redirect('customer/show?id='.$store->getCustomerID());
+		}
+
+	if($request->hasParameter('customer') && is_numeric($request->getParameter('customer'))){
+		$this->redirect('customer/show?id='.$request->getParameter('customer'));
+		}
+		
+  }
+
   public function executeCreate(sfWebRequest $request)
   {
     $this->forward404Unless($request->isMethod(sfRequest::POST));
 
-    $this->form = new CustomerForm();
+    $form = new CustomerForm();
 
-    $this->processForm($request, $this->form);
-
-    $this->setTemplate('new');
+    $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
+    if ($form->isValid())
+    {
+      $customer = $form->save();
+	  $this->redirect('store/new?customer='.$customer->getID().'&hq=1');
+    }
+	$this->form = $form;
+	$this->setTemplate('new');
   }
 
   public function executeEdit(sfWebRequest $request)
@@ -83,7 +111,27 @@ class customerActions extends sfActions
     {
       $customer = $form->save();
 
-      $this->redirect('customer/edit?id='.$customer->getId());
+     
     }
   }
+	public function executeFindstore($request)
+	{
+	  $this->getResponse()->setContentType('application/json');
+
+	  $stores = store::retrieveForSelect($request->getParameter('q'),
+	$request->getParameter('limit'),$request->getParameter('customer'));
+
+	  return $this->renderText(json_encode($stores));
+	}
+
+	public function executeFindcustomer($request)
+	{
+	  $this->getResponse()->setContentType('application/json');
+
+	  $cutomers = customer::retrieveForSelect($request->getParameter('q'),
+	$request->getParameter('limit'),$request->getParameter('customer'));
+
+	  return $this->renderText(json_encode($cutomers));
+	}
+	
 }
