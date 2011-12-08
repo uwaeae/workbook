@@ -193,13 +193,17 @@
   <thead>
    
 	<tr>
-	<th style="width:150px;">Start</th>
-	<th style="width:150px;">Ende</th>
+	<th rowspan="2" style="width:150px;">Start</th>
+	<th rowspan="2" style="width:150px;">Ende</th>
 
-	<th style="width:350px;">Arbeiten</th>
-	<th style="width:200px;">Mitarbeiter</th>
-	<th style="width:50px;">Stunden</th>
-	<th style="width:150px;">Erstellt</th>
+	<th rowspan="2" style="width:350px;">Arbeiten</th>
+	<th rowspan="2" style="width:200px;">Mitarbeiter</th>
+	<th colspan="2"style="width:50px;">Stunden</th>
+	<th rowspan="2" style="width:150px;">Erstellt</th>
+	</tr>
+	<tr>
+	<th rowspan="2" style="width:150px;">Normal </th>
+	<th rowspan="2" style="width:150px;">30%</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -218,6 +222,7 @@
 			<?php echo $user ?><br>
 		<?php endforeach ?></td>
 		<td><?php echo $task['time'] ?></td>
+		<td><?php echo $task['task']->getOvertime() ?></td>
 		<td><?php // echo format_date($task['task']->getCreatedAt(),'dd.MM.yyyy') ?>
 			<?php echo $task['task']->getCreator()->getUsername() ?>
 			</td>
@@ -226,10 +231,17 @@
 	</tbody>
 	<tfoot>
 		<tr>
-			<td ></td>
-			<td ></td>
-			<th colspan="2">Summe</th>
+			<td colspan="2" rowspan="2"></td>
+			<th colspan="1" rowspan="2">Summe</th>
+			<th colspan="1" rowspan="1">Einzeln</th>
 			<td ><strong><?php echo $worksumme ?></strong></td>
+			<td ><strong><?php echo $overtimesumme ?></strong></td>
+			<td ></td>
+		</tr>
+		<tr>
+			<th colspan="1" rowspan="1" >Gesamt</th>
+			<td colspan="2" style="text-align: center;"><strong><?php echo $worksumme+$overtimesumme  ?></strong></td>
+			
 
 			<td ></td>
 		</tr>

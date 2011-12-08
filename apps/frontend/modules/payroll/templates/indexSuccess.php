@@ -20,8 +20,8 @@
 		</tr>	
 			<th>Stunden</th>
 			<th>ab 20 Uhr</th>
-			<th>Krank</th>
 			<th>Urlaub</th>
+			<th>Krank</th>
 			<th>Stunden</th>
 			<th>Info</th>
 		</tr>

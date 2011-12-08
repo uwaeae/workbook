@@ -213,15 +213,27 @@ public function executeTable(sfWebRequest $request)
 	$this->date = array();
 	$this->work = array();
 	$this->worksumme = 0;
+	$this->overtimesumme = 0;
 	$part = Doctrine_Core::getTable('Option')->getOptionByName('payroll_hour_split');
 	foreach ($this->job->getTasks() as $task) {
 		if(!$task->getScheduled()){
 			
-			$Stunden =  date('H',strtotime($task->getEnd())) - date('H',strtotime($task->getStart()))  - $task->getOvertime();
-		 	$Minuten = (date('i',strtotime($task->getEnd())) - date('i',strtotime($task->getStart())));
+			//$Stunden =  date('H',strtotime($task->getEnd())) - date('H',strtotime($task->getStart()))  - $task->getOvertime();
+		 	//$Minuten = (date('i',strtotime($task->getEnd())) - date('i',strtotime($task->getStart())));
+			
+			$diff = date_diff(new DateTime($task->getStart()), new DateTime($task->getEnd()));
+			$Stunden = $diff->format('%h') - $task->getOvertime() ; 
+			// Stunden Addierung wenn mehrere Tage gearbeitet wurde( kommt eingentlich nicht vor)
+			if($diff->format('%d') > 0 ){
+				$Stunden += $diff->format('%d') * 24;
+			}
+				// Minuten Berechnung in Stunden anteile
+			$Minuten = $diff->format('%i');
+			
 			$Minuten = round(($Minuten - ($task->getBreak()*15)) / $part, 0) * $part;
 			if($Minuten != 0) $Stunden += round($Minuten / 60,2);
 			$this->worksumme += $Stunden;
+			$this->overtimesumme += $task->getOvertime() ; 
 			$t = array('time' => $Stunden, 'task'=> $task);
 			
 			$this->work[] = $t;

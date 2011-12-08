@@ -103,7 +103,7 @@ protected function makeNavForm($user)
 					->orderBy('t.start');
 		
 		if ( $this->getUser()->hasPermission('admin')) {
-		$user = ($request->hasParameter('user')? $request->getParameter('user') : $this->getUser()->getId());
+			$user = ($request->hasParameter('user')? $request->getParameter('user') : $this->getUser()->getId());
 		} 
 		else {
 			$user = $this->getUser()->getId();
@@ -118,35 +118,35 @@ protected function makeNavForm($user)
 		else $t = $query->andWhere('MONTH(t.start) = MONTH(NOW()) ')
 				->execute();
 		$this->setBack('payroll/index/?user='.$user.($request->hasParameter('month')? '&month='.$request->getParameter('month'):''));			
-	 foreach ($t as $task) {
+	 
+	foreach ($t as $task) {
 	 	$tmp = array();
 			$start = strtotime($task->getStart());
 			// Stunden differenz zwischen anfang und ende der Arbeit berechnen
 			$diff = date_diff(new DateTime($task->getStart()), new DateTime($task->getEnd()));
+			$Tage = $diff->format('%d');
 			$Stunden = $diff->format('%h'); 
 			// Stunden Addierung wenn mehrere Tage gearbeitet wurde( kommt eingentlich nicht vor)
-			if($diff->format('%d') > 0 ){
-				$Stunden += $diff->format('%d') * 24;
-			}
+		
 			// Minuten Berechnung in Stunden anteile
 			$Minuten = $diff->format('%i'); 
-			//$Minuten = (date('i',strtotime($task->getEnd())) - date('i',strtotime($task->getStart())))	;
 			$Minuten = round($Minuten / $part, 0) * $part;
 			if($Minuten != 0) $Stunden += round($Minuten / 60,2);
-				// if($diff->format('%d') > 0 ){
-				// 	$Stunden = 0;
-				// 	for($i = 0; $i <= $diff->format('%d'); $i++)
-				// 	{
-				// 			   			$date = mktime(0, 0, 0, date("m",$start)  , date("d",$start)+ $i , date("Y",$start));	
-				// 		if(	date('w',$date) != 0 AND date('w',$date) != 6 AND  !Doctrine_Core::getTable('Holiday')->isHoliday($date))
-				// 		{
-				// 		$Stunden++;
-				// 		}
-				// 	}
-				// 
-				// 	$Stunden = $Stunden * 8;
-				// 
-				// }
+			
+			if($diff->format('%d') > 0 ){
+				 	$Stunden = 0;
+				 	for($i = 0; $i <= $diff->format('%d'); $i++)
+				 	{
+				 			   			$date = mktime(0, 0, 0, date("m",$start)  , date("d",$start)+ $i , date("Y",$start));	
+				 		if(	date('w',$date) != 0 AND date('w',$date) != 6 AND  !Doctrine_Core::getTable('Holiday')->isHoliday($date))
+				 		{
+				 		$Stunden++;
+				 		}
+				 	}
+				 
+				 	$Stunden = $Stunden * 8;
+				 
+				 }
 				// else {
 				// 	$Stunden =  date('H',strtotime($task->getEnd())) - date('H',strtotime($task->getStart()))  - $task->getOvertime() +$task->getCorrectionTime();
 				//  	$Minuten = (date('i',strtotime($task->getEnd())) - date('i',strtotime($task->getStart())))	;
@@ -170,16 +170,14 @@ protected function makeNavForm($user)
 					$tmp['approach'] = $task->getApproach() * 0.25;
 					$this->approach += $task->getApproach() * 0.25;
 					break;
-				case '2': //Urlaubsbrrechung
-				//	echo '<td></td><td>'.($task->getOvertime() == 0?' ':$task->getOvertime() ).'</td><td>'.$Stunden.'</td><td></td>';
-				 	$tmp['holyday'] = $Stunden;
-					$this->holyday += $Stunden;
 
+				case '2': // Krankheit
+						$tmp['sickness'] = $Stunden;
+						$this->sickness += $Stunden;
 					break;
-				case '3': // Krankheit
-				//	echo '<td></td><td>'.($task->getOvertime() == 0?' ':$task->getOvertime() ).'</td><td></td><td>'.$Stunden.'</td>';
-					$tmp['sickness'] = $Stunden;
-					$this->sickness += $Stunden;
+				case '3': //Urlaubsbrrechung
+						$tmp['holyday'] = $Stunden;
+						$this->holyday += $Stunden;
 					break;
 				default : //buero und sonstiges
 					$Stunden = $Stunden - ($task->getBreak() * 0.25) ;

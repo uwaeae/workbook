@@ -1,13 +1,4 @@
 
-DELETE FROM `workbook`.`task` WHERE `task`.`id` = 44;
-DELETE FROM `workbook`.`task` WHERE `task`.`id` = 45;
-DELETE FROM `workbook`.`task` WHERE `task`.`id` = 46;
-DELETE FROM `workbook`.`task` WHERE `task`.`id` = 47;
-DELETE FROM `workbook`.`task` WHERE `task`.`id` = 49;
-DELETE FROM `workbook`.`task` WHERE `task`.`id` = 50;
-DELETE FROM `workbook`.`task` WHERE `task`.`id` = 51;
-DELETE FROM `workbook`.`task` WHERE `task`.`id` = 97;
-DELETE FROM `workbook`.`task` WHERE `task`.`id` = 98;
 
 
 Bug / TODOs
@@ -55,6 +46,17 @@ ERLEDIGT
 
 Datenbank verändern
 ALTER TABLE `customer` DROP FOREIGN KEY `customer_headoffice_store_id` ;
+
+DELETE FROM `workbook`.`task` WHERE `task`.`id` = 44;
+DELETE FROM `workbook`.`task` WHERE `task`.`id` = 45;
+DELETE FROM `workbook`.`task` WHERE `task`.`id` = 46;
+DELETE FROM `workbook`.`task` WHERE `task`.`id` = 47;
+DELETE FROM `workbook`.`task` WHERE `task`.`id` = 49;
+DELETE FROM `workbook`.`task` WHERE `task`.`id` = 50;
+DELETE FROM `workbook`.`task` WHERE `task`.`id` = 51;
+DELETE FROM `workbook`.`task` WHERE `task`.`id` = 97;
+DELETE FROM `workbook`.`task` WHERE `task`.`id` = 98;
+
 
 Layout 			Anpassung auf Eis-Ber
 

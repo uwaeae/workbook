@@ -904,6 +904,7 @@ table.job_component td{
 		xborder-bottom: 2px solid lightblue;
 		height: 25px;
 		padding: 0 10px;
+		text-align: center;
 }
 table.job_component tr{
 		border-bottom: 2px solid lightblue;
