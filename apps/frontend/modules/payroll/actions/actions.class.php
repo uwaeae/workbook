@@ -33,6 +33,7 @@ protected function getMonth($number){
 
 protected function makeNavForm($user)
   {
+	// Erweiterung um Jahr
 	$form = new sfForm();
 	$month = Doctrine_Query::create()
 				->select('MONTH(t.start) month')
@@ -120,35 +121,48 @@ protected function makeNavForm($user)
 	 foreach ($t as $task) {
 	 	$tmp = array();
 			$start = strtotime($task->getStart());
+			// Stunden differenz zwischen anfang und ende der Arbeit berechnen
 			$diff = date_diff(new DateTime($task->getStart()), new DateTime($task->getEnd()));
+			$Stunden = $diff->format('%h'); 
+			// Stunden Addierung wenn mehrere Tage gearbeitet wurde( kommt eingentlich nicht vor)
 			if($diff->format('%d') > 0 ){
-				$Stunden = 0;
-				for($i = 0; $i <= $diff->format('%d'); $i++)
-				{
-		   			$date = mktime(0, 0, 0, date("m",$start)  , date("d",$start)+ $i , date("Y",$start));	
-					if(	date('w',$date) != 0 AND date('w',$date) != 6 AND  !Doctrine_Core::getTable('Holiday')->isHoliday($date))
-					{
-					$Stunden++;
-					}
-				}
-
-				$Stunden = $Stunden * 8;
-
+				$Stunden += $diff->format('%d') * 24;
 			}
-			else {
-				$Stunden =  date('H',strtotime($task->getEnd())) - date('H',strtotime($task->getStart()))  - $task->getOvertime() +$task->getCorrectionTime();
-			 	$Minuten = (date('i',strtotime($task->getEnd())) - date('i',strtotime($task->getStart())))	;
+			// Minuten Berechnung in Stunden anteile
+			$Minuten = $diff->format('%i'); 
+			//$Minuten = (date('i',strtotime($task->getEnd())) - date('i',strtotime($task->getStart())))	;
+			$Minuten = round($Minuten / $part, 0) * $part;
+			if($Minuten != 0) $Stunden += round($Minuten / 60,2);
+				// if($diff->format('%d') > 0 ){
+				// 	$Stunden = 0;
+				// 	for($i = 0; $i <= $diff->format('%d'); $i++)
+				// 	{
+				// 			   			$date = mktime(0, 0, 0, date("m",$start)  , date("d",$start)+ $i , date("Y",$start));	
+				// 		if(	date('w',$date) != 0 AND date('w',$date) != 6 AND  !Doctrine_Core::getTable('Holiday')->isHoliday($date))
+				// 		{
+				// 		$Stunden++;
+				// 		}
+				// 	}
+				// 
+				// 	$Stunden = $Stunden * 8;
+				// 
+				// }
+				// else {
+				// 	$Stunden =  date('H',strtotime($task->getEnd())) - date('H',strtotime($task->getStart()))  - $task->getOvertime() +$task->getCorrectionTime();
+				//  	$Minuten = (date('i',strtotime($task->getEnd())) - date('i',strtotime($task->getStart())))	;
 
 // Hier noch die Eintsllungsparameter für die Stunden berechnung einbauen
-
-			
-				$Minuten = round($Minuten / $part, 0) * $part;
-				if($Minuten != 0) $Stunden += round($Minuten / 60,2);
-			}
+			// 		$Minuten = (date('i',strtotime($task->getEnd())) - date('i',strtotime($task->getStart())))	;
+			// 		$Minuten = round($Minuten / $part, 0) * $part;
+			// 		if($Minuten != 0) $Stunden += round($Minuten / 60,2);
+			// 
+			// 	
+			// }
 
 			$this->overtime +=  $task->getOvertime();
+			$Stunden -= $task->getOvertime();
 			switch ($task->getTaskTypeId()) {
-				case '1':
+				case '1': // Arbeitsstunden berechnung
 			//	echo '<td>'.$Stunden.'</td><td>'.($task->getOvertime() == 0?' ':$task->getOvertime() ).'</td><td></td><td></td>';
 					$Stunden = $Stunden - ($task->getBreak() * 0.25) ;
 					$tmp['worktime'] = $Stunden;
@@ -156,18 +170,18 @@ protected function makeNavForm($user)
 					$tmp['approach'] = $task->getApproach() * 0.25;
 					$this->approach += $task->getApproach() * 0.25;
 					break;
-				case '2':
+				case '2': //Urlaubsbrrechung
 				//	echo '<td></td><td>'.($task->getOvertime() == 0?' ':$task->getOvertime() ).'</td><td>'.$Stunden.'</td><td></td>';
 				 	$tmp['holyday'] = $Stunden;
 					$this->holyday += $Stunden;
 
 					break;
-				case '3':
+				case '3': // Krankheit
 				//	echo '<td></td><td>'.($task->getOvertime() == 0?' ':$task->getOvertime() ).'</td><td></td><td>'.$Stunden.'</td>';
 					$tmp['sickness'] = $Stunden;
 					$this->sickness += $Stunden;
 					break;
-				case '4':
+				default : //buero und sonstiges
 					$Stunden = $Stunden - ($task->getBreak() * 0.25) ;
 					$tmp['worktime'] = $Stunden;
 					$this->worktime += $Stunden;

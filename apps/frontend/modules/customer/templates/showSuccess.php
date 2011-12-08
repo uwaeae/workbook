@@ -23,10 +23,18 @@
 			<td><a href="<?php echo $customer->getUrl() ?>">Homepage</a></td>
 	</tr>
 	<tr>
-		<td><a class="button" href="<?php echo url_for('customer/index') ?>">Zurück</a></td>
-		<td><a class="button" href="<?php echo url_for('customer/edit?id='.$customer->getId()) ?>">Basisdaten</a></td>
-		<td><a class="button" href="<?php echo url_for('store/edit?id='.$customer->getHeadoffice()) ?>">Adresse</a></td>
-			
+		<td colspan="1" ><a class="button" href="<?php echo url_for('customer/index') ?>">Zurück</a></td>
+		<td colspan="1" ><a class="button" href="<?php echo url_for('customer/edit?id='.$customer->getId()) ?>">Basisdaten</a></td>
+		<td colspan="1" ><a class="button" href="<?php echo url_for('store/edit?id='.$customer->getHeadoffice()) ?>">Adresse</a>
+		<td>	
+			<form action="<?php echo url_for('job/new') ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
+				<?echo $form['type']->renderLabel() ?>
+				<?php echo $form['type']->renderError() ?>
+				<?php echo $form['type']->render() ?>
+				<?php echo $form->renderHiddenFields() ?>
+				<input class="button" type="submit" value="Neuen Auftrag anlegen">
+			</form>
+		</td>
 	</tr>
   </tbody>
 </table>

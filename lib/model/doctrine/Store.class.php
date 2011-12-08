@@ -14,7 +14,8 @@ class Store extends BaseStore
 {
 	public function __toString()
 	{
-		return  ($this->getNumber() ==  0? ' ': $this->getNumber().' | ')
+		return  substr($this->getCustomer()->getCompany(),0,20)
+				.($this->getNumber() ==  0? ' ': ' - '.$this->getNumber().' - ')
 				.str_pad($this->getPostcode(),5,"0", STR_PAD_LEFT)
 				.' '.$this->getCity()
 				.' '.$this->getStreet();

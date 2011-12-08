@@ -107,7 +107,7 @@ public function executeTable(sfWebRequest $request)
 										,$request->getParameter('page')
 										,$request->getParameter('max'));
 //					}
-	 if ( $this->getUser()->hasPermission('Rechung')) {
+	 if ( $this->getUser()->hasPermission('Rechnung')) {
 
 	$this->jobstate[4] = $this->getJobStateArray(4,'abgeschlossene Aufträge'
 								,Doctrine_Core::getTable('Job')->getFinishedJobs()
@@ -291,15 +291,22 @@ public function executeTable(sfWebRequest $request)
   {
     $this->forward404Unless($job = Doctrine_Core::getTable('Job')->find(array($request->getParameter('id'))), sprintf('Object job does not exist (%s).', $request->getParameter('id')));
 
-    $this->form = new JobForm($job, array('url' => $this->getController()->genUrl('job/ajax')));
+    $this->form = new JobForm($job,array(
+	'url' => $this->getController()->genUrl('job/findstore'),
+	'type' => $job->getJobTypeId(),
+	'customer' => $job->getStore()->getCustomer()));
 	//$this->form->setOption('updated_from',$this->getUser());
 	$this->form->setDefault('updated_from',$this->getUser()->getId());
+	$this->back = $this->getUser()->getAttribute('back');	
   }
+
+
  public function executeWork(sfWebRequest $request)
   {
     $this->forward404Unless($job = Doctrine_Core::getTable('Job')->find(array($request->getParameter('id'))), 			   sprintf('Object job does not exist (%s).', $request->getParameter('id')));
 
     $this->form = new JobForm($job, array('url' => $this->getController()->genUrl('job/ajax')));
+ 
 	
   }
 
@@ -348,8 +355,8 @@ public function executeFindstore($request)
 {
   $this->getResponse()->setContentType('application/json');
 
-  $stores = store::retrieveForSelect($request->getParameter('q'),
-$request->getParameter('limit'),$request->getParameter('customer'));
+	$stores = store::retrieveForSelect($request->getParameter('q'),
+	$request->getParameter('limit'),$request->getParameter('customer'));
 
   return $this->renderText(json_encode($stores));
 }

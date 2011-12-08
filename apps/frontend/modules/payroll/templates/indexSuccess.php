@@ -77,7 +77,7 @@
 		<td></td>
 		
 		<td colspan="1">Summe mit FA</td>
-		<td colspan="2" class="number"><?php echo $approach+ $worktime ?></td>
+		<td colspan="2" class="number"><?php echo $approach+ $worktime  ?></td>
 		<td class="number"><?php echo $overtime ?></td>
 		<td class="number"><?php echo $holyday ?></td>
 		<td class="number"><?php echo $sickness  ?></td>

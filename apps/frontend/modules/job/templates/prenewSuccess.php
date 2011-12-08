@@ -7,7 +7,10 @@
   <table id="job_form">
     <tfoot>
       <tr>
-        <td colspan="2">
+		 <td colspan="1">
+	          <?php echo link_to('Neuer Kunde','customer/new',array('class'=>'button')); ?>
+	        </td>
+        <td colspan="1">
           <input type="submit" class="button" value="weiter" />
         </td>
       </tr>

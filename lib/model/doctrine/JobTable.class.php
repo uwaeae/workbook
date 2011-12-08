@@ -106,7 +106,7 @@ public static function getStoreOldJobs($id,$store)
 				->where('j.job_state_id = 2')
 				->leftJoin('j.Invoices i')
 				->andWhere('i.id is null ')
-				->orderby('j.end');
+				->orderby('j.id');
 		
 		
 	}

@@ -93,6 +93,7 @@ Job:
       type: integer
       notnull: true
     store_id:
+      notnull: true
       type: integer
     created_at:
       type: timestamp

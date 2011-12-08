@@ -98,8 +98,8 @@ sfGuardPermission:
     name:           Bearbeiten
     description:    Einen Auftrag Bearbeiten
   Job_Invoice:
-    name:           Rechung
-    description:    Rechungsnummer Erstellen
+    name:           Rechnung
+    description:    Rechnungsnummer Erstellen
   Correctur:
     name:           Korrektur
     description:    Arbeitssunden Korrigieren    

@@ -94,7 +94,7 @@
 			<li class="table_menu_left">	
 			<a class="button" href="<?php echo   url_for($back) ?>">	
 				zurück</a></li>
-				<?php if ($sf_user->hasPermission('bearbeiten') and $job->getJobStateId() < 2 ): ?>
+				<?php if ($sf_user->hasPermission('Bearbeiten')  ): ?>
 				
 			<li class="table_menu_left">
 						
@@ -108,7 +108,7 @@
 		<td>
 			
     		
-		<?php if ($job->getJobStateId() == 2 AND $job->getInvoices()->count() == 0 AND $sf_user->hasPermission('Rechung') ): ?>
+		<?php if ($job->getJobStateId() == 2 AND $job->getInvoices()->count() == 0 AND $sf_user->hasPermission('Rechnung') ): ?>
 				<a class="button" href="<?php echo url_for('invoice/new/?job='.$job->getId()) ?>">
 				Rechnungsnummer erstellen</a>
 				<a href="<?php echo url_for( 'job/finish/?id='.$job->getId()) ?>" 

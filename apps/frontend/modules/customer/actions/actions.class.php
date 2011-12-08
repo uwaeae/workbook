@@ -13,10 +13,16 @@ class customerActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
   
-		$this->pager = new sfDoctrinePager('Customer', ($request->hasParameter('max')? $request->getParameter('max'): 30));	
-		$this->pager->setQuery(Doctrine_Core::getTable('Customer')
-	      ->createQuery('c')
-		  ->orderBy('c.company'));
+		$this->pager = new sfDoctrinePager('Customer', ($request->hasParameter('max')? $request->getParameter('max'): 100));	
+		$query = Doctrine_Core::getTable('Customer')
+	      ->createQuery('c');
+		if ($request->hasParameter('sort')) {
+			 $query->orderBy('c.'.$request->getParameter('sort'));
+		}else{
+			$query->orderBy('c.company');
+		}
+		
+		$this->pager->setQuery($query);
 		$this->pager->setPage($request->getParameter('page'));
 		$this->pager->init();
 		
@@ -34,7 +40,11 @@ class customerActions extends sfActions
   {
     $this->customer = Doctrine_Core::getTable('Customer')->find(array($request->getParameter('id')));
     $this->forward404Unless($this->customer);
-  }
+	$this->form = new PreJobForm(NULL,array(
+		'customer' => $this->customer->getID()
+		));
+	
+}
 
   public function executeNew(sfWebRequest $request)
   {

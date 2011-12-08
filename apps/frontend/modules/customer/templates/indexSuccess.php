@@ -13,8 +13,8 @@
 	<a class="button" href="<?php echo url_for('customer/new') ?>">Neuer Kunde</a>
 	</td></tr>
     <tr>
-      <th>Frimenname</th>
-      <th>Straße</th>
+      <th>Firmenname</th>
+      <th>Strasse</th>
       <th>PLZ</th>
 	  <th>Ort</th>
     </tr>

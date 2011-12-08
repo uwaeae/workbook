@@ -1,7 +1,13 @@
 
-Datenbank verändern
-ALTER TABLE `customer` DROP FOREIGN KEY `customer_headoffice_store_id` ;
-
+DELETE FROM `workbook`.`task` WHERE `task`.`id` = 44;
+DELETE FROM `workbook`.`task` WHERE `task`.`id` = 45;
+DELETE FROM `workbook`.`task` WHERE `task`.`id` = 46;
+DELETE FROM `workbook`.`task` WHERE `task`.`id` = 47;
+DELETE FROM `workbook`.`task` WHERE `task`.`id` = 49;
+DELETE FROM `workbook`.`task` WHERE `task`.`id` = 50;
+DELETE FROM `workbook`.`task` WHERE `task`.`id` = 51;
+DELETE FROM `workbook`.`task` WHERE `task`.`id` = 97;
+DELETE FROM `workbook`.`task` WHERE `task`.`id` = 98;
 
 
 Bug / TODOs
@@ -23,16 +29,15 @@ Stundenzettel	Korrekturwert mit Kommastellen angeben
 Kalendar		Task Kundenname, Adresse, Info 50 Zeichen
 Kalendar		alle sehen, nur eigene bearbeiten 
 Kalendar		Filtereinstellungen Speichern
+Kalendar		15 Minuten einträge anzeigen
+
 
 Job 			Datei Mime Type mit speichern und übergeben bein download
 Job				anzeige welche Jobs schon in dieser Adresse/Filiale bearbeitet worden sind.
 Job				Abgeschlossen Thermin bearbeitung ausschalten
 Job 			Löschen (Material )
 
-Kunden			Suche nach Filialnummer/Name/Adresse
-Kunden			100 Kunden anzeigen
-Kunden NEU		Adresseingabe
-Kunden 			Filiale Anlegen
+Payroll			Erweiterung um Jahres anzeige
 
 Archiv			Suche nach Rechungsnummer/Name/Adresse/Filialnummer
 
@@ -48,12 +53,17 @@ FEATURES
 ERLEDIGT
 
 
+Datenbank verändern
+ALTER TABLE `customer` DROP FOREIGN KEY `customer_headoffice_store_id` ;
+
 Layout 			Anpassung auf Eis-Ber
 
 Auftrag			Eigene Meine geplanten/ Meine in Bearbeitung Aufträge in einer liste anzeigen
 Auftrag 		Übersicht Filter/Suche einbauen User, Firma, usw. 
 Auftrag 		Dateihochladen und anzeigen
 Auftrag 		übersicht Statutes prüfen ob Querys richtig
+Auftrag			Übersich Abgeschlossene Auftrage nach Auftragsnummer
+Auftrag			Anzeige erweitern mit Auftragsnummer, von, bis
 
 Stundenzettel	Monatssyitsch
 Stundenzettel	Filter User funktioniert nicht
@@ -66,6 +76,10 @@ Stundenzettel	Buero Arbeit erstellen mit allem
 Stundenzettel	Alle Task Typen als buttons ausgeben.
 
 Kunden			Anzeige sortieren nach FirmenName
+Kunden			Suche nach Filialnummer/Name/Adresse
+Kunden			100 Kunden anzeigen
+Kunden NEU		Adresseingabe
+Kunden 			Filiale Anlegen
 
 Job				 anzeige welche Jobs schon in dieser Adresse/Filiale bearbeitet worden sind.
 Job				 anzeige in bei der Bearbeitung eines Jobs welche Jobs sich in der nähe befinden
