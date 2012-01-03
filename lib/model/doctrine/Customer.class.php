@@ -16,7 +16,12 @@ class Customer extends BaseCustomer
 	{
 		return  str_pad($this->getNumber(), 4, "0", STR_PAD_LEFT).' '.$this->getCompany();
 	}
-	
+
+    public function getStore()
+    {
+        return Doctrine_Core::getTable('Store')->find($this->getHeadoffice());
+        //return $stores[$this->getHeadoffice()];
+    }
 	public function getNbStores() 
 	{
 		
