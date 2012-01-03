@@ -37,7 +37,7 @@ class EntryTable extends Doctrine_Table
           $mc = '#CC'.$customCode;
           $customCode++;
       }
-       
+
 			if(!isset($output[$mc])){
 				$output[$mc] = array();
 				$output[$mc]['amount'] = 0;

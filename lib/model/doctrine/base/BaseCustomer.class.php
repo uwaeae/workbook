@@ -11,7 +11,6 @@
  * @property string $url
  * @property integer $number
  * @property integer $headoffice
- * @property Store $Store
  * @property Doctrine_Collection $Stores
  * 
  * @method integer             getId()         Returns the current record's "id" value
@@ -20,7 +19,6 @@
  * @method string              getUrl()        Returns the current record's "url" value
  * @method integer             getNumber()     Returns the current record's "number" value
  * @method integer             getHeadoffice() Returns the current record's "headoffice" value
- * @method Store               getStore()      Returns the current record's "Store" value
  * @method Doctrine_Collection getStores()     Returns the current record's "Stores" collection
  * @method Customer            setId()         Sets the current record's "id" value
  * @method Customer            setCompany()    Sets the current record's "company" value
@@ -28,7 +26,6 @@
  * @method Customer            setUrl()        Sets the current record's "url" value
  * @method Customer            setNumber()     Sets the current record's "number" value
  * @method Customer            setHeadoffice() Sets the current record's "headoffice" value
- * @method Customer            setStore()      Sets the current record's "Store" value
  * @method Customer            setStores()     Sets the current record's "Stores" collection
  * 
  * @package    workbook
@@ -68,7 +65,7 @@ abstract class BaseCustomer extends sfDoctrineRecord
              'length' => 5,
              ));
         $this->hasColumn('headoffice', 'integer', 5, array(
-             'notnull' => true,
+             'notnull' => false,
              'type' => 'integer',
              'length' => 5,
              ));
@@ -77,10 +74,6 @@ abstract class BaseCustomer extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('Store', array(
-             'local' => 'headoffice',
-             'foreign' => 'id'));
-
         $this->hasMany('Store as Stores', array(
              'local' => 'id',
              'foreign' => 'customer_id'));

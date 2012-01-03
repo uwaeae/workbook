@@ -10,7 +10,7 @@
  * @property timestamp $end
  * @property boolean $scheduled
  * @property integer $break
- * @property integer $overtime
+ * @property decimal $overtime
  * @property clob $info
  * @property integer $approach
  * @property integer $job_id
@@ -32,7 +32,7 @@
  * @method timestamp           getEnd()             Returns the current record's "end" value
  * @method boolean             getScheduled()       Returns the current record's "scheduled" value
  * @method integer             getBreak()           Returns the current record's "break" value
- * @method integer             getOvertime()        Returns the current record's "overtime" value
+ * @method decimal             getOvertime()        Returns the current record's "overtime" value
  * @method clob                getInfo()            Returns the current record's "info" value
  * @method integer             getApproach()        Returns the current record's "approach" value
  * @method integer             getJobId()           Returns the current record's "job_id" value
@@ -97,8 +97,9 @@ abstract class BaseTask extends sfDoctrineRecord
         $this->hasColumn('break', 'integer', null, array(
              'type' => 'integer',
              ));
-        $this->hasColumn('overtime', 'integer', null, array(
-             'type' => 'integer',
+        $this->hasColumn('overtime', 'decimal', null, array(
+             'type' => 'decimal',
+             'scale' => 2,
              ));
         $this->hasColumn('info', 'clob', null, array(
              'type' => 'clob',

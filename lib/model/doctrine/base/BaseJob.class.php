@@ -126,6 +126,7 @@ abstract class BaseJob extends sfDoctrineRecord
              'notnull' => true,
              ));
         $this->hasColumn('store_id', 'integer', null, array(
+             'notnull' => true,
              'type' => 'integer',
              ));
         $this->hasColumn('created_at', 'timestamp', null, array(

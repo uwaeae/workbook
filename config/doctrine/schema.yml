@@ -134,7 +134,8 @@ Task:
     break:
       type: integer
     overtime:
-      type: integer
+      type: decimal
+      scale: 2
     info:
       type: clob      
     approach:
