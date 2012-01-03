@@ -26,12 +26,18 @@ class EntryTable extends Doctrine_Table
 				->from('Task t')
 				->where('t.job_id = '.$Job)
 				->execute();
+      $customCode = 1;
 		
 		foreach ($tasks as $task) {
 			
-			
+
 			foreach ($task->getEntry() as $entry) {
 			$mc = $entry->getItem()->getCode();
+      if(empty($mc)) {
+          $mc = '#CC'.$customCode;
+          $customCode++;
+      }
+        echo $mc.'<br>';
 			if(!isset($output[$mc])){
 				$output[$mc] = array();
 				$output[$mc]['amount'] = 0;
