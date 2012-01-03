@@ -20,7 +20,7 @@ abstract class BaseCustomerForm extends BaseFormDoctrine
       'logo'       => new sfWidgetFormInputText(),
       'url'        => new sfWidgetFormInputText(),
       'number'     => new sfWidgetFormInputText(),
-      'headoffice' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Store'), 'add_empty' => false)),
+      'headoffice' => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
@@ -29,7 +29,7 @@ abstract class BaseCustomerForm extends BaseFormDoctrine
       'logo'       => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'url'        => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'number'     => new sfValidatorInteger(),
-      'headoffice' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Store'))),
+      'headoffice' => new sfValidatorInteger(array('required' => false)),
     ));
 
     $this->validatorSchema->setPostValidator(

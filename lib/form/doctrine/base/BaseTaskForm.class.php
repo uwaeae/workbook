@@ -40,7 +40,7 @@ abstract class BaseTaskForm extends BaseFormDoctrine
       'end'             => new sfValidatorDateTime(array('required' => false)),
       'scheduled'       => new sfValidatorBoolean(array('required' => false)),
       'break'           => new sfValidatorInteger(array('required' => false)),
-      'overtime'        => new sfValidatorInteger(array('required' => false)),
+      'overtime'        => new sfValidatorNumber(array('required' => false)),
       'info'            => new sfValidatorString(array('required' => false)),
       'approach'        => new sfValidatorInteger(array('required' => false)),
       'job_id'          => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Job'), 'required' => false)),
