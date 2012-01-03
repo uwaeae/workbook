@@ -93,6 +93,7 @@ protected function makeNavForm($user)
 		$this->approach = 0;
 		$this->worktime = 0;
 		$this->overtime = 0;
+    $this->correcttime = 0;
 		$this->sickness = 0;
 		$this->holyday = 0;
 		
@@ -160,11 +161,12 @@ protected function makeNavForm($user)
 			// }
 
 			$this->overtime +=  $task->getOvertime();
+      $this->correcttime += $task->getCorrectionTime();
 			$Stunden -= $task->getOvertime();
 			switch ($task->getTaskTypeId()) {
 				case '1': // Arbeitsstunden berechnung
 			//	echo '<td>'.$Stunden.'</td><td>'.($task->getOvertime() == 0?' ':$task->getOvertime() ).'</td><td></td><td></td>';
-					$Stunden = $Stunden - ($task->getBreak() * 0.25) ;
+					$Stunden = $Stunden - ($task->getBreak() * 0.25) + $task->getCorrectionTime();
 					$tmp['worktime'] = $Stunden;
 					$this->worktime += $Stunden;
 					$tmp['approach'] = $task->getApproach() * 0.25;
@@ -180,7 +182,7 @@ protected function makeNavForm($user)
 						$this->holyday += $Stunden;
 					break;
 				default : //buero und sonstiges
-					$Stunden = $Stunden - ($task->getBreak() * 0.25) ;
+					$Stunden = $Stunden - ($task->getBreak() * 0.25) + $task->getCorrectionTime();
 					$tmp['worktime'] = $Stunden;
 					$this->worktime += $Stunden;
 					$tmp['approach'] = $task->getApproach() * 0.25;
