@@ -81,9 +81,9 @@
 		<td class="number"><?php echo $overtime ?></td>
 		<td class="number"><?php echo $holyday ?></td>
 		<td class="number"><?php echo $sickness  ?></td>
-    <td class="number"><?php echo $correcttime ?></td>
     <td ></td>
-		<td class="number"><?php echo ($sickness + $holyday+$overtime+$approach+ $worktime +$correcttime ) ?></td>
+    <td ></td>
+		<td class="number"><?php echo ($sickness + $holyday+$overtime+$approach+ $worktime  ) ?></td>
 	</tr>	
 	<tr>
 		<td colspan="10">

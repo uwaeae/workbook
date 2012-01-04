@@ -232,9 +232,9 @@ public function executeTable(sfWebRequest $request)
 			
 			$Minuten = round(($Minuten - ($task->getBreak()*15)) / $part, 0) * $part;
 			if($Minuten != 0) $Stunden += round($Minuten / 60,2);
-			$this->worksumme += $Stunden;
+			$this->worksumme += $Stunden + $task->getCorrectionTime() ;
 			$this->overtimesumme += $task->getOvertime() ; 
-			$t = array('time' => $Stunden, 'task'=> $task);
+			$t = array('time' => $Stunden + $task->getCorrectionTime(), 'task'=> $task);
 			
 			$this->work[] = $t;
 		}
