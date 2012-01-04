@@ -184,6 +184,7 @@ public function executeTable(sfWebRequest $request)
 			$this->formCustomer = new searchCustomerForm(NULL,array(
 				'url' => $this->getController()->genUrl('job/findcustomer')
 				));
+      $this->url  = 'job/archiv';
 			$this->setBack('job');
 		
   }
