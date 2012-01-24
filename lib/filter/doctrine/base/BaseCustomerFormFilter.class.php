@@ -17,7 +17,7 @@ abstract class BaseCustomerFormFilter extends BaseFormFilterDoctrine
       'logo'       => new sfWidgetFormFilterInput(),
       'url'        => new sfWidgetFormFilterInput(),
       'number'     => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'headoffice' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Store'), 'add_empty' => true)),
+      'headoffice' => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
@@ -25,7 +25,7 @@ abstract class BaseCustomerFormFilter extends BaseFormFilterDoctrine
       'logo'       => new sfValidatorPass(array('required' => false)),
       'url'        => new sfValidatorPass(array('required' => false)),
       'number'     => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'headoffice' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Store'), 'column' => 'id')),
+      'headoffice' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
     ));
 
     $this->widgetSchema->setNameFormat('customer_filters[%s]');
@@ -50,7 +50,7 @@ abstract class BaseCustomerFormFilter extends BaseFormFilterDoctrine
       'logo'       => 'Text',
       'url'        => 'Text',
       'number'     => 'Number',
-      'headoffice' => 'ForeignKey',
+      'headoffice' => 'Number',
     );
   }
 }
