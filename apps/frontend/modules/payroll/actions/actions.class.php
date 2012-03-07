@@ -35,30 +35,55 @@ protected function makeNavForm($user)
   {
 	// Erweiterung um Jahr
 	$form = new sfForm();
-	$month = Doctrine_Query::create()
+      $year = Doctrine_Query::create()
+          ->select('YEAR(t.start) year')
+          ->from('Task t')
+          ->groupBy('year')
+          ->execute();
+
+  $this->taskyear = array();
+  foreach($year as $y){
+      $this->taskyear[$y->year] = $y->year;
+  }
+
+
+      $month = Doctrine_Query::create()
 				->select('MONTH(t.start) month')
 				->from('Task t')
 				->groupBy('month')
 				->execute();
 	$this->taskmonth = array();
+
+
 	foreach ($month as $m) {
 		$this->taskmonth[$m->month] = $this->getMonth($m->month);
 	
-	}
-	
-	$form->setWidget('month',new sfWidgetFormChoice(array(
-			'choices' => $this->taskmonth,
-			'expanded' => true,
-	      	'multiple'	=> false,
-	 		 )));
+	  }
+
+  $form->setWidget('year',new sfWidgetFormChoice(array(
+          'choices' => $this->taskyear,
+          'expanded' => false,
+          'multiple'	=> false,
+          'label' => 'Jahr'
+      )));
+  $form->setDefault('year', date('Y'));
+
+
+  $form->setWidget('month',new sfWidgetFormChoice(array(
+          'choices' => $this->taskmonth,
+          'expanded' => false,
+          'multiple'	=> false,
+          'label' => 'Monat'
+      )));
 	$form->setDefault('month', date('n'));
 	
 	if ( $this->getUser()->hasPermission('admin')) {
 	$form->setWidget('user',new sfWidgetFormDoctrineChoice(array(
 	      	'model' => 'sfGuardUser', 
 	      	'add_empty' => false,
-			'expanded' => true,
-	      	'multiple'	=> false )));
+			    'expanded' => false,
+	      	'multiple'	=> false,
+          'label' => 'Mitarbeiter')));
 	$form->setDefault('user', $user);
 	}
 
@@ -113,10 +138,10 @@ protected function makeNavForm($user)
 		$query->where('t.id  IN ( select task_id from task_user where user_id = '.$user.')');
 		$query->andWhere('t.scheduled is not TRUE');
 		
-		if($request->hasParameter('month'))
-				$t = $query->andWhere('MONTH(t.start) = '.$request->getParameter('month'))
+		if($request->hasParameter('month') and $request->hasParameter('year'))
+				$t = $query->andWhere('MONTH(t.start) = '.$request->getParameter('month').' AND YEAR(t.start) = '.$request->getParameter('year') )
 					->execute();
-		else $t = $query->andWhere('MONTH(t.start) = MONTH(NOW()) ')
+		else $t = $query->andWhere('MONTH(t.start) = MONTH(NOW()) AND YEAR(t.start) = YEAR(NOW())')
 				->execute();
 		$this->setBack('payroll/index/?user='.$user.($request->hasParameter('month')? '&month='.$request->getParameter('month'):''));			
 	 
@@ -168,9 +193,11 @@ protected function makeNavForm($user)
 			//	echo '<td>'.$Stunden.'</td><td>'.($task->getOvertime() == 0?' ':$task->getOvertime() ).'</td><td></td><td></td>';
 					$Stunden = $Stunden - ($task->getBreak() * 0.25) + $task->getCorrectionTime();
 					$tmp['worktime'] = $Stunden;
+
 					$this->worktime += $Stunden;
 					$tmp['approach'] = $task->getApproach() * 0.25;
 					$this->approach += $task->getApproach() * 0.25;
+          $tmp['break'] = $task->getBreak() * 0.25;
 					break;
 
 				case '2': // Krankheit

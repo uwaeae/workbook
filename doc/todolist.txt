@@ -6,6 +6,8 @@ Bug / TODOs
 
 Tabellen		Store zu Adresse
 Backend 		Einstellungen Menu Einbindung
+Backend Import  ArtikelImport überarbeiten
+Datenmigration  Konzept erstellen
 
 Konfiguration	Optionen in den Modulen Laden
 
@@ -14,13 +16,20 @@ Back Buttons	Historie Array machen
 Auftrag 		Neu über die Übersicht und aus dem Hauptmenu raus
 Auftrag 		Eingabe die Datepicker jQuery UI verwenden und Deutsch?
 Auftrag			Löschen( Rechnungsnummer, Files, Tasks(material))
+Auftrag			Reload automatisch
+Auftrag         Wenn Fix dann Job automatisch Termin eintragen
+Auftrag         Ansicht Filialnummer anzeigen
+Auftrag         Mitrarbeitern zuweisen ohne Termin
+Auftrag         übersicht meine auftrage mit und ohne Termin
 
-Stundenzettel	Korrekturwert mit Kommastellen angeben
+
+Stundenzettel		Korrekturwert mit Kommastellen angeben ( Punkt zu Komma)
 
 Kalendar		Task Kundenname, Adresse, Info 50 Zeichen
 Kalendar		alle sehen, nur eigene bearbeiten 
 Kalendar		Filtereinstellungen Speichern
 Kalendar		15 Minuten einträge anzeigen
+Kalendar        Klicken statt Hover
 
 
 Job 			Datei Mime Type mit speichern und übergeben bein download
@@ -28,11 +37,13 @@ Job				anzeige welche Jobs schon in dieser Adresse/Filiale bearbeitet worden sin
 Job				Abgeschlossen Thermin bearbeitung ausschalten
 Job 			Löschen (Material )
 
-Payroll			Erweiterung um Jahres anzeige
+1 Payroll			Erweiterung um Jahresanzeige 
+Payroll         Pausen anzeigen
+2 Archiv			Suche nach Rechungsnummer/Name/Adresse/Filialnummer
 
-Archiv			Suche nach Rechungsnummer/Name/Adresse/Filialnummer
+3 Layout Feste Breite
 
-
+TEST Safari Webbroser Ofene Aufträge
 
 FEATURES
 

@@ -2,6 +2,7 @@
 	
 		<form action="<?php echo url_for('payroll/index') ?>" method="get" >
 		<div id="name">
+      <?php echo $form['year']->renderRow()  ?>
 			<?php echo $form['month']->renderRow()  ?>
 		</div>
 		

@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-	$('.payroll_nav .radio_list input:radio').change(requestFilter); 
+	$('.payroll_nav select').change(requestFilter);
 });
 
 var requestFilter =  function(){

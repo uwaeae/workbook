@@ -15,10 +15,11 @@
 			<th rowspan="2">Adresse</th>
 			<th rowspan="2">Tätigkeit</th>
 			<th rowspan="2">FA</th>
-			<th colspan="4">Stunden</th>
+			<th colspan="5">Stunden</th>
 			<th colspan="2">Korrektur</th>
 		</tr>	
 			<th>Stunden</th>
+      <th>Pause</th>
 			<th>ab 20 Uhr</th>
 			<th>Urlaub</th>
 			<th>Krank</th>
@@ -48,6 +49,7 @@
 		<td><?php echo $task['task']->getInfo() ?></td>
 		<td class="number"><?php if(isset($task['approach']))echo $task['approach'] ?></td>
 		<td class="number"><?php if(isset($task['worktime'])) echo $task['worktime'] ?></td>
+    <td class="number"><?php if(isset($task['break'])) echo $task['break'] ?></td>
 		<td class="number"><?php if($task['task']->getOvertime() != 0) echo $task['task']->getOvertime() ?></td>
 		<td class="number"><?php if(isset($task['holyday'])) echo $task['holyday'] ?></td>
 		<td class="number"><?php if(isset($task['sickness']))echo $task['sickness'] ?></td>
@@ -66,7 +68,7 @@
 		<td>Summe</td>
 	
 	<td class="number"><?php echo $approach ?></td>
-	<td class="number"><?php echo $worktime ?></td>
+	<td class="number" colspan="2"><?php echo $worktime ?></td>
 		<td></td>
 		<td></td>
 		<td></td>
@@ -77,8 +79,9 @@
 		<td></td>
 		
 		<td colspan="1">Summe mit FA</td>
-		<td colspan="2" class="number"><?php echo $approach+ $worktime  ?></td>
-		<td class="number"><?php echo $overtime ?></td>
+		<td colspan="3" class="number"><?php echo $approach+ $worktime  ?></td>
+
+    <td class="number"><?php echo $overtime ?></td>
 		<td class="number"><?php echo $holyday ?></td>
 		<td class="number"><?php echo $sickness  ?></td>
     <td ></td>
