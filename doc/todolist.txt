@@ -37,11 +37,10 @@ Job				anzeige welche Jobs schon in dieser Adresse/Filiale bearbeitet worden sin
 Job				Abgeschlossen Thermin bearbeitung ausschalten
 Job 			Löschen (Material )
 
-1 Payroll			Erweiterung um Jahresanzeige 
-Payroll         Pausen anzeigen
+
 2 Archiv			Suche nach Rechungsnummer/Name/Adresse/Filialnummer
 
-3 Layout Feste Breite
+
 
 TEST Safari Webbroser Ofene Aufträge
 
@@ -87,6 +86,9 @@ Stundenzettel	Feiertage als normale Arbeit berechne außer Wochenende 1709
 Stundenzettel	wenn urlaub als normal stunden (krank nachfragen) 1709
 Stundenzettel	Buero Arbeit erstellen mit allem
 Stundenzettel	Alle Task Typen als buttons ausgeben.
+Stundenzettel		Erweiterung um Jahresanzeige
+Stundenzettel   Pausen anzeigen
+
 
 Kunden			Anzeige sortieren nach FirmenName
 Kunden			Suche nach Filialnummer/Name/Adresse
@@ -121,3 +123,5 @@ Kalender		 alles User anzeigen übersichtlicheremachen vieleicht durch weitere �
 Kalender		 Task Thermin ändern einbauen bzw user zuweisen
 Konfiguration	Tabelle erstellen layout einfallen lassen
 Konfiguration	Modul Implementieren
+
+Layout          Feste Breite

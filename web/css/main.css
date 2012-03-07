@@ -10,7 +10,7 @@
 body{
 	margin-left: 10%;
 	margin-right: 10%;
-
+    width: 1025px;
 	
 }
 
@@ -97,7 +97,8 @@ form th{
 	margin: 0 auto;
 	padding: 10px;
 	display: inline-block;
-	width: 85%;
+    width: 900px;
+}
 }
 
 .smallicon {
