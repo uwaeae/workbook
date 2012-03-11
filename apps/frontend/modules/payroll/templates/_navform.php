@@ -4,17 +4,18 @@
 		<div id="name">
       <?php echo $form['year']->renderRow()  ?>
 			<?php echo $form['month']->renderRow()  ?>
-		</div>
+
 		
 	
 			<?php if (isset($form['user'])): ?>
-				<div id="name">
+
 				<?php echo $form['user']->renderRow()  ?>
-					</div>
+
 			<?php endif ?>
-				
-	
-	
+
+
+        </div>
+
 		</form>
 		<?php if ( $sf_user->hasGroup('admin') OR $sf_user->hasGroup('supervisor')) : ?>
 		<?php endif ?>

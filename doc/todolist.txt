@@ -24,6 +24,8 @@ Auftrag         übersicht meine auftrage mit und ohne Termin
 
 
 Stundenzettel		Korrekturwert mit Kommastellen angeben ( Punkt zu Komma)
+Stundenzettel		Link auf den Auftrag
+Stundenzettel 		Zurück Button mit Mitarbeiter und Monat
 
 Kalendar		Task Kundenname, Adresse, Info 50 Zeichen
 Kalendar		alle sehen, nur eigene bearbeiten 
@@ -121,6 +123,7 @@ Kalender		 User Filter funktoniert irgenwie nicht?!
 Kalender		 Fertig stellen
 Kalender		 alles User anzeigen übersichtlicheremachen vieleicht durch weitere Überschriftsspalte und Timeline?
 Kalender		 Task Thermin ändern einbauen bzw user zuweisen
+
 Konfiguration	Tabelle erstellen layout einfallen lassen
 Konfiguration	Modul Implementieren
 

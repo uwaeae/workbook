@@ -138,12 +138,11 @@ protected function makeNavForm($user)
 		$query->where('t.id  IN ( select task_id from task_user where user_id = '.$user.')');
 		$query->andWhere('t.scheduled is not TRUE');
 		
-		if($request->hasParameter('month') and $request->hasParameter('year'))
-				$t = $query->andWhere('MONTH(t.start) = '.$request->getParameter('month').' AND YEAR(t.start) = '.$request->getParameter('year') )
-					->execute();
-		else $t = $query->andWhere('MONTH(t.start) = MONTH(NOW()) AND YEAR(t.start) = YEAR(NOW())')
-				->execute();
-		$this->setBack('payroll/index/?user='.$user.($request->hasParameter('month')? '&month='.$request->getParameter('month'):''));			
+    $query->andWhere('YEAR(t.start) = '.($request->hasParameter('year')?$request->getParameter('year'):'YEAR(NOW())'));
+		$query->andWhere('MONTH(t.start) = '.($request->hasParameter('month')?$request->getParameter('month'):'MONTH(NOW())'));
+
+		$t = 	$query	->execute();
+		$this->setBack('payroll/index/?user='.$user.($request->hasParameter('month')? '&month='.$request->getParameter('month'):'').($request->hasParameter('year')?'&year='.$request->getParameter('year'):''));
 	 
 	foreach ($t as $task) {
 	 	$tmp = array();
@@ -214,6 +213,7 @@ protected function makeNavForm($user)
 					$this->worktime += $Stunden;
 					$tmp['approach'] = $task->getApproach() * 0.25;
 					$this->approach += $task->getApproach() * 0.25;
+          $tmp['break'] = $task->getBreak() * 0.25;
 					break;	
 			}
 	

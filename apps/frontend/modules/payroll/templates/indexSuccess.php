@@ -1,5 +1,5 @@
 <?php  use_helper('Date');?>
-<?php use_javascript('payroll.js') ?>
+<?php  use_javascript('payroll.js') ?>
 
 <?php include_partial('navform', array('form' => $form )) ?>
 <div id="payroll">
@@ -33,7 +33,7 @@
 <?php foreach ($tasks as $task): ?>
 	<?php 	$time = strtotime($task['task']->getEnd()) - strtotime($task['task']->getStart()); ?>
 	<tr  class="payrole_entry" 
-	onclick="document.location = '<?php echo url_for('task/edit?id='.$task['task']->getId()) ?>'">
+	onclick="document.location = '<?php echo url_for(($task['task']->getJobId())?'job/show?id='.$task['task']->getJobId():'task/show?id='.$task['task']->getId()) ?>'">
 		<td><?php 
 			if(date('j',$time) > 1) echo 	format_date($task['task']->getStart(),'dd.MM.').
 											' - '.
