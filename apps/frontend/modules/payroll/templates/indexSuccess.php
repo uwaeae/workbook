@@ -11,7 +11,7 @@
 		<tr>
 			<th rowspan="2">Datum</th>
 			<th rowspan="2">Kunde</th>
-		
+      <th rowspan="2">Filalnummer</th>
 			<th rowspan="2">Adresse</th>
 			<th rowspan="2">Tätigkeit</th>
 			<th rowspan="2">FA</th>
@@ -41,8 +41,8 @@
 			else echo  format_date($task['task']->getStart(),'dd.MM.yyyy'); 
 			?></td>
 		<td><?php echo $task['task']->getJob()->getStore()->getCustomer()->getCompany() ?></td>
-		
-		<td><?php echo $task['task']->getJob()->getStore()->getStreet() ?><br>
+    <td><?php echo ($task['task']->getJob()->getStore()->getNumber() != 0 ?$task['task']->getJob()->getStore()->getNumber(): ' ') ?></td>
+    <td><?php echo $task['task']->getJob()->getStore()->getStreet() ?><br>
 		<?php echo $task['task']->getJob()->getStore()->getPostcode() ?>
 		<?php echo $task['task']->getJob()->getStore()->getCity() ?>
 		</td>
