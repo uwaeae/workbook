@@ -31,23 +31,23 @@ protected function getMonth($number){
 	
 }
 
-protected function makeNavForm($user)
+protected function makeNavForm($user,$year,$month)
   {
 	// Erweiterung um Jahr
 	$form = new sfForm();
-      $year = Doctrine_Query::create()
+      $ayear = Doctrine_Query::create()
           ->select('YEAR(t.start) year')
           ->from('Task t')
           ->groupBy('year')
           ->execute();
 
   $this->taskyear = array();
-  foreach($year as $y){
+  foreach($ayear as $y){
       $this->taskyear[$y->year] = $y->year;
   }
 
 
-      $month = Doctrine_Query::create()
+      $amonth = Doctrine_Query::create()
 				->select('MONTH(t.start) month')
 				->from('Task t')
 				->groupBy('month')
@@ -55,7 +55,7 @@ protected function makeNavForm($user)
 	$this->taskmonth = array();
 
 
-	foreach ($month as $m) {
+	foreach ($amonth as $m) {
 		$this->taskmonth[$m->month] = $this->getMonth($m->month);
 	
 	  }
@@ -66,7 +66,7 @@ protected function makeNavForm($user)
           'multiple'	=> false,
           'label' => 'Jahr'
       )));
-  $form->setDefault('year', date('Y'));
+  $form->setDefault('year', $year);
 
 
   $form->setWidget('month',new sfWidgetFormChoice(array(
@@ -75,7 +75,7 @@ protected function makeNavForm($user)
           'multiple'	=> false,
           'label' => 'Monat'
       )));
-	$form->setDefault('month', date('n'));
+	$form->setDefault('month', $month);
 	
 	if ( $this->getUser()->hasPermission('admin')) {
 	$form->setWidget('user',new sfWidgetFormDoctrineChoice(array(
@@ -223,7 +223,9 @@ protected function makeNavForm($user)
 	
 	
 	 }
-		$this->form = $this->makeNavForm($user);
+		$this->form = $this->makeNavForm($user,
+                                    ($request->hasParameter('year')?$request->getParameter('year'):date('Y')),
+                                    ($request->hasParameter('month')?$request->getParameter('month'):date('n')) );
 		$this->TaskType  = Doctrine_Query::create()
 						->select('t.*, ')
 						->from('TaskType t')

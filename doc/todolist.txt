@@ -24,8 +24,7 @@ Auftrag         übersicht meine auftrage mit und ohne Termin
 
 
 Stundenzettel		Korrekturwert mit Kommastellen angeben ( Punkt zu Komma)
-Stundenzettel		Link auf den Auftrag
-Stundenzettel 		Zurück Button mit Mitarbeiter und Monat
+
 
 Kalendar		Task Kundenname, Adresse, Info 50 Zeichen
 Kalendar		alle sehen, nur eigene bearbeiten 
@@ -88,8 +87,6 @@ Stundenzettel	Feiertage als normale Arbeit berechne außer Wochenende 1709
 Stundenzettel	wenn urlaub als normal stunden (krank nachfragen) 1709
 Stundenzettel	Buero Arbeit erstellen mit allem
 Stundenzettel	Alle Task Typen als buttons ausgeben.
-Stundenzettel		Erweiterung um Jahresanzeige
-Stundenzettel   Pausen anzeigen
 
 
 Kunden			Anzeige sortieren nach FirmenName
