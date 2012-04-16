@@ -2,6 +2,6 @@ all:
   doctrine:
     class: sfDoctrineDatabase
     param:
-      dsn: 'mysql:host=localhost;dbname=workbook_prod'
+      dsn: 'mysql:host=localhost;dbname=workbook'
       username: root
       password: root

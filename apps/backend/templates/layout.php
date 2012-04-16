@@ -35,7 +35,8 @@
 				<li><?php echo link_to('Auftäge','job'); ?></li>
 				<li><?php echo link_to('Auftrags Typen','jobtype'); ?></li>
 				<li><?php echo link_to('Auftrags Status','job_state'); ?></li>
-				<ul>
+
+         <ul>
 				</div>	
 			</li>
 			<li><div id='#box'>
@@ -43,7 +44,9 @@
 				<ul id="#entry">
 				<li><?php echo link_to('Arbeit','task'); ?></li>
 				<li><?php echo link_to('Arbeit Type','task_type'); ?></li>
-				<ul>
+        <li><?php echo link_to('Changlog','task_change_log'); ?></li>
+
+        <ul>
 				</div>	
 			</li>
 			<li><div id='#box'>

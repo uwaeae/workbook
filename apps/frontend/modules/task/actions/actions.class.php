@@ -207,7 +207,9 @@ class taskActions extends sfActions
     $this->forward404Unless($task = Doctrine_Core::getTable('Task')->find(array($request->getParameter('id'))), sprintf('Object task does not exist (%s).', $request->getParameter('id')));
     $this->form = new TaskForm($task);
 
-    $this->processForm($request, $this->form,"Update");
+    $task = $this->processForm($request, $this->form,"Update");
+    $this->changelog($task,"Update");
+
 
     $type =  $this->getUser()->getFlash('type');
 	if($type == 1){
@@ -255,7 +257,13 @@ protected function changelog(Task $task,$action )
 		$cl = new TaskChangeLog();
 		$cl->setTask($task);
 		$cl->setUserId($this->getUser()->getId());
-		$cl->setAction($action);
+		$text = " Anfart".$task->approach*0.15;
+    $text .= " Pause:".$task->getBreak()*0.15;
+    $text .= " Anfang:".$task->getStart();
+    $text .= " Ende: ".$task->getEnd();
+    $text .= " Info: ".$task->getInfo();
+    $text .= " Übrstunden; ".$task->getOvertime();
+    $cl->setAction($action.":".$text);
 		$cl->save();
 	}
  

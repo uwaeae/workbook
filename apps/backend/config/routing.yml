@@ -1,3 +1,12 @@
+task_changelog:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                TaskChangelog
+    module:               task_changelog
+    prefix_path:          /task_changelog
+    column:               id
+    with_wildcard_routes: true
+
 holiday:
   class: sfDoctrineRouteCollection
   options:
