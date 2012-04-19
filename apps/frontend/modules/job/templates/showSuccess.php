@@ -43,7 +43,11 @@
     
     <tr>
       <th>Kunde</th>
-      <td colspan="3" ><?php echo $job->getStore()->getCustomer()->getCompany() ?></td>
+      <td colspan="2" ><?php echo $job->getStore()->getCustomer()->getCompany() ?></td>
+      <th>Filiale</th>
+      <td colspan="1" >
+          <?php echo ($job->getStore()->getNumber()!=0 ?$job->getStore()->getNumber():' ')  ?></td>
+
   </tr>
     <tr>
 	<th>Adresse</th>
@@ -199,8 +203,10 @@
 	<th rowspan="2" style="width:350px;">Arbeiten</th>
 	<th rowspan="2" style="width:200px;">Mitarbeiter</th>
 	<th colspan="2"style="width:50px;">Stunden</th>
-	<th rowspan="2" style="width:150px;">Erstellt</th>
-	</tr>
+<?php if ( $sf_user->hasGroup('admin')): ?>
+	<th rowspan="2" style="width:150px;">Bearbeitet</th>
+<?php endif ?>
+  </tr>
 	<tr>
 	<th rowspan="2" style="width:150px;">Normal </th>
 	<th rowspan="2" style="width:150px;">30%</th>
@@ -209,11 +215,7 @@
 	<tbody>
 <?php foreach ($work as $task): ?>
 		<tr class="table_item"
-	
-			
-			onclick="document.location='<?php echo url_for('task/'.(($task['task']->hasUser($sf_user->getId()) OR $sf_user->hasGroup('admin')) ?'edit':'show').'?id='.$task['task']->getId()) ?>'"
-
-			>
+			onclick="document.location='<?php echo url_for('task/'.(($task['task']->hasUser($sf_user->getId()) OR $sf_user->hasGroup('admin')) ?'edit':'show').'?id='.$task['task']->getId()) ?>'"		>
 		<td><?php echo format_date($task['task']->getStart(),'dd.MM.yyyy HH:mm') ?></td>
 		<td><?php echo format_date($task['task']->getEnd() ,'dd.MM.yyyy HH:mm') ?></td>
 
@@ -223,9 +225,12 @@
 		<?php endforeach ?></td>
 		<td><?php echo $task['time'] ?></td>
 		<td><?php echo $task['task']->getOvertime() ?></td>
-		<td><?php // echo format_date($task['task']->getCreatedAt(),'dd.MM.yyyy') ?>
-			<?php echo $task['task']->getCreator()->getUsername() ?>
-			</td>
+<?php if ( $sf_user->hasGroup('admin')): ?>
+    <td>
+        <?php echo $task['task']->getUpdater()->getUsername() ?>
+        <?php echo format_date($task['task']->getUpdatedAt(),'dd.MM.yyyy HH:MM') ?>
+     </td>
+<?php endif ?>
 	</tr>
 <?php endforeach; ?>
 	</tbody>

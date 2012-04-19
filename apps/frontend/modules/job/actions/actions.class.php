@@ -20,7 +20,7 @@ class jobActions extends sfActions
 		//				$results // (Optional) Number of results per page. Default is 25
 		//				);
 		
-		$pager = new sfDoctrinePager('Job', 10);	
+		$pager = new sfDoctrinePager('Job', 10);
 		$pager->setQuery($query);
 		$pager->setPage($page);
 		$pager->init();	
@@ -76,12 +76,6 @@ public function executeTable(sfWebRequest $request)
 	
   public function executeIndex(sfWebRequest $request)
   {
-	$this->setBack('job/index');	
-   // $this->jobs = Doctrine_Core::getTable('Job')
-     // ->createQuery('j')
-	//->leftJoin('j.Users u')
-	 // ->where('u.id = ?',$this->getUser()->getId() )
-     // ->execute();
 	$this->jobstate = array();
 	$job = new Job();
 	$this->jobstate[0] = $this->getJobStateArray(0,'meine Aufträge'

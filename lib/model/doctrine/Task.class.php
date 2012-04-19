@@ -24,5 +24,11 @@ class Task extends BaseTask
 		return 	Doctrine_Core::getTable('sfGuardUser')
 							->find($this->getCreatedFrom() );
 	}
+
+  public function getUpdater()
+  {
+       return 	Doctrine_Core::getTable('sfGuardUser')
+            ->find($this->getUpdatedFrom() );
+   }
 	
 }
