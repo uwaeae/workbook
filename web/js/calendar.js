@@ -2,7 +2,20 @@ $(document).ready(function()
 {
  $('.open_jobs_body').hide();
  $('.cal_filter_body').hide();
- 
+
+// table.cal_table_user  td.cal_entry:hover div.cal_entry_content_over
+    $('table.cal_table_medium  td.cal_entry  ').click(function(key)
+    {
+        $('div.cal_entry_content_over').hide();
+        $(this).find('div.cal_entry_content_over').show();
+
+    });
+
+   
+
+
+
+
   $('.open_jobs_head').click(function(key)
 	{
 	if ($(".open_jobs_body").is(":hidden")) {

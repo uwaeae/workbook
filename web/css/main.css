@@ -434,10 +434,12 @@ table.cal_table_medium  td.cal_entry:hover,
 table.cal_table_user  td.cal_entry:hover{
 	background-color: #FAAC58;
 }
+/*
 table.cal_table_medium  td.cal_entry:hover div.cal_entry_content_over,
 table.cal_table_user  td.cal_entry:hover div.cal_entry_content_over{
 	display: block;
 }
+*/
 
 table.cal_table_user div.cal_entry_content{
 	width: 50px;

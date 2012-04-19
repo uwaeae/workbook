@@ -289,8 +289,8 @@ public function executeWeek(sfWebRequest $request)
 		$this->setOptions( $request);
 		//Wochentags verschiebung auf anfang der woche also das das erste Element im Claendar der Montag ist
 		$next =  $this->days * $this->next  - ( date('w') - 1);
-		$this->calendar = $this->renderCalendar($this->days,$next,7,22);
-		$this->timeline = $this->renderTimeline(7,22);
+		$this->calendar = $this->renderCalendar($this->days,$next,5,22);
+		$this->timeline = $this->renderTimeline(5,22);
 		$this->form = $this->makeFilterForm();
 		$this->setBack('calendar/week/?&next='.$this->next);
 		$this->getUser()->setAttribute('calendar',
@@ -304,8 +304,8 @@ public function executeWeek(sfWebRequest $request)
 			$this->setOptions( $request);
 			//Wochentags verschiebung auf anfang der woche also das das erste Element im Claendar der Montag ist
 			$next =  $this->days * $this->next  - ( date('w') - 1);
-			$this->calendar = $this->renderCalendar($this->days,$next,7,22);
-			$this->timeline = $this->renderTimeline(7,22);
+			$this->calendar = $this->renderCalendar($this->days,$next,5,22);
+			$this->timeline = $this->renderTimeline(5,22);
 			$this->form = $this->makeFilterForm();
 			$this->setBack('calendar/week/?&next='.$this->next);
 			$this->getUser()->setAttribute('calendar',

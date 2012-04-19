@@ -26,7 +26,8 @@
 			class="cal_entry cal_type_<?php echo $task['task']->getTaskTypeId() ?><?php echo ((!$task['task']->getScheduled() AND $task['task']->getTaskTypeId() < 2)? '_finshed':' ')?>" >
 
 
-		<div class="cal_entry_content_over"  >
+		<div class="cal_entry_content_over " id=<?php echo $task['task']->getId() ?> >
+
 							 	<a href="<?php echo url_for('task/edit?type=0&id='.$task['task']->getId()) ?>" style="float: right;" >
 											<img src="/images/icons/calendar_edit.png" ></a>						
 								<span onclick="document.location='<?php echo url_for(
