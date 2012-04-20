@@ -251,7 +251,7 @@ table.cal_table_medium tr{
 }
 table.cal_table_medium  td.cal_entry{
 	vertical-align: top;
-	cursor: pointer;
+	xcursor: pointer;
 	border-bottom: 1px solid  #E6E6E6;
 	border-right: 1px solid #E6E6E6;
 }
@@ -273,6 +273,10 @@ table.cal_table_medium  td.cal_entry div.cal_entry_content_over{
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
+}
+
+span.cal_entry_over_content{
+    cursor: pointer;
 }
 
 

@@ -26,11 +26,11 @@
 			class="cal_entry cal_type_<?php echo $task['task']->getTaskTypeId() ?><?php echo ((!$task['task']->getScheduled() AND $task['task']->getTaskTypeId() < 2)? '_finshed':' ')?>" >
 
 
-		<div class="cal_entry_content_over " id=<?php echo $task['task']->getId() ?> >
+		<div class="cal_entry_content_over" id=<?php echo $task['task']->getId() ?> >
 
 							 	<a href="<?php echo url_for('task/edit?type=0&id='.$task['task']->getId()) ?>" style="float: right;" >
 											<img src="/images/icons/calendar_edit.png" ></a>						
-								<span onclick="document.location='<?php echo url_for(
+								<span class="cal_entry_over_content" onclick="document.location='<?php echo url_for(
 												($task['task']->getTaskTypeId() < 2? 
 												'job/show?id='.$task['task']->getJob()->getId() : 
 												'task/edit?type='.$task['task']->getTaskTypeId().'&id='.$task['task']->getId() ) )  ?>'">
