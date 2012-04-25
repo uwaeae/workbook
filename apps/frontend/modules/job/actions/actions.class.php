@@ -11,7 +11,7 @@
 class jobActions extends sfActions
 {
 
-	protected function getJobStateArray($type,$name,$query,$page = 1,$results = 10)
+	protected function getJobStateArray($type,$name,$query,$page = 1,$results = 20)
 	  {
 		// Creating pager object
 		$output = array();
@@ -20,7 +20,7 @@ class jobActions extends sfActions
 		//				$results // (Optional) Number of results per page. Default is 25
 		//				);
 		
-		$pager = new sfDoctrinePager('Job', 10);
+		$pager = new sfDoctrinePager('Job', 20);
 		$pager->setQuery($query);
 		$pager->setPage($page);
 		$pager->init();	

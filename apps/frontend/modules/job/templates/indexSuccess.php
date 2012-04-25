@@ -27,33 +27,41 @@
         <div class="job_type_body_1 job_type_body" colspan = "7" > </div>
     </div>
 
+
+
     <div class="job_type_2">
 
-    <?php foreach($jobs_sheduled as $job_sh): ?>
-
-        <div class="job_type_head_<?php echo $job_sh['id'] ?>  job_type_head" colspan = "7">
-            <?php echo $job_sh['name'] ?> (<?php echo $job_sh['count'] ?>)
+        <div class="job_type_head_2  job_type_head" colspan = "7">
+            Geplante / Zugewisene
         </div>
 
+        <div class="job_type_body_2  job_type_body" colspan = "7">
 
-        <div class="job_type_body_<?php echo $job_sh['id'] ?> job_type_body" colspan = "7" > </div>
+        <?php foreach($jobs_sheduled as $job_sh): ?>
 
-
-
-    <script type="text/javascript">
-        $('div.job_type_head_<?php echo $job_sh['id'] ?> ').click(function(key)
-        {
-
-            $(this).parent().find('.job_type_body_<?php echo $job_sh['id'] ?>').load('/job/table/type/2/user/<?php echo $job_sh['id'] ?>' ); //.slideToggle('slow');
-           // $(this).parent().find('.job_type_body_<?php echo $job_sh['id'] ?>').toggle();
-
-        });
+          <div class="job_type2_head_<?php echo $job_sh['id'] ?>  job_type2_head" colspan = "7">
+             <?php echo $job_sh['name'] ?> (<?php echo $job_sh['count'] ?>)
+          </div>
+          <div class="job_type2_body_<?php echo $job_sh['id'] ?> job_type_body" colspan = "7" > </div>
 
 
 
-    </script>
-    <?php endforeach ?>
+            <script type="text/javascript">
+                    $('div.job_type2_head_<?php echo $job_sh['id'] ?> ').click(function(key)
+                    {
 
+                        $(this).parent().find('.job_type2_body_<?php echo $job_sh['id'] ?>:hidden').load('/job/table/type/2/user/<?php echo $job_sh['id'] ?>' ,function(){
+                            $(this).slideDown(); });
+                        $(this).parent().find('.job_type2_body_<?php echo $job_sh['id'] ?>:visible').slideUp();
+
+                    });
+
+
+
+            </script>
+        <?php endforeach ?>
+
+        </div>
 
     </div>
 
@@ -65,10 +73,10 @@
     </div>
 
     <div class="job_type_4">
-        <div class="job_type_head_4 job_type_head" colspan = "7">
+        <div class="job_type_head_4 job_type_head" >
             <?php echo $jobs_finisched['name'] ?> (<?php echo $jobs_finisched['count'] ?>)
         </div>
-        <div class="job_type_body_4 job_type_body" colspan = "7" > </div>
+        <div class="job_type_body_4 job_type_body"  > </div>
     </div>
 
 
