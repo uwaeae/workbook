@@ -12,8 +12,8 @@ function init(){
 
     setInterval(function()
     {
-        $('#responsecontainer').fadeOut("slow").load('response.php').fadeIn("slow");
-    }, 10000);
+       $('.content').load('/job');
+    }, 300000);
 
 
 $('div.job_type_head_0').click(function(key)
