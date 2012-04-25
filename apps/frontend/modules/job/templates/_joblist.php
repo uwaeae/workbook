@@ -1,7 +1,7 @@
 <?php  use_helper('Date');?>
-<table class="job">
+<table class="job job_body_type_<?php echo $type ?>">
   <thead>
-    <tr class="job_type_<?php echo $type ?>_body">
+    <tr >
 		<th>NR</th>
 		<th>Kunde</th>
 		<th>Filiale</th>
@@ -15,7 +15,7 @@
 	<?php endif ?>	
 	</tr>
 	</thead>
-	<tbody class="job_type_<?php echo $type ?>_body">
+	<tbody >
 	<?php foreach ($pager->getResults() as $job): ?>
 	<tr class="table_item" 
 		onclick="document.location = '<?php echo url_for('job/show?id='.$job->getId()) ?>'">
@@ -74,28 +74,24 @@
 		<?php endforeach; ?>
 		<li ><?php echo	link_to('>' ,$url.'&page='.$pager->getNextPage(),'class=button'); ?></li>
 		<li ><?php echo	link_to('>>' ,$url.'&page='.$pager->getLastPage(),'class=button'); ?></li>
-		</ul>
+
 		<script type="text/javascript">
 		$(document).ready(function(){
-		 $(".job_type_<?php echo $type ?>_body a").click(function()
-			{
-			$('.job_type_<?php echo $type ?>_head #loader').show();	
-			$('.job_type_<?php echo $type ?>_body').load($(this).attr("href"),function() {
-				$('.job_type_<?php echo $type ?>_head #loader').hide();
-				});
-			return false;
-
-			});
-
+         $(".job_body_type_<?php echo $type ?> a").click(function()
+			      {
+            $(this).closest('div').load($(this).attr("href"));
+		        return false;
+	        	});
 		});
 		</script>
 
-		<?php endif; ?>
+    </ul>
 		
 		
 	</td>
 	
 
 </tr>
+      <?php endif; ?>
   </tbody>
 </table>

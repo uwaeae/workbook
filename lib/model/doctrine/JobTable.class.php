@@ -58,7 +58,7 @@ public static function getStoreOldJobs($id,$store)
 
 	public function getOwnJobs($id){
 		return 	Doctrine_Query::create()
-            	->select('j.*')
+        ->select('j.*')
 				->from('Job j')
 				->leftJoin('j.Tasks t')
 				->innerJoin('t.TaskUser u ON t.id = u.task_id AND u.user_id ='.$id )
@@ -66,6 +66,19 @@ public static function getStoreOldJobs($id,$store)
 				->orderby('j.end');
 		
 	}
+    public function getCountOwnJobs($id){
+        return 	Doctrine_Query::create()
+            ->select('j.*')
+            ->from('Job j')
+            ->leftJoin('j.Tasks t')
+            ->innerJoin('t.TaskUser u ON t.id = u.task_id AND u.user_id ='.$id )
+            ->andWhere('j.job_state_id < 2')
+            ->orderby('j.end')
+            ->execute()->count();
+
+    }
+
+
 	public function getOpenJobs(){
 		return Doctrine_Query::create()
         	->select('j.*')
@@ -76,6 +89,19 @@ public static function getStoreOldJobs($id,$store)
 			->orderby('j.end');
 		
 	}
+    public function getCountOpenJobs(){
+        return Doctrine_Query::create()
+            ->select('j.*')
+            ->from('Job j')
+            ->leftJoin('j.Tasks t')
+            ->where('t.scheduled IS null OR FALSE')
+            ->andWhere('j.job_state_id < 2')
+            ->orderby('j.end')
+            ->execute()->count();
+
+    }
+
+
 	public function getSheduledJobs(){
 		return 	Doctrine_Query::create()
             	->select('j.*')
@@ -86,6 +112,43 @@ public static function getStoreOldJobs($id,$store)
 				->orderby('j.end');
 		
 	}
+    public function getCountSheduledJobs(){
+        return 	Doctrine_Query::create()
+            ->select('j.*')
+            ->from('Job j')
+            ->leftJoin('j.Tasks t')
+            ->where('t.scheduled IS TRUE')
+            ->andWhere('j.job_state_id = 1')
+            ->orderby('j.end')
+            ->execute()->count();
+
+    }
+
+  public function getSheduledJobsByUser($UserID){
+        return 	Doctrine_Query::create()
+            ->select('j.*')
+            ->from('Job j')
+            ->leftJoin('j.Tasks t')
+            ->innerJoin('t.TaskUser u ON t.id = u.task_id AND u.user_id ='.$UserID )
+            ->where('t.scheduled IS TRUE')
+            ->andWhere('j.job_state_id = 1')
+            ->orderby('j.end');
+
+  }
+
+    public function getCountSheduledJobsByUser($UserID){
+        return 	Doctrine_Query::create()
+            ->select('j.*')
+            ->from('Job j')
+            ->leftJoin('j.Tasks t')
+            ->innerJoin('t.TaskUser u ON t.id = u.task_id AND u.user_id ='.$UserID )
+            ->where('t.scheduled IS TRUE')
+            ->andWhere('j.job_state_id = 1')
+            ->orderby('j.end')->execute()->count();
+
+    }
+
+
 	public function getWorkedJobs(){
 		return  Doctrine_Query::create()
 			->select('j.*')
@@ -99,6 +162,55 @@ public static function getStoreOldJobs($id,$store)
 		
 		
 	}
+    public function getCountWorkedJobs(){
+        return  Doctrine_Query::create()
+            ->select('j.*')
+            ->from('Job j')
+            ->leftJoin('j.Tasks t')
+            ->where('t.scheduled IS NOT TRUE')
+            ->andWhere('j.job_state_id = 1')
+            ->leftJoin('j.Invoices i')
+            ->andWhere('i.id is null   ')
+            ->orderby('j.end')
+            ->execute()->count();
+
+
+    }
+
+    public function getWorkedJobsByUser($UserID){
+        return  Doctrine_Query::create()
+            ->select('j.*')
+            ->from('Job j')
+            ->leftJoin('j.Tasks t')
+            ->innerJoin('t.TaskUser u ON t.id = u.task_id AND u.user_id ='.$UserID )
+            ->where('t.scheduled IS NOT TRUE')
+            ->andWhere('j.job_state_id = 1')
+            ->leftJoin('j.Invoices i')
+            ->andWhere('i.id is null   ')
+            ->orderby('j.end');
+
+
+    }
+
+    public function getCountWorkedJobsByUser($UserID){
+        return  Doctrine_Query::create()
+            ->select('j.*')
+            ->from('Job j')
+            ->leftJoin('j.Tasks t')
+            ->innerJoin('t.TaskUser u ON t.id = u.task_id AND u.user_id ='.$UserID )
+            ->where('t.scheduled IS NOT TRUE')
+            ->andWhere('j.job_state_id = 1')
+            ->leftJoin('j.Invoices i')
+            ->andWhere('i.id is null   ')
+            ->orderby('j.end')
+            ->execute()->count();
+
+
+    }
+
+
+
+
 	public function getFinishedJobs(){
 			return  Doctrine_Query::create()
 				->select('j.*')
@@ -110,6 +222,17 @@ public static function getStoreOldJobs($id,$store)
 		
 		
 	}
+    public function getCountFinishedJobs(){
+        return  Doctrine_Query::create()
+            ->select('j.*')
+            ->from('Job j')
+            ->where('j.job_state_id = 2')
+            ->leftJoin('j.Invoices i')
+            ->andWhere('i.id is null ')
+            ->orderby('j.id')->execute()->count();
+
+
+    }
 	public function getCompletedJobs(){
 		return  Doctrine_Query::create()
 			->select('j.*')
@@ -120,6 +243,20 @@ public static function getStoreOldJobs($id,$store)
 			->orderby('j.end');
 		
 	}
+
+    public function getCountCompletedJobs(){
+        return  Doctrine_Query::create()
+            ->select('COUNT(j.id)')
+            ->from('Job j')
+            ->andWhere('j.job_state_id = 2')
+            ->leftJoin('j.Invoices i')
+            ->andWhere('i.id is not null   ')
+            ->orderby('j.end')
+            ->execute()->count();
+
+    }
+
+
 
 	 
 }

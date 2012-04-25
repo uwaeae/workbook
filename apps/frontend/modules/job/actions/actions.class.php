@@ -48,11 +48,15 @@ public function executeTable(sfWebRequest $request)
 			$name = 'offen'	;
 			break;
 		case '2':
-			$query = Doctrine_Core::getTable('Job')->getSheduledJobs();
+			$query = ($request->hasParameter('user')?
+                    Doctrine_Core::getTable('Job')->getSheduledJobsByUser($request->getParameter('user'))
+                    :Doctrine_Core::getTable('Job')->getSheduledJobsByUser());
 			$name = 'geplant';	
 			break;
 		case '3':
-			$query = Doctrine_Core::getTable('Job')->getWorkedJobs();
+        $query = ($request->hasParameter('user')?
+                    Doctrine_Core::getTable('Job')->getWorkedJobsByUser($request->getParameter('user'))
+                    :Doctrine_Core::getTable('Job')->getWorkedJobs());
 			$name = 'in Bearbeitung';
 			break;
 		case '4':
@@ -78,7 +82,7 @@ public function executeTable(sfWebRequest $request)
   {
 	$this->jobstate = array();
 	$job = new Job();
-	$this->jobstate[0] = $this->getJobStateArray(0,'meine Aufträge'
+/*	$this->jobstate[0] = $this->getJobStateArray(0,'meine Aufträge'
 									,Doctrine_Core::getTable('Job')->getOwnJobs($this->getUser()->getId())
 									,$request->getParameter('page')
 									,$request->getParameter('max'));
@@ -90,25 +94,54 @@ public function executeTable(sfWebRequest $request)
 									,$request->getParameter('max'));
 								
 	
-//	if(	$this->getUser()->hasGroup('admin') 
-//		OR $this->getUser()->hasGroup('office')){
-						$this->jobstate[2] = $this->getJobStateArray(2,'geplante Aufträge'
+	$this->jobstate[2] = $this->getJobStateArray(2,'geplante Aufträge'
 													,Doctrine_Core::getTable('Job')->getSheduledJobs()
 													,$request->getParameter('page')
 													,$request->getParameter('max'));
-						$this->jobstate[3] 	= $this->getJobStateArray(3,'in Bearbeitung'
+	$this->jobstate[3] 	= $this->getJobStateArray(3,'in Bearbeitung'
 										,$job->getWorkedJobs()
 										,$request->getParameter('page')
 										,$request->getParameter('max'));
-//					}
-	 if ( $this->getUser()->hasPermission('Rechnung')) {
+  if ( $this->getUser()->hasPermission('Rechnung')) {
 
 	$this->jobstate[4] = $this->getJobStateArray(4,'abgeschlossene Aufträge'
 								,Doctrine_Core::getTable('Job')->getFinishedJobs()
 								,$request->getParameter('page')
 								,$request->getParameter('max'));}				
 	
-			
+	*/
+   //$this->jobstate = array();
+
+
+
+  $this->jobs_own= array(   'name' => 'Eigene Aufträge',
+                                'count'=>  Doctrine_Core::getTable('Job')->getCountOwnJobs($this->getUser()->getId())) ;
+  $this->jobs_open= array(   'name' => 'Offene Aufträge',
+                                'count'=>  Doctrine_Core::getTable('Job')->getCountOpenJobs());
+ // $this->jobs_sheduled = array(   'name' => 'Geplant',
+ //         'count'=>  Doctrine_Core::getTable('Job')->getCountSheduledJobs());
+  $this->job_worked= array(   'name' => 'Bearbeitet',
+          'count'=>  Doctrine_Core::getTable('Job')->getCountWorkedJobs());
+  $this->jobs_sheduled  = array();
+  $query = Doctrine_Query::create()
+           ->select('u.id')
+           ->from('sfGuardUser u')
+           ->execute();
+   foreach($query as $user ){
+       $this->jobs_sheduled[] = array('id' => $user->getID(),
+                                        'name' => 'Geplant für '.$user->getName(),
+                                        'count'=>  Doctrine_Core::getTable('Job')->getCountSheduledJobsByUser($user->getID()));
+
+   }
+
+
+
+
+  if ( $this->getUser()->hasPermission('Rechnung')) {
+      $this->jobs_finisched= array(   'name' => 'Abgeschlossen',
+          'count'=>  Doctrine_Core::getTable('Job')->getCountFinishedJobs());
+      }
+
 		$this->formStore = new searchStoreForm(NULL,array(
 			'url' => $this->getController()->genUrl('job/findstore'),
 				));

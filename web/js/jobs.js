@@ -8,36 +8,52 @@ init();
 });
 
 function init(){
-	
-	$('.job_type_0_body').hide();
-	$('.job_type_1_body').hide();
-	$('.job_type_2_body').hide();
-	$('.job_type_3_body').hide();
-	$('.job_type_4_body').hide();
-	
 
 
-$('div.job_type_0_head').click(function(key)
+    setInterval(function()
+    {
+        $('#responsecontainer').fadeOut("slow").load('response.php').fadeIn("slow");
+    }, 10000);
+
+
+$('div.job_type_head_0').click(function(key)
 	{
-	 $('.job_type_0_body').slideToggle('slow');
+      //var body = $(this).parent().find('.job_type_0_body').visible();
+
+        $(this).parent().find('.job_type_body').fadeOut("slow").load('/job/table/type/0' ).fadeIn("slow");
+      //$(this).parent().find('.job_type_body').load('/job/table/type/0' ); //.slideToggle('slow');
+        var refreshId = setInterval(function()
+        {
+            $(this).parent().find('.job_type_body').fadeOut("slow").load('/job/table/type/0' ).fadeIn("slow");
+        }, 10000);
+        //$(this).parent().find('.job_type_body').toggle();
 	}); 
 
- $('div.job_type_1_head').click(function(key)
+ $('div.job_type_head_1').click(function(key)
 	{
- 		$('.job_type_1_body').slideToggle(700);
+        $(this).parent().find('.job_type_body').load('/job/table/type/1' );
+        setInterval(function()
+        {
+        $(this).parent().find('.job_type_body').load('/job/table/type/1' ); //.slideToggle('slow');
+        //$(this).parent().find('.job_type_body').toggle();
+        }, 10000);
+
 	});
-$('.job_type_2_head').click(function(key)
-	{
-		$('.job_type_2_body').slideToggle();
-	});
-$('div.job_type_3_head').click(function(key)
-	{
-	$(' .job_type_3_body ').slideToggle("slow");
-	});
-$('.job_type_4_head ').click(function(key)
-	{
-	$('.job_type_4_body ').slideToggle("slow");
-	});
+
+    $('div.job_type_head_3').click(function(key)
+    {
+
+        $(this).parent().find('.job_type_body').load('/job/table/type/3' ); //.slideToggle('slow');
+       // $(this).parent().find('.job_type_body').toggle();
+
+    });
+    $('div.job_type_head_4').click(function(key)
+    {
+
+        $(this).parent().find('.job_type_body').load('/job/table/type/4' ); //.slideToggle('slow');
+        //$(this).parent().find('.job_type_body').toggle();
+
+    });
 }
 
 
