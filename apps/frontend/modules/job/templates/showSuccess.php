@@ -66,7 +66,7 @@
 				<ul>
 				<?php foreach ($job->getFiles() as $file): ?>
 					<li class="jobfile"><?php echo link_to($file->getName(),'/file/get/?id='.$file->getID()) ?>
-						<?php echo link_to('Delete', 'file/delete?id='.$file->getID(), array('method' => 'delete', 'confirm' => 'Are you sure?','class'=>'button','style'=> 'float:right;')) ?></li>
+						<?php echo link_to('Delete', 'file/delete?id='.$file->getID().'&jobid='.$job->getID(), array('method' => 'delete', 'confirm' => 'Are you sure?','class'=>'button','style'=> 'float:right;')) ?></li>
 				<?php endforeach ?>
 				<?php if ($job->getJobStateId() < 2): ?> 	
 					<li class="jobfile newfilebutton"><label class="button newfilebutton">Neue Datei</label></li>

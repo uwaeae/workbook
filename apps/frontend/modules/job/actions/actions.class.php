@@ -114,22 +114,26 @@ public function executeTable(sfWebRequest $request)
 
 
 
-  $this->jobs_own= array(   'name' => 'Eigene Aufträge',
+  $this->jobs_own= array(   'name' => 'eigene Aufträge',
                                 'count'=>  Doctrine_Core::getTable('Job')->getCountOwnJobs($this->getUser()->getId())) ;
-  $this->jobs_open= array(   'name' => 'Offene Aufträge',
+  $this->jobs_open= array(   'name' => 'offene Aufträge',
                                 'count'=>  Doctrine_Core::getTable('Job')->getCountOpenJobs());
  // $this->jobs_sheduled = array(   'name' => 'Geplant',
  //         'count'=>  Doctrine_Core::getTable('Job')->getCountSheduledJobs());
-  $this->job_worked= array(   'name' => 'Bearbeitet',
+  $this->job_worked= array(   'name' => 'in Bearbeitung',
           'count'=>  Doctrine_Core::getTable('Job')->getCountWorkedJobs());
+
+   $this->jobs_sheduled_count =    Doctrine_Core::getTable('Job')->getCountSheduledJobs();
+
   $this->jobs_sheduled  = array();
   $query = Doctrine_Query::create()
            ->select('u.id')
            ->from('sfGuardUser u')
            ->execute();
+
    foreach($query as $user ){
        $this->jobs_sheduled[] = array('id' => $user->getID(),
-                                        'name' => 'Geplant für '.$user->getName(),
+                                        'name' =>  $user->getName(),
                                         'count'=>  Doctrine_Core::getTable('Job')->getCountSheduledJobsByUser($user->getID()));
 
    }
@@ -138,7 +142,7 @@ public function executeTable(sfWebRequest $request)
 
 
   if ( $this->getUser()->hasPermission('Rechnung')) {
-      $this->jobs_finisched= array(   'name' => 'Abgeschlossen',
+      $this->jobs_finisched= array(   'name' => 'abgeschlossene Aufträge',
           'count'=>  Doctrine_Core::getTable('Job')->getCountFinishedJobs());
       }
 

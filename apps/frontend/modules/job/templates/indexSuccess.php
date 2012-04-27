@@ -32,33 +32,35 @@
     <div class="job_type_2">
 
         <div class="job_type_head_2  job_type_head" colspan = "7">
-            Geplante / Zugewisene
+            geplante / zugewiesene Aufträge (<?php echo $jobs_sheduled_count ?>)
         </div>
 
         <div class="job_type_body_2  job_type_body" colspan = "7">
 
         <?php foreach($jobs_sheduled as $job_sh): ?>
 
+         <?php if($job_sh['count'] !=0 ): ?>
           <div class="job_type2_head_<?php echo $job_sh['id'] ?>  job_type2_head" colspan = "7">
              <?php echo $job_sh['name'] ?> (<?php echo $job_sh['count'] ?>)
           </div>
-          <div class="job_type2_body_<?php echo $job_sh['id'] ?> job_type_body" colspan = "7" > </div>
+          <div class="job_type2_body_<?php echo $job_sh['id'] ?> job_type2_body" colspan = "7" > </div>
 
 
 
             <script type="text/javascript">
                     $('div.job_type2_head_<?php echo $job_sh['id'] ?> ').click(function(key)
                     {
-
+                        $(this).parent().find('.job_type2_body_<?php echo $job_sh['id'] ?>:visible').slideUp('fast');
                         $(this).parent().find('.job_type2_body_<?php echo $job_sh['id'] ?>:hidden').load('/job/table/type/2/user/<?php echo $job_sh['id'] ?>' ,function(){
-                            $(this).slideDown(); });
-                        $(this).parent().find('.job_type2_body_<?php echo $job_sh['id'] ?>:visible').slideUp();
+                            $(this).slideDown('fast'); });
+
 
                     });
 
 
 
             </script>
+          <?php endif ?>
         <?php endforeach ?>
 
         </div>

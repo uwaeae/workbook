@@ -22,8 +22,9 @@ public function prepareDownload($response,$outFilename)
   { 
     $response->clearHttpHeaders();
     $response->addCacheControlHttpHeader('Cache-control','must-revalidate, post-check=0, pre-check=0');
-    $response->setContentType('application/octet-stream',TRUE);    
-    $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
+    $response->setContentType('application/pdf',TRUE);
+    //  $response->setHttpHeader('Content-Type', $contentType);
+      $response->setHttpHeader('Content-Transfer-Encoding', 'binary', TRUE);
     $response->setHttpHeader('Content-Disposition','attachment; filename='.$outFilename, TRUE);
     $response->sendHttpHeaders();  
   }
@@ -32,8 +33,13 @@ public function executeGet(sfWebRequest $request)
 {
 	$this->forward404Unless($file = Doctrine_Core::getTable('File')->find(array($request->getParameter('id'))), sprintf('Object file does not exist (%s).', $request->getParameter('id')));
 	$this->prepareDownload($this->getResponse(),$file->getName());
-	readfile(sfConfig::get('sf_upload_dir').'/document/'.$file->getFile());
-	return sfView::NONE;
+ // $this->getContext()->getResponse()->setContentType('application/pdf');
+
+	$this->getContext()->getResponse()->setContent(readfile(sfConfig::get('sf_upload_dir').'/document/'.$file->getFile()));
+  $this->getContext()->getResponse()->sendContent();
+  return sfView::HEADER_ONLY;
+
+
 }
 
 
@@ -75,9 +81,20 @@ public function executeGet(sfWebRequest $request)
     //$request->checkCSRFProtection();
 
     $this->forward404Unless($file = Doctrine_Core::getTable('File')->find(array($request->getParameter('id'))), sprintf('Object file does not exist (%s).', $request->getParameter('id')));
+    //$filejob = Doctrine_Core::getTable('FileJob')->find(array($request->getParameter('id')));
+    $filejobs =  Doctrine_Query::create()
+          ->select('j.*')
+          ->from('FileJob j')
+          ->where('j.file_id = '.$request->getParameter('id'))
+          ->execute();
+
+    foreach($filejobs as $fj){
+        $fj->delete();
+    }
+
     $file->delete();
 
-    $this->redirect('file/index');
+    $this->redirect('/job/'.$request->getParameter('jobid'));
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
@@ -97,7 +114,7 @@ public function executeGet(sfWebRequest $request)
 		$filejob->setFileId($upload->getId());
 		$filejob->setJobId($request->getParameter('job'));
 		$filejob->save();
-		$this->redirect($this->getUser()->getAttribute('back'));
+		$this->redirect('/job/'.$request->getParameter('job'));
 		//$this->redirect('file/edit?id='.$upload->getId());
     }
   }

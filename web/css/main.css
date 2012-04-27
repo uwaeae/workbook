@@ -976,32 +976,49 @@ table.job tr.table_item:hover {
 
 .job_type_head {
 	width: 100%;
-
+    background-color: #E0E6F8;
 	cursor: pointer;
 	text-align: left;
 	display: inline-block;
 	margin-top: 20px;
 	margin-bottom: 10px;
     padding-left: 60px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
 
 }
 .job_type_head:hover {
 	background-color: #007BB6;
 }
 
-.job_type_head {
-    background-color: #E0E6F8;
+
+.job_type2_body{
+    margin-left: 70px;
 
 }
 
-
  .job_type2_head{
-    background-color: orange;
+     background-color: #add8e6;
+
+     cursor: pointer;
+     text-align: left;
+     display: inline-block;
+     margin-top: 10px;
+     margin-bottom: 5px;
+     padding-left: 20px;
+     width: 100%;
+     margin-left: 50px;
+     padding-top: 5px;
+     padding-bottom: 5px;
+
 }
 
  .job_type2_head:hover{
-    background-color: #ff4500;
+     background-color: #007BB6;
+
 }
+
 
 
 
@@ -1020,6 +1037,11 @@ div.job_search li {
 	margin-left: 5px;
 	margin-right: 5px;
 		
+}
+
+div.job_search .ac_input{
+
+    width: 300px;
 }
 
 .pageing{
@@ -1161,7 +1183,7 @@ table.entry tbody td {
 table.entry tfoot td input[type=text] {
 	width: 100%;
 }
-width: 100%;
+
 
 table.entry tfoot {
 
