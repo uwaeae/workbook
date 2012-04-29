@@ -11,17 +11,61 @@
 	
 	
 	<li class="<?php echo $type ?>_item" 	onclick="document.location = '<?php  echo url_for('job/show?id='.$job->getId()) ?>'">
-	<?php echo $job->getId()?><br>
-		Ende: <?php echo format_date($job->getEnd(),'dd.MM.') ?><br>
-		Anfang: <?php echo format_date($job->getStart(),'dd.MM.') ?>
-		
-	<p><?php echo $job->getStore()->getCustomer()->getCompany() ?></p>
-		<p> <?php echo $job->getStore()->getStreet() ?><br>
-		<?php echo $job->getStore()->getPostcode() ?><?php echo $job->getStore()->getCity() ?></p>
-		<p>
-			<?php echo substr($job->getDescription(), 0, 50) ?>
-		</p>
-		
+
+  <table>
+      <tr>
+
+          <td colspan="3"> <strong><?php echo $job->getId()?></strong>
+          </td>
+
+      </tr>
+
+      <tr>
+          <td>
+              Ende:
+          </td>
+          <td colspan="2">
+              <?php echo format_date($job->getEnd(),'dd.MM.') ?>
+
+          </td>
+      </tr>
+      <tr>
+          <td>
+              Anfang:
+          </td>
+          <td colspan="2">
+              <?php echo format_date($job->getStart(),'dd.MM.') ?>
+          </td>
+      </tr>
+
+
+
+      <TR>
+          <td rowspan="3"> Kunde</td>
+          <td colspan="2">
+              <?php echo $job->getStore()->getCustomer()->getCompany() ?>
+
+          </td>
+      </TR>
+
+      <tr>
+          <td colspan="2">
+              <?php echo $job->getStore()->getStreet() ?>
+          </td>
+      </tr>
+
+      <tr>
+          <td colspan="2">
+              <?php echo $job->getStore()->getPostcode() ?> <?php echo $job->getStore()->getCity() ?>
+          </td>
+      </tr>
+      <tr>
+          <td colspan="3">
+              <?php echo substr($job->getDescription(), 0, 50) ?>
+          </td>
+      </tr>
+  </table>
+
 		
     </li>
 

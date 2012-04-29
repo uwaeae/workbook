@@ -18,7 +18,7 @@
 	<tbody >
 	<?php foreach ($pager->getResults() as $job): ?>
 	<tr class="table_item" 
-		onclick="document.location = '<?php echo url_for('job/show?id='.$job->getId()) ?>'">
+		onclick="document.location = '<?php echo url_for('/job/show?id='.$job->getId()) ?>'">
 		<td><?php echo $job->getID() ?></td>
 		<td><?php echo $job->getStore()->getCustomer()->getCompany() ?></td>
 		<td><?php echo $job->getStore()->getNumber() ?></td>

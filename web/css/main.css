@@ -521,6 +521,11 @@ div.filtertypes label {
 	
 }
 
+div.job_openjob_menu ul li{
+    list-style: none;
+    float: left;
+}
+
 
 
 
@@ -528,8 +533,7 @@ div #open_jobs{
 	float:none;
 	font-size: 8pt;
 	font-family: verdana,arial,sans-serif;
-	position: absolute;
-	left:60%;
+
 }
 
 .open_jobs_head{
@@ -553,6 +557,9 @@ div #open_jobs{
 .open_jobs_body{
 	height: 40em;
 	overflow: auto;
+    position: absolute;
+    width: 260px;
+
 }
 
 .open_jobs_item{
@@ -562,17 +569,22 @@ div #open_jobs{
 	cursor: pointer;
 	margin-top:5px;
 	margin-right: 5px;
+    width: 250px;
 }
 .open_jobs_item:hover{
 	 background-color: #81DAF5;
 }
+.open_jobs_item table{
+   font-size: 8pt;
+}
 
+
+/*
 div #open_filiale{
 	float:none;
 	font-size: 8pt;
 	font-family: verdana,arial,sans-serif;
-	position: absolute;
-	left:40%;
+
 }
 
 .open_filiale_head{
@@ -594,8 +606,10 @@ div #open_filiale{
 }
 	
 .open_filiale_body{
-	height: 40em;
-	overflow: auto;
+    height: 300px;
+    overflow: auto;
+    position: absolute;
+    width: 300px;
 }
 
 .open_filiale_item{
@@ -614,8 +628,6 @@ div #jobsold{
 	float:none;
 	font-size: 8pt;
 	font-family: verdana,arial,sans-serif;
-	position: absolute;
-	left:20%;
 }
 
 .jobsold_head{
@@ -637,8 +649,10 @@ div #jobsold{
 }
 	
 .jobsold_body{
-	height: 40em;
-	overflow: auto;
+    height: 300px;
+    overflow: auto;
+    position: absolute;
+    width: 300px;
 }
 
 .jobsold_item{
@@ -653,7 +667,7 @@ div #jobsold{
 	 background-color: #81DAF5;
 }
 
-
+*/
 
 /* NAVIGATIONS BUTTONS */
 
@@ -822,8 +836,8 @@ div #jobsold{
 }
 .table_item:hover {
 	background-color: lightblue;
-	border-bottom: 1px solid #ccccff ;
-	cursor:pointer; 
+	xborder-bottom: 1px solid #ccccff ;
+	xcursor:pointer;
 }
 
 .table_list{

@@ -1,8 +1,26 @@
 <?php  use_helper('Date');?>
 <?php use_javascript('jobshow.js') ?>
-<?php include_partial('openjob', array('jobs' => $openjobs_near,'type'=> 'open_jobs','info'=> 'Offene Aufträge  in der Nähe')) ?>
-<?php include_partial('openjob', array('jobs' => $openjobs_same,'type'=> 'open_filiale','info'=> 'Offene Aufträge  in der Filiale')) ?>
-<?php include_partial('openjob', array('jobs' => $jobsold,'type'=> 'jobsold','info'=> 'Erledigte Aufträge')) ?>
+
+<div class="job_openjob_menu">
+
+    <ul>
+        <li>
+            <?php include_partial('openjob', array('jobs' => $openjobs_near,'type'=> 'open_jobs','info'=> 'Offene Aufträge  in der Nähe')) ?>
+        </li>
+        <li>
+            <?php include_partial('openjob', array('jobs' => $openjobs_same,'type'=> 'open_jobs','info'=> 'Offene Aufträge  in der Filiale')) ?>
+        </li>
+        <li>
+            <?php include_partial('openjob', array('jobs' => $jobsold,'type'=> 'open_jobs','info'=> 'Erledigte Aufträge')) ?>
+        </li>
+    </ul>
+
+
+
+
+</div>
+
+
 <table class="job_show">
   <tbody>
     <tr>

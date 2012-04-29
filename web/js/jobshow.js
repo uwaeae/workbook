@@ -14,17 +14,18 @@ $('label.newfilebutton').click(function(key)
  $('.open_jobs_body').hide();
 
  
-  $('.open_jobs_head').click(function(key)
-	{
-		$('.jobsold_body').hide();
-		$('.open_filiale_body').hide();
-	if ($(".open_jobs_body").is(":hidden")) {
-	$('.open_jobs_body').toggle("fast");
-	} else {
-    $('.open_jobs_body').toggle("slow");
-	}
-	});
+  $('.open_jobs_head').click(function(key){
+ //  $('.open_jobs_body').slideUp('fast');
+    $(this).parent().find('div.open_jobs_body').slideToggle('fast');
+      //$('.open_jobs_body').set
 
+
+  });
+
+
+});
+
+/*
 $('.open_filiale_body').hide();
 
 
@@ -52,3 +53,4 @@ $('.jobsold_body').hide();
 				}
 				});		
 });
+   */
