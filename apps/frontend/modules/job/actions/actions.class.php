@@ -80,80 +80,46 @@ public function executeTable(sfWebRequest $request)
 	
   public function executeIndex(sfWebRequest $request)
   {
-	$this->jobstate = array();
-	$job = new Job();
-/*	$this->jobstate[0] = $this->getJobStateArray(0,'meine Aufträge'
-									,Doctrine_Core::getTable('Job')->getOwnJobs($this->getUser()->getId())
-									,$request->getParameter('page')
-									,$request->getParameter('max'));
-	
+      $this->jobstate = array();
 
-	$this->jobstate[1] = $this->getJobStateArray(1,'offene Aufträge '
-									,Doctrine_Core::getTable('Job')->getOpenJobs()
-									,$request->getParameter('page')
-									,$request->getParameter('max'));
-								
-	
-	$this->jobstate[2] = $this->getJobStateArray(2,'geplante Aufträge'
-													,Doctrine_Core::getTable('Job')->getSheduledJobs()
-													,$request->getParameter('page')
-													,$request->getParameter('max'));
-	$this->jobstate[3] 	= $this->getJobStateArray(3,'in Bearbeitung'
-										,$job->getWorkedJobs()
-										,$request->getParameter('page')
-										,$request->getParameter('max'));
-  if ( $this->getUser()->hasPermission('Rechnung')) {
+      $this->jobs_own= array(   'name' => 'eigene Aufträge',
+                                    'count'=>  Doctrine_Core::getTable('Job')->getCountOwnJobs($this->getUser()->getId())) ;
+      $this->jobs_open= array(   'name' => 'offene Aufträge',
+                                    'count'=>  Doctrine_Core::getTable('Job')->getCountOpenJobs());
+      $this->job_worked= array(   'name' => 'in Bearbeitung',
+              'count'=>  Doctrine_Core::getTable('Job')->getCountWorkedJobs());
 
-	$this->jobstate[4] = $this->getJobStateArray(4,'abgeschlossene Aufträge'
-								,Doctrine_Core::getTable('Job')->getFinishedJobs()
-								,$request->getParameter('page')
-								,$request->getParameter('max'));}				
-	
-	*/
-   //$this->jobstate = array();
+     //  $this->jobs_sheduled_count =    Doctrine_Core::getTable('Job')->getCountSheduledJobs();
 
+      $this->jobs_sheduled  = array();
+      $query = Doctrine_Query::create()
+               ->select('u.id')
+               ->from('sfGuardUser u')
+               ->execute();
 
+       foreach($query as $user ){
+           $this->jobs_sheduled[] = array('id' => $user->getID(),
+                                            'name' =>  $user->getName(),
+                                            'count'=>  Doctrine_Core::getTable('Job')->getCountSheduledJobsByUser($user->getID()));
 
-  $this->jobs_own= array(   'name' => 'eigene Aufträge',
-                                'count'=>  Doctrine_Core::getTable('Job')->getCountOwnJobs($this->getUser()->getId())) ;
-  $this->jobs_open= array(   'name' => 'offene Aufträge',
-                                'count'=>  Doctrine_Core::getTable('Job')->getCountOpenJobs());
- // $this->jobs_sheduled = array(   'name' => 'Geplant',
- //         'count'=>  Doctrine_Core::getTable('Job')->getCountSheduledJobs());
-  $this->job_worked= array(   'name' => 'in Bearbeitung',
-          'count'=>  Doctrine_Core::getTable('Job')->getCountWorkedJobs());
-
-   $this->jobs_sheduled_count =    Doctrine_Core::getTable('Job')->getCountSheduledJobs();
-
-  $this->jobs_sheduled  = array();
-  $query = Doctrine_Query::create()
-           ->select('u.id')
-           ->from('sfGuardUser u')
-           ->execute();
-
-   foreach($query as $user ){
-       $this->jobs_sheduled[] = array('id' => $user->getID(),
-                                        'name' =>  $user->getName(),
-                                        'count'=>  Doctrine_Core::getTable('Job')->getCountSheduledJobsByUser($user->getID()));
-
-   }
+       }
 
 
 
 
-  if ( $this->getUser()->hasPermission('Rechnung')) {
-      $this->jobs_finisched= array(   'name' => 'abgeschlossene Aufträge',
-          'count'=>  Doctrine_Core::getTable('Job')->getCountFinishedJobs());
-      }
+      if ( $this->getUser()->hasPermission('Rechnung')) {
+          $this->jobs_finisched= array(   'name' => 'abgeschlossene Aufträge',
+              'count'=>  Doctrine_Core::getTable('Job')->getCountFinishedJobs());
+          }
 
-		$this->formStore = new searchStoreForm(NULL,array(
-			'url' => $this->getController()->genUrl('job/findstore'),
-				));
-		$this->formCustomer = new searchCustomerForm(NULL,array(
-			'url' => $this->getController()->genUrl('job/findcustomer')
-			));
-		$this->setBack('job');
-			
+        $this->formStore = new searchStoreForm(NULL,array(
+          'url' => $this->getController()->genUrl('job/findstore'),
+            ));
+        $this->formCustomer = new searchCustomerForm(NULL,array(
+          'url' => $this->getController()->genUrl('job/findcustomer')
+          ));
+        $this->setBack('job');
+
   }
 
  public function executeFinish(sfWebRequest $request)
@@ -238,8 +204,11 @@ public function executeTable(sfWebRequest $request)
 	$this->openjobs_same = Doctrine_Core::getTable('Job')->getStoreOpenJobs($this->job->getId(),$this->job->getStore()->getId());
 	$this->jobsold = Doctrine_Core::getTable('Job')->getStoreOldJobs($this->job->getId(),$this->job->getStore()->getId());
 	
-	
-	$this->form = new FileForm(NULL);
+	$this->UserForm = new JobUserForm();
+  $this->UserForm->setDefault('job', $this->job->getId());
+
+
+      $this->FileForm = new FileForm(NULL);
 	//$this->form->setDefault('jobs_list', array($this->job->getId()));
     $this->entrys  = Doctrine_Core::getTable('Entry')->getEntypByJob($this->job->getId());
 	$this->date = array();
@@ -279,6 +248,21 @@ public function executeTable(sfWebRequest $request)
 
 
   }
+
+  public  function executeUser(sfWebRequest $request){
+      if(!$request->isMethod(sfRequest::POST))  $this->redirect($this->getUser()->getAttribute('back'));
+      $job = $request->getParameter('job');
+      $users = $request->getParameter('user');
+      Doctrine_Core::getTable('JobUser')->deleteJobUser($job);
+      foreach($users as $user) {
+          $JobUser = new JobUser();
+          $JobUser->setJobId($job);
+          $JobUser->setUserId($user);
+          $JobUser->save();
+      }
+    $this->redirect('/job/'.$job);
+  }
+
 
  public function executeNew(sfWebRequest $request)
   {

@@ -225,19 +225,26 @@ class taskActions extends sfActions
     $request->checkCSRFProtection();
 
     $this->forward404Unless($task = Doctrine_Core::getTable('Task')->find(array($request->getParameter('id'))), sprintf('Object task does not exist (%s).', $request->getParameter('id')));
-    
-	$taskusers = Doctrine_Core::getTable('TaskUser')->createQuery('t')
-	  ->where('t.task_id ='.$task->getId())
-      ->execute();
-	foreach ($taskusers as $tu) {
-		$tu->delete();
-	}
-	/*$changelog = Doctrine_Core::getTable('TaskChangeLog')->createQuery('t')
-	  ->where('t.task_id ='.$task->getId())
-      ->execute();*/
-	$task->delete();
 
-    $this->redirect($this->getUser()->getAttribute('back'));
+    $job = $task->getJobId();
+
+    $taskusers = Doctrine_Core::getTable('TaskUser')->createQuery('t')
+        ->where('t.task_id ='.$task->getId())
+          ->execute();
+    foreach ($taskusers as $tu) {
+        $tu->delete();
+    }
+
+    $entrytask = Doctrine_Core::getTable('Entry')->createQuery('t')
+          ->where('t.task_id ='.$task->getId())
+          ->execute();
+    foreach ($entrytask as $et) {
+          $et->delete();
+    }
+
+	  $task->delete();
+
+    $this->redirect('/job/'.$job );
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form,$action)

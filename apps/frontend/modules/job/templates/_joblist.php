@@ -32,20 +32,26 @@
 		<?php echo format_date($job->getEnd(),'dd.MM.yyyy HH:mm') ?></td>
 		
 		<?php if ($type > 1): ?>
-		<td ><?php foreach ($job->getTasks() as $thermin ): ?> 
-		<ul class="table_list">	
-			<span <?php if ($job->getEnd()< $thermin->getScheduled() AND $type < 4): ?>
-				class="fault"
-			<?php endif ?> >
-		<?php echo format_date($thermin->getStart(),'dd.MM.yyyy HH:mm')  ?>
-		</span>
-			
-		<?php 
-			foreach ($thermin->getUsers() as $user) {
-				echo '<li >'.$user->getUsername().'</li>';
-			}
-		 ?>
-		</ul>	<?php endforeach ?></td>
+		<td >
+        <table class="table_list">
+            <?php foreach ($job->getTasks() as $thermin ): ?>
+            <tr >
+                <td <?php if ($job->getEnd()< $thermin->getScheduled() AND $type < 4): ?>
+                class="fault"
+                <?php endif ?> >
+                <?php echo format_date($thermin->getStart(),'dd.MM. HH:mm')  ?>
+
+                </td>
+                <td>
+                <?php foreach ($thermin->getUsers() as $user):?>
+                    <?php echo $user->getUsername()  ?> <br>
+                <?php endforeach ?>
+                </td>
+            </tr>
+            <?php endforeach ?>
+
+        </table>
+    </td>
 		<?php endif ?>
     </tr>
 

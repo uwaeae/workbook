@@ -84,18 +84,40 @@
 				<ul>
 				<?php foreach ($job->getFiles() as $file): ?>
 					<li class="jobfile"><?php echo link_to($file->getName(),'/file/get/?id='.$file->getID()) ?>
-						<?php echo link_to('Delete', 'file/delete?id='.$file->getID().'&jobid='.$job->getID(), array('method' => 'delete', 'confirm' => 'Are you sure?','class'=>'button','style'=> 'float:right;')) ?></li>
+						<?php echo link_to('Löschen', 'file/delete?id='.$file->getID().'&jobid='.$job->getID(), array('method' => 'delete', 'confirm' => 'Sind sie sicher das sie die Datei '.$file->getName().' Löschen wollen?','class'=>'button','style'=> 'float:right;')) ?></li>
 				<?php endforeach ?>
 				<?php if ($job->getJobStateId() < 2): ?> 	
 					<li class="jobfile newfilebutton"><label class="button newfilebutton">Neue Datei</label></li>
 					<li class="jobfile newfileform">
-	<?php include_partial('fileform', array('form' => $form,'job' => $job->getId())) ?>
+	<?php include_partial('fileform', array('form' => $FileForm,'job' => $job->getId())) ?>
 						</li>
 				<?php endif ?>
 				</ul>
 				
 			</td>
 	</tr>
+
+    <tr>
+        <th>
+            Zugewiesen
+        </th>
+        <td colspan="3">
+            <?php foreach($job->getUsers() as $user):?>
+                <?php echo $user ?><br>
+            <?php endforeach ?>
+        </td>
+        <td colspan="3">
+        <?php if ($sf_user->hasPermission('Bearbeiten') AND  $job->getJobStateId() < 2 ): ?>
+            <div class="job_assign_user_button">
+                <label class="button job_assign_user_button">Zuweisen</label>
+            </div>
+            <div class="job_assign_user_form">
+                <?php include_partial('userform', array('form' => $UserForm)) ?>
+            </div>
+        <?php endif ?>
+        </td>
+
+    </tr>
 
     <tr>
 	
@@ -116,7 +138,7 @@
 			<li class="table_menu_left">	
 			<a class="button" href="<?php echo   url_for($back) ?>">	
 				zurück</a></li>
-				<?php if ($sf_user->hasPermission('Bearbeiten')  ): ?>
+				<?php if ($sf_user->hasPermission('Bearbeiten') AND  $job->getJobStateId() < 2 ): ?>
 				
 			<li class="table_menu_left">
 						

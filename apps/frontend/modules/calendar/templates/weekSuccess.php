@@ -1,5 +1,11 @@
 <?php  use_helper('Date');?>
 <?php use_javascript('calendar.js') ?>
+
+<?php include_partial('openjob', array('jobs' => $jobs)) ?>
+<?php include_partial('filterform', array('form' => $form , 'type' => 'week')) ?>
+
+
+
 <div id="calendar">
 <table class="calendar">
 	
@@ -50,8 +56,5 @@
 </tbody>
 </table>
 </div>
-
-<?php include_partial('openjob', array('jobs' => $jobs)) ?>
-<?php include_partial('filterform', array('form' => $form , 'type' => 'week')) ?>
 
 

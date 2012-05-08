@@ -114,6 +114,10 @@ Job:
       foreignAlias: Jobs
       class: Invoice
       refClass: JobInvoice
+    Users:
+        foreignAlias: Jobs
+        class: User
+        refClass: JobUser
   actAs:
     Timestampable: ~
 
@@ -190,6 +194,7 @@ Entry:
   relations:
     Task:
       foreignAlias: Entry
+      cascade: [delete]
     Item:
       foreignAlias: Entry
             

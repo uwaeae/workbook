@@ -16,4 +16,17 @@ class JobUserTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('JobUser');
     }
+
+    public static function deleteJobUser($jobid){
+
+        $JUs = Doctrine_Query::create()
+            ->select('*')
+            ->from('JobUser ju')
+            ->where('ju.job_id = '.$jobid)
+            ->execute();
+        foreach($JUs as $ju){
+            $ju->delete();
+        }
+
+    }
 }

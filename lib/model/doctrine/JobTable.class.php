@@ -100,6 +100,20 @@ public static function getStoreOldJobs($id,$store)
             ->execute()->count();
 
     }
+// TODO zugeordnete Jobs noch in die Übersihct
+    public function getAssignedJobs(){
+        return 	Doctrine_Query::create()
+            ->select('j.*')
+            ->from('Job j')
+            ->leftJoin('j.Tasks t')
+            ->where('t.scheduled IS TRUE')
+            ->andWhere('j.job_state_id = 1')
+            ->orderby('j.end');
+
+    }
+
+
+
 
 
 	public function getSheduledJobs(){
@@ -107,7 +121,8 @@ public static function getStoreOldJobs($id,$store)
             	->select('j.*')
 				->from('Job j')
 				->leftJoin('j.Tasks t')
-				->where('t.scheduled IS TRUE')
+        ->leftJoin('j.JobUser ju')
+        ->where('t.scheduled IS TRUE OR j.id = ju.job_id')
 				->andWhere('j.job_state_id = 1')
 				->orderby('j.end');
 		
@@ -117,8 +132,9 @@ public static function getStoreOldJobs($id,$store)
             ->select('j.*')
             ->from('Job j')
             ->leftJoin('j.Tasks t')
-            ->where('t.scheduled IS TRUE')
-            ->andWhere('j.job_state_id = 1')
+            ->leftJoin('j.JobUser ju ')
+            ->where('t.scheduled IS TRUE AND j.job_state_id = 1')
+            ->orWhere('j.id = ju.job_id')
             ->orderby('j.end')
             ->execute()->count();
 
@@ -129,9 +145,11 @@ public static function getStoreOldJobs($id,$store)
             ->select('j.*')
             ->from('Job j')
             ->leftJoin('j.Tasks t')
-            ->innerJoin('t.TaskUser u ON t.id = u.task_id AND u.user_id ='.$UserID )
+            ->leftJoin('t.TaskUser u ON t.id = u.task_id AND u.user_id ='.$UserID )
+            ->leftJoin('j.JobUser ju ON j.id = ju.job_id AND ju.user_id ='.$UserID )
             ->where('t.scheduled IS TRUE')
             ->andWhere('j.job_state_id = 1')
+            ->andWhere('ju.user_id ='.$UserID.' OR u.user_id ='.$UserID)
             ->orderby('j.end');
 
   }
@@ -141,9 +159,11 @@ public static function getStoreOldJobs($id,$store)
             ->select('j.*')
             ->from('Job j')
             ->leftJoin('j.Tasks t')
-            ->innerJoin('t.TaskUser u ON t.id = u.task_id AND u.user_id ='.$UserID )
+            ->leftJoin('t.TaskUser u ON t.id = u.task_id AND u.user_id ='.$UserID )
+            ->leftJoin('j.JobUser ju ON j.id = ju.job_id AND ju.user_id ='.$UserID )
             ->where('t.scheduled IS TRUE')
             ->andWhere('j.job_state_id = 1')
+            ->andWhere('ju.user_id ='.$UserID.' OR u.user_id ='.$UserID)
             ->orderby('j.end')->execute()->count();
 
     }

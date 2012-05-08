@@ -8,6 +8,15 @@ $('label.newfilebutton').click(function(key)
 	$('li.newfileform ').slideDown("fast");
 	 });
 
+$('div.job_assign_user_form ').hide();
+
+$('label.job_assign_user_button').click(function(key)
+    {
+        $('div.job_assign_user_button ').slideUp (function(){
+            $('div.job_assign_user_form ').slideDown();
+
+        });
+    });
 
 
 

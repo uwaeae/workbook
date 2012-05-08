@@ -69,6 +69,8 @@ sfGuardUser:
       notnull: true
     salt: string(128)
     password: string(128)
+    settings:
+        type: string(255)
     is_active:
       type: boolean
       default: 1
@@ -98,6 +100,13 @@ sfGuardUser:
       foreign: task_id
       refClass: TaskUser
       foreignAlias: Users
+    Job:
+      local: user_id
+      foreign: job_id
+      refClass: JobUser
+      foreignAlias: Users
+
+
 
 sfGuardUserPermission:
   options:

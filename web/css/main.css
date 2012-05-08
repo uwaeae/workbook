@@ -462,9 +462,7 @@ table.cal_table_user div.cal_entry_content{
 
 
 div #cal_filter{
-	position: absolute;
-	float:none;
-	left: 50%;
+	float:left;
 	font-size: 8pt;
 	font-family: verdana,arial,sans-serif;
 	margin: 0 0.2em;
@@ -485,6 +483,11 @@ div #cal_filter{
 .cal_filter_head:hover{
 	background-color: #A9F5F2;
 	color: blue;
+}
+
+.cal_filter_body{
+    position: absolute;
+
 }
 
 div #cal_filter .checkbox_list li {
@@ -530,7 +533,7 @@ div.job_openjob_menu ul li{
 
 
 div #open_jobs{
-	float:none;
+	float:left;
 	font-size: 8pt;
 	font-family: verdana,arial,sans-serif;
 
@@ -840,11 +843,15 @@ div #jobsold{
 	xcursor:pointer;
 }
 
-.table_list{
+table.table_list {
 	display: inline-table;
 	margin: 0;
 	padding: 0;
+    width: 130px
 }
+
+
+
 .table_border_left{
 	border-left: 2px solid #FFFFFF;
 }

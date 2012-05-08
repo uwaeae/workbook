@@ -2,6 +2,37 @@
 <?php use_javascript('calendar.js') ?>
 
 
+
+<div id="calendar">
+ <div id="open_job">
+    <table>
+        <thead>
+        <tr>
+            <th class="calendar_open_jobs_head" colspan="3"> Offene Aufträge</th>
+        </tr>
+        </thead>
+        <tbody class="calendar_open_jobs_body" >
+        <?php foreach ($jobs as $job): ?>
+        <tr class="table_item" 	onclick="document.location = '<?php if ($sf_user->hasPermission('Zuweisen')) echo url_for('task/new/?job='.$job->getId().'&type=0') ?>'">
+            <td><?php echo $job->getId()?><br>
+                Ende: <?php echo format_date($job->getEnd(),'dd.MM.') ?><br>
+                Anfang: <?php echo format_date($job->getStart(),'dd.MM.') ?>
+            </td>
+            <td><p><?php echo $job->getStore()->getCustomer()->getCompany() ?></p>
+                <p> <?php echo $job->getStore()->getStreet() ?><br>
+                    <?php echo $job->getStore()->getPostcode() ?><?php echo $job->getStore()->getCity() ?></p>
+                <p>
+                    <?php echo substr($job->getDescription(), 0, 50) ?>
+                </p>
+
+
+        </tr>
+
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
 	<div id="calender_filter">
 			<ul>
 				<li  class="calender_filter_head">
@@ -47,7 +78,6 @@
 	</ul>
 
 	</div>
-<div id="calendar">	
 	
 
 <?php
@@ -164,33 +194,5 @@ if( $rows == 0){
 ?>
 </div>
 
-<div id="open_job">
-<table>
-  <thead>
-    <tr>
-		<th class="calendar_open_jobs_head" colspan="3"> Offene Aufträge</th>
-	</tr>
-	</thead>
-	<tbody class="calendar_open_jobs_body" >
-	<?php foreach ($jobs as $job): ?>
-	<tr class="table_item" 	onclick="document.location = '<?php if ($sf_user->hasPermission('Zuweisen')) echo url_for('task/new/?job='.$job->getId().'&type=0') ?>'">
-		<td><?php echo $job->getId()?><br>
-		Ende: <?php echo format_date($job->getEnd(),'dd.MM.') ?><br>
-		Anfang: <?php echo format_date($job->getStart(),'dd.MM.') ?>
-		</td>
-		<td><p><?php echo $job->getStore()->getCustomer()->getCompany() ?></p>
-		<p> <?php echo $job->getStore()->getStreet() ?><br>
-		<?php echo $job->getStore()->getPostcode() ?><?php echo $job->getStore()->getCity() ?></p>
-		<p>
-			<?php echo substr($job->getDescription(), 0, 50) ?>
-		</p>
-		
-		
-    </tr>
-
-    <?php endforeach; ?>
-  </tbody>
-</table>
-</div>
 
 

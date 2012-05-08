@@ -32,7 +32,7 @@
     <div class="job_type_2">
 
         <div class="job_type_head_2  job_type_head" colspan = "7">
-            geplante / zugewiesene Aufträge (<?php echo $jobs_sheduled_count ?>)
+            geplante / zugewiesene Aufträge
         </div>
 
         <div class="job_type_body_2  job_type_body" colspan = "7">
@@ -73,14 +73,14 @@
         </div>
         <div class="job_type_body_3 job_type_body" colspan = "7" > </div>
     </div>
-
+<?php if($sf_user->hasPermission('Rechnung')): ?>
     <div class="job_type_4">
         <div class="job_type_head_4 job_type_head" >
             <?php echo $jobs_finisched['name'] ?> (<?php echo $jobs_finisched['count'] ?>)
         </div>
         <div class="job_type_body_4 job_type_body"  > </div>
     </div>
-
+<?php endif ?>
 
 
 

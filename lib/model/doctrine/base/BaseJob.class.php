@@ -24,6 +24,7 @@
  * @property JobState $JobState
  * @property JobType $JobType
  * @property Doctrine_Collection $Invoices
+ * @property Doctrine_Collection $Users
  * @property Doctrine_Collection $Tasks
  * @property Doctrine_Collection $Message
  * @property Doctrine_Collection $Files
@@ -48,6 +49,7 @@
  * @method JobState            getJobState()       Returns the current record's "JobState" value
  * @method JobType             getJobType()        Returns the current record's "JobType" value
  * @method Doctrine_Collection getInvoices()       Returns the current record's "Invoices" collection
+ * @method Doctrine_Collection getUsers()          Returns the current record's "Users" collection
  * @method Doctrine_Collection getTasks()          Returns the current record's "Tasks" collection
  * @method Doctrine_Collection getMessage()        Returns the current record's "Message" collection
  * @method Doctrine_Collection getFiles()          Returns the current record's "Files" collection
@@ -71,6 +73,7 @@
  * @method Job                 setJobState()       Sets the current record's "JobState" value
  * @method Job                 setJobType()        Sets the current record's "JobType" value
  * @method Job                 setInvoices()       Sets the current record's "Invoices" collection
+ * @method Job                 setUsers()          Sets the current record's "Users" collection
  * @method Job                 setTasks()          Sets the current record's "Tasks" collection
  * @method Job                 setMessage()        Sets the current record's "Message" collection
  * @method Job                 setFiles()          Sets the current record's "Files" collection
@@ -162,6 +165,11 @@ abstract class BaseJob extends sfDoctrineRecord
              'refClass' => 'JobInvoice',
              'local' => 'job_id',
              'foreign' => 'invoice_id'));
+
+        $this->hasMany('sfGuardUser as Users', array(
+             'refClass' => 'JobUser',
+             'local' => 'job_id',
+             'foreign' => 'user_id'));
 
         $this->hasMany('Task as Tasks', array(
              'local' => 'id',

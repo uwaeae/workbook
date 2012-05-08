@@ -2,6 +2,9 @@
 <?php use_javascript('calendar.js') ?>
 
 
+<?php include_partial('openjob', array('jobs' => $jobs)) ?>
+<?php include_partial('filterform', array('form' => $form , 'type' => 'day')) ?>
+
 
 <div id="calendar" >
 <table class="calendar" style="width: 100%;">
@@ -37,7 +40,4 @@
 </tbody>
 </table>
 </div>
-
-<?php include_partial('openjob', array('jobs' => $jobs)) ?>
-<?php include_partial('filterform', array('form' => $form , 'type' => 'day')) ?>
 
