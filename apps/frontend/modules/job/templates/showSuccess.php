@@ -96,7 +96,7 @@
 				
 			</td>
 	</tr>
-
+    <!--
     <tr>
         <th>
             Zugewiesen
@@ -106,19 +106,20 @@
                 <?php echo $user ?><br>
             <?php endforeach ?>
         </td>
+
         <td colspan="3">
         <?php if ($sf_user->hasPermission('Bearbeiten') AND  $job->getJobStateId() < 2 ): ?>
             <div class="job_assign_user_button">
                 <label class="button job_assign_user_button">Zuweisen</label>
             </div>
             <div class="job_assign_user_form">
-                <?php include_partial('userform', array('form' => $UserForm)) ?>
+                <?php //include_partial('userform', array('form' => $UserForm)) ?>
             </div>
         <?php endif ?>
         </td>
 
     </tr>
-
+-->
     <tr>
 	
  		<th>erstellt am</th>

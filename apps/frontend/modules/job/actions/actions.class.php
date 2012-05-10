@@ -204,8 +204,8 @@ public function executeTable(sfWebRequest $request)
 	$this->openjobs_same = Doctrine_Core::getTable('Job')->getStoreOpenJobs($this->job->getId(),$this->job->getStore()->getId());
 	$this->jobsold = Doctrine_Core::getTable('Job')->getStoreOldJobs($this->job->getId(),$this->job->getStore()->getId());
 	
-	$this->UserForm = new JobUserForm();
-  $this->UserForm->setDefault('job', $this->job->getId());
+ //$this->UserForm = new JobUserForm();
+ // $this->UserForm->setDefault('job', $this->job->getId());
 
 
       $this->FileForm = new FileForm(NULL);
