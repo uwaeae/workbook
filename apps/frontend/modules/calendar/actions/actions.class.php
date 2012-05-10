@@ -65,6 +65,8 @@ class calendarActions extends sfActions
 				$this->UserArray = $query->where('u.id = '.$this->getUser()->getID())->execute();
 			}
 
+
+
 	  }
 	
 	

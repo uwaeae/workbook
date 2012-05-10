@@ -3,11 +3,6 @@ class JobUserForm extends sfForm
 {
     public function configure()
     {
-        $users =  Doctrine_Query::create()
-            ->select('u.*')->from('sfGuardUser u')
-            ->execute();
-
-
 
         $this->setWidgets(array(
             'user' => new sfWidgetFormDoctrineChoice(array('model' => 'sfGuardUser', 'multiple' => true, )),
@@ -24,5 +19,5 @@ class JobUserForm extends sfForm
         ));
     }
 }
-// sfWidgetFormChoice(array('choices' => $customers)),
+
 ?>

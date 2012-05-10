@@ -175,6 +175,17 @@ abstract class PluginsfGuardUser extends BasesfGuardUser
   }
 
   /**
+  * Returns all related groups names.
+   *
+   * @return array
+   */
+  public function getGroupUsers()
+  {
+      $this->loadGroupsAndPermissions();
+
+  }
+
+  /**
    * Returns whether or not the user has the given permission.
    *
    * @return boolean
