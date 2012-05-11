@@ -194,7 +194,6 @@ Entry:
   relations:
     Task:
       foreignAlias: Entry
-      cascade: [delete]
     Item:
       foreignAlias: Entry
             

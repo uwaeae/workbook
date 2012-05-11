@@ -222,7 +222,7 @@ class taskActions extends sfActions
 
   public function executeDelete(sfWebRequest $request)
   {
-    $request->checkCSRFProtection();
+    //$request->checkCSRFProtection();
 
     $this->forward404Unless($task = Doctrine_Core::getTable('Task')->find(array($request->getParameter('id'))), sprintf('Object task does not exist (%s).', $request->getParameter('id')));
 

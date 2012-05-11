@@ -71,7 +71,9 @@ class entryActions extends sfActions
     //$request->checkCSRFProtection();
 
     $this->forward404Unless($entry = Doctrine_Core::getTable('Entry')->find(array($request->getParameter('id'))), sprintf('Object entry does not exist (%s).', $request->getParameter('id')));
-    $entry->delete();
+
+
+      $entry->delete();
 
       $this->redirect('entry/new?taskid='.$entry->getTaskId());
   }
