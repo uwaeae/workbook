@@ -242,11 +242,13 @@ public function executeTable(sfWebRequest $request)
 		else{
 			$this->date[] = $task;
 		}
-		$this->setBack('job/show?id='.$request->getParameter('id'));	
-		
+
+
+
+
 	}
 
-
+      $this->setBack('/job/show/'.$this->job->getId());
   }
 
   public  function executeUser(sfWebRequest $request){
@@ -402,11 +404,10 @@ $request->getParameter('limit'),$request->getParameter('customer'));
 
 
 
-protected function setBack($var){
-		$routing = $this->getContext()->getRouting();
-		$this->getUser()->setFlash('back',$var);
-		$this->getUser()->setAttribute('back',$routing->getCurrentInternalUri());
-		}
-
+    protected function setBack($var){
+        $routing = $this->getContext()->getRouting();
+        $this->getUser()->setFlash('back',$var);
+        $this->getUser()->setAttribute('back',$routing->getCurrentInternalUri());
+    }
 
 }

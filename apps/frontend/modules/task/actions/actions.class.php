@@ -108,8 +108,10 @@ class taskActions extends sfActions
 		));
 	$this->job = null;
 	if ($request->hasParameter('job')) {
+
 		$this->job = Doctrine_Core::getTable('Job')->find(array($request->getParameter('job')));
 		$jobid = $this->job->getId();
+   // $this->back = "job/show?id=".$jobid;
 		$this->tasks = Doctrine_Core::getTable('Task')->createQuery('t')
 		  ->where('t.job_id ='.$jobid)
 	      ->execute();
@@ -150,7 +152,9 @@ class taskActions extends sfActions
 		$this->redirect('task/edit?id='.$task->getId().'&type='.$type);
 	}
 	else {
+
 		$this->redirect($this->getUser()->getAttribute('back'));
+    //$this->redirect('job/show?id='.$task->getJobId());
 	}
 	
 	
@@ -234,6 +238,13 @@ class taskActions extends sfActions
     foreach ($taskusers as $tu) {
         $tu->delete();
     }
+
+    $tchange = $task->getChangelog();
+
+    foreach($tchange as $tc){
+        $tc->delete();
+    }
+
 
     $entrytask = Doctrine_Core::getTable('Entry')->createQuery('t')
           ->where('t.task_id ='.$task->getId())
