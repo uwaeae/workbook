@@ -70,9 +70,7 @@ abstract class BaseTaskChangelog extends sfDoctrineRecord
         $this->hasOne('Task', array(
              'local' => 'task_id',
              'foreign' => 'id',
-             'cascade' => array(
-             0 => 'delete',
-             )));
+             ));
 
         $this->hasOne('sfGuardUser as User', array(
              'local' => 'user_id',
