@@ -48,7 +48,7 @@ sfGuardGroupPermission:
     Permission:
       class: sfGuardPermission
       local: permission_id
-      onDelete: CASCADE
+
 
 sfGuardUser:
   actAs: [Timestampable]
@@ -72,6 +72,9 @@ sfGuardUser:
     settings:
         type: string(255)
     is_active:
+      type: boolean
+      default: 1
+    is_user:
       type: boolean
       default: 1
     is_super_admin:
@@ -129,7 +132,7 @@ sfGuardUserPermission:
     Permission:
       class: sfGuardPermission
       local: permission_id
-      onDelete: CASCADE
+
 
 sfGuardUserGroup:
   options:
@@ -170,7 +173,7 @@ sfGuardRememberKey:
       local: user_id
       foreignAlias: RememberKeys
       foreignType: one
-      onDelete: CASCADE
+
 
 sfGuardForgotPassword:
   options:

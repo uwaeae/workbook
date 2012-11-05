@@ -52,8 +52,7 @@ abstract class BasesfGuardRememberKey extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('sfGuardUser as User', array(
              'local' => 'user_id',
-             'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
+             'foreign' => 'id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              ));

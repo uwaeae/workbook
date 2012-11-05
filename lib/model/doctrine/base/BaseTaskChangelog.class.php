@@ -69,8 +69,7 @@ abstract class BaseTaskChangelog extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('Task', array(
              'local' => 'task_id',
-             'foreign' => 'id',
-             ));
+             'foreign' => 'id'));
 
         $this->hasOne('sfGuardUser as User', array(
              'local' => 'user_id',

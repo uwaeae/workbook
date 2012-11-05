@@ -54,8 +54,7 @@ abstract class BasesfGuardGroupPermission extends sfDoctrineRecord
 
         $this->hasOne('sfGuardPermission as Permission', array(
              'local' => 'permission_id',
-             'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
+             'foreign' => 'id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              ));

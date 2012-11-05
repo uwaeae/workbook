@@ -22,7 +22,7 @@
       <?php echo $form->renderGlobalErrors() ?>
       <tr>
         <th><?php echo $form['start']->renderLabel() ?></th>
-        <td>
+        <td class="task_start">
           <?php echo $form['start']->renderError() ?>
           <?php echo $form['start'] ?>
         </td>
@@ -36,7 +36,7 @@
       </tr>
       <tr>
         <th><?php echo $form['end']->renderLabel() ?></th>
-        <td>
+        <td class="task_end">
           <?php echo $form['end']->renderError() ?>
           <?php echo $form['end'] ?>
         </td>

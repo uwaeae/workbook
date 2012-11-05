@@ -13,6 +13,8 @@ generator:
     config:
       fields:
         password_again: { label: "Password (again)" }
+      filter:
+        display: [is_active, is_super_admin, groups_list, permissions_list]
 
       list:
         title:   User list
@@ -22,6 +24,7 @@ generator:
         class: sfGuardUserAdminForm
         display:
           "User":                   [first_name, last_name, email_address, username, password, password_again]
+          "Jobs":                   [jobs]
           "Permissions and groups": [is_active, is_super_admin, groups_list, permissions_list]
 
       edit:

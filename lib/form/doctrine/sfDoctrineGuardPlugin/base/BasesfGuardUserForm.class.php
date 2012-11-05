@@ -25,6 +25,7 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
       'password'         => new sfWidgetFormInputText(),
       'settings'         => new sfWidgetFormInputText(),
       'is_active'        => new sfWidgetFormInputCheckbox(),
+      'is_user'          => new sfWidgetFormInputCheckbox(),
       'is_super_admin'   => new sfWidgetFormInputCheckbox(),
       'last_login'       => new sfWidgetFormDateTime(),
       'created_at'       => new sfWidgetFormDateTime(),
@@ -32,6 +33,7 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
       'groups_list'      => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardGroup')),
       'permissions_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardPermission')),
       'task_list'        => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Task')),
+      'job_list'         => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Job')),
     ));
 
     $this->setValidators(array(
@@ -45,6 +47,7 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
       'password'         => new sfValidatorString(array('max_length' => 128, 'required' => false)),
       'settings'         => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'is_active'        => new sfValidatorBoolean(array('required' => false)),
+      'is_user'          => new sfValidatorBoolean(array('required' => false)),
       'is_super_admin'   => new sfValidatorBoolean(array('required' => false)),
       'last_login'       => new sfValidatorDateTime(array('required' => false)),
       'created_at'       => new sfValidatorDateTime(),
@@ -52,6 +55,7 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
       'groups_list'      => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardGroup', 'required' => false)),
       'permissions_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardPermission', 'required' => false)),
       'task_list'        => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Task', 'required' => false)),
+      'job_list'         => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Job', 'required' => false)),
     ));
 
     $this->validatorSchema->setPostValidator(
@@ -94,6 +98,11 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
       $this->setDefault('task_list', $this->object->Task->getPrimaryKeys());
     }
 
+    if (isset($this->widgetSchema['job_list']))
+    {
+      $this->setDefault('job_list', $this->object->Job->getPrimaryKeys());
+    }
+
   }
 
   protected function doSave($con = null)
@@ -101,6 +110,7 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
     $this->saveGroupsList($con);
     $this->savePermissionsList($con);
     $this->saveTaskList($con);
+    $this->saveJobList($con);
 
     parent::doSave($con);
   }
@@ -216,6 +226,44 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
     if (count($link))
     {
       $this->object->link('Task', array_values($link));
+    }
+  }
+
+  public function saveJobList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['job_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (null === $con)
+    {
+      $con = $this->getConnection();
+    }
+
+    $existing = $this->object->Job->getPrimaryKeys();
+    $values = $this->getValue('job_list');
+    if (!is_array($values))
+    {
+      $values = array();
+    }
+
+    $unlink = array_diff($existing, $values);
+    if (count($unlink))
+    {
+      $this->object->unlink('Job', array_values($unlink));
+    }
+
+    $link = array_diff($values, $existing);
+    if (count($link))
+    {
+      $this->object->link('Job', array_values($link));
     }
   }
 

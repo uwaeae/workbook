@@ -256,8 +256,8 @@ TaskUser:
     User:
       class: sfGuardUser
       local: user_id
-
-
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
 File:
   tableName: file
   columns:

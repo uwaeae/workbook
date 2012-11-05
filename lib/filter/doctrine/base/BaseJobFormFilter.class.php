@@ -28,6 +28,7 @@ abstract class BaseJobFormFilter extends BaseFormFilterDoctrine
       'updated_at'     => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'updated_from'   => new sfWidgetFormFilterInput(),
       'invoices_list'  => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Invoice')),
+      'users_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser')),
       'files_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'File')),
     ));
 
@@ -47,6 +48,7 @@ abstract class BaseJobFormFilter extends BaseFormFilterDoctrine
       'updated_at'     => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'updated_from'   => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'invoices_list'  => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Invoice', 'required' => false)),
+      'users_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser', 'required' => false)),
       'files_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'File', 'required' => false)),
     ));
 
@@ -74,6 +76,24 @@ abstract class BaseJobFormFilter extends BaseFormFilterDoctrine
     $query
       ->leftJoin($query->getRootAlias().'.JobInvoice JobInvoice')
       ->andWhereIn('JobInvoice.invoice_id', $values)
+    ;
+  }
+
+  public function addUsersListColumnQuery(Doctrine_Query $query, $field, $values)
+  {
+    if (!is_array($values))
+    {
+      $values = array($values);
+    }
+
+    if (!count($values))
+    {
+      return;
+    }
+
+    $query
+      ->leftJoin($query->getRootAlias().'.JobUser JobUser')
+      ->andWhereIn('JobUser.user_id', $values)
     ;
   }
 
@@ -119,6 +139,7 @@ abstract class BaseJobFormFilter extends BaseFormFilterDoctrine
       'updated_at'     => 'Date',
       'updated_from'   => 'Number',
       'invoices_list'  => 'ManyKey',
+      'users_list'     => 'ManyKey',
       'files_list'     => 'ManyKey',
     );
   }

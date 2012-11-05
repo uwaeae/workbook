@@ -64,8 +64,7 @@ abstract class BaseEntry extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('Task', array(
              'local' => 'task_id',
-             'foreign' => 'id',
-             ));
+             'foreign' => 'id'));
 
         $this->hasOne('Item', array(
              'local' => 'item_id',

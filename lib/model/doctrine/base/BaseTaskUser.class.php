@@ -41,6 +41,8 @@ abstract class BaseTaskUser extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('sfGuardUser as User', array(
              'local' => 'user_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'onDelete' => 'RESTRICT',
+             'onUpdate' => 'RESTRICT'));
     }
 }

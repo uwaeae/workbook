@@ -22,6 +22,7 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
       'password'         => new sfWidgetFormFilterInput(),
       'settings'         => new sfWidgetFormFilterInput(),
       'is_active'        => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
+      'is_user'          => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
       'is_super_admin'   => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
       'last_login'       => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
       'created_at'       => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
@@ -29,6 +30,7 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
       'groups_list'      => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardGroup')),
       'permissions_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardPermission')),
       'task_list'        => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Task')),
+      'job_list'         => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Job')),
     ));
 
     $this->setValidators(array(
@@ -41,6 +43,7 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
       'password'         => new sfValidatorPass(array('required' => false)),
       'settings'         => new sfValidatorPass(array('required' => false)),
       'is_active'        => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
+      'is_user'          => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
       'is_super_admin'   => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
       'last_login'       => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'created_at'       => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
@@ -48,6 +51,7 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
       'groups_list'      => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardGroup', 'required' => false)),
       'permissions_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardPermission', 'required' => false)),
       'task_list'        => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Task', 'required' => false)),
+      'job_list'         => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Job', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('sf_guard_user_filters[%s]');
@@ -113,6 +117,24 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
     ;
   }
 
+  public function addJobListColumnQuery(Doctrine_Query $query, $field, $values)
+  {
+    if (!is_array($values))
+    {
+      $values = array($values);
+    }
+
+    if (!count($values))
+    {
+      return;
+    }
+
+    $query
+      ->leftJoin($query->getRootAlias().'.JobUser JobUser')
+      ->andWhereIn('JobUser.job_id', $values)
+    ;
+  }
+
   public function getModelName()
   {
     return 'sfGuardUser';
@@ -131,6 +153,7 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
       'password'         => 'Text',
       'settings'         => 'Text',
       'is_active'        => 'Boolean',
+      'is_user'          => 'Boolean',
       'is_super_admin'   => 'Boolean',
       'last_login'       => 'Date',
       'created_at'       => 'Date',
@@ -138,6 +161,7 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
       'groups_list'      => 'ManyKey',
       'permissions_list' => 'ManyKey',
       'task_list'        => 'ManyKey',
+      'job_list'         => 'ManyKey',
     );
   }
 }

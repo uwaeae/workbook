@@ -22,6 +22,8 @@ class BasesfGuardUserAdminForm extends BasesfGuardUserForm
       $this['created_at'],
       $this['updated_at'],
       $this['salt'],
+      $this['job_list'],
+      $this['task_list'],
       $this['algorithm']
     );
 

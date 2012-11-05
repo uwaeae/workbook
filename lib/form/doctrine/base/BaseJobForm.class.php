@@ -31,6 +31,7 @@ abstract class BaseJobForm extends BaseFormDoctrine
       'updated_at'     => new sfWidgetFormDateTime(),
       'updated_from'   => new sfWidgetFormInputText(),
       'invoices_list'  => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Invoice')),
+      'users_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser')),
       'files_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'File')),
     ));
 
@@ -51,6 +52,7 @@ abstract class BaseJobForm extends BaseFormDoctrine
       'updated_at'     => new sfValidatorDateTime(),
       'updated_from'   => new sfValidatorInteger(array('required' => false)),
       'invoices_list'  => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Invoice', 'required' => false)),
+      'users_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser', 'required' => false)),
       'files_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'File', 'required' => false)),
     ));
 
@@ -77,6 +79,11 @@ abstract class BaseJobForm extends BaseFormDoctrine
       $this->setDefault('invoices_list', $this->object->Invoices->getPrimaryKeys());
     }
 
+    if (isset($this->widgetSchema['users_list']))
+    {
+      $this->setDefault('users_list', $this->object->Users->getPrimaryKeys());
+    }
+
     if (isset($this->widgetSchema['files_list']))
     {
       $this->setDefault('files_list', $this->object->Files->getPrimaryKeys());
@@ -87,6 +94,7 @@ abstract class BaseJobForm extends BaseFormDoctrine
   protected function doSave($con = null)
   {
     $this->saveInvoicesList($con);
+    $this->saveUsersList($con);
     $this->saveFilesList($con);
 
     parent::doSave($con);
@@ -127,6 +135,44 @@ abstract class BaseJobForm extends BaseFormDoctrine
     if (count($link))
     {
       $this->object->link('Invoices', array_values($link));
+    }
+  }
+
+  public function saveUsersList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['users_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (null === $con)
+    {
+      $con = $this->getConnection();
+    }
+
+    $existing = $this->object->Users->getPrimaryKeys();
+    $values = $this->getValue('users_list');
+    if (!is_array($values))
+    {
+      $values = array();
+    }
+
+    $unlink = array_diff($existing, $values);
+    if (count($unlink))
+    {
+      $this->object->unlink('Users', array_values($unlink));
+    }
+
+    $link = array_diff($values, $existing);
+    if (count($link))
+    {
+      $this->object->link('Users', array_values($link));
     }
   }
 

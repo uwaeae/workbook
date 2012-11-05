@@ -1,23 +1,58 @@
 $(document).ready(function()
 {
  $('#task_start_day').change(function() {
-	changeItemDate('day','task');
+     changeItemBeginDate('day','task');
 	});
  $('#task_start_month').change(function() {
-	changeItemDate('month','task');
+     changeItemBeginDate('month','task');
 	});
-	
-$('#task_start_year').change(function() {
-	changeItemDate('year','task');
+ $('#task_start_year').change(function() {
+	changeItemBeginDate('year','task');
+	});
+
+ $('#task_end_day').change(function() {
+	changeItemEndDate('day','task');
+	});
+ $('#task_end_month').change(function() {
+	changeItemEndDate('month','task');
+	});
+
+$('#task_end_year').change(function() {
+	changeItemEndDate('year','task');
 	});
 	
 
-  
 });
 
-function changeItemDate(item,modul){
-	var itemvalue = $('#' +modul +'_start_'+item+' option:selected').val();
-	if(itemvalue> $('#' +modul +'_end_'+item).val() ) $('#' +modul +'_end_'+item).val(itemvalue);
+function init(){
+
+}
+
+function changeDate(item){
+
+
+}
+
+
+
+function changeItemBeginDate(item,modul){
+	var begin = Number($('#' +modul +'_start_'+item+' option:selected').val());
+    var end = Number($('#' +modul +'_end_'+item+' option:selected').val());
+
+	if(begin >= end ){
+        $('#' +modul +'_end_'+item).val(begin);
+    }
+}
+function changeItemEndDate(item,modul){
+    var begin = Number($('#' +modul +'_start_'+item+' option:selected').val());
+    var end = Number($('#' +modul +'_end_'+item+' option:selected').val());
+
+    if(end <= beginn ){
+        $('#' +modul +'_start_'+item).val(end);
+    }
+
+
+
 }
 
 function set_end_after_start(modul) {

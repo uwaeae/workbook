@@ -14,6 +14,7 @@
  * @property string $password
  * @property string $settings
  * @property boolean $is_active
+ * @property boolean $is_user
  * @property boolean $is_super_admin
  * @property timestamp $last_login
  * @property Doctrine_Collection $Groups
@@ -38,6 +39,7 @@
  * @method string                getPassword()              Returns the current record's "password" value
  * @method string                getSettings()              Returns the current record's "settings" value
  * @method boolean               getIsActive()              Returns the current record's "is_active" value
+ * @method boolean               getIsUser()                Returns the current record's "is_user" value
  * @method boolean               getIsSuperAdmin()          Returns the current record's "is_super_admin" value
  * @method timestamp             getLastLogin()             Returns the current record's "last_login" value
  * @method Doctrine_Collection   getGroups()                Returns the current record's "Groups" collection
@@ -61,6 +63,7 @@
  * @method sfGuardUser           setPassword()              Sets the current record's "password" value
  * @method sfGuardUser           setSettings()              Sets the current record's "settings" value
  * @method sfGuardUser           setIsActive()              Sets the current record's "is_active" value
+ * @method sfGuardUser           setIsUser()                Sets the current record's "is_user" value
  * @method sfGuardUser           setIsSuperAdmin()          Sets the current record's "is_super_admin" value
  * @method sfGuardUser           setLastLogin()             Sets the current record's "last_login" value
  * @method sfGuardUser           setGroups()                Sets the current record's "Groups" collection
@@ -125,6 +128,10 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'length' => 255,
              ));
         $this->hasColumn('is_active', 'boolean', null, array(
+             'type' => 'boolean',
+             'default' => 1,
+             ));
+        $this->hasColumn('is_user', 'boolean', null, array(
              'type' => 'boolean',
              'default' => 1,
              ));
