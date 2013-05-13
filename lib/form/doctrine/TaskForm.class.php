@@ -18,8 +18,9 @@ class TaskForm extends BaseTaskForm
 	$this->widgetSchema['job_id'] = new sfWidgetFormInputHidden();
 	$this->widgetSchema['scheduled'] = new sfWidgetFormInputHidden();
 	$this->widgetSchema['correction_time'] = new sfWidgetFormInputText();
-    $this->widgetSchema['correction_info'] = new sfWidgetFormTextarea();
-	
+  $this->widgetSchema['correction_info'] = new sfWidgetFormTextarea();
+  $this->widgetSchema['users_list'] = new sfWidgetFormSelect(array('choices' => Doctrine_Core::getTable('sfGuardUser')->getActive(), 'multiple' => true));
+
 	$this->setDefault('scheduled',0);
 		
 	switch ($this->getOption('type')) {

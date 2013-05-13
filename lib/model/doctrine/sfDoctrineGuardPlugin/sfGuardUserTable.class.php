@@ -16,4 +16,14 @@ class sfGuardUserTable extends PluginsfGuardUserTable
     {
         return Doctrine_Core::getTable('sfGuardUser');
     }
+
+
+    public function getActive(){
+        return Doctrine_Query::create()
+            ->select('*')
+            ->from('sfGuardUser u')
+            //->where('u.is_active = 1')
+            ->where('u.is_user = 1')
+            ->execute();
+    }
 }

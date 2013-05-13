@@ -28,9 +28,16 @@ class calendarActions extends sfActions
 	
 	
 		$this->jobs = Doctrine_Query::create()
-					->select('j.*')
-					->from('Job j')
-					->where('j.id NOT IN (select job_id from task where job_id IS NOT NULL GROUP BY job_id)')
+					//->select('j.*')
+					//->from('Job j')
+          //->leftJoin('Task t ON j.id = t.job_id where t.job_id IS NULL '  )
+					//->where('j.id NOT IN (select job_id from task where job_id IS NOT NULL GROUP BY job_id)')
+        ->select('j.*')
+        ->from('Job j')
+        ->leftJoin('j.Tasks t')
+        ->where('t.job_id IS null OR FALSE')
+        ->andWhere('j.job_state_id < 2')
+        ->orderby('j.end')
 					->execute();
 		
 	}
@@ -52,17 +59,18 @@ class calendarActions extends sfActions
 	  {
 			$query = Doctrine_Query::create()
 							->select('u.id')
-							->from('sfGuardUser u');
+							->from('sfGuardUser u')
+              ->where('u.is_user = 1');
 		
 			if($this->getUser()->hasGroup('admin') 
 							OR $this->getUser()->hasGroup('supervisor')){
 				if(isset($this->Users)) 
-					$this->UserArray = $query->where('u.id IN ('.implode(",", $this->Users).')')->execute();
+					$this->UserArray = $query->andWhere('u.id IN ('.implode(",", $this->Users).')')->execute();
 				else  
 					$this->UserArray = $query->execute();
 				}
 			else {
-				$this->UserArray = $query->where('u.id = '.$this->getUser()->getID())->execute();
+				$this->UserArray = $query->andWhere('u.id = '.$this->getUser()->getID())->execute();
 			}
 
 
@@ -130,9 +138,10 @@ class calendarActions extends sfActions
 		
 		
 		$form->setWidget('user',new sfWidgetFormDoctrineChoice(array(
-		      	'model' => 'sfGuardUser', 
+		      	'model' => 'sfGuardUser',
+            'table_method' => 'getActive',
 		      	'add_empty' => false,
-				'expanded' => true,
+				    'expanded' => true,
 		      	'multiple'	=> true )));
 		$form->setDefault('user', $this->Users);
 		
