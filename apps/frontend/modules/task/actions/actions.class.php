@@ -205,7 +205,8 @@ class taskActions extends sfActions
         $this->form = new TaskForm($task);
 
         $task = $this->processForm($request, $this->form, "Update");
-        $this->changelog($task, "Update");
+
+        //$this->changelog($task, "Update");
 
 
         $type = $this->getUser()->getFlash('type');

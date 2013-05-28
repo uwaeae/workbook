@@ -77,7 +77,7 @@ protected function makeNavForm($user,$year,$month)
       )));
 	$form->setDefault('month', $month);
 	
-	if ( $this->getUser()->hasPermission('admin')) {
+	if ( $this->getUser()->hasPermission('admin') or  $this->getUser()->hasCredential('Mitarbeiter') ) {
 	$form->setWidget('user',new sfWidgetFormDoctrineChoice(array(
 	      	'model' => 'sfGuardUser', 
 	      	'add_empty' => false,

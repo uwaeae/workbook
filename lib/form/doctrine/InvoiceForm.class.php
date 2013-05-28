@@ -12,8 +12,9 @@ class InvoiceForm extends BaseInvoiceForm
 {
   public function configure()
   {
-	unset(
-			$this['created_at'], $this['updated_at']
+	      unset(
+			      $this['created_at'], $this['updated_at']
 				 );
+        $this->widgetSchema['jobs_list'] = new sfWidgetFormInputHidden();
   }
 }

@@ -20,7 +20,7 @@ class invoiceActions extends sfActions
   public function executeNew(sfWebRequest $request)
   {
     $this->form = new InvoiceForm();
-	$this->job = NULL;
+  	$this->job = NULL;
 	
 	if($request->hasParameter('job')){
 		$this->forward404Unless($this->job = Doctrine_Core::getTable('Job')->find(array($request->getParameter('job'))),
@@ -45,8 +45,18 @@ class invoiceActions extends sfActions
 
   public function executeEdit(sfWebRequest $request)
   {
-	$this->job = NULL;
+	  $this->job = NULL;
     $this->forward404Unless($invoice = Doctrine_Core::getTable('Invoice')->find(array($request->getParameter('id'))), sprintf('Object invoice does not exist (%s).', $request->getParameter('id')));
+
+
+    $jobs = Doctrine::getTable('Job')
+          ->createQuery('j')
+          ->innerJoin('j.Invoices ji')
+          ->innerJoin('j.Store s')
+          ->where('ji.id = ?', $invoice->getId())
+          ->execute();
+
+    $this->jobs = $jobs;
     $this->form = new InvoiceForm($invoice);
   }
 
