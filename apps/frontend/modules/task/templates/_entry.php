@@ -19,12 +19,9 @@
     <?php foreach ($task->getEntry() as $entry): ?>
     <tr>
 		<td><?php echo $entry->getAmount() ?> </td>
-		<td><?php echo $entry->getItem()->getUnit()  ?></td>		
-		<td><?php echo $entry->getItem()->getCode() ?></td>
-		<td>
-		<?php 
-		 echo $entry->getItem()->getDescription();
-		 echo $entry->getDescription(); ?></td>
+		<td><?php echo $entry->getUnit()  ?></td>
+		<td><?php echo $entry->getCode() ?></td>
+		<td><?php echo $entry->getDescription(); ?></td>
 		
     </tr>
     <?php endforeach; ?>

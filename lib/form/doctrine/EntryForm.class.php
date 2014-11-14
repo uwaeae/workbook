@@ -14,18 +14,22 @@ class EntryForm extends BaseEntryForm
   {
 	//$this->widgetSchema['description'] = new sfWidgetForm();
 	$this->widgetSchema['amount'] = new sfWidgetFormInput();
-	$this->widgetSchema['item_id']->setOption('renderer_class', 'sfWidgetFormDoctrineJQueryAutocompleter');
-	$this->widgetSchema['item_id']->setOption('renderer_options', array(
-		'model' => 'Item',
+	//$this->widgetSchema['item_id']->setOption('renderer_class', 'sfWidgetFormDoctrineJQueryAutocompleter');
+	/*$this->widgetSchema['item_id']->setOption('renderer_options', array(
+		'model' => 'Item_Master',
 		'url'   => $this->getOption('url'),
 		'config'=>'{ width: 500,max: 100,highlight:false ,scroll: true,scrollHeight: 300}'	));
-	//$this->widgetSchema['item_id'] = new sfWidgetFormDoctrineJQueryAjax();	
+	*/
+	  /*$this->widgetSchema['item_id'] =  new sfWidgetFormInputHidden();*/
+	//$this->widgetSchema['item_id'] = new sfWidgetFormDoctrineJQueryAjax();
 	
 	$this->widgetSchema['description'] = new sfWidgetFormInputText();
 	
 	
 	$this->widgetSchema['task_id'] = new sfWidgetFormInputHidden();
+
 	$this->setDefault('amount', 1 );
+
 	$this->widgetSchema->setLabels(array(
 		'description'    => 'Beschreibung',
 		'amount' => 'Stück',

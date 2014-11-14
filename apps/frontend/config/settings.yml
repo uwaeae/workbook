@@ -3,6 +3,7 @@
 
 prod:
   .settings:
+    error_reporting:        <?php echo (E_ALL | E_STRICT)."\n" ?>
     no_script_name:         true
     logging_enabled:        false
     cache:                  true

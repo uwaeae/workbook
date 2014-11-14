@@ -10,20 +10,17 @@
  * @property string $name
  * @property string $unit
  * @property string $description
- * @property Doctrine_Collection $Entry
  * 
- * @method integer             getId()          Returns the current record's "id" value
- * @method string              getCode()        Returns the current record's "code" value
- * @method string              getName()        Returns the current record's "name" value
- * @method string              getUnit()        Returns the current record's "unit" value
- * @method string              getDescription() Returns the current record's "description" value
- * @method Doctrine_Collection getEntry()       Returns the current record's "Entry" collection
- * @method Item                setId()          Sets the current record's "id" value
- * @method Item                setCode()        Sets the current record's "code" value
- * @method Item                setName()        Sets the current record's "name" value
- * @method Item                setUnit()        Sets the current record's "unit" value
- * @method Item                setDescription() Sets the current record's "description" value
- * @method Item                setEntry()       Sets the current record's "Entry" collection
+ * @method integer getId()          Returns the current record's "id" value
+ * @method string  getCode()        Returns the current record's "code" value
+ * @method string  getName()        Returns the current record's "name" value
+ * @method string  getUnit()        Returns the current record's "unit" value
+ * @method string  getDescription() Returns the current record's "description" value
+ * @method Item    setId()          Sets the current record's "id" value
+ * @method Item    setCode()        Sets the current record's "code" value
+ * @method Item    setName()        Sets the current record's "name" value
+ * @method Item    setUnit()        Sets the current record's "unit" value
+ * @method Item    setDescription() Sets the current record's "description" value
  * 
  * @package    workbook
  * @subpackage model
@@ -64,8 +61,6 @@ abstract class BaseItem extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('Entry', array(
-             'local' => 'id',
-             'foreign' => 'item_id'));
+        
     }
 }

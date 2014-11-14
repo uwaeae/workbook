@@ -46,7 +46,7 @@ class entryActions extends sfActions
 
     $this->processForm($request, $this->form);
 
-	//$this->redirect('entry/new?taskid='.$entry->getTaskId());	
+	//$this->redirect('entry/new?taskid='.$entry->getTaskId());
   }
 
   public function executeEdit(sfWebRequest $request)
@@ -88,11 +88,12 @@ class entryActions extends sfActions
       $this->redirect('entry/new?taskid='.$entry->getTaskId());
     }
   }
+
 public function executeAjax($request)
 {
   $this->getResponse()->setContentType('application/json');
 
-  $item = item::retrieveForSelect($request->getParameter('q'),$request->getParameter('limit'));
+  $item = itemMaster::retrieveForSelect($request->getParameter('q'),$request->getParameter('limit'));
 
   return $this->renderText(json_encode($item));
 }

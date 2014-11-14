@@ -32,7 +32,7 @@ class EntryTable extends Doctrine_Table
 			
 
 			foreach ($task->getEntry() as $entry) {
-			$mc = $entry->getItem()->getCode();
+			$mc = $entry->getCode();
       if(empty($mc)) {
           $mc = '#CC'.$customCode;
           $customCode++;
@@ -44,7 +44,7 @@ class EntryTable extends Doctrine_Table
 			}
 	
 			$output[$mc]['amount'] += $entry->getAmount();
-			$output[$mc]['item'] =	$entry->getItem();
+			$output[$mc]['item'] =	$entry;
 			$output[$mc]['description'] =	$entry->getDescription();
 			}
 			

@@ -181,8 +181,17 @@ Entry:
       type: integer
       autoincrement: true
       primary: true
+    name:
+      type: string(64)
+      notnull: true
     description:
       type: string(255)
+    code:
+      type: string(10)
+      notnull: true
+    unit:
+      type: string(32)
+      notnull: true
     amount:
       type: integer
       notnull: true
@@ -193,11 +202,29 @@ Entry:
   relations:
     Task:
       foreignAlias: Entry
-    Item:
-      foreignAlias: Entry
+
             
 Item:
   tableName: item
+  columns:
+    id:
+      type: integer
+      autoincrement: true
+      primary: true
+    code:
+      type: string(10)
+      notnull: true
+    name:
+      type: string(64)
+      notnull: true
+    unit:
+      type: string(32)
+      notnull: true
+    description:
+      type: string(255)
+
+ItemMaster:
+  tableName: itemMaster
   columns:
     id:
       type: integer

@@ -52,7 +52,7 @@
 			<li><div id='#box'>
 				Material
 				<ul id="#entry">
-				<li><?php echo link_to('Artikel','item'); ?></li>
+				<li><?php echo link_to('Artikel','item_master'); ?></li>
 				<li><?php echo link_to('Type','item_typ'); ?></li>
 				<ul>
 				</div>	

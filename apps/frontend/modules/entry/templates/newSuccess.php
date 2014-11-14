@@ -13,14 +13,13 @@
 		<?php foreach ($entrys as $entry): ?>
 		<tr>
 			
-			<td><?php echo $entry->getItem()->getCode() ?></td>
-			<td><?php echo $entry->getItem()->getDescription() ?>
-			<?php echo $entry->getDescription() ?></td>
+			<td><?php echo $entry->getCode() ?></td>
+			<td><?php echo $entry->getDescription() ?></td>
 			<td><?php echo $entry->getAmount() ?></td>
-			<td><?php echo $entry->getItem()->getUnit() ?></td>
+			<td><?php echo $entry->getUnit() ?></td>
 			<td> 
 			<a href="<?php echo url_for('entry/delete?id='.$entry->getId(),array('method' => 'delete')) ?>	">
-					<img src="/images/icons/cross.png" /></a></td>
+					<img src="/images/icons/delete.png" /></a></td>
 	    </tr>
 	    <?php endforeach ?>
   </tbody>
