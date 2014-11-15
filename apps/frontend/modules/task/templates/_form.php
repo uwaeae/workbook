@@ -91,7 +91,7 @@
         <th rowspan="2"><?php echo $form['users_list']->renderLabel() ?></th>
         <td rowspan="2">
           <?php echo $form['users_list']->renderError() ?>
-          <?php echo $form['users_list'] ?>
+          <?php echo $form['users_list']->render(array('style' => 'height: 250px'))  ?>
         </td>
       
 <?php endif ?> 

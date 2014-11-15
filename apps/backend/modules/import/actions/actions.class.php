@@ -435,7 +435,7 @@ class importActions extends sfActions
 							}
 							if(count($row) > 2 and !is_numeric($row[$name] and $count = 0))
 							{	
-								$item = new item();
+								$item = new itemMaster();
 								$item->setCode($row[$matchcode]);
 								$item->setName($row[$name]);
 								$item->setDescription($row[$description]);

@@ -18,7 +18,7 @@ class importActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
      $this->form = new IndexForm();
-	 $this->form
+
   }
 
 	public function executeShow(sfWebRequest $request)
