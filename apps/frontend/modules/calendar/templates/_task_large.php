@@ -37,7 +37,7 @@
 		 	<strong><?php echo $task['task']->getJob()->getStore()->getCustomer()->getCompany()?></strong>
 				<p> <strong>Adresse</strong>
 				<?php echo $task['task']->getJob()->getStore()->getStreet() ?>	<br>
-				<?php echo	$task['task']->getJob()->getStore()->getPostcode() ?> 
+				<?php echo sprintf("%1$05d", $task['task']->getJob()->getStore()->getPostcode()) ?>
 				<?php echo $task['task']->getJob()->getStore()->getCity() ?><br></p>
 			
 			<p><strong>Info</strong>

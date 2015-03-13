@@ -22,7 +22,7 @@
 		
 	<?php if ($full < $task['duration']) $full = $task['duration'] ?>
 			
-	<td rowspan="<?php echo $task['duration'] ?>"
+	<td rowspan="<?php echo $task['duration'] == 0 ? 1 : $task['duration'] ?>"
 		class="cal_entry cal_type_<?php echo $task['task']->getTaskTypeId() ?><?php echo ((!$task['task']->getScheduled() AND $task['task']->getTaskTypeId() < 2)? '_finshed':' ')?>" >
 	
 
@@ -39,7 +39,7 @@
 							<p>	<?php echo format_date($task['task']->getStart(),'dd.MM.yyyy HH:mm')   ?>	</p>	
 								<p>	<?php echo $task['task']->getJob()->getStore()->getCustomer()->getCompany() ?><br>
 							<?php echo $task['task']->getJob()->getStore()->getStreet() ?><br>
-							<?php echo $task['task']->getJob()->getStore()->getPostcode() ?>	
+							<?php  echo sprintf("%1$05d", $task['task']->getJob()->getStore()->getPostcode()) ?>
 							<?php echo $task['task']->getJob()->getStore()->getCity() ?>
 							<?php echo $task['task']->getJob()->getStore()->getDestrict() ?></p>
 							<p><?php echo $task['task']->getJob()->getDescription() ?></p></span>

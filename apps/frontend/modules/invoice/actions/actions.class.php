@@ -19,6 +19,8 @@ class invoiceActions extends sfActions
 
   public function executeNew(sfWebRequest $request)
   {
+
+
     $this->form = new InvoiceForm();
   	$this->job = NULL;
 	
@@ -30,6 +32,13 @@ class invoiceActions extends sfActions
 		$this->form->setOption('jobs_list',array('disabled' => 'true', 'readonly'=>'readonly'));
 		$this->form->setWidget('jobs_list', new sfWidgetFormInputHidden());
 	}
+	  if($this->getUser()->getAttribute('back')){
+		  $this->back = $this->getUser()->getAttribute('back');
+	  }
+	  else{
+		  $this->back = '/';
+	  }
+
   }
 
   public function executeCreate(sfWebRequest $request)
@@ -58,6 +67,15 @@ class invoiceActions extends sfActions
 
     $this->jobs = $jobs;
     $this->form = new InvoiceForm($invoice);
+	  if($this->getUser()->getAttribute('back')){
+		  $this->back = $this->getUser()->getAttribute('back');
+	  }
+	  else{
+		  $this->back = '/';
+	  }
+
+
+
   }
 
   public function executeUpdate(sfWebRequest $request)
@@ -81,7 +99,16 @@ class invoiceActions extends sfActions
 			->where('j.invoice_id ='.$invoice->getId())
 			->execute();
 	$invoice->delete();
-    $this->redirect('invoice/index');
+
+    if($this->getUser()->getAttribute('back')){
+      $this->redirect($this->getUser()->getAttribute('back'));
+    }
+    else{
+      $this->redirect('/');
+    }
+
+
+    //$this->redirect('/index');
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)

@@ -39,8 +39,8 @@ class TaskForm extends BaseTaskForm
 			$this->widgetSchema['info'] = new sfWidgetFormInputHidden();
 
 			$this->setDefault('scheduled',1);
-			$this->setDefault('end', date('Y/m/d H:i', mktime(16,0,0,date("m"),date("d") + 1,date("Y"))));
-			$this->setDefault('start', date('Y/m/d H:i',mktime(8,0,0,date("m"),date("d") + 1,date("Y"))));
+			$this->setDefault('end', date('d.m.Y H:i', mktime(16,0,0,date("m"),date("d") + 1,date("Y"))));
+			$this->setDefault('start', date('d.m.Y H:i',mktime(8,0,0,date("m"),date("d") + 1,date("Y"))));
 			break;
 		case '1': //auftrag
 			$this->setDefault('task_type_id',1);
@@ -50,13 +50,13 @@ class TaskForm extends BaseTaskForm
 			}
 			$this->widgetSchema['break'] = new sfWidgetFormChoice(array('choices' => array('0','15','30', '45', '60')));
 			$this->widgetSchema['approach'] = new sfWidgetFormChoice(array('choices' => 	$approach,'default'   => '2'));
-			$this->setDefault('end', date('Y/m/d H:i', time()));
-			$this->setDefault('start', date('Y/m/d H:i',mktime(8,0,0,date("m"),date("d"),date("Y"))));
+			$this->setDefault('end', date('d.m.Y H:i', time()));
+			$this->setDefault('start', date('d.m.Y H:i',mktime(8,0,0,date("m"),date("d"),date("Y"))));
 			$this->setDefault('overtime', (date('H') > 20? date('H')-20: 0));
 			break;
 		case '2': //krank
-			$this->setDefault('end', date('Y/m/d H:i',mktime(15,00,0,date("m"),date("d"),date("Y"))));
-			$this->setDefault('start', date('Y/m/d H:i',mktime(8,0,0,date("m"),date("d"),date("Y"))));
+			$this->setDefault('end', date('d.m.Y H:i',mktime(15,00,0,date("m"),date("d"),date("Y"))));
+			$this->setDefault('start', date('d.m.Y H:i',mktime(8,0,0,date("m"),date("d"),date("Y"))));
 			$this->setDefault('task_type_id',2);
 		//	$this->widgetSchema['users_list'] = new sfWidgetFormInputHidden();
 			$this->setDefault('approach',30);
@@ -68,8 +68,8 @@ class TaskForm extends BaseTaskForm
 			$this->setDefault('info','Krank');
 			break;
 		case '3': //urlaub
-			$this->setDefault('end', date('Y/m/d H:i',mktime(15,00,0,date("m"),date("d"),date("Y"))));
-			$this->setDefault('start', date('Y/m/d H:i',mktime(8,0,0,date("m"),date("d"),date("Y"))));
+			$this->setDefault('end', date('d.m.Y H:i',mktime(15,00,0,date("m"),date("d"),date("Y"))));
+			$this->setDefault('start', date('d.m.Y H:i',mktime(8,0,0,date("m"),date("d"),date("Y"))));
 			$this->setDefault('info','Urlaub');
 			$this->setDefault('task_type_id',3);
 		//	$this->widgetSchema['users_list'] = new sfWidgetFormInputHidden();
@@ -82,8 +82,8 @@ class TaskForm extends BaseTaskForm
 			
 			break;
 		default: // der Rest
-			$this->setDefault('end', date('Y/m/d H:i',mktime(16,00,0,date("m"),date("d"),date("Y"))));
-			$this->setDefault('start', date('Y/m/d H:i',mktime(8,0,0,date("m"),date("d"),date("Y"))));
+			$this->setDefault('end', date('d.m.Y H:i',mktime(16,00,0,date("m"),date("d"),date("Y"))));
+			$this->setDefault('start', date('d.m.Y H:i',mktime(8,0,0,date("m"),date("d"),date("Y"))));
 			$this->setDefault('info','Bitte hier die erledigten Arbeiten Eintragen');
 			$this->setDefault('task_type_id',$this->getOption('type'));
 			$this->setOption('task_type',array('disabled'=>'disabled'));
@@ -96,8 +96,10 @@ class TaskForm extends BaseTaskForm
 	
 
 
-	$this->widgetSchema['end'] = new sfWidgetFormJQueryDate(array( 'image' => '/images/icons/calendar.png','config' => '{}',));
-	$this->widgetSchema['start'] =  new sfWidgetFormJQueryDate(array( 'image' => '/images/icons/calendar.png','config' => '{}',));
+	//$this->widgetSchema['end'] = new sfWidgetFormJQueryDate(array( 'image' => '/images/icons/calendar.png','config' => '{}',));
+	$this->widgetSchema['end'] = new sfWidgetFormInput();
+	//$this->widgetSchema['start'] =  new sfWidgetFormJQueryDate(array( 'image' => '/images/icons/calendar.png','config' => '{}',));
+	$this->widgetSchema['start'] =  new sfWidgetFormInput();
 
 	$this->widgetSchema['created_from']  = new sfWidgetFormInputHidden();
 	$this->widgetSchema['updated_from']  = new sfWidgetFormInputHidden();

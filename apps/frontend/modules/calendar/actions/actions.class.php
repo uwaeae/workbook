@@ -63,7 +63,8 @@ class calendarActions extends sfActions
               ->where('u.is_user = 1');
 		
 			if($this->getUser()->hasGroup('admin') 
-							OR $this->getUser()->hasGroup('supervisor')){
+				OR $this->getUser()->hasGroup('supervisor')
+				OR $this->getUser()->hasPermission('Kalender')){
 				if(isset($this->Users)) 
 					$this->UserArray = $query->andWhere('u.id IN ('.implode(",", $this->Users).')')->execute();
 				else  
@@ -300,8 +301,8 @@ public function executeWeek(sfWebRequest $request)
 		$this->setOptions( $request);
 		//Wochentags verschiebung auf anfang der woche also das das erste Element im Claendar der Montag ist
 		$next =  $this->days * $this->next  - ( date('w') - 1);
-		$this->calendar = $this->renderCalendar($this->days,$next,5,22);
-		$this->timeline = $this->renderTimeline(5,22);
+		$this->calendar = $this->renderCalendar($this->days,$next,5,24);
+		$this->timeline = $this->renderTimeline(5,24);
 		$this->form = $this->makeFilterForm();
 		$this->setBack('calendar/week/?&next='.$this->next);
 		$this->getUser()->setAttribute('calendar',
@@ -315,8 +316,8 @@ public function executeWeek(sfWebRequest $request)
 			$this->setOptions( $request);
 			//Wochentags verschiebung auf anfang der woche also das das erste Element im Claendar der Montag ist
 			$next =  $this->days * $this->next  - ( date('w') - 1);
-			$this->calendar = $this->renderCalendar($this->days,$next,5,22);
-			$this->timeline = $this->renderTimeline(5,22);
+			$this->calendar = $this->renderCalendar($this->days,$next,5,24);
+			$this->timeline = $this->renderTimeline(5,24);
 			$this->form = $this->makeFilterForm();
 			$this->setBack('calendar/week/?&next='.$this->next);
 			$this->getUser()->setAttribute('calendar',

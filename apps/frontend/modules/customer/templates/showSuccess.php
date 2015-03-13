@@ -5,7 +5,7 @@
 	
 	<tr>
 		<td> <?php echo $customer->getStore()->getStreet() ?></td>
-		<td> <?php echo $customer->getStore()->getPostcode() ?></td>
+		<td> <?php  echo sprintf("%1$05d", $customer->getStore()->getPostcode()); ?></td>
 		<td><?php echo $customer->getStore()->getCity().' '.$customer->getStore()->getDestrict(); ?></td>
 	</tr>
 	<tr>
@@ -43,7 +43,7 @@
 	<thead>
 		<tr>
 			<td><a class="button" href="<?php echo url_for('store/new?customer='.$customer->getId()) ?>">Neue Filiale</a></th>
-		
+		</tr>
 	<tr>
 		<th>Filialnummer</th>
 		<th>Strasse</th>

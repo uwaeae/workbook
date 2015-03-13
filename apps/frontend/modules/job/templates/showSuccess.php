@@ -11,7 +11,11 @@
             <?php include_partial('openjob', array('jobs' => $openjobs_same,'type'=> 'open_jobs','info'=> 'Offene Aufträge  in der Filiale')) ?>
         </li>
         <li>
-            <?php include_partial('openjob', array('jobs' => $jobsold,'type'=> 'open_jobs','info'=> 'Erledigte Aufträge')) ?>
+            <?php // include_partial('openjob', array('jobs' => $jobsold,'type'=> 'open_jobs','info'=> 'Erledigte Aufträge')) ?>
+			<div id="open_jobs">
+				<h1 class="open_jobs_head"> <?php echo link_to( "(".count($jobsold).") Erledigte Aufträge",'job/search/action?store='.$job->getStore()->getId()) ?> </h1>
+			</div>
+
         </li>
     </ul>
 
@@ -42,10 +46,19 @@
 		<tr>
 			<th>Rechnungsnummer</th>
 			<td>
-				<?php foreach ($job->getInvoices() as $invoice): ?>
+				<?php if ( $sf_user->hasPermission('Rechnung') ): ?>
+					<?php foreach ($job->getInvoices() as $invoice): ?>
 					             <?php echo link_to($invoice->getNumber(),'invoice/edit?id='.$invoice->getId()) ?>
-				<br>
-				<?php endforeach ?>
+					<br>
+					<?php endforeach ?>
+				<?php else: ?>
+					<?php foreach ($job->getInvoices() as $invoice): ?>
+						<?php echo $invoice->getNumber(); ?>
+						<br>
+					<?php endforeach ?>
+
+				<?php endif ?>
+
 			</td>
 		</tr>
 		<?php endif ?>
@@ -69,9 +82,15 @@
   </tr>
     <tr>
 	<th>Adresse</th>
-      <td ><?php echo $job->getStore()->getStreet() ?> <br>
-	<?php echo $job->getStore()->getPostcode() ?> <?php echo $job->getStore()->getCity() ?>
-	
+      <td colspan="2"><?php echo $job->getStore()->getStreet() ?> <br>
+	<?php echo sprintf("%1$05d", $job->getStore()->getPostcode())  ?> <?php echo $job->getStore()->getCity() ?>
+		</td>
+		<th>Telefon</th>
+		<td>
+			<?php echo $job->getStore()->getFon() ?>
+
+
+		</td>
     </tr>
 	
   <tr>
@@ -151,8 +170,11 @@
 		</ul>	
 		</td>
 		<td>
-			
-    		
+
+			<?php if(	$sf_user->hasPermission('Kopieren') ): ?>
+
+				<a class="button" href="<?php echo url_for('job/new/?job='.$job->getId()) ?>">Auftrag Kopieren</a>
+			<?php endif ?>
 		<?php if ($job->getJobStateId() == 2 AND $job->getInvoices()->count() == 0 AND $sf_user->hasPermission('Rechnung') ): ?>
 				<a class="button" href="<?php echo url_for('invoice/new/?job='.$job->getId()) ?>">
 				Rechnungsnummer erstellen</a>
@@ -314,7 +336,7 @@
 		<td><?php echo $entry['item']->getCode() ?></td>
 		<td>
 		<?php 
-		 echo $entry['item']->getDescription();
+		 //echo $entry['item']->getDescription();
 		 echo $entry['description']; ?></td>
 		
     </tr>

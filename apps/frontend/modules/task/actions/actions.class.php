@@ -181,10 +181,13 @@ class taskActions extends sfActions
             'type' => $this->type,
         ));
 
-        if (!$this->getUser()->hasPermission('Korrektur') OR $this->task->getJob()->getJobStateId() < 2) {
-            unset($this->form['correction_info'], $this->form['correction_time']);
-            //$task->setWidget(,new sfWidgetFormInputHidden());
-            //$task->setWidget(,new sfWidgetFormInputHidden());
+        if (!$this->getUser()->hasPermission('Korrektur')) {
+            //unset($this->form['correction_info'], $this->form['correction_time']);
+			$this->form->setWidget('correction_info',new sfWidgetFormInputHidden());
+			$this->form->setWidget('correction_time',new sfWidgetFormInputHidden());
+			$this->form->getWidget('correction_time')->setHidden(true);
+			$this->form->getWidget('correction_info')->setHidden(true);
+
         }
         if (!$this->getUser()->hasPermission('Zuweisen')) {
             $this->form->setWidget('users_list', new sfWidgetFormInputHidden());
@@ -242,13 +245,27 @@ class taskActions extends sfActions
         $entrytask = Doctrine_Core::getTable('Entry')->createQuery('t')
             ->where('t.task_id =' . $task->getId())
             ->execute();
+
         foreach ($entrytask as $et) {
             $et->delete();
         }
 
         $task->delete();
+        if($job){
+            $this->redirect('/job/' . $job);
+        }else{
 
-        $this->redirect('/job/' . $job);
+            if($this->getUser()->hasAttribute('back')){
+                $this->redirect($this->getUser()->getAttribute('back'));
+               }
+            else{
+                $this->redirect('/');
+            }
+
+        }
+
+
+
     }
 
     protected function processForm(sfWebRequest $request, sfForm $form, $action)

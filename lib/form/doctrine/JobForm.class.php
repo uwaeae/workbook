@@ -17,11 +17,11 @@ class JobForm extends BaseJobForm
 				 );
 
 		
-			$this->widgetSchema['end'] =  new sfWidgetFormJQueryDate(array( 'image' => '/images/icons/calendar.png','config' => '{}'));
-				$this->widgetSchema['start'] =  new sfWidgetFormJQueryDate(array( 'image' => '/images/icons/calendar.png','config' => '{}' ));
+			//$this->widgetSchema['end'] =  new sfWidgetFormJQueryDate(array( 'image' => '/images/icons/calendar.png','config' => '{}'));
+			//	$this->widgetSchema['start'] =  new sfWidgetFormJQueryDate(array( 'image' => '/images/icons/calendar.png','config' => '{}' ));
 		
-	//	$this->widgetSchema['end'] = new sfWidgetFormInput();
-	//	$this->widgetSchema['start'] = new sfWidgetFormInput();
+		$this->widgetSchema['end'] = new sfWidgetFormInput();
+		$this->widgetSchema['start'] = new sfWidgetFormInput();
 	
 	switch ($this->getOption('type')) {
 		case 1:
@@ -31,8 +31,8 @@ class JobForm extends BaseJobForm
 			$this->widgetSchema['job_state_id'] = new sfWidgetFormInputHidden();
 			$this->widgetSchema['job_type_id'] = new sfWidgetFormInputHidden();
 	
-			$this->setDefault('end', date('c',mktime(16,0,0,date("m"),date("d")+1,date("Y"))));
-			$this->setDefault('start', date('c',mktime(8,0,0,date("m"),date("d")+1,date("Y"))));
+			$this->setDefault('end', date('d.m.Y H:i',mktime(16,0,0,date("m"),date("d")+1,date("Y"))));
+			$this->setDefault('start', date('d.m.Y H:i',mktime(8,0,0,date("m"),date("d")+1,date("Y"))));
 			$this->setDefault('job_type_id',  $this->getOption('type'));
 			$this->setDefault('job_state_id',  1);
 			break;
@@ -43,8 +43,8 @@ class JobForm extends BaseJobForm
 			$this->widgetSchema['job_state_id'] = new sfWidgetFormInputHidden();
 			$this->widgetSchema['job_type_id'] = new sfWidgetFormInputHidden();
 			
-			$this->setDefault('end', date('c',mktime(16,0,0,date("m"),date("d")+1,date("Y"))));
-			$this->setDefault('start', date('c'));
+			$this->setDefault('end', date('d.m.Y H:i',mktime(16,0,0,date("m"),date("d")+1,date("Y"))));
+			$this->setDefault('start', date('d.m.Y H:00'));
 			$this->setDefault('job_type_id',  $this->getOption('type'));
 			$this->setDefault('job_state_id',  1);
 			break;
@@ -55,8 +55,8 @@ class JobForm extends BaseJobForm
 			$this->widgetSchema['job_type_id'] = new sfWidgetFormInputHidden();
 			$this->widgetSchema['job_state_id'] = new sfWidgetFormInputHidden();
 		
-			$this->setDefault('end', date('c',mktime(0,0,0,date("m"),date("d")+1,date("Y"))));
-			$this->setDefault('start', date('c',mktime(0,0,0,date("m"),date("d")+1,date("Y"))));
+			$this->setDefault('end', date('d.m.Y H:i',mktime(0,0,0,date("m"),date("d")+1,date("Y"))));
+			$this->setDefault('start', date('d.m.Y H:i',mktime(0,0,0,date("m"),date("d")+1,date("Y"))));
 			$this->setDefault('job_type_id',  $this->getOption('type'));
 			$this->setDefault('job_state_id',  1);
 			break;

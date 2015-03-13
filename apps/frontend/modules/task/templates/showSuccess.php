@@ -50,7 +50,7 @@
         <td>
 			<?php echo $task->getJob()->getStore()->getCustomer()->getCompany() ?><br>
 			<?php echo $task->getJob()->getStore()->getStreet() ?><br>
-			<?php echo $task->getJob()->getStore()->getPostcode() ?>
+			<?php echo sprintf("%1$05d", $task->getJob()->getStore()->getPostcode())?>
 			<?php echo $task->getJob()->getStore()->getCity() ?>
 			<?php echo $task->getJob()->getStore()->getDestrict() ?>
         </td>
@@ -72,39 +72,27 @@
 <h3 class="job_work">Material 
 
 	</h3>
-<table class="job_component">
+<table class="job_component" style="width: 100%">
   <thead>
     <tr>
-      <th colspan="2" style="width:10%;">Einheit</th>
-      <th style="width:auto;">Artikel</th>
-      <th style="width:auto;">Beschreibung</th>
+		<th  >Menge</th>
+      <th  >Einheit</th>
+      <th >Artikel</th>
+      <th >Beschreibung</th>
     </tr>
   </thead>
   <tbody>
     <?php foreach ($task->getEntry() as $entry): ?>
     <tr>
-		<td><?php echo $entry->getAmount() ?> </td>
-		<td><?php echo $entry->getItem()->getUnit()  ?></td>		
-		<td><?php echo $entry->getItem()->getCode() ?></td>
-		<td>
-		<?php 
-		 echo $entry->getItem()->getDescription();
-		 echo $entry->getDescription(); ?></td>
+		<td colspan="2" style="width:10%;"><?php echo $entry->getAmount() ?> </td>
+		<td><?php echo $entry->getUnit()  ?></td>
+		<td><?php echo $entry->getCode() ?></td>
+		<td><?php echo $entry->getDescription(); ?></td>
 
     </tr>
     <?php endforeach; ?>
   </tbody>
-	<tfoot>	
-    <tr>
-		<td ></td>
-		<td ></td>
-		<td ></td>
 
-      <td >
-
-      </td>
-    </tr>
-  </tfoot>
 </table>
 <?php echo link_to('zurück',$back,array('class'=>'button')) ?>
 

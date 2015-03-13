@@ -13,9 +13,16 @@ generator:
 
     config:
       actions: ~
-      fields:  ~
-      list:    ~
-      filter:  ~
+      fields:
+              number: { label: Rechnungsnummer }
+              created_at: { label: Erstellt am }
+
+      list:
+        display: [number,created_at]
+        object_actions:
+                  _delete: ~
+      filter:
+        display: [number,created_at,updated_at]
       form:    ~
       edit:    ~
       new:     ~

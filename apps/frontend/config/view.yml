@@ -12,9 +12,9 @@ default:
     #language:     en
     #robots:       index, follow
 
-  stylesheets:    [main.css, jquery-ui.min.css]
+  stylesheets:    [main.css, jquery-ui.min.css,jquery.datetimepicker.css]
 # 
-  javascripts:    [jquery-1.11.1.min.js, jquery-ui.min.js]
+  javascripts:    [jquery-1.11.1.min.js, jquery-ui.min.js,jquery.datetimepicker.js,moment.min.js]
 # 
   has_layout:     true
   layout:         layout

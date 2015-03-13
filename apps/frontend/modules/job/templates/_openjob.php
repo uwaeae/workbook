@@ -56,7 +56,7 @@
 
       <tr>
           <td colspan="2">
-              <?php echo $job->getStore()->getPostcode() ?> <?php echo $job->getStore()->getCity() ?>
+              <?php echo sprintf("%1$05d", $job->getStore()->getPostcode()) ?> <?php echo $job->getStore()->getCity() ?>
           </td>
       </tr>
       <tr>

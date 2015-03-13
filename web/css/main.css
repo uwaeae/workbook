@@ -8,9 +8,9 @@
 }
 
 body{
-	margin-left: 10%;
+	/*margin-left: 10%;
 	margin-right: 10%;
-    width: 1025px;
+    width: 1025px;*/
 	
 }
 
@@ -19,7 +19,7 @@ h1 {
 	text-transform:uppercase;
 	letter-spacing:2px;
 	background-color: #E7EEF6;
- 	border-radius: 5px 5px 5px 5px;
+ 	border-radius: 2px;
 }
 h3 {
 	background-color: #E7EEF6;
@@ -76,12 +76,12 @@ form th{
 	font-weight: bold;
 	font-size: 12pt;
 	color: white;
-	border-radius: 5px;
+	xborder-radius: 5px;
 	padding: 1em;
-	margin:2em;
+	xmargin:2em;
 	text-shadow: 2px 2px 2px #000;
 	background-color: #007bb6;
-	height: 100px;
+	xheight: 100%;
 
 	
 }
@@ -152,22 +152,34 @@ table.cal_entry td {
  
 }
 
-.cal_type_1  {
-	background-color: #3333ff;
+.cal_type_1.job_state_1  {
+	background-color: rgba(0, 0, 255, 0.40);
 }
 
-.cal_type_1_finshed {
-	background-color: #ccccff;
+.cal_type_1.job_state_2{
+	background-color: rgba(0, 0, 112, 0.8);
+	color: #E9E8E8;
+}
+
+.cal_type_1_finshed.job_state_1 {
+
+	background-color: rgba(160, 255, 160, 0.90);
+}
+
+
+.cal_type_1_finshed.job_state_2{
+	background-color: rgba(48, 188, 19, 0.90);
+	color: #E9E8E8;
 }
 
 
 .cal_type_2 {
-	background-color: #ff3333;
+	background-color: rgba(255, 0, 0, 0.50);
 }
 
 
 .cal_type_3  {
-	background-color: #33ff33;
+	background-color: rgba(255, 238, 0, 0.50);
 }
 
 .cal_type_4{
@@ -184,11 +196,13 @@ table.cal_entry td {
 }
 
 .cal_timerow_odd {
-	background-color: #9999FF;
+	background-color: #ffffff;
+	border-bottom: 1px solid grey;
 }
 
 .cal_timerow_even {
-	background-color: #99ddcc;
+	background-color: #ffffff;
+	border-bottom: 1px solid grey;
 }
 
 .calender_today{
@@ -260,7 +274,7 @@ table.cal_table_medium  td.cal_entry div.cal_entry_content_over{
 	position: absolute;
 	font-size: 10pt;
  	background-color: #EEEEEE;
-	
+	color: #000000;
 	padding:10px;
 	margin-left: 20px;
 	margin-top: 20px;
@@ -420,7 +434,7 @@ table.cal_table_user  td.cal_entry div.cal_entry_content_over{
 	padding:10px;
 	margin-left: 25px;
 	margin-top: 25px;
-	position: fixed;
+
 	width: 20em;
 	
 	-webkit-box-shadow: 2px 3px 3px 2px #000000;
@@ -540,6 +554,7 @@ div #open_jobs{
 }
 
 .open_jobs_head{
+
 	text-align:center;
 	color: white;
 	background-color: #007bb6;
@@ -551,10 +566,21 @@ div #open_jobs{
 	padding-right: 0.5em;
 	width: 25em;
 	margin-bottom: 5px;
+	cursor: pointer;
 }
 .open_jobs_head:hover{
 	background-color: #A9F5F2;
 	color: blue;
+}
+
+.open_jobs_head a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.open_jobs_head a:visited {
+	color: #FFFFFF;
+	text-decoration: none;
 }
 	
 .open_jobs_body{
@@ -719,8 +745,8 @@ div #jobsold{
 	color: white; 
 	font-family:Sans-serif;
 	width: 60px;
-	display: block;
-	xpadding: 0.2em;
+
+
 }
 
 
@@ -737,9 +763,6 @@ div #jobsold{
 	padding: 0.5em;
 	background-color: #007bb6;
 
-	-webkit-box-shadow: 2px 2px 3px 1px #00007a;
-	-moz-box-shadow: 2px 2px 3px 1px #00007a;
-	box-shadow: 2px 2px 3px 1px #00007a;
 
 }
 .menu li:hover {
@@ -771,10 +794,11 @@ div #jobsold{
 .usermenu {
 	
 	padding-top: 4px;
-	xbackground-color: #CCCCCC;
+	background-color: #007bb6;
 	height: 24px;
 	color: white; 
 	float: right;
+	padding-right: 10%;
 }
 .usermenu a {
 	text-decoration: none;
@@ -1216,6 +1240,154 @@ table.entry tfoot th{
 	background-color: #E7EEF6;
 	font-size:8pt;
 }
+
+
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+
+and (-webkit-min-device-pixel-ratio: 1)  {
+
+	.header img{
+		width: 18%;
+
+	}
+
+	.menu {
+		color: white;
+		display: block;
+		width: 100%;
+		padding-bottom: 10px;
+	}
+	.menu ul{
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+		text-align: center;
+	}
+
+	.menu ul li{
+		display: inline-block;
+		height: 25px;
+		margin: 0;
+		padding: 0;
+		width: 19%;
+
+	}
+	.menu ul li a{
+		width: 20%;
+	}
+
+	.content{
+		width: 100%;
+		padding: 0px;
+	}
+
+
+
+	table.job_component,
+	table.job_show{
+		font-size: 10pt;
+	}
+
+
+
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+	/* Styles */
+	.header img {
+		width: 18%;
+
+	}
+
+	.button{
+		font-size: 16px;
+		line-height: 30px;
+	}
+
+	.menu {
+		color: white;
+		display: block;
+		width: 100%;
+		padding-bottom: 10px;
+	}
+
+	.menu ul {
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+		text-align: center;
+	}
+
+	.menu ul li {
+		display: inline-block;
+		font-size: 18pt;
+		height: 40px;
+		margin: 0;
+		padding: 0;
+		width: 19%;
+
+	}
+
+	.menu ul li a {
+		line-height: 40px;
+		width: 20%;
+	}
+
+	.content {
+		width: 100%;
+		padding: 0px;
+	}
+
+	table,
+	table.job_show{
+		font-size: 10pt;
+	}
+
+
+}
+	@media (max-width: 767px) {
+
+		.header img{
+			display: none;
+
+		}
+
+		.menu {
+			color: white;
+			display: block;
+			width: 100%;
+			padding-bottom: 10px;
+		}
+		.menu ul{
+			margin: 0;
+			padding: 0;
+			list-style-type: none;
+			text-align: center;
+		}
+
+		.menu ul li{
+			display: inline-block;
+			font-size: 16pt;
+			height: 30px;
+			margin: 0;
+			padding: 0;
+			width: 19%;
+
+		}
+		.menu ul li a{
+			width: 20%;
+		}
+
+		.content{
+			width: 100%;
+			padding: 0px;
+		}
+
+
+	}
+
 
 
 

@@ -30,5 +30,10 @@ class Task extends BaseTask
        return 	Doctrine_Core::getTable('sfGuardUser')
             ->find($this->getUpdatedFrom() );
    }
-	
+
+
+	public function getStartDate(){
+		$this->getDateTimeObject('start')->format('d.m.Y H:i');
+	}
+
 }

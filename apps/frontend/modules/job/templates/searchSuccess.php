@@ -1,5 +1,5 @@
 <?php  use_helper('Date');?>
-Die Suche lieferte <?php echo $results ?> Erbebnisse
+Die Suche lieferte <?php if($results == 100): ?>mehr als <?php endif ?> <?php echo $results ?> Erbebnisse
 <table class="job">
 	<thead>
 	<tr>
@@ -22,8 +22,8 @@ Die Suche lieferte <?php echo $results ?> Erbebnisse
 			<td><?php echo $job->getStore()->getCustomer()->getCompany() ?></td>
 			
 			<td><?php echo $job->getStore()->getStreet() ?><br>
-			<?php echo $job->getStore()->getPostcode() ?> <?php echo $job->getStore()->getCity() ?></td>
-			<td><?php echo substr($job->getDescription(), 0, 50).'...' ?></td>
+			<?php echo sprintf("%1$05d", $job->getStore()->getPostcode())  ?> <?php echo $job->getStore()->getCity() ?></td>
+			<td><?php echo $job->getDescription() ?></td>
 			 <td>	
 					<?php foreach ($job->getInvoices() as $invoice): ?>
 						<?php echo $invoice->getNumber() ?>
@@ -35,6 +35,18 @@ Die Suche lieferte <?php echo $results ?> Erbebnisse
     <?php endforeach; ?>
   </tbody>
 </table>
+<?php if($page > 1): ?>
+	<a class="button" href="<?php echo url_for('job/search').'?page='.($page-1).'&'.$parameters ?>">
+		<<<
+	</a>
+<?php endif ?>
 
+<?php if($results == 100): ?>
+
+	<a class="button" href="<?php echo url_for('job/search').'?page='.($page+1).'&'.$parameters ?>">
+		>>>
+	</a>
+
+<?php endif ?>
 
 

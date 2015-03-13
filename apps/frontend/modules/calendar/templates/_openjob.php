@@ -17,7 +17,7 @@
 		
 	<p><?php echo $job->getStore()->getCustomer()->getCompany() ?></p>
 		<p> <?php echo $job->getStore()->getStreet() ?><br>
-		<?php echo $job->getStore()->getPostcode() ?><?php echo $job->getStore()->getCity() ?></p>
+		<?php  echo sprintf("%1$05d", $job->getStore()->getPostcode()) ?><?php echo $job->getStore()->getCity() ?></p>
 		<p>
 			<?php echo substr($job->getDescription(), 0, 50) ?>
 		</p>

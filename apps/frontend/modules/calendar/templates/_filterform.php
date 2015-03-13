@@ -9,7 +9,7 @@
 		
 		<?php echo $form['type']->renderRow()  ?>
 		</div>
-	<?php if ( $sf_user->hasGroup('admin') OR $sf_user->hasGroup('supervisor')) : ?>
+	<?php if ( $sf_user->hasGroup('admin') OR $sf_user->hasGroup('supervisor') OR $sf_user->hasPermission('Kalender')) : ?>
 		<div class="filterusers">
 		<?php echo $form['user']->renderRow()  ?>
 		</div>

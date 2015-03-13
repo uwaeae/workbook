@@ -67,11 +67,89 @@ class sfWidgetFormJQueryAutocompleter extends sfWidgetFormInput
 
     return $this->renderTag('input', array('type' => 'hidden', 'name' => $name, 'value' => $value)).
            parent::render('autocomplete_'.$name, $visibleValue, $attributes, $errors).
-           sprintf(<<<EOF
-<script type="text/javascript">
-  jQuery(document).ready(function() {
-    jQuery("#%s")
-    .autocomplete('%s', jQuery.extend({}, {
+           sprintf(
+			   <<<EOF
+	<script type="text/javascript">
+		 $(document).ready(function() {
+
+			$( "#%s" ).autocomplete({
+				source: function( request, response ) {
+					$.ajax({
+						url: "%s",
+						dataType: "json",
+						data: {
+						q: request.term
+						},
+						success: function( data ) {
+							console.log(data);
+							var result = $.map( data, function( value, key ) {
+  									return {id:key,value:value};
+								});
+							response( result);
+						}
+			   		});
+				},
+				minLength: 2,
+				select: function( event, data ) {
+
+					console.log(data);
+					$("#%s").val(data.item.id);
+				},
+				 open: function() {
+$( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+},
+close: function() {
+$( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+}
+			});
+		});
+
+
+
+
+
+
+
+</script>
+EOF
+      ,
+      $this->generateId('autocomplete_'.$name),
+      $this->getOption('url'),
+      //$this->getOption('config'),
+      $this->generateId($name)
+    );
+  }
+
+
+/*
+
+  		  jQuery(document).ready(function() {
+    		jQuery()
+    		.autocomplete({
+				source: function( request, response ) {
+					$.ajax({
+					url: "",
+				   dataType: "jsonp",
+					data: {
+					q: request.term
+					},
+					success: function( data ) {
+						response( data );
+						}
+					});
+				},
+				minLength: 3,
+				select: function( event, ui ) {
+					log( ui.item ?
+					"Selected: " + ui.item.label :
+					"Nothing selected, input was " + this.value);
+				}
+
+  			});
+
+
+
+    .autocomplete('', jQuery.extend({}, {
       dataType: 'json',
       parse:    function(data) {
         var parsed = [];
@@ -80,18 +158,12 @@ class sfWidgetFormJQueryAutocompleter extends sfWidgetFormInput
         }
         return parsed;
       }
-    }, %s))
+    },
+    ))
     .result(function(event, data) { jQuery("#%s").val(data[1]); });
-  });
-</script>
-EOF
-      ,
-      $this->generateId('autocomplete_'.$name),
-      $this->getOption('url'),
-      $this->getOption('config'),
-      $this->generateId($name)
-    );
-  }
+
+    */
+
 
   /**
    * Gets the stylesheet paths associated with the widget.
@@ -110,6 +182,6 @@ EOF
    */
   public function getJavascripts()
   {
-    return array('/sfFormExtraPlugin/js/jquery.autocompleter.js');
+    return null;//array('/sfFormExtraPlugin/js/jquery.autocompleter.js');
   }
 }

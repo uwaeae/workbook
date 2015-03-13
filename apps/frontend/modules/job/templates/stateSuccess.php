@@ -31,7 +31,7 @@
 		<td><?php echo $job->getStore()->getCustomer()->getCompany() ?></td>
 		<td><?php echo $job->getStore()->getNumber() ?></td>
 		<td><?php echo $job->getStore()->getStreet() ?><br>
-		<?php echo $job->getStore()->getPostcode() ?> <?php echo $job->getStore()->getCity() ?></td>
+		<?php echo sprintf("%1$05d", $job->getStore()->getPostcode())  ?> <?php echo $job->getStore()->getCity() ?></td>
 		<td><?php echo substr($job->getDescription(), 0, 50).'...' ?></td>
 		<td><?php echo $job->getJobType() ?></td>
 		<td <?php echo ($job->getEnd() < date('c')? 'class="fault"' : ' ' ) ?>>

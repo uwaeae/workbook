@@ -95,7 +95,7 @@
         </td>
       
 <?php endif ?> 
-<?php if (isset($form['correction_time'])): ?>
+<?php if (isset($form['correction_time']) and !$form['correction_time']->isHidden()): ?>
       
         <th><?php echo $form['correction_time']->renderLabel() ?></th>
         <td>

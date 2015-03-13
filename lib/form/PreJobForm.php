@@ -11,8 +11,8 @@ class PreJobForm extends sfForm
       	'customer' => new sfWidgetFormDoctrineChoice(array('model' => 'Customer', 'multiple' => false, )),
 		'type' => new sfWidgetFormDoctrineChoice(array('model' => 'JobType', 'multiple' => false, )),
     ));
-
-	if($this->getOption('customer') == NULL){
+	  $this->setDefault('type', 2 );
+	  if($this->getOption('customer') == NULL){
 
 	$this->widgetSchema['customer']->setOption('renderer_class', 'sfWidgetFormDoctrineJQueryAutocompleter');
 	$this->widgetSchema['customer']->setOption('renderer_options', array(

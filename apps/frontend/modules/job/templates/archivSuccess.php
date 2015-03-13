@@ -20,7 +20,7 @@
 			onclick="document.location = '<?php echo url_for('job/show?id='.$job->getId()) ?>'">
       <td><?php echo $job->getStore()->getCustomer()->getCompany() ?><br>
       <?php echo $job->getStore()->getStreet() ?><br>
-      <?php echo $job->getStore()->getPostcode()  ?>
+      <?php echo sprintf("%1$05d", $job->getStore()->getPostcode())  ?>
       <?php echo $job->getStore()->getCity()  ?></td>
       <td><?php echo substr($job->getDescription(),0,50) ?></td>
       <td>	

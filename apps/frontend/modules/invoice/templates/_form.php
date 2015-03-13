@@ -10,7 +10,9 @@
         <td colspan="2">
           <?php echo $form->renderHiddenFields(false) ?>
           &nbsp;
-		     <a class="button" href="<?php echo url_for('job') ?>">zurück</a>
+
+            <a class="button" href="<?php echo url_for($back) ?>">zurück</a>
+
           <?php if (!$form->getObject()->isNew()): ?>
 			
             &nbsp;<?php echo link_to('Löschen', 'invoice/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => 'Are you sure?','class' => 'button')) ?>

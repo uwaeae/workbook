@@ -136,14 +136,15 @@ class jobActions extends sfActions
     {
         //if(!$request->isMethod(sfRequest::get))  $this->redirect('job');
         //if($request->hasParameter('customer'))
+        $this->parameters = '';
         $this->jobs = array();
         $query = Doctrine_Query::create()
             ->select('j.*')
             ->from('Job j');
         if ($request->hasParameter('store') && is_numeric($request->getParameter('store'))) {
-            $this->jobs = $query->where('j.store_id = ' . $request->getParameter('store'))
-                ->orderby('j.end')
-                ->execute();
+            $query->where('j.store_id = ' . $request->getParameter('store'))
+                ->orderby('j.end DESC');
+            $this->parameters .= 'store='.$request->getParameter('store');
         }
 
         if ($request->hasParameter('customer') && is_numeric($request->getParameter('customer'))) {
@@ -154,11 +155,29 @@ class jobActions extends sfActions
             foreach ($t as $s) {
                 $stores[] = $s->getId();
             }
-            $this->jobs = $query->where('j.store_id IN (' . implode(",", $stores) . ')')
-                ->orderby('j.end')
-                ->execute();
+            $this->parameters .= 'customer='.$request->getParameter('customer');
+                $query->where('j.store_id IN (' . implode(",", $stores) . ')')
+                ->orderby('j.end DESC')
+                ;
         }
+        if ($request->hasParameter('page')){
+            $this->page = $request->getParameter('page');
+        }else{
+            $this->page = 1;
+        }
+
+
+        $this->jobs =  $query->offset(($this->page*100)-100)->limit(100)->execute();
         $this->results = count($this->jobs);
+
+
+
+
+
+
+
+
+
     }
 
     public function executeArchiv(sfWebRequest $request)
@@ -217,7 +236,14 @@ class jobActions extends sfActions
         $this->worksumme = 0;
         $this->overtimesumme = 0;
         $part = Doctrine_Core::getTable('Option')->getOptionByName('payroll_hour_split');
-        foreach ($this->job->getTasks() as $task) {
+
+        $tasks = Doctrine_Core::getTable('Task')
+            ->createQuery('t')
+            ->where('t.job_id = ?', $this->job->getId())
+            ->orderBy('t.Start ASC')
+            ->execute();
+
+        foreach ($tasks as $task) {
             if (!$task->getScheduled()) {
 
                 //$Stunden =  date('H',strtotime($task->getEnd())) - date('H',strtotime($task->getStart()))  - $task->getOvertime();
@@ -267,28 +293,58 @@ class jobActions extends sfActions
 
     public function executeNew(sfWebRequest $request)
     {
-        if (!$request->isMethod(sfRequest::POST)) $this->redirect('job/prenew');
-        $this->forward404Unless($request->getParameter('customer'));
-        switch ($request->getParameter('type')) {
-            case '1':
-                $this->type = 'Fix';
-                break;
-            case '2':
-                $this->type = 'bis zum';
-                break;
-            case '3':
-                $this->type = 'von bis';
-                break;
-            case '4':
-                $this->type = 'Wartung';
-                break;
-        }
-        $this->customer = Doctrine_Core::getTable('Customer')->find(array($request->getParameter('customer')));
 
-        $this->form = new JobForm(NULL, array(
-            'url' => $this->getController()->genUrl('job/findstore/?customer=' . $this->customer->getId()),
+        $jobNew = null;
+
+        if($request->isMethod(sfRequest::GET) and $request->hasParameter('job')){
+            $jobOrg =  Doctrine_Core::getTable('Job')->find(array($request->getParameter('job')));
+
+            $jobNew = new Job();
+            $jobNew->setJobType($jobOrg->getJobType());
+            $this->type = $jobOrg->getJobType()->getName();
+            $jobNew->setContactPerson($jobOrg->getContactPerson());
+            $jobNew->setContactInfo($jobOrg->getContactInfo());
+
+            $jobNew->setDescription($jobOrg->getDescription());
+            $this->customer = $jobOrg->getStore()->getCustomer();
+
+
+            $dt = new DateTime(); //will be now
+            $dt->modify('+1 days');
+            $jobNew->setStart($dt->format('Y-m-d 08:00'));
+            $jobNew->setEnd($dt->format('Y-m-d 16:00'));
+
+        }elseif($request->isMethod(sfRequest::POST) ){
+
+            $this->forward404Unless($request->getParameter('customer'));
+
+
+            switch ($request->getParameter('type')) {
+                case '1':
+                    $this->type = 'Fix';
+                    break;
+                case '2':
+                    $this->type = 'bis zum';
+                    break;
+                case '3':
+                    $this->type = 'von bis';
+                    break;
+                case '4':
+                    $this->type = 'Wartung';
+                    break;
+            }
+            $this->customer = Doctrine_Core::getTable('Customer')->find(array($request->getParameter('customer')));
+
+        }else{
+            $this->redirect('job/prenew');
+        }
+
+
+
+        $this->form = new JobForm($jobNew, array(
+            'url' => $this->getController()->genUrl('job/findstore/?customer=' .  $this->customer->getId()),
             'type' => $request->getParameter('type'),
-            'customer' => $request->getParameter('customer'),
+            'customer' => $this->customer,
         ));
         $this->form->setDefault('created_from', $this->getUser()->getId());
         $this->form->setDefault('updated_from', $this->getUser()->getId());

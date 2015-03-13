@@ -37,7 +37,7 @@ $calendar = $sf_user->getAttribute('calendar') ?>
 			 <td>
 			<?php echo $job->getStore()->getStreet() ?>
 			<br>
-			<?php echo $job->getStore()->getPostcode() ?>
+			<?php echo sprintf("%1$05d", $customer->getStore()->getPostcode())?>
 			
 			<?php echo $job->getStore()->getCity() ?>
 			 </td>

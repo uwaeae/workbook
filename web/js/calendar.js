@@ -11,6 +11,9 @@ $(document).ready(function(){
         $(".cal_filter_body").slideToggle();
     });
 
+
+
+
     init();
 });
 
@@ -20,6 +23,7 @@ $(document).ready(function(){
 var init = function(){
 
     $('table.cal_table_medium  td.cal_entry  ').click(click_content);
+    $('table.cal_table_user  td.cal_entry  ').click(click_content);
     $('.filterusers .checkbox_list input:checkbox').change(requestFilter);
     $('.filtertypes .checkbox_list input:checkbox').change(requestFilter);
   

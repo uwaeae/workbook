@@ -26,7 +26,7 @@ generator:
           _edit: ~
           _delete: ~
       filter:
-        display: [users_list,job_id,start,end,scheduled,task_type_id]
+        display: [users_list,start,end,scheduled,task_type_id]
       form:    ~
       edit:    ~
       new:     ~

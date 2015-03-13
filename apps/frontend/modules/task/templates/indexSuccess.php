@@ -43,7 +43,7 @@
 		<td><?php echo $task['task']->getJob()->getStore()->getCustomer()->getCompany() ?></td>
 		<td><?php echo $task['task']->getJob()->getStore()->getNumber() ?></td>
 		<td><?php echo $task['task']->getJob()->getStore()->getStreet() ?><br>
-		<?php echo $task['task']->getJob()->getStore()->getPostcode() ?>
+		<?php echo sprintf("%1$05d", $task['task']->getJob()->getStore()->getPostcode()) ?>
 		<?php echo $task['task']->getJob()->getStore()->getCity() ?>
 		</td>
 		<td><?php echo $task['task']->getInfo() ?></td>

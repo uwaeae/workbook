@@ -31,7 +31,7 @@ for ($i=0; $i < $rows; $i++) {
 		'<br>'.date('H:i',strtotime($job->getTimeed())).
 		'</a></td><td>'.$job->getStore()->getCustomer()->getCompany() .
 		'<br>'.$job->getStore()->getStreet().
-		'<br>'.$job->getStore()->getPostcode().' '.$job->getStore()->getCity().
+		'<br>'.sprintf("%1$05d", $job->getStore()->getPostcode()).' '.$job->getStore()->getCity().
 		'</td><td>'.$users.'</td>';
 		}
 		else echo '<td> </td>';

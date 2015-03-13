@@ -12,7 +12,7 @@
 
             <?php echo $job->getStore()->getStreet() ?>
             <br>
-            <?php echo $job->getStore()->getPostcode() ?>
+            <?php echo sprintf("%1$05d", $job->getStore()->getPostcode())  ?>
 
             <?php echo $job->getStore()->getCity() ?>
         </p>
@@ -34,4 +34,4 @@
 
 
 
-<?php include_partial('form', array('form' => $form,'job'=>$job)) ?>
+<?php include_partial('form', array('form' => $form,'job'=>$job,'back'=>$back)) ?>
