@@ -89,7 +89,7 @@ class sfWidgetFormJQueryAutocompleter extends sfWidgetFormInput
 						}
 			   		});
 				},
-				minLength: 2,
+				minLength: 1,
 				select: function( event, data ) {
 
 					console.log(data);
