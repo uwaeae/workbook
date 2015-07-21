@@ -103,7 +103,7 @@ public function executeGet(sfWebRequest $request)
     if ($form->isValid())
     {
 		$file = $form->getValue('file');
-		$filename = sha1($file->getOriginalName());
+		$filename = sha1($file->getOriginalName().date('U'));
 		$extension = $file->getExtension($file->getOriginalExtension());
 		$file->save(sfConfig::get('sf_upload_dir').'/document/'.$filename.$extension);
 		$upload = new file();

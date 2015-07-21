@@ -11,7 +11,7 @@
 class jobActions extends sfActions
 {
 
-    protected function getJobStateArray($type, $name, $query, $page = 1, $results = 20)
+    protected function getJobStateArray($type, $name, $query, $page = 1, $results = 20,$user)
     {
         // Creating pager object
         $output = array();
@@ -27,10 +27,12 @@ class jobActions extends sfActions
         $output['pager'] = $pager;
         $output['type'] = $type;
         $output['name'] = $name;
+        $output['user'] = $user;
         //$this->pager->init();
         //$output['jobs'] = $pager->getResults();
         //$output['pager'] = $pager;
         $output['url'] = 'job/table/?type=' . $type;
+		
         return $output;
 
     }
@@ -48,9 +50,13 @@ class jobActions extends sfActions
                 $name = 'offen';
                 break;
             case '2':
-                $query = ($request->hasParameter('user') ?
-                    Doctrine_Core::getTable('Job')->getSheduledJobsByUser($request->getParameter('user'))
-                    : Doctrine_Core::getTable('Job')->getSheduledJobsByUser());
+                if( $request->hasParameter('user')){
+                    $query = Doctrine_Core::getTable('Job')->getSheduledJobsByUser($request->getParameter('user'));
+                }else{
+                    $query = Doctrine_Core::getTable('Job')->getSheduledJobs();
+                }
+
+
                 $name = 'geplant';
                 break;
             case '3':
@@ -68,11 +74,14 @@ class jobActions extends sfActions
                 $name = 'Abgeschlossen';
                 break;
         }
-        $this->state = $this->getJobStateArray($request->getParameter('type'), 'Offen'
-            ,
-            $query
-            , $request->getParameter('page')
-            , $request->getParameter('max'));
+        $this->state = $this->getJobStateArray(
+			$request->getParameter('type'),
+			$name,
+            $query,
+			$request->getParameter('page'),
+			$request->getParameter('max'),
+			$request->getParameter('user')
+		);
 
         $this->setTemplate('table');
         $this->setLayout(false);
