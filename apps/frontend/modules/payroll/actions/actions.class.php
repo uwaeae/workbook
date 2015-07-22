@@ -12,7 +12,8 @@ class payrollActions extends sfActions
 {
 
 protected function getMonth($number){
-	
+
+	if(!$number) return '';
 	$month = array();
 		$month[1] = 'Januar';
 		$month[2] = 'Februar';
