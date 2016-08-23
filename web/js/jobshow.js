@@ -21,7 +21,7 @@ $(document).ready(function () {
 			//console.log(moment($('#job_end').val(),'DD.MM.YYYY HH:mm').format());
 			//console.log()
 			if (moment(ct).isAfter(moment($('#job_end').val(), 'DD.MM.YYYY HH:mm'))) {
-				$('#job_end').val(moment(ct).add(1, 'd').format('DD.MM.YYYY HH:mm'));
+				$('#job_end').val(moment(ct).add(2, 'h').format('DD.MM.YYYY HH:mm'));
 			}
 		}
 	});
@@ -34,7 +34,7 @@ $(document).ready(function () {
 		dayOfWeekStart: 1,
 		onSelectDate: function (ct) {
 			if (moment(ct).isBefore(moment($('#job_start').val(), 'DD.MM.YYYY HH:mm'))) {
-				$('#job_start').val(moment(ct).subtract(1, 'd').format('DD.MM.YYYY HH:mm'));
+				$('#job_start').val(moment(ct).subtract(2, 'h').format('DD.MM.YYYY HH:mm'));
 			}
 		}
 	});
