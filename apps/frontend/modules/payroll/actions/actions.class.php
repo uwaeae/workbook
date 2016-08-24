@@ -158,10 +158,8 @@ protected function makeNavForm($user,$year,$month)
 			// Minuten Berechnung in Stunden anteile
 			$nettoMinuten = $diff->format('%i'); 
 
-            $Minuten = round( $nettoMinuten / $part, 0) * $part;
-            if($nettoMinuten % $part) { 
-                    $Minuten +=  $part;
-               }	
+            $Minuten = round( $nettoMinuten / $part, 0,PHP_ROUND_HALF_UP) * $part;
+            
 
 			if($Minuten != 0) $Stunden += round($Minuten / 60,2);
 			

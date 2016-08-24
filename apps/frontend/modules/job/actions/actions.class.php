@@ -267,10 +267,11 @@ class jobActions extends sfActions
                 // Minuten Berechnung in Stunden anteile
                 $Minuten = $diff->format('%i');
                 $nettoMinuten =     $Minuten - ($task->getBreak() * 15);
-                $Minuten = round( $nettoMinuten / $part, 0) * $part;
-                if($nettoMinuten % $part) { 
-                    $Minuten +=  $part;
-                }
+                echo $nettoMinuten.' ';
+                $Minuten = round( $nettoMinuten / $part, 0,PHP_ROUND_HALF_UP) * $part;
+                echo $Minuten.' ' ;
+               
+               
                 if ($Minuten != 0) $Stunden += round($Minuten / 60, 2);
                 $this->worksumme += $Stunden + $task->getCorrectionTime();
                 $this->overtimesumme += $task->getOvertime();
