@@ -156,9 +156,10 @@ protected function makeNavForm($user,$year,$month)
 			// Stunden Addierung wenn mehrere Tage gearbeitet wurde( kommt eingentlich nicht vor)
 		
 			// Minuten Berechnung in Stunden anteile
-			$nettoMinuten = $diff->format('%i'); 
-
-            $Minuten = round( $nettoMinuten / $part, 0,PHP_ROUND_HALF_UP) * $part;
+			$Minuten = $diff->format('%i');
+                $nettoMinuten =     $Minuten - ($task->getBreak() * 15);
+                $Minuten = intval($nettoMinuten / $part) * $part;
+                if($nettoMinuten % $part) $Minuten +=  $part;
             
 
 			if($Minuten != 0) $Stunden += round($Minuten / 60,2);

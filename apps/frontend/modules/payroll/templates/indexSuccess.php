@@ -65,6 +65,7 @@
 		<td></td>
 		<td></td>
 		<td></td>
+		<td></td>
 		<td>Summe</td>
 	
 	<td class="number"><?php echo $approach ?></td>
@@ -74,6 +75,7 @@
 		<td></td>
 	</tr>
 	<tr>
+		<td></td>
 		<td></td>
 		<td></td>
 		<td></td>
