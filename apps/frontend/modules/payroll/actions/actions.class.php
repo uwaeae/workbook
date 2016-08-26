@@ -157,9 +157,9 @@ protected function makeNavForm($user,$year,$month)
 		
 			// Minuten Berechnung in Stunden anteile
 			$Minuten = $diff->format('%i');
-                $nettoMinuten =     $Minuten - ($task->getBreak() * 15);
-                $Minuten = intval($nettoMinuten / $part) * $part;
-                if($nettoMinuten % $part) $Minuten +=  $part;
+            $nettoMinuten =     $Minuten ;
+            $Minuten = intval($nettoMinuten / $part) * $part;
+            if($nettoMinuten % $part) $Minuten +=  $part;
             
 
 			if($Minuten != 0) $Stunden += round($Minuten / 60,2);
@@ -191,7 +191,7 @@ protected function makeNavForm($user,$year,$month)
 			// }
 
 			$this->overtime +=  $task->getOvertime();
-      $this->correcttime += $task->getCorrectionTime();
+            $this->correcttime += $task->getCorrectionTime();
 			$Stunden -= $task->getOvertime();
 			switch ($task->getTaskTypeId()) {
 				case '1': // Arbeitsstunden berechnung
