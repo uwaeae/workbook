@@ -159,7 +159,7 @@ protected function makeNavForm($user,$year,$month)
 			$Minuten = $diff->format('%i');
             $nettoMinuten =     $Minuten ;
             $Minuten = intval($nettoMinuten / $part) * $part;
-            if($nettoMinuten % $part) $Minuten +=  $part;
+            if($nettoMinuten > 0 and $nettoMinuten % $part) $Minuten +=  $part;
             
 
 			if($Minuten != 0) $Stunden += round($Minuten / 60,2);

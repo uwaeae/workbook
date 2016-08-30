@@ -267,9 +267,14 @@ class jobActions extends sfActions
                 // Minuten Berechnung in Stunden anteile
                 $Minuten = $diff->format('%i');
                 $nettoMinuten =     $Minuten - ($task->getBreak() * 15);
+
+                echo 'Netto '.$nettoMinuten;
                 $Minuten = intval($nettoMinuten / $part) * $part;
-                if($nettoMinuten % $part) $Minuten +=  $part;
-                
+                echo 'Brutto '.$Minuten;
+                if($nettoMinuten > 1 AND $nettoMinuten % $part) {
+                    $Minuten +=  $part;
+                }
+                echo 'Brutto2 '.$Minuten;
                                
                
                 if ($Minuten != 0) $Stunden += round($Minuten / 60, 2);
