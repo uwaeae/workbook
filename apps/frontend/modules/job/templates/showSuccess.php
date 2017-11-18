@@ -225,7 +225,7 @@
 			<?php echo $user ?><br>
 		<?php endforeach ?></td>
 		<td><?php echo format_date($task->getCreatedAt(),'dd.MM.yyyy HH:mm') ?>
-			<?php echo $task->getCreator()->getUsername() ?>
+			<?php echo $task->getCreator()?$task->getCreator()->getUsername():'' ?>
 		</td>
 		<td>
 		<?php if ($job->getJobStateId() < 2): ?> 
