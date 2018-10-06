@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+  # Hauptcontainer
+  web:
+    image: workbook:dev
+    ports:
+      - "80"
+    volumes:
+      - "../..//:/www-root"
+    deploy:
+      labels:
+        traefik.docker.network: "proxy"
+        traefik.frontend.rule: "Host:workbook.test"
+        traefik.port: "80"
+      replicas: 1
+      update_config:
+        parallelism: 1
+      restart_policy:
+        delay: 5s
+        max_attempts: 2
+        window: 120s
+    networks:
+      - internal
+      - proxy
+
+  # MySQL-Datenbank
+  db:
+    image: workbook:db
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=workbook
+    volumes:
+      - "db:/var/lib/mysql2"
+    deploy:
+      restart_policy:
+        delay: 5s
+        max_attempts: 4
+        window: 120s
+    networks:
+      internal:
+        aliases:
+          - mysql
+
+volumes:
+  db:
+
+networks:
+  proxy:
+    external: true
+  internal:
