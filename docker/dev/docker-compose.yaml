@@ -5,14 +5,11 @@ services:
   web:
     image: workbook:dev
     ports:
-      - "80"
+      - "80:80"
     volumes:
       - "../..//:/www-root"
     deploy:
-      labels:
-        traefik.docker.network: "proxy"
-        traefik.frontend.rule: "Host:workbook.test"
-        traefik.port: "80"
+
       replicas: 1
       update_config:
         parallelism: 1
@@ -22,7 +19,6 @@ services:
         window: 120s
     networks:
       - internal
-      - proxy
 
   # MySQL-Datenbank
   db:
@@ -46,6 +42,4 @@ volumes:
   db:
 
 networks:
-  proxy:
-    external: true
   internal:
