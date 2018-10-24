@@ -27,7 +27,7 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=workbook
     volumes:
-      - "db:/var/lib/mysql2"
+      - "db:/var/lib/mysql"
     deploy:
       restart_policy:
         delay: 5s
