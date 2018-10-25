@@ -37,37 +37,37 @@
 				<td><?php echo $form['timeinterval']->renderError()  ?><?php echo $form['timeinterval']->render()  ?></td>
 		<?php endif ?>
 		<?php if (isset($form['job_state_id'])): ?>
-		<th><?echo $form['job_state_id']->renderLabel() ?></th>
+		<th><?php echo $form['job_state_id']->renderLabel() ?></th>
 		<td><?php echo $form['job_state_id']->render() ?></td>
 		</tr>
 		<tr>
 		<?php endif ?>
 			<?php if (isset($form['start'])): ?>
-				<th><?echo $form['start']->renderLabel() ?></th>
+				<th><?php echo $form['start']->renderLabel() ?></th>
 				<td>
 				<?php echo $form['start']->renderError() ?>
 				<?php echo $form['start']->render() ?>
 				</td>
 				
 			<?php endif ?>
-	      <th><?echo $form['end']->renderLabel() ?></th>
+	      <th><?php echo $form['end']->renderLabel() ?></th>
 	      <td><?php echo $form['end']->renderError() ?>
 	<?php echo $form['end']->render() ?></td>
 	    </tr>
 	   
 		<tr>
-	      <th><?echo $form['contact_person']->renderLabel() ?></th>
+	      <th><?php echo $form['contact_person']->renderLabel() ?></th>
 	      <td><?php echo $form['contact_person']->render(array('size' => 50,)) ?></td>
-	      <th><?echo $form['contact_info']->renderLabel() ?></th>
+	      <th><?php echo $form['contact_info']->renderLabel() ?></th>
 	      <td><?php echo $form['contact_info']->render(array('size' => 50,)) ?></td>
 	    </tr>
 	    <tr>
-	      <th><?echo $form['store_id']->renderLabel() ?></th>
+	      <th><?php echo $form['store_id']->renderLabel() ?></th>
 	      <td colspan="3"><?php echo $form['store_id']->renderError() ?>
 	<?php echo $form['store_id']->render(array('size' => 100,)) ?></td>
 	    </tr>
 			 <tr>
-			      <th><?echo $form['description']->renderLabel() ?></th>
+			      <th><?php echo $form['description']->renderLabel() ?></th>
 			      <td colspan="3"><?php echo $form['description']->render(array('rows' => 5,'cols' => 80,)) ?></td>
 			 </tr>
 	

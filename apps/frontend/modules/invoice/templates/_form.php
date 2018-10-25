@@ -8,7 +8,7 @@
     <tfoot>
       <tr>
         <td colspan="2">
-          <?php echo $form->renderHiddenFields(false) ?>
+          <?php echo $form->renderHiddenFields(true) ?>
           &nbsp;
 
             <a class="button" href="<?php echo url_for($back) ?>">zurück</a>
@@ -23,8 +23,6 @@
     </tfoot>
     <tbody>
       <?php echo $form->renderGlobalErrors() ?>
-      
-
 
 		<tr>
 	        <th><?php echo $form['number']->renderLabel() ?></th>
