@@ -8,8 +8,8 @@ services:
       - "80:80"
     volumes:
       - "../..//:/www-root"
+      - "files:/www-root/web/uploads"
     deploy:
-
       replicas: 1
       update_config:
         parallelism: 1
@@ -40,6 +40,7 @@ services:
 
 volumes:
   db:
+  files:
 
 networks:
   internal:
