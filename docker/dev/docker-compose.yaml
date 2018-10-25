@@ -8,8 +8,8 @@ services:
       - "80:80"
     volumes:
       - "../..//:/www-root"
+      - "files:/www-root/web/uploads"
     deploy:
-
       replicas: 1
       update_config:
         parallelism: 1
@@ -27,7 +27,7 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=workbook
     volumes:
-      - "db:/var/lib/mysql2"
+      - "db:/var/lib/mysql"
     deploy:
       restart_policy:
         delay: 5s
@@ -40,6 +40,7 @@ services:
 
 volumes:
   db:
+  files:
 
 networks:
   internal:
