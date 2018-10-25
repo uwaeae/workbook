@@ -22,10 +22,8 @@ Available commands:
   status     Views the status of the docker stack
   shell      Starts a shell in the docker image
 
-  cake       Runs cake shell commands in the container
-  composer   Does a composer install
-  migrate    Runs database migrations
-  watch      Run yarn watch
+  dbdump     Creates an MySQL Dump
+
 EOF
 }
 
@@ -79,10 +77,19 @@ shell () {
 		docker exec  $instance $@
 	fi
 }
+dbdumb() {
+    instance=${PROJECT_NAME}_db.1.$(get_running_db_instance)
+    docker exec  $instance "sh -c 'exec mysqldump workbook -uroot -p\"root\"' > /tmp/backup.sql" $@
+}
+
 
 get_running_instance () {
 	docker service ps -f "name=${PROJECT_NAME}_web.1" ${PROJECT_NAME}_web -q --no-trunc | head -n1
 }
+get_running_db_instance () {
+	docker service ps -f "name=${PROJECT_NAME}_db.1" ${PROJECT_NAME}_db -q --no-trunc | head -n1
+}
+
 
 case $CMD in
 	init)      init;;
@@ -94,7 +101,7 @@ case $CMD in
 	shell|sh)  shell $@;;
 	stop)      stop_stack;;
 
-	dbdump)      shell  "sh -c 'exec mysqldump --all-databases -uroot -p\"root\"' > /tmp/backup.sql" $@ ;;
+	dbdump)    dbdumb ;;
 
 
 	*) usage;;
