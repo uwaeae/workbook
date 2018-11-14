@@ -5,7 +5,7 @@ services:
   web:
     image: workbook:dev
     ports:
-      - "80:80"
+      - "8080:80"
     volumes:
       - "../..//:/www-root"
       - "files:/www-root/web/uploads"

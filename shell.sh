@@ -43,12 +43,10 @@ init () {
 	log_status "Starting stack ..."
 	start_stack
 
-	log_status "Please make sure that 'pm.test' is is in your hosts file"
-	log_status "You can view load balancer status at http://localhost:8080"
 }
 
 build () {
-	docker build -t projectmanagement:dev --no-cache -f ./docker/dev/Dockerfile .
+	docker build -t workbook:dev --no-cache -f ./docker/dev/Dockerfile .
 }
 
 build_db () {
@@ -56,7 +54,7 @@ build_db () {
 }
 
 run_single() {
-    docker run --name pm_dev -d -t -i -v .:/www-root  -e VIRTUAL_HOST=pm.test  --link $1:mysql projectmanagement:dev
+    docker run --name workbook_dev -d -t -i -v .:/www-root  -e VIRTUAL_HOST=pm.test  --link $1:mysql workbook:dev
 }
 
 
