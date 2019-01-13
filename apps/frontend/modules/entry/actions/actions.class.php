@@ -75,7 +75,7 @@ class entryActions extends sfActions
 
       $entry->delete();
 
-      $this->redirect('entry/new?taskid='.$entry->getTaskId());
+      $this->redirect('/entry/new?taskid='.$entry->getTaskId());
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
@@ -85,7 +85,7 @@ class entryActions extends sfActions
     {
       $entry = $form->save();
 
-      $this->redirect('entry/new?taskid='.$entry->getTaskId());
+      $this->redirect('/entry/new?taskid='.$entry->getTaskId());
     }
   }
 

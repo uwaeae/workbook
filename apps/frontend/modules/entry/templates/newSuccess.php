@@ -18,7 +18,7 @@
 			<td><?php echo $entry->getAmount() ?></td>
 			<td><?php echo $entry->getUnit() ?></td>
 			<td> 
-			<a href="<?php echo url_for('entry/delete?id='.$entry->getId(),array('method' => 'delete')) ?>	">
+			<a href="<?php echo url_for('/entry/delete?id='.$entry->getId(),array('method' => 'delete')) ?>	">
 					<img src="/images/icons/delete.png" /></a></td>
 	    </tr>
 	    <?php endforeach ?>
