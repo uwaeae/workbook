@@ -27,7 +27,7 @@
         onclick="document.location = '<?php echo url_for('customer/show?id=' . $customer->getId()) ?>'">
 
         <td><?php echo $customer->getCompany() ?> </td>
-        <td><?php echo $customer->getStore()->getStreet() ?></td>
+        <td><?php echo $customer->getStore() ? $customer->getStore()->getStreet():'' ?></td>
         <td><?php echo $customer->getHeadoffice() ?></td>
         <td><?php //echo $customer->getHQ()->getCity().
             // ' '.$customer->getHQ()->getDestrict(); ?></td>

@@ -4,7 +4,7 @@
 <table class="job_show"border="0" cellspacing="5" cellpadding="5">
 	
 	<tr>
-		<td> <?php echo $customer->getStore()->getStreet() ?></td>
+		<td> <?php echo  $customer->getStore() ? $customer->getStore()->getStreet():'' ?></td>
 		<td> <?php  echo sprintf("%1$05d", $customer->getStore()->getPostcode()); ?></td>
 		<td><?php echo $customer->getStore()->getCity().' '.$customer->getStore()->getDestrict(); ?></td>
 	</tr>

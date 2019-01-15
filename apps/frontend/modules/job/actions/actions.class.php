@@ -354,7 +354,7 @@ class jobActions extends sfActions
             $this->customer = Doctrine_Core::getTable('Customer')->find(array($request->getParameter('customer')));
 
         }else{
-            $this->redirect('job/prenew');
+            $this->redirect('/job/prenew');
         }
 
 
