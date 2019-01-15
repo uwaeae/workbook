@@ -62,11 +62,11 @@ class customerActions extends sfActions
 	
 	if($request->hasParameter('store') && is_numeric($request->getParameter('store'))) {
 		$store = Doctrine_Core::getTable('store')->find(array($request->getParameter('store')));
-		$this->redirect('customer/show?id='.$store->getCustomerID());
+		$this->redirect('/customer/show?id='.$store->getCustomerID());
 		}
 
 	if($request->hasParameter('customer') && is_numeric($request->getParameter('customer'))){
-		$this->redirect('customer/show?id='.$request->getParameter('customer'));
+		$this->redirect('/customer/show?id='.$request->getParameter('customer'));
 		}
 		
   }

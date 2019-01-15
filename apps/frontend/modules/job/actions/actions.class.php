@@ -295,7 +295,7 @@ class jobActions extends sfActions
 
     public function executeUser(sfWebRequest $request)
     {
-        if (!$request->isMethod(sfRequest::POST)) $this->redirect($this->getUser()->getAttribute('back'));
+        if (!$request->isMethod(sfRequest::POST)) $this->redirect('/'.$this->getUser()->getAttribute('back'));
         $job = $request->getParameter('job');
         $users = $request->getParameter('user');
         Doctrine_Core::getTable('JobUser')->deleteJobUser($job);

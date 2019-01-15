@@ -216,7 +216,7 @@ class taskActions extends sfActions
         if ($type == 1) {
             $this->redirect('/task/edit?id=' . $task->getId() . '&type=' . $type);
         } else {
-            $this->redirect($this->getUser()->getAttribute('back'));
+            $this->redirect('/'.$this->getUser()->getAttribute('back'));
         }
     }
 
@@ -256,7 +256,7 @@ class taskActions extends sfActions
         }else{
 
             if($this->getUser()->hasAttribute('back')){
-                $this->redirect($this->getUser()->getAttribute('back'));
+                $this->redirect('/'.$this->getUser()->getAttribute('back'));
                }
             else{
                 $this->redirect('/');
