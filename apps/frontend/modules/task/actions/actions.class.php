@@ -144,7 +144,7 @@ class taskActions extends sfActions
         $task = $this->processForm($request, $this->form, "Create");
         $type = $this->getUser()->getFlash('type');
         if ($type == 1) {
-            $this->redirect('task/edit?id=' . $task->getId() . '&type=' . $type);
+            $this->redirect('/task/edit?id=' . $task->getId() . '&type=' . $type);
         } else {
 
             $this->redirect($this->getUser()->getAttribute('back'));
@@ -171,7 +171,7 @@ class taskActions extends sfActions
         $this->back = $this->getUser()->getAttribute('back');
         $this->forward404Unless($this->task = Doctrine_Core::getTable('Task')->find(array($request->getParameter('id'))), sprintf('Object task does not exist (%s).', $request->getParameter('id')));
         if (!$this->getUser()->hasPermission('admin') AND $this->task->getJob()->getJobStateId() == 2) {
-            $this->redirect('task/show/?id=' . $this->task->getId());
+            $this->redirect('/task/show/?id=' . $this->task->getId());
         }
 //	$this->back = $this->getUser()->getFlash('back');
 //$this->job = Doctrine_Core::getTable('Job')->find($task->getJobId());
@@ -214,7 +214,7 @@ class taskActions extends sfActions
 
         $type = $this->getUser()->getFlash('type');
         if ($type == 1) {
-            $this->redirect('task/edit?id=' . $task->getId() . '&type=' . $type);
+            $this->redirect('/task/edit?id=' . $task->getId() . '&type=' . $type);
         } else {
             $this->redirect($this->getUser()->getAttribute('back'));
         }

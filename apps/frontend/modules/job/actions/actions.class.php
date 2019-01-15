@@ -137,7 +137,7 @@ class jobActions extends sfActions
 
         $job->save();
         //$this->job = $job;
-        $this->redirect('job/show/?id=' . $job->getId());
+        $this->redirect('/job/show/?id=' . $job->getId());
 
     }
 
@@ -428,7 +428,7 @@ class jobActions extends sfActions
         $this->forward404Unless($job = Doctrine_Core::getTable('Job')->find(array($request->getParameter('id'))), sprintf('Object job does not exist (%s).', $request->getParameter('id')));
         $job->delete();
 
-        $this->redirect('job/index');
+        $this->redirect('/job/index');
     }
 
     protected function processForm(sfWebRequest $request, sfForm $form, $action)
@@ -437,7 +437,7 @@ class jobActions extends sfActions
         if ($form->isValid()) {
             $job = $form->save();
             //$this->changelog($job, $action);
-            $this->redirect('job/show/job/show?id=' . $job->getId());
+            $this->redirect('/job/show/job/show?id=' . $job->getId());
         }
     }
 

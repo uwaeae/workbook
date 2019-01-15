@@ -118,7 +118,7 @@ class invoiceActions extends sfActions
     {
       $invoice = $form->save();
 
-      $this->redirect('invoice/edit?id='.$invoice->getId());
+      $this->redirect('/invoice/edit?id='.$invoice->getId());
     }
   }
 }
