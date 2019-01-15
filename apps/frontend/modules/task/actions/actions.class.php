@@ -147,7 +147,7 @@ class taskActions extends sfActions
             $this->redirect('/task/edit?id=' . $task->getId() . '&type=' . $type);
         } else {
 
-            $this->redirect($this->getUser()->getAttribute('back'));
+            $this->redirect('/'.$this->getUser()->getAttribute('back'));
             //$this->redirect('job/show?id='.$task->getJobId());
         }
 
