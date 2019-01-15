@@ -81,7 +81,7 @@ class customerActions extends sfActions
     if ($form->isValid())
     {
       $customer = $form->save();
-	  $this->redirect('store/new?customer='.$customer->getID().'&hq=1');
+	  $this->redirect('/store/new?customer='.$customer->getID().'&hq=1');
     }
 	$this->form = $form;
 	$this->setTemplate('new');
@@ -111,7 +111,7 @@ class customerActions extends sfActions
     $this->forward404Unless($customer = Doctrine_Core::getTable('Customer')->find(array($request->getParameter('id'))), sprintf('Object customer does not exist (%s).', $request->getParameter('id')));
     $customer->delete();
 
-    $this->redirect('customer/index');
+    $this->redirect('/customer/index');
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)

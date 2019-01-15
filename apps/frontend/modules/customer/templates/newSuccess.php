@@ -11,7 +11,7 @@
     <tfoot>
       <tr>
         <td colspan="2">
-          &nbsp;<a class="button" href="<?php echo url_for('customer/index') ?>">zurück</a>
+          &nbsp;<a class="button" href="<?php echo url_for('/customer/index') ?>">zurück</a>
           <input class="button" type="submit" value="Weiter" />
         </td>
       </tr>

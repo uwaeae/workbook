@@ -45,7 +45,7 @@ class userActions extends sfActions
     {
       $sf_guard_user = $form->save();
 
-      $this->redirect('user/edit?id='.$sf_guard_user->getId());
+      $this->redirect('/user/edit?id='.$sf_guard_user->getId());
     }
   }
 }

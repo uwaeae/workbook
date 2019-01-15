@@ -63,7 +63,7 @@ class roleActions extends sfActions
     $this->forward404Unless($role = Doctrine_Core::getTable('Role')->find(array($request->getParameter('id'))), sprintf('Object role does not exist (%s).', $request->getParameter('id')));
     $role->delete();
 
-    $this->redirect('role/index');
+    $this->redirect('/role/index');
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
@@ -73,7 +73,7 @@ class roleActions extends sfActions
     {
       $role = $form->save();
 
-      $this->redirect('role/edit?id='.$role->getId());
+      $this->redirect('/role/edit?id='.$role->getId());
     }
   }
 }

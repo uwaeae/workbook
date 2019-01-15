@@ -63,7 +63,7 @@ class itemActions extends sfActions
     $this->forward404Unless($item = Doctrine_Core::getTable('Item')->find(array($request->getParameter('id'))), sprintf('Object item does not exist (%s).', $request->getParameter('id')));
     $item->delete();
 
-    $this->redirect('item/index');
+    $this->redirect('/item/index');
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
@@ -73,7 +73,7 @@ class itemActions extends sfActions
     {
       $item = $form->save();
 
-      $this->redirect('item/edit?id='.$item->getId());
+      $this->redirect('/item/edit?id='.$item->getId());
     }
   }
 }

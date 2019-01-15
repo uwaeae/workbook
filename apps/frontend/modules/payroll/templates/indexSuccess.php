@@ -94,9 +94,9 @@
 		<td colspan="10">
 			<?php foreach ($TaskType as $type): ?>
 			<?php if ($type->getId() == 1): ?>
-			<a class="button" href="<?php echo url_for('job/prenew') ?>"><?php echo $type->getName() ?></a>
+			<a class="button" href="<?php echo url_for('/job/prenew') ?>"><?php echo $type->getName() ?></a>
 			<?php else: ?>
-				<a class="button" href="<?php echo url_for('task/new?type='.$type->getId()) ?>"><?php echo $type->getName() ?></a>
+				<a class="button" href="<?php echo url_for('/task/new?type='.$type->getId()) ?>"><?php echo $type->getName() ?></a>
 			<?php endif ?>
 			<?php endforeach ?>
 			

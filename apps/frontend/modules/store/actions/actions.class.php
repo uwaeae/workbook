@@ -75,7 +75,7 @@ class storeActions extends sfActions
     $cid = $store->getCustomerID();
 	$store->delete();
 
-    $this->redirect('customer/show?id='.$cid);
+    $this->redirect('/customer/show?id='.$cid);
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
@@ -89,7 +89,7 @@ class storeActions extends sfActions
 			$customer->setHeadoffice($store->getID());
 			$customer->save();
 		}
-      $this->redirect('customer/show?id='.$store->getCustomerID());
+      $this->redirect('/customer/show?id='.$store->getCustomerID());
     }
   }
 }

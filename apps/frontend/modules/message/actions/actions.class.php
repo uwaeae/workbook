@@ -57,7 +57,7 @@ class messageActions extends sfActions
     $this->forward404Unless($message = Doctrine_Core::getTable('Message')->find(array($request->getParameter('id'))), sprintf('Object message does not exist (%s).', $request->getParameter('id')));
     $message->delete();
 
-    $this->redirect('message/index');
+    $this->redirect('/message/index');
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
@@ -67,7 +67,7 @@ class messageActions extends sfActions
     {
       $message = $form->save();
 
-      $this->redirect('message/edit?id='.$message->getId());
+      $this->redirect('/message/edit?id='.$message->getId());
     }
   }
 }
