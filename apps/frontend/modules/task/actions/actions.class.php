@@ -137,9 +137,7 @@ class taskActions extends sfActions
 
     public function executeCreate(sfWebRequest $request)
     {
-        //$this->forward404Unless($this->getUser()->setFlash('jobid',);
         $this->forward404Unless($request->isMethod(sfRequest::POST));
-
         $this->form = new TaskForm();
         $task = $this->processForm($request, $this->form, "Create");
         $type = $this->getUser()->getFlash('type');
@@ -148,11 +146,9 @@ class taskActions extends sfActions
         } else {
 
             $this->redirect($this->getUser()->getAttribute('back'));
-            //$this->redirect('job/show?id='.$task->getJobId());
+
         }
 
-
-        //$this->setTemplate('edit');
     }
 
     public function executeShow(sfWebRequest $request)

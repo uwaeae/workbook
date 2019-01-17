@@ -144,7 +144,7 @@ protected function makeNavForm($user,$year,$month)
 		$query->andWhere('MONTH(t.start) = '.($request->hasParameter('month')?$request->getParameter('month'):'MONTH(NOW())'));
 
 		$t = 	$query	->execute();
-		$this->setBack('payroll/index/?user='.$user.($request->hasParameter('month')? '&month='.$request->getParameter('month'):'').($request->hasParameter('year')?'&year='.$request->getParameter('year'):''));
+		$this->setBack('/payroll/index/?user='.$user.($request->hasParameter('month')? '&month='.$request->getParameter('month'):'').($request->hasParameter('year')?'&year='.$request->getParameter('year'):''));
 	 
 	foreach ($t as $task) {
 	 	$tmp = array();

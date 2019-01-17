@@ -125,7 +125,7 @@ class jobActions extends sfActions
         $this->formCustomer = new searchCustomerForm(NULL, array(
             'url' => $this->getController()->genUrl('job/findcustomer')
         ));
-        $this->setBack('job');
+        $this->setBack('/job');
 
     }
 
@@ -209,7 +209,7 @@ class jobActions extends sfActions
             'url' => $this->getController()->genUrl('job/findcustomer')
         ));
         $this->url = 'job/archiv';
-        $this->setBack('job');
+        $this->setBack('/job');
 
     }
 
