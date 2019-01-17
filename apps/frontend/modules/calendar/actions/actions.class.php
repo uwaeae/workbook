@@ -289,7 +289,7 @@ class calendarActions extends sfActions
 				$this->calendar[$i] = $this->renderCalendar(7,($i * 7 ) + $next,8,18);
 			}
 				$this->form = $this->makeFilterForm();
-			$this->setBack('calendar/month/?&next='.$this->next.'&user='.$this->userid);	
+			$this->setBack('/calendar/month/?&next='.$this->next.'&user='.$this->userid);
 			$this->getUser()->setAttribute('calendar',
 								array('next'=> $this->next,'type'=> $this->TaskType,'user' => $this->Users));	
 	}
@@ -304,7 +304,7 @@ public function executeWeek(sfWebRequest $request)
 		$this->calendar = $this->renderCalendar($this->days,$next,5,24);
 		$this->timeline = $this->renderTimeline(5,24);
 		$this->form = $this->makeFilterForm();
-		$this->setBack('calendar/week/?&next='.$this->next);
+		$this->setBack('/calendar/week/?&next='.$this->next);
 		$this->getUser()->setAttribute('calendar',
 							array('next'=> $this->next,'type'=> $this->TaskType,'user' => $this->Users));
 		   //$this->setTemplate('table');
@@ -319,7 +319,7 @@ public function executeWeek(sfWebRequest $request)
 			$this->calendar = $this->renderCalendar($this->days,$next,5,24);
 			$this->timeline = $this->renderTimeline(5,24);
 			$this->form = $this->makeFilterForm();
-			$this->setBack('calendar/week/?&next='.$this->next);
+			$this->setBack('/calendar/week/?&next='.$this->next);
 			$this->getUser()->setAttribute('calendar',
 								array('next'=> $this->next,'type'=> $this->TaskType,'user' => $this->Users));
 			   //$this->setTemplate('table');
@@ -334,7 +334,7 @@ public function executeDay(sfWebRequest $request)
 		$this->timeline = $this->renderTimeline(7,22);
 		$this->calendar = $this->renderCalendar($this->days,$this->next,$beginn,$end);
 		$this->form = $this->makeFilterForm();
-		$this->setBack('calendar/day/?&next='.$this->next);	
+		$this->setBack('/calendar/day/?&next='.$this->next);
 		$this->getUser()->setAttribute('calendar',
 							array('next'=> $this->next,'type'=> $this->TaskType,'user' => $this->Users));
 	}
@@ -348,7 +348,7 @@ public function executeSmall(sfWebRequest $request)
 		$this->calendar = $this->renderCalendar($this->days,$next,7,22);
 		$this->timeline = $this->renderTimeline(7,22);
 		$this->form = $this->makeFilterForm();
-		$this->setBack('calendar/week/?&next='.$this->next);
+		$this->setBack('/calendar/week/?&next='.$this->next);
 		$this->setLayout(false);
 	}
 	

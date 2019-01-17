@@ -101,7 +101,7 @@ class invoiceActions extends sfActions
 	$invoice->delete();
 
     if($this->getUser()->getAttribute('back')){
-      $this->redirect('/'.$this->getUser()->getAttribute('back'));
+      $this->redirect($this->getUser()->getAttribute('back'));
     }
     else{
       $this->redirect('/');
