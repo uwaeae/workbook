@@ -77,7 +77,7 @@ shell () {
 }
 dbdumb() {
     instance=${PROJECT_NAME}_db.1.$(get_running_db_instance)
-    docker exec  $instance sh -c 'exec mysqldump workbook -uroot -p"$MYSQL_ROOT_PASSWORD"' >/tmp/backup.sql $@
+    docker exec  $instance sh -c 'exec mysqldump workbook -uroot -p"$MYSQL_ROOT_PASSWORD"'  $@
 }
 
 
