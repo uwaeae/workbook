@@ -6,5 +6,5 @@
 all:
   sf_guard_plugin:
     routes_register: false
-    success_signin_url:      calendar/table # the plugin use the referer as default
+    success_signin_url:      /calendar/table # the plugin use the referer as default
     success_signout_url:     sfGuardAuth/signin         # the plugin use the referer as default
