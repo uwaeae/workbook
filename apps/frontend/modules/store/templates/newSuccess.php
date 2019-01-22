@@ -22,7 +22,7 @@
 		<tbody>
 			<?php if (!$form['number']->isHidden()): ?>
 			<tr>
-				<th><?echo $form['number']->renderLabel() ?></th>
+				<th><?php echo $form['number']->renderLabel() ?></th>
 				<td>
 					<?php echo $form['number']->renderError() ?>
 					<?php echo $form['number']->render() ?>
@@ -30,50 +30,50 @@
 			</tr>
 			<?php endif ?>
 			<tr>
-				<th><?echo $form['contact']->renderLabel() ?></th>
+				<th><?php echo $form['contact']->renderLabel() ?></th>
 				<td colspan="5">
 					<?php echo $form['contact']->renderError() ?>
 					<?php echo $form['contact']->render(array('size' => 100,)) ?>
 				</td>
 			</tr>
 			<tr>
-				<th><?echo $form['info']->renderLabel() ?></th>
+				<th><?php echo $form['info']->renderLabel() ?></th>
 				<td colspan="3">
 					<?php echo $form['info']->renderError() ?>
 					<?php echo $form['info']->render() ?>
 				</td>
 			</tr>
 			<tr>
-				<th><?echo $form['fon']->renderLabel() ?></th>
+				<th><?php echo $form['fon']->renderLabel() ?></th>
 				<td>
 					<?php echo $form['fon']->renderError() ?>
 					<?php echo $form['fon']->render() ?>
 				</td>
-				<th><?echo $form['fax']->renderLabel() ?></th>
+				<th><?php echo $form['fax']->renderLabel() ?></th>
 				<td>
 					<?php echo $form['fax']->renderError() ?>
 					<?php echo $form['fax']->render() ?>
 				</td>
 			</tr>
 			<tr>
-				<th><?echo $form['street']->renderLabel() ?></th>
+				<th><?php echo $form['street']->renderLabel() ?></th>
 				<td colspan="5">
 					<?php echo $form['street']->renderError() ?>
 					<?php echo $form['street']->render(array('size' => 100,)) ?>
 				</td>
 			</tr>
 			<tr>
-				<th><?echo $form['postcode']->renderLabel() ?></th>
+				<th><?php echo $form['postcode']->renderLabel() ?></th>
 				<td>
 					<?php echo $form['postcode']->renderError() ?>
 					<?php echo $form['postcode']->render(array('size' => 6,)) ?>
 				</td>
-				<th><?echo $form['city']->renderLabel() ?></th>
+				<th><?php echo $form['city']->renderLabel() ?></th>
 				<td>
 					<?php echo $form['city']->renderError() ?>
 					<?php echo $form['city']->render() ?>
 				</td>
-				<th><?echo $form['destrict']->renderLabel() ?></th>
+				<th><?php echo $form['destrict']->renderLabel() ?></th>
 				<td>
 					<?php echo $form['destrict']->renderError() ?>
 					<?php echo $form['destrict']->render() ?>
@@ -81,7 +81,7 @@
 			</tr>
 			<?php if (!$form['customer_id']->isHidden()): ?>
 			<tr>
-				<th><?echo $form['customer_id']->renderLabel() ?></th>
+				<th><?php echo $form['customer_id']->renderLabel() ?></th>
 				<td>
 					<?php echo $form['customer_id']->renderError() ?>
 					<?php echo $form['customer_id']->render() ?>
