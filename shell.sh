@@ -27,8 +27,6 @@ Available commands:
 EOF
 }
 
-GREEN=`tput setaf 2`
-RESET=`tput sgr0`
 
 log_status () {
 	echo -e "\n${GREEN}$@${RESET}"
@@ -76,8 +74,9 @@ shell () {
 	fi
 }
 dbdumb() {
-    instance=${PROJECT_NAME}_db.1.$(get_running_db_instance)
-    docker exec  $instance sh -c 'exec mysqldump workbook -uroot -p"$MYSQL_ROOT_PASSWORD"'  $@
+   	
+      	instance=${PROJECT_NAME}_db.1.$(get_running_db_instance)
+	docker exec   $instance sh -c 'mysqldump workbook -uroot -p$MYSQL_ROOT_PASSWORD >backup.sql' 
 }
 
 
