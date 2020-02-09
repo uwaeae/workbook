@@ -37,8 +37,8 @@
 		<td><?php 
 			if(date('j',$time) > 1) echo 	format_date($task['task']->getStart(),'dd.MM.').
 											' - '.
-											format_date($task['task']->getEnd(),'dd.MM.yyyy');
-			else echo  format_date($task['task']->getStart(),'dd.MM.yyyy'); 
+											format_date($task['task']->getEnd(),'dd.MM.yyyy HH:mm');
+			else echo  format_date($task['task']->getStart(),'dd.MM.yyyy HH:mm').' - '.format_date($task['task']->getEnd(),'HH:mm');; 
 			?></td>
 		<td><?php echo $task['task']->getJob()->getStore()->getCustomer()->getCompany() ?></td>
     <td><?php echo ($task['task']->getJob()->getStore()->getNumber() != 0 ?$task['task']->getJob()->getStore()->getNumber(): ' ') ?></td>

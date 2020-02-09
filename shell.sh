@@ -28,17 +28,15 @@ EOF
 }
 
 
-log_status () {
-	echo -e "\n${GREEN}$@${RESET}"
-}
 
 init () {
 
-	log_status "Building image ..."
+	build_db
+	echo "Building image ..."
 	build
 
 
-	log_status "Starting stack ..."
+	echo "Starting stack ..."
 	start_stack
 
 }
@@ -48,7 +46,7 @@ build () {
 }
 
 build_db () {
-    (cd ./docker/testdb && ./make.sh)
+    docker build -t workbook:db --no-cache -f ./docker/db/Dockerfile .
 }
 
 run_single() {

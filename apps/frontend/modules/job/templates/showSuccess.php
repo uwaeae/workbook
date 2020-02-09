@@ -267,6 +267,9 @@
 	<th rowspan="2" style="width:200px;">Mitarbeiter</th>
 	<th colspan="2"style="width:50px;">Stunden</th>
 <?php if ( $sf_user->hasGroup('admin')): ?>
+	<th rowspan="2" style="width:50px;">FA</th>
+	<th rowspan="2" style="width:50px;">Pause</th>
+	<th rowspan="2" colspan="2" style="width:50px;">Korrektur</th>
 	<th rowspan="2" style="width:150px;">Bearbeitet</th>
 <?php endif ?>
   </tr>
@@ -289,7 +292,11 @@
 		<td><?php echo $task['time'] ?></td>
 		<td><?php echo $task['task']->getOvertime() ?></td>
 <?php if ( $sf_user->hasGroup('admin')): ?>
-    <td>
+	<td class="number"><?php echo $task['task']->getApproach() * 15 ?></td>
+    <td class="number"><?php echo $task['task']->getBreak()* 15 ?></td>
+	<td class="number"><?php echo $task['task']->getCorrectionTime()?></td>
+	<td class="number"><?php echo $task['task']->getCorrectionInfo()?></td>
+	<td>
         <?php echo $task['task']->getUpdater()->getUsername() ?>
         <?php echo format_date($task['task']->getUpdatedAt(),'dd.MM.yyyy HH:MM') ?>
      </td>
