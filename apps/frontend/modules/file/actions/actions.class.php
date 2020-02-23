@@ -35,9 +35,9 @@ public function executeGet(sfWebRequest $request)
 	$this->prepareDownload($this->getResponse(),$file->getName());
  // $this->getContext()->getResponse()->setContentType('application/pdf');
 
-	$this->getContext()->getResponse()->setContent(readfile(sfConfig::get('sf_upload_dir').'/document/'.$file->getFile()));
-  $this->getContext()->getResponse()->sendContent();
-  return sfView::HEADER_ONLY;
+ $this->getContext()->getResponse()->setContent(readfile(sfConfig::get('sf_upload_dir').'/document/'.$file->getFile()));
+ $this->getContext()->getResponse()->sendContent();
+ return sfView::HEADER_ONLY;
 
 
 }

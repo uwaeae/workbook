@@ -2,6 +2,8 @@
 <?php  use_javascript('payroll.js') ?>
 
 <?php include_partial('navform', array('form' => $form )) ?>
+
+<a class="button" href="<?php echo $exportURL ?>">CSV EXPORT</a>
 <div id="payroll">
 	
 
@@ -99,7 +101,7 @@
 				<a class="button" href="<?php echo url_for('/task/new?type='.$type->getId()) ?>"><?php echo $type->getName() ?></a>
 			<?php endif ?>
 			<?php endforeach ?>
-			
+
 		</td>
 	</tr>
 </tfoot>	
