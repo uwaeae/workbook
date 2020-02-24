@@ -2,7 +2,7 @@ CREATE TABLE Calendar (id BIGINT AUTO_INCREMENT, beginn DATETIME NOT NULL, durat
 CREATE TABLE CalendarType (id BIGINT AUTO_INCREMENT, name TEXT NOT NULL, PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE calendar_user (calendar_id BIGINT, user_id BIGINT, PRIMARY KEY(calendar_id, user_id)) ENGINE = INNODB;
 CREATE TABLE customer (id BIGINT AUTO_INCREMENT, company VARCHAR(255) NOT NULL, logo VARCHAR(255), url VARCHAR(255), number BIGINT UNIQUE NOT NULL, headoffice BIGINT, PRIMARY KEY(id)) ENGINE = INNODB;
-CREATE TABLE Entry (id BIGINT AUTO_INCREMENT, name VARCHAR(64) NOT NULL, description VARCHAR(255), code VARCHAR(10) NOT NULL, unit VARCHAR(32) NOT NULL, amount BIGINT NOT NULL, task_id BIGINT, INDEX task_id_idx (task_id), PRIMARY KEY(id)) ENGINE = INNODB;
+CREATE TABLE Entry (id BIGINT AUTO_INCREMENT, name VARCHAR(64) NOT NULL, description VARCHAR(255), code VARCHAR(10) NOT NULL, unit VARCHAR(32) NOT NULL, amount BIGINT NOT NULL, item_id BIGINT, task_id BIGINT, INDEX task_id_idx (task_id), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE file (id BIGINT AUTO_INCREMENT, name VARCHAR(64) NOT NULL, file VARCHAR(255), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE file_job (file_id BIGINT, job_id BIGINT, PRIMARY KEY(file_id, job_id)) ENGINE = INNODB;
 CREATE TABLE holiday (id BIGINT AUTO_INCREMENT, name TEXT NOT NULL, date DATE NOT NULL, PRIMARY KEY(id)) ENGINE = INNODB;
@@ -30,7 +30,7 @@ CREATE TABLE sf_guard_group (id BIGINT AUTO_INCREMENT, name VARCHAR(255) UNIQUE,
 CREATE TABLE sf_guard_group_permission (group_id BIGINT, permission_id BIGINT, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(group_id, permission_id)) ENGINE = INNODB;
 CREATE TABLE sf_guard_permission (id BIGINT AUTO_INCREMENT, name VARCHAR(255) UNIQUE, description TEXT, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE sf_guard_remember_key (id BIGINT AUTO_INCREMENT, user_id BIGINT, remember_key VARCHAR(32), ip_address VARCHAR(50), created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, INDEX user_id_idx (user_id), PRIMARY KEY(id)) ENGINE = INNODB;
-CREATE TABLE sf_guard_user (id BIGINT AUTO_INCREMENT, first_name VARCHAR(255), last_name VARCHAR(255), email_address VARCHAR(255) NOT NULL UNIQUE, username VARCHAR(128) NOT NULL UNIQUE, algorithm VARCHAR(128) DEFAULT 'sha1' NOT NULL, salt VARCHAR(128), password VARCHAR(128), settings VARCHAR(255), is_active TINYINT(1) DEFAULT '1', is_user TINYINT(1) DEFAULT '1', is_super_admin TINYINT(1) DEFAULT '0', last_login DATETIME, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, INDEX is_active_idx_idx (is_active), PRIMARY KEY(id)) ENGINE = INNODB;
+CREATE TABLE sf_guard_user (id BIGINT AUTO_INCREMENT, first_name VARCHAR(255), last_name VARCHAR(255), email_address VARCHAR(255) NOT NULL UNIQUE, username VARCHAR(128) NOT NULL UNIQUE, algorithm VARCHAR(128) DEFAULT 'sha1' NOT NULL, salt VARCHAR(128), password VARCHAR(128), settings VARCHAR(255), is_active TINYINT(1) DEFAULT '1', is_user TINYINT(1) DEFAULT '1', is_super_admin TINYINT(1) DEFAULT '0', last_login DATETIME, sort BIGINT DEFAULT 1, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, INDEX is_active_idx_idx (is_active), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE sf_guard_user_group (user_id BIGINT, group_id BIGINT, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(user_id, group_id)) ENGINE = INNODB;
 CREATE TABLE sf_guard_user_permission (user_id BIGINT, permission_id BIGINT, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(user_id, permission_id)) ENGINE = INNODB;
 ALTER TABLE Calendar ADD CONSTRAINT Calendar_type_id_CalendarType_id FOREIGN KEY (type_id) REFERENCES CalendarType(id);
@@ -38,6 +38,7 @@ ALTER TABLE Calendar ADD CONSTRAINT Calendar_job_id_job_id FOREIGN KEY (job_id) 
 ALTER TABLE calendar_user ADD CONSTRAINT calendar_user_user_id_sf_guard_user_id FOREIGN KEY (user_id) REFERENCES sf_guard_user(id);
 ALTER TABLE calendar_user ADD CONSTRAINT calendar_user_calendar_id_Calendar_id FOREIGN KEY (calendar_id) REFERENCES Calendar(id);
 ALTER TABLE Entry ADD CONSTRAINT Entry_task_id_task_id FOREIGN KEY (task_id) REFERENCES task(id);
+ALTER TABLE file_job ADD CONSTRAINT file_job_job_id_job_id FOREIGN KEY (job_id) REFERENCES job(id);
 ALTER TABLE file_job ADD CONSTRAINT file_job_file_id_file_id FOREIGN KEY (file_id) REFERENCES file(id);
 ALTER TABLE itementry ADD CONSTRAINT itementry_job_id_job_id FOREIGN KEY (job_id) REFERENCES job(id);
 ALTER TABLE itementry ADD CONSTRAINT itementry_item_id_item_id FOREIGN KEY (item_id) REFERENCES item(id);

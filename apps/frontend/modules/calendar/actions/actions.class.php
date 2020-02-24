@@ -61,7 +61,8 @@ class calendarActions extends sfActions
         $query = Doctrine_Query::create()
             ->select('u.id')
             ->from('sfGuardUser u')
-            ->where('u.is_user = 1');
+            ->where('u.is_user = 1')
+            ->orderBy('u.sort DESC');
 
         if ($this->getUser()->hasGroup('admin')
             OR $this->getUser()->hasGroup('supervisor')

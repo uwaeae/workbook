@@ -17,6 +17,7 @@
  * @property boolean $is_user
  * @property boolean $is_super_admin
  * @property timestamp $last_login
+ * @property integer $sort
  * @property Doctrine_Collection $Groups
  * @property Doctrine_Collection $Permissions
  * @property Doctrine_Collection $Task
@@ -42,6 +43,7 @@
  * @method boolean               getIsUser()                Returns the current record's "is_user" value
  * @method boolean               getIsSuperAdmin()          Returns the current record's "is_super_admin" value
  * @method timestamp             getLastLogin()             Returns the current record's "last_login" value
+ * @method integer               getSort()                  Returns the current record's "sort" value
  * @method Doctrine_Collection   getGroups()                Returns the current record's "Groups" collection
  * @method Doctrine_Collection   getPermissions()           Returns the current record's "Permissions" collection
  * @method Doctrine_Collection   getTask()                  Returns the current record's "Task" collection
@@ -66,6 +68,7 @@
  * @method sfGuardUser           setIsUser()                Sets the current record's "is_user" value
  * @method sfGuardUser           setIsSuperAdmin()          Sets the current record's "is_super_admin" value
  * @method sfGuardUser           setLastLogin()             Sets the current record's "last_login" value
+ * @method sfGuardUser           setSort()                  Sets the current record's "sort" value
  * @method sfGuardUser           setGroups()                Sets the current record's "Groups" collection
  * @method sfGuardUser           setPermissions()           Sets the current record's "Permissions" collection
  * @method sfGuardUser           setTask()                  Sets the current record's "Task" collection
@@ -141,6 +144,10 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              ));
         $this->hasColumn('last_login', 'timestamp', null, array(
              'type' => 'timestamp',
+             ));
+        $this->hasColumn('sort', 'integer', null, array(
+             'type' => 'integer',
+             'default' => 1,
              ));
 
 
