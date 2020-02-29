@@ -21,7 +21,7 @@
  * @method string  getCode()        Returns the current record's "code" value
  * @method string  getUnit()        Returns the current record's "unit" value
  * @method integer getAmount()      Returns the current record's "amount" value
- * @method integer getItemId()      Returns the current record's "item_id" value
+
  * @method integer getTaskId()      Returns the current record's "task_id" value
  * @method Task    getTask()        Returns the current record's "Task" value
  * @method Entry   setId()          Sets the current record's "id" value
@@ -30,7 +30,7 @@
  * @method Entry   setCode()        Sets the current record's "code" value
  * @method Entry   setUnit()        Sets the current record's "unit" value
  * @method Entry   setAmount()      Sets the current record's "amount" value
- * @method Entry   setItemId()      Sets the current record's "item_id" value
+
  * @method Entry   setTaskId()      Sets the current record's "task_id" value
  * @method Entry   setTask()        Sets the current record's "Task" value
  * 
@@ -72,9 +72,9 @@ abstract class BaseEntry extends sfDoctrineRecord
              'type' => 'integer',
              'notnull' => true,
              ));
-        $this->hasColumn('item_id', 'integer', null, array(
+      /*  $this->hasColumn('item_id', 'integer', null, array(
              'type' => 'integer',
-             ));
+             ));*/
         $this->hasColumn('task_id', 'integer', null, array(
              'type' => 'integer',
              ));

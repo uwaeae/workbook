@@ -20,13 +20,13 @@ class Store extends BaseStore
 				.' '.$this->getCity()
 				.' '.$this->getStreet();
 	}
-	static public function retrieveForSelect($q, $limit, $customer = NULL)
+	static public function retrieveForSelect($q, $limit = 100, $customer = NULL)
 	{
 		$query = Doctrine_Core::getTable('Store')->createQuery('s');
 		if($customer) $query->innerJoin('s.Customer c WITH c.id = '.$customer );
 		
 		if(is_numeric($q)) $query->where(" s.number LIKE '$q%'");
-		else if(strlen($q) > 1) $query->where("s.street like '$q%' ");
+		else if(strlen($q) > 1) $query->where("s.street like '%".$q."%'");
 		
 		$stores = array();
 		foreach ($query->execute() as $store){

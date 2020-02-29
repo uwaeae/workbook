@@ -13,22 +13,16 @@ abstract class BaseEntryFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'name'        => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'description' => new sfWidgetFormFilterInput(),
-      'code'        => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'unit'        => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'amount'      => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'item_id'     => new sfWidgetFormFilterInput(),
+      'item_id'     => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Item'), 'add_empty' => true)),
       'task_id'     => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Task'), 'add_empty' => true)),
     ));
 
     $this->setValidators(array(
-      'name'        => new sfValidatorPass(array('required' => false)),
       'description' => new sfValidatorPass(array('required' => false)),
-      'code'        => new sfValidatorPass(array('required' => false)),
-      'unit'        => new sfValidatorPass(array('required' => false)),
       'amount'      => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'item_id'     => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'item_id'     => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Item'), 'column' => 'id')),
       'task_id'     => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Task'), 'column' => 'id')),
     ));
 
@@ -50,12 +44,9 @@ abstract class BaseEntryFormFilter extends BaseFormFilterDoctrine
   {
     return array(
       'id'          => 'Number',
-      'name'        => 'Text',
       'description' => 'Text',
-      'code'        => 'Text',
-      'unit'        => 'Text',
       'amount'      => 'Number',
-      'item_id'     => 'Number',
+      'item_id'     => 'ForeignKey',
       'task_id'     => 'ForeignKey',
     );
   }
