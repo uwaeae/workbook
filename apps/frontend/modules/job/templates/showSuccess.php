@@ -298,7 +298,7 @@
 	<td class="number"><?php echo $task['task']->getCorrectionInfo()?></td>
 	<td>
         <?php echo $task['task']->getUpdater()->getUsername() ?>
-        <?php echo format_date($task['task']->getUpdatedAt(),'dd.MM.yyyy HH:MM') ?>
+        <?php echo format_date($task['task']->getUpdatedAt(),'dd.MM.yyyy HH:mm') ?>
      </td>
 <?php endif ?>
 	</tr>
